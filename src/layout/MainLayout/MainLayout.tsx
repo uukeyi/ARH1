@@ -3,9 +3,8 @@ import { Outlet } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import styles from "./MainLayout.module.css";
-interface MainLayoutProps {}
 
-const MainLayout: React.FC<MainLayoutProps> = () => {
+const MainLayout: React.FC= () => {
    const { arrowContainer, arrow } = styles;
 
    return (

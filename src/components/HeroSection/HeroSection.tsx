@@ -3,9 +3,8 @@ import styles from "./HeroSection.module.css";
 import "aos/dist/aos.css";
 // import telegramSrc from "../../assets/icons/telegramIcon.svg";
 import arrowIconSrc from '../../assets/icons/arrow-icon.webp'
-interface HeroSectionProps {}
 
-const HeroSection: React.FC<HeroSectionProps> = () => {
+const HeroSection: React.FC = () => {
    const {
       hero,
       bgImage,
