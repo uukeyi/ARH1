@@ -13,6 +13,7 @@ const MainLayout: React.FC<MainLayoutProps> = () => {
         <Header/>
         <main className='main'>
             <Outlet/>
+
         </main>
         <Footer/>
         </>

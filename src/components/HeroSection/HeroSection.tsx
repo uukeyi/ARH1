@@ -19,6 +19,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
    return (
       <section id={hero}>
          <div className="container">
+           
             <h1 className={title}>
                Проект дизайна фасадов дома за 7 дней <br /> Более 200+
                реализованных объектов за 14 лет
