@@ -1,0 +1,84 @@
+#quoteSection {
+   padding: 80px 0px;
+   background-color: #f0f0f0;
+}
+.line {
+   border-top: 1px solid black;
+}
+.principleBlock {
+   width: 170px;
+   height: 50px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background: black;
+   margin: -25px auto;
+}
+.principleBlock > p {
+   color: #fff;
+   text-align: center;
+   letter-spacing: 1px;
+   font-size: 19px;
+}
+.title {
+   color: rgba(0, 0, 0, 0.795);
+   text-align: center;
+   font-weight: 200;
+   font-size: 37px;
+   line-height: 38px;
+   margin: 60px 0px;
+}
+.infoContainer {
+   padding: 50px 0px;
+   display: flex;
+}
+.mainText {
+   color: rgb(0, 0, 0);
+   font-size: 23px;
+   font-weight: 200;
+
+   line-height: 33px;
+   max-width: 85%;
+}
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 3px;
+}
+.cardImg {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 50%;
+}
+.cardTitle {
+    color: black;
+    font-weight: 600;
+}
+.cardSubtitle {
+    font-weight: 300;
+    color: black;
+}
+.footerLine {
+    display: block;
+    margin: 30px auto;
+}
+
+
+@media screen and (max-width: 992px) {
+.infoContainer {
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+}
+.mainText {
+    margin-top: 40px;
+    max-width: none;
+    width: 100%;
+    text-align: center;
+}
+}
+
