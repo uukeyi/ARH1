@@ -20,11 +20,11 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
       <section id={hero}>
          <div className="container">
            
-            <h1 className={title}>
+            <h1 data-aos = "zoom-in-up" data-aos-duration = "1000" className={title}>
                Проект дизайна фасадов дома за 7 дней <br /> Более 200+
                реализованных объектов за 14 лет
             </h1>
-            <p className={description}>
+            <p data-aos = "zoom-in-up" data-aos-duration = "1000" className={description}>
                Создали более 370+ проектов по нормам СНиП <br /> Опыт
                проектирования фасадов от 100 м2 до 25 000 м2 <br />
                Строим в рамках бюджета, фиксируем стоимость в договоре
