@@ -1,0 +1,110 @@
+#swiperSection {
+   padding: 80px 0px;
+   background: #f0f0f0;
+}
+.title {
+   font-weight: 400;
+   font-size: 43px;
+   line-height: 43px;
+   text-align: center;
+}
+.contentContainer {
+   padding: 40px;
+   display: flex;
+   gap: 20px;
+   background: #fff;
+}
+.swiperSlider {
+   margin-top: 70px;
+}
+.mainBtn {
+   padding: 20px;
+   width: 100%;
+   font-size: 14px;
+   font-weight: 400;
+   letter-spacing: 0px;
+   line-height: 33px;
+   text-align: center;
+   text-transform: uppercase;
+}
+.mainBtnActive {
+   border-top: 4px solid red;
+   background: #fff;
+}
+.textContainer {
+   display: flex;
+   flex-direction: column;
+   gap: 30px;
+}
+.titleContainer {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+.contentImg {
+   max-width: 50%;
+   animation: opacity 0.6s 1 linear;
+}
+@keyframes opacity {
+   0% {
+      opacity: 0;
+   }
+   100% {
+      opacity: 1;
+   }
+}
+.contentText {
+   font-size: 18px;
+   line-height: 28px;
+   font-family: "Roboto";
+}
+.contentTitle {
+   font-size: 30px;
+   font-weight: 300;
+   line-height: 38px;
+}
+.contentSubtitle {
+   font-weight: 200;
+   font-size: 21px;
+   line-height: 28px;
+}
+
+@media screen and (max-width: 1200px) {
+   .mainBtn {
+      font-size: 12px;
+   }
+}
+@media screen and (max-width: 992px) {
+   .contentContainer {
+      flex-direction: column;
+   }
+   .contentImg {
+      max-width: none;
+      width: 100%;
+      object-fit: cover;
+      max-height: 600px;
+   }
+}
+@media screen and (max-width: 768px) {
+    #swiperSection {
+        overflow: hidden;
+    }
+   .contentText {
+      font-size: 16px;
+   }
+   .hiddenContainer {
+      overflow: hidden !important;
+   }
+}
+@media screen and (max-width: 576px) {
+  .contentContainer {
+    padding: 15px;
+  }
+ }
+@media screen and (max-width: 368px) {
+    
+   .mainBtn {
+      white-space: nowrap;
+      font-size: 11px;
+   }
+}

@@ -1,5 +1,7 @@
 #quoteSection {
    padding: 80px 0px;
+   overflow-x: hidden;
+
    background-color: #f0f0f0;
 }
 .line {

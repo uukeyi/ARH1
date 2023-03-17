@@ -1,0 +1,92 @@
+#blockHeaderSection {
+   padding: 70px 0px;
+   overflow-x: hidden;
+}
+
+.title {
+   color: black;
+   font-size: 48px;
+   font-weight: 300;
+   letter-spacing: 0px;
+   line-height: 58px;
+   text-align: center;
+}
+.cardContainer {
+   margin-top: 70px;
+   display: flex;
+   flex-wrap: wrap;
+   gap: 20px;
+}
+.feedbackContainer {
+   width: 100%;
+   display: flex;
+   gap: 20px;
+}
+.optionPhone {
+   position: absolute !important;
+   background: transparent !important;
+   top: 10px !important;
+   height: 30px !important;
+   border: none !important;
+}
+
+.inputPhone {
+   width: 310px !important;
+   border: none !important;
+   outline: none !important;
+   height: 55px !important;
+   font-family: "Oswald", sans-serif !important;
+   font-size: 16px !important;
+   border-radius: 0px !important;
+   color: rgba(0, 0, 0, 0.712) !important;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.712) !important;
+}
+.inputName {
+   width: 310px;
+   padding: 15px;
+   color: rgba(0, 0, 0, 0.712);
+   border-bottom: 1px solid rgba(0, 0, 0, 0.712);
+}
+.optionPhone {
+   color: black;
+}
+.feedbackContainer {
+   margin-top: 110px;
+}
+.inputName:focus,
+.inputPhone:focus {
+   border-bottom: 1px solid orange !important;
+}
+
+@media screen and (max-width: 992px) {
+   .cardContainer {
+      gap: 90px;
+   }
+   .inputName {
+      width: 48%;
+   }
+   .phoneContainer {
+      width: 48% !important;
+   }
+   .inputPhone {
+      max-width: 100% !important;
+   }
+   .feedbackContainer {
+      flex-wrap: wrap;
+
+      justify-content: center;
+   }
+}
+@media screen and (max-width: 576px) {
+   .inputName {
+      width: 100% !important; 
+      border-radius: none !important;
+   }
+   .phoneContainer {
+      width: 100% !important;
+   }
+   .inputPhone {
+      width: 100% !important;
+      max-width: none !important;
+   }
+}
