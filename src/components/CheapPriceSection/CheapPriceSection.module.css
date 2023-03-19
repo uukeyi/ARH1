@@ -1,0 +1,78 @@
+#cheapPriceSection {
+   padding: 80px 0px;
+   background: #f0f0f0;
+}
+
+.title {
+   font-weight: 400;
+   font-size: 43px;
+   line-height: 53px;
+   text-align: center;
+}
+.subtitle {
+   font-family: "Roboto";
+   font-weight: 400;
+   font-size: 21px;
+   text-align: center;
+   margin-top: 30px;
+}
+.contentContainer {
+   display: flex;
+   gap: 15px;
+}
+.contentContainer img {
+   max-width: 50%;
+}
+.textContainer {
+   display: flex;
+   padding-top: 50px;
+   flex-direction: column;
+   gap: 20px;
+}
+.sliderTitle {
+   font-weight: 400;
+   font-size: 33px;
+   line-height: 43px;
+}
+.descriptionSlider {
+   font-size: 18px;
+   line-height: 28px;
+   color: rgba(0, 0, 0, 0.603);
+}
+.slider {
+   margin-top: 70px;
+}
+.sliderContainer {
+   position: relative;
+   display: flex;
+   align-items: center;
+}
+
+@media screen and (max-width: 1200px) {
+   .textContainer {
+      padding-left: 10px;
+      padding-top: 20px;
+   }
+   .descriptionSlider {
+      font-size: 16px;
+   }
+   .contentContainer img {
+      max-height: 400px;
+   }
+}
+@media screen and (max-width: 992px) {
+   .contentContainer img {
+      max-width: 448px;
+      max-height: 448px;
+   }
+   .contentContainer {
+      align-items: center;
+      flex-direction: column;
+   }
+}
+@media screen and (max-width: 576px) {
+   .contentContainer img {
+      max-width: 100%;
+      max-height: 400px;
+   }
+}

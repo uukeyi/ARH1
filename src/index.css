@@ -34,7 +34,24 @@ body {
    margin: 0 auto;
    padding: 0px 15px;
 }
+.image-swiper-button-next-small,
+.image-swiper-button-prev-small {
+   position: absolute;
+   width: 15px;
+   height: 15px;
+   border-top: 3px solid rgba(34, 34, 34, 0.795);
+   border-right: 3px solid rgba(34, 34, 34, 0.747);
+   z-index: 100;
+}
+.image-swiper-button-next-small {
+   right: -30px;
+   transform: rotate(45deg);
+}
+.image-swiper-button-prev-small {
+   left: -30px;
+   transform: rotate(-135deg);
 
+}
 @media screen and (max-width: 1400px) {
    .container {
       width: 1200px;
@@ -56,6 +73,12 @@ body {
    }
 }
 @media screen and (max-width: 576px) {
+   .image-swiper-button-next-small , .image-swiper-button-prev-small {
+      width: 50%;
+      border: none;
+      height: 100%;
+      transform: rotate(0deg);
+   }
    .container {
       width: 100%;
    }
