@@ -1,6 +1,7 @@
 import React from "react";
 import BlockHeaderSection from "../components/BlockHeaderSection/BlockHeaderSection";
 import CheapPriceSection from "../components/CheapPriceSection/CheapPriceSection";
+import CostEquivalentSection from "../components/CostEquivalentSection/CostEquivalentSection";
 import HeroSection from "../components/HeroSection/HeroSection";
 import OurServicesSection from "../components/OurServicesSection/OurServicesSection";
 import QuoteSection from "../components/QuoteSection/QuoteSection";
@@ -18,6 +19,7 @@ const MainPage: React.FC = () => {
          <BlockHeaderSection/>
          <SwiperSection/>
          <CheapPriceSection/>
+         <CostEquivalentSection/>
       </div>
    );
 };

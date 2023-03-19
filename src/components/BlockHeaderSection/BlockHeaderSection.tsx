@@ -87,7 +87,7 @@ const BlockHeaderSection: React.FC = () => {
                   );
                })}
             </div>
-            <div className={feedbackContainer}>
+            <div data-aos="zoom-in" data-aos-duration = "1500" className={feedbackContainer}>
                <input
                   className={inputName}
                   type="text"
