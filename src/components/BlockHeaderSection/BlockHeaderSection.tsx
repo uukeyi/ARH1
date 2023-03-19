@@ -70,7 +70,7 @@ const BlockHeaderSection: React.FC = () => {
    return (
       <section id={blockHeaderSection}>
          <div className="container">
-            <p data-aos="zoom-in" className={title}>
+            <p data-aos="zoom-in" data-aos-duration = "1500" className={title}>
                Заголовок блока
             </p>
 

@@ -21,7 +21,7 @@ const NumberedCard: React.FC<NumberedCardProps> = ({
       numberContainer,
    } = styles;
    return (
-      <div data-aos = {id % 2 === 0 ? 'fade-left' : 'fade-right'} className={card}>
+      <div data-aos = {id % 2 === 0 ? 'fade-left' : 'fade-right'} data-aos-duration = "1500" className={card}>
          <img src={imgSrc} alt="Не удалось загрузить фото" />
          <div className={titleContainer}>
             <div className={numberContainer}>{id}</div>

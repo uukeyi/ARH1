@@ -17,12 +17,12 @@ const QuoteLineBlock: React.FC<QuoteLineBlockProps> = ({
          <hr className={line} />
          <div
             data-aos="zoom-in-up"
-            data-aos-duration="600"
+            data-aos-duration="1000"
             className={blackBlock}
          >
             <p>{titleBlock}</p>
          </div>
-         <p data-aos="zoom-in-up" data-aos-duration="600" className={titleClass}>
+         <p data-aos="zoom-in-up" data-aos-duration="1000" className={titleClass}>
             {title}
          </p>
          <hr className={line} />

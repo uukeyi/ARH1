@@ -21,7 +21,7 @@ const CheapPriceSection: React.FC = () => {
 
    return (
       <section id={cheapPriceSection}>
-         <div className="container">
+         <div  data-aos = "zoom-in" data-aos-duration = "1000" className="container">
             <p className={title}>ПОЧЕМУ НИЗКАЯ ЦЕНА?</p>
             <p className={subtitle}>
                Есть несколько вариантов манипуляций низкой ценой.
@@ -100,8 +100,8 @@ const CheapPriceSection: React.FC = () => {
                      );
                   })}
                </Swiper>
-               <button className="image-swiper-button-next-small"></button>
-               <button className="image-swiper-button-prev-small"></button>
+               <button type="button" className="image-swiper-button-next-small"></button>
+               <button type="button" className="image-swiper-button-prev-small"></button>
             </div>
          </div>
       </section>

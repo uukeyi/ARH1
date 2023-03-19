@@ -83,8 +83,8 @@ const SwiperSection: React.FC = () => {
       }
    };
    return (
-      <section id={swiperSection}>
-         <div className={`container ${hiddenContainer}`}>
+      <section id={swiperSection} >
+         <div data-aos = "zoom-in" data-aos-duration = "1000" className={`container ${hiddenContainer}`}>
             <p className={title}>ЧТО ДЕЛАЕМ В ПРОЕКТЕ ФАСАДОВ</p>
 
             <Swiper

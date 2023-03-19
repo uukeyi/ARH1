@@ -26,13 +26,13 @@ const QuoteSection: React.FC<QuoteSectionProps> = ({ desc, subDesc }) => {
                title="Один подрядчик - одна ответственность."
             />
             <div className={infoContainer}>
-               <p data-aos="fade-right" className={mainText}>
+               <p data-aos="fade-right" data-aos-duration = "1500"  className={mainText}>
                   {desc}
                   <br />
                   <br />
                   {subDesc}
                </p>
-               <div data-aos="fade-left" className={cardContainer}>
+               <div data-aos="fade-left" data-aos-duration = "1500" className={cardContainer}>
                   <img className={cardImg} src={quoteIcon} alt="Фото" />
                   <p className={cardTitle}>Александр Савенков</p>
                   <p className={cardSubtitle}>Архитектор</p>

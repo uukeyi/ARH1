@@ -43,7 +43,7 @@ const OurServicesSection: React.FC = () => {
          <div className="container">
             <h1
                data-aos="fade-right"
-               data-aos-duration="1000"
+               data-aos-duration="1500"
                className={title}
             >
                НАШИ УСЛУГИ
