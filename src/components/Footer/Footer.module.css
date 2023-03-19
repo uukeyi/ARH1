@@ -46,7 +46,7 @@
   border: 3px solid white;
   padding: 10px;
   transition: 0.5s;
-  width: 30px;
+  width: 50px;
   display: flex;
   margin: 0 5px;
   align-items: center;
@@ -68,6 +68,7 @@
   font-size: 18px;
   padding: 20px;
   border: none;
+  background-color: white;
   border-radius: 50px;
   margin: 10px;
 }
@@ -108,7 +109,7 @@
   );
   top: 0;
   left: -100px;
-  animation: shiningAnimation 5s infinite linear; /* Animation */
+  animation: shiningAnimation 3s infinite linear; /* Animation */
 }
 .phoneButton:hover {
   -webkit-box-shadow: 0px 12px 15px 7px rgba(255, 255, 255, 0.2);
@@ -139,5 +140,16 @@
 @media (max-width: 736px) {
   .phoneWrapper {
     flex-direction: column;
+  }
+}
+@keyframes shiningAnimation {
+  0% {
+    left: -100px;
+  }
+  20% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
   }
 }

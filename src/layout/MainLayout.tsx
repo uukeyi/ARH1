@@ -3,21 +3,19 @@ import { Outlet } from 'react-router-dom';
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
 
-interface MainLayoutProps {
-    
-}
+interface MainLayoutProps {}
 
 const MainLayout: React.FC<MainLayoutProps> = () => {
-    return (
-        <>
-        <Header/>
-        <main className='main'>
-            <Outlet/>
+  return (
+    <>
+      <Header />
+      <main className="main">
+        <Outlet />
+      </main>
 
-        </main>
-        <Footer/>
-        </>
-    )
-}
+      <Footer />
+    </>
+  );
+};
 
 export default MainLayout;

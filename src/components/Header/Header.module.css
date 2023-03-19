@@ -14,15 +14,13 @@
 
 .logoImg {
   width: 150px;
-
 }
 .logoLink {
   display: block;
   height: 57px;
-
 }
 
-.buttonNav {
+.navLink {
   color: white;
   border: 0;
   background: transparent;
@@ -35,7 +33,7 @@
 .img {
   width: 100%;
 }
-.buttonWrapper {
+.navWrapper {
   display: flex;
   justify-content: space-between;
   width: 50%;
@@ -51,6 +49,10 @@
 .logoWrapper {
   width: 25%;
 }
+.burgerButton {
+  display: none;
+}
+
 .numberButton {
   color: white;
   background: transparent;
@@ -74,14 +76,64 @@
   );
   top: 0;
   left: -100px;
-  animation: shiningAnimation 5s infinite linear;
+  animation: shiningAnimation 3s infinite linear;
 }
 .numberButton:hover {
   background: rgb(255, 68, 31);
   cursor: pointer;
   border: 1px solid rgb(255, 68, 31);
 }
-.buttonNav:hover {
+.navLink:hover {
   color: rgb(255, 68, 31);
   cursor: pointer;
+}
+@media (max-width: 1200px) {
+  .contactWrapper {
+    width: 30%;
+  }
+  .navWrapper {
+    width: 45%;
+  }
+}
+
+@media (max-width: 992px) {
+  .navWrapper {
+    display: none;
+  }
+  .contactWrapper {
+    display: none;
+  }
+
+  .burgerButton {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    display: block;
+    cursor: pointer;
+  }
+  .stick {
+    width: 40px;
+    height: 1.5px;
+    background-color: rgb(235, 51, 73);
+    margin: 8px 0;
+  }
+
+  .stick:first-child {
+    margin-top: 0;
+  }
+
+  .stick:last-child {
+    margin-bottom: 0;
+  }
+}
+@keyframes shiningAnimation {
+  0% {
+    left: -100px;
+  }
+  20% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
