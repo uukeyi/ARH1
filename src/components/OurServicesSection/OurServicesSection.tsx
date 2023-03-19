@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import styles from "./OurServicesSection.module.css";
-import designFacade from "../../assets/mainPage/designFacade.webp";
-import buildingFacades from "../../assets/mainPage/buildingFacades.webp";
-import authorVisionSrc from "../../assets/mainPage/authorSupervision.webp";
+
 import OurServicesCard from "../OurServicesCard/OurServicesCard";
 type cardType = {
    img: string;
@@ -16,7 +14,7 @@ const OurServicesSection: React.FC = () => {
    const [cards, setCards] = useState<cardType[]>([
       {
          id: 1,
-         img: designFacade,
+         img: 'https://i.ibb.co/RBH9ZB6/author-Supervision.webp',
          title: "Дизайн фасадов",
          description:
             "Авторский дизайн фасада с использованием элементов швейцарского шале, минимализма, русского стиля, дополненных растительным декором.",
@@ -24,7 +22,7 @@ const OurServicesSection: React.FC = () => {
       },
       {
          id: 2,
-         img: buildingFacades,
+         img: 'https://i.ibb.co/xYfcrsd/building-Facades.webp',
          title: "Строительство фасадов",
          description:
             "Осуществляем отделку фасадов натуральным и искусственным камнем, керамической плиткой. Монтируем и восстанавливаем наличники, карнизы и тяги. Производим монтаж колонн, вензелей и замковых камней.",
@@ -32,7 +30,7 @@ const OurServicesSection: React.FC = () => {
       },
       {
          id: 3,
-         img: authorVisionSrc,
+         img: 'https://i.ibb.co/RBH9ZB6/author-Supervision.webp',
          title: "Авторский надзор",
          description:
             "Авторский надзор является частью строительного контроля, который проводится лицом, осуществившим подготовку проектной и, на её основе, рабочей документации.",

@@ -1,11 +1,5 @@
 import React, { useState } from "react";
 import styles from "./BlockHeaderSection.module.css";
-import digitalProcessSrc from "../../assets/mainPage/digitalProccess.webp";
-import engineeringNodescSrc from "../../assets/mainPage/engineeringNodes.webp";
-import sketchDesignSrc from "../../assets/mainPage/sketchDesign.webp";
-import slowAuthorDesignSrc from "../../assets/mainPage/slowAuthorDesign.webp";
-import suitableMaterialsSrc from "../../assets/mainPage/suitableMaterials.webp";
-import warmingDesignSrc from "../../assets/mainPage/warmingDesign.webp";
 import NumberedCard from "../NumberedCard/NumberedCard";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -20,42 +14,42 @@ type cardType = {
 const BlockHeaderSection: React.FC = () => {
    const [cards, setCards] = useState<cardType[]>([
       {
-         img: slowAuthorDesignSrc,
+         img: "https://i.ibb.co/RBH9ZB6/author-Supervision.webp",
          title: "Медленный авторский дизайн",
          id: 1,
          description:
             "К нам обращаются за уникальным дизайном для собственного особенного дома. Лучшие фасады, как и все другие хорошие вещи, появляются благодаря вниманию и увлечению своих создателей. В задачу нужно погрузиться с головой.",
       },
       {
-         img: suitableMaterialsSrc,
+         img: "https://i.ibb.co/xYfcrsd/building-Facades.webp",
          title: "Подходящие материалы",
          id: 2,
          description:
             "У нас нет карманного производства или магазина. Мы находим подходящие материалы для каждого проекта в рамках бюджета, характеристик, сочетаемости и надежности, проверенной трудным опытом.",
       },
       {
-         img: sketchDesignSrc,
+         img: "https://i.ibb.co/xYfcrsd/building-Facades.webp",
          title: "Эскизный старт",
          id: 3,
          description:
             "Ручная подача на первом этапе дает творческие и разнообразные идеи. Без эскизов дизайнеры делают то, что проще моделировать в знакомой программе.",
       },
       {
-         img: digitalProcessSrc,
+         img: "https://i.ibb.co/RBH9ZB6/author-Supervision.webp",
          title: "Цифровой процесс",
          id: 4,
          description:
             "Модель дома и профессиональная 3D-визуализация поможет проработать дизайн со всех ракурсов, согласовать материалы, посчитать точные площади покрытий.",
       },
       {
-         img: engineeringNodescSrc,
+         img: "https://i.ibb.co/RBH9ZB6/author-Supervision.webp",
          title: "Инженерные узлы",
          id: 5,
          description:
             "Не всё, что кажется прочным и безопасным во время монтажа, окажется таким через 15 лет. Фасад должен долго украшать и защищать дом, но в климате с холодной зимой и палящим солнцем это сложно.",
       },
       {
-         img: warmingDesignSrc,
+         img: "https://i.ibb.co/xYfcrsd/building-Facades.webp",
          title: "Утепление",
          id: 6,
          description:
