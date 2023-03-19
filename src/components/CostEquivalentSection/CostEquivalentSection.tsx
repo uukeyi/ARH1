@@ -1,19 +1,22 @@
 import React from "react";
 import styles from "./CostEquivalentSection.module.css";
-interface CostEquivalentSectionProps {}
 
-const CostEquivalentSection: React.FC<CostEquivalentSectionProps> = () => {
+const CostEquivalentSection: React.FC = () => {
    const { costEquivalentSection, title, contentContainer } = styles;
    return (
       <section id={costEquivalentSection}>
          <div className="container">
-            <p className={title}>ЭКВИВАЛЕНТ СТОИМОСТИ</p>
+            <p data-aos="zoom-in" data-aos-duration="1000" className={title}>
+               ЭКВИВАЛЕНТ СТОИМОСТИ
+            </p>
             <div className={contentContainer}>
                <img
+                  data-aos="fade-right"
+                  data-aos-duration="1000"
                   src="https://i.ibb.co/wNGTqsH/71.webp"
                   alt="Не удалось загрузить фото"
                />
-               <p>
+               <p data-aos="fade-left" data-aos-duration="1000">
                   К примеру: стоимость эскизного проекта дизайна для отделки
                   фасадов дома площадью 250 м2 составит 85 000 руб.
                   <br />
