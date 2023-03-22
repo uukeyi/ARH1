@@ -21,7 +21,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         onClick={() => {
           setIsOpen(!isOpen);
         }}
-        class={close}
+        className={close}
       />
       <div className={container}>
         <a href="#" className={logoLink}>

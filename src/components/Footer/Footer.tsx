@@ -4,7 +4,6 @@ import telegramIcon from '../../assets/icons/telegramIcon.svg';
 import instagramIcon from '../../assets/icons/instagramIcon.svg';
 import whatsappIcon from '../../assets/icons/whatsappIcon.svg';
 import styles from './Footer.module.css';
-import BeforeAfterSlider from '../BeforeAfterSlider/BeforeAfterSlider';
 
 const Footer = () => {
   const {
@@ -54,10 +53,6 @@ const Footer = () => {
         </div>
       </div>
       <div className={bottom}>
-        <BeforeAfterSlider
-          beforeImg="https://www.timeoutdubai.com/cloud/timeoutdubai/2021/09/11/udHvbKwV-IMG-Dubai-UAE-1.jpg"
-          afterImg="https://da28ojrjakn6f.cloudfront.net/tickets/4355/NEW/img_1650272397_1650273497__1.jpg?v=1.1.0"
-        />
         <div className={bottomText}>
           © "АРХИТЕКТУРА" 2006-2020. Все права защищены.
           <br /> <br />

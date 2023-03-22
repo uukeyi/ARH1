@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import MainLayout from "./layout/MainLayout";
+import MainLayout from "./layout/MainLayout/MainLayout";
 import MainPage from "./pages/MainPage";
 //@ts-ignore
 import AOS from "aos";

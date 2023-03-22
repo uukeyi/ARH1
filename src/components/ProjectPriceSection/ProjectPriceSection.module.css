@@ -1,0 +1,182 @@
+#priceWrapper {
+  background-color: #f0f0f0;
+  padding: 50px 0;
+}
+.wrapper {
+  display: flex;
+  gap: 30px;
+}
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
+}
+.left {
+  width: 50%;
+}
+.stickyWrapper {
+  top: 2.5rem;
+  position: sticky;
+}
+.footerLine {
+  display: block;
+  margin: 70px auto 10px;
+}
+.inputLabel {
+  position: relative;
+}
+.inputLabel > p {
+  font-family: 'Roboto';
+  margin-left: 40px;
+}
+.checkboxList > li {
+  margin: 20px 0;
+}
+.totalPrice {
+  font-family: 'Roboto';
+  font-weight: 600;
+}
+.inputCheckbox {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+}
+.inputRadio {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+}
+.inputTitle {
+  font-size: 18px;
+}
+.radiomark {
+  border: 1.5px solid black;
+  border-radius: 50%;
+  background-color: transparent;
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  transition: 0.5s;
+}
+.checkmark {
+  border: 1.5px solid black;
+  border-radius: 0;
+  background-color: transparent;
+  position: absolute;
+  opacity: 0.7;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  transition: 0.5s;
+}
+
+.checkmark:hover,
+.radiomark:hover {
+  border: 2px solid black;
+  opacity: 1;
+}
+.inputCheckbox:checked ~ .checkmark:after,
+.inputRadio:checked ~ .radiomark:after {
+  display: block;
+}
+
+.checkmark:after,
+.radiomark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+.inputLabel .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 7px;
+  height: 15px;
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.inputLabel .radiomark:after {
+  left: -1px;
+  top: -1px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid black;
+  background-color: black;
+}
+.video {
+  width: 100%;
+  aspect-ratio: 5 / 3;
+}
+.title {
+  font-weight: 400;
+  font-size: 43px;
+  line-height: 53px;
+  text-align: center;
+}
+.subtitle {
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-size: 21px;
+  text-align: center;
+  margin: 30px 0;
+}
+.description {
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-size: 18px;
+}
+.inputName {
+  width: 310px;
+  padding: 15px;
+  color: rgba(0, 0, 0, 0.712);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.712);
+}
+.inputPhone {
+  width: 310px !important;
+  border: none !important;
+  outline: none !important;
+  height: 55px !important;
+  background-color: #f0f0f0 !important;
+  font-family: 'Oswald', sans-serif !important;
+  font-size: 16px !important;
+  border-radius: 0px !important;
+  color: rgba(0, 0, 0, 0.712) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.712) !important;
+}
+.optionPhone {
+  position: absolute !important;
+  background: transparent !important;
+  top: 10px !important;
+  height: 30px !important;
+  border: none !important;
+}
+@media (max-width: 992px) {
+  .wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .video {
+    width: 100%;
+    aspect-ratio: 4 / 2;
+  }
+  .left {
+    width: 100%;
+  }
+  .right {
+    width: 100%;
+  }
+}

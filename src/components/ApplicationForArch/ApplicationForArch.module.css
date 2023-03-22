@@ -1,0 +1,66 @@
+#ApplicationForArch {
+  border-bottom: 4.7px solid rgb(255, 68, 31);
+}
+.wrapper {
+  display: flex;
+}
+.left {
+  width: 25%;
+  padding-top: 70px;
+}
+.right {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.img {
+  height: 100%;
+  width: 100%;
+}
+.title {
+  font-weight: 400;
+  font-size: 43px;
+  line-height: 43px;
+  padding: 20px 0;
+}
+.description {
+  padding: 50px 0;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.contactsWrapper {
+  display: flex;
+  padding: 30px 10px;
+  border-radius: 20px;
+  border: 0;
+  gap: 10px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0 20px 70px;
+}
+.optionPhone {
+  position: absolute !important;
+  background: transparent !important;
+  top: 10px !important;
+  height: 30px !important;
+  border: none !important;
+}
+.inputPhone {
+  width: 100px !important;
+  border: none !important;
+  outline: none !important;
+  height: 55px !important;
+  font-family: 'Oswald', sans-serif !important;
+  font-size: 16px !important;
+  border-radius: 0px !important;
+  color: rgba(0, 0, 0, 0.712) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.712) !important;
+}
+.inputName {
+  width: 100px;
+  padding: 15px;
+  color: rgba(0, 0, 0, 0.712);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.712);
+}
+.optionPhone {
+  color: black;
+}
