@@ -51,5 +51,39 @@
    font-family: "Roboto";
 }
 .card:hover {
-    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+   box-shadow: rgba(0, 0, 0, 0.411) 0px 54px 55px, rgba(0, 0, 0, 0.411) 0px -12px 30px, rgba(0, 0, 0, 0.411) 0px 4px 6px, rgba(0, 0, 0, 0.411) 0px 12px 13px, rgba(0, 0, 0, 0.411) 0px -3px 5px;
+
 }
+@media screen and (max-width: 1200px) {
+   .card {
+      width: 24%;
+   }
+ }
+ @media screen and (max-width: 992px) {
+.card {
+   width: 32%;
+}
+.descriptionClass {
+   font-size: 15px;
+}
+
+ }
+ @media screen and (max-width: 768px) {
+.card {
+   width: 48%;
+}
+.descriptionClass {
+   font-size: 16px;
+}
+ }
+ @media screen and (max-width: 576px) {
+.card {
+   width: 100%;
+   height:370px;
+}
+
+.textContainer {
+   gap: 5px;
+   padding: 10px 20px 20px 20px;
+}
+ }

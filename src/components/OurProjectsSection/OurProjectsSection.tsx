@@ -12,7 +12,7 @@ type cardType = {
    pathCard : string;
 };
 const OurProjectsSection: React.FC = () => {
-   const { ourProjectsSection, subtitle, title, cardContainer , cardTitle } = styles;
+   const { ourProjectsSection, subtitle, title, cardContainer , cardTitle , fullWidthContainer } = styles;
    const [cards, setCards] = useState<cardType[]>([
     {
         titleText: "ДИЗАЙН ФАСАДА ДОМА В СТИЛЕ РАЙТА (ПРЕРИЙ)",
@@ -68,7 +68,7 @@ const OurProjectsSection: React.FC = () => {
    ]);
    return (
       <section id={ourProjectsSection}>
-         <div className="container">
+         <div className={`${fullWidthContainer} container`}>
             <Link to={"/"} className={subtitle}>
                Главная /
                <Link to={"ourProjects"} style={{ color: "rgb(235 51 73)" }}>

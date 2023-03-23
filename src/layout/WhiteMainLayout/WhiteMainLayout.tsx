@@ -5,15 +5,14 @@ import Header from "../../components/Header/Header";
 import styles from "./WhiteMainLayout.module.css";
 
 const WhiteMainLayout: React.FC = () => {
-   const { headerButton , headerNavLink , activeHeaderLink , footer , footerLogo , footerSubtitle  , footerTextContainer , footerFeedbackContainer } = styles;
+   const { headerButton , headerNavLink , activeHeaderLink , footer , footerLogo , footerSubtitle  , footerTextContainer , footerFeedbackContainer  , footerFeedbackBlock , footerSocialLinks} = styles;
    return (
       <>
          <Header customClassNameButton={headerButton} customClassNameLinks = {headerNavLink} blackLogo = {true} customClassNameActiveLink = {activeHeaderLink} />
-         <main className="main">
-            
+         <main className="main">   
             <Outlet />
          </main>
-         <Footer whiteFooter = {true} customClassNameFooter = {footer}  customClassNameFeedbackContainer = {footerFeedbackContainer} customClassNameTextContainer = {footerTextContainer} customClassNameSubtitle = {footerSubtitle} customClassNameLogo = {footerLogo} />
+         <Footer whiteFooter = {true} colorIcons = "#fff" customClassNameFooter = {footer}  customClassNameFeedbackContainer = {footerFeedbackContainer} customClassNameFeedbackBlock = {footerFeedbackBlock} customClassNameSocialLinksContainer = {footerSocialLinks} customClassNameTextContainer = {footerTextContainer} customClassNameSubtitle = {footerSubtitle} customClassNameLogo = {footerLogo} />
       </>
    );
 };
