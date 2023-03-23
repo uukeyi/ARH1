@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import OrangeButton from '../OrangeButton/OrangeButton';
 import styles from './ProjectPriceSection.module.css';
 import quoteSectionLine from '../../assets/icons/quoteSectionLine.webp';
 import PhoneInput from 'react-phone-input-2';
-
+type CheckBoxType = {
+  label: string;
+  price: number;
+};
+type RadioType = {
+  label: string;
+};
 const ProjectPriceSection: React.FC = () => {
   const {
     title,
@@ -32,22 +38,21 @@ const ProjectPriceSection: React.FC = () => {
   const [totalSum, setTotalSum] = useState(0);
   const [square, setSquare] = useState(0);
   const [value, setValue] = useState('');
-  const [checkboxes, setCheckboxes] = useState([
+  const [checkboxes, setCheckboxes] = useState<CheckBoxType[]>([
     { label: 'проект ночной подсветки фасадов', price: 300 },
     { label: 'доработать планировку дома', price: 260 },
     { label: 'авторский надзор', price: 300 },
   ]);
-  const [radioStyle, setRadioStyle] = useState([
+  const [radioStyle, setRadioStyle] = useState<RadioType[]>([
     { label: 'Современный' },
     { label: 'Классический' },
     { label: 'Не определились' },
     { label: 'Реконструкция построенного' },
   ]);
-  const [radioType, setRadioType] = useState([
+  const [radioType, setRadioType] = useState<RadioType[]>([
     { label: 'Дизайн фасадов - проект без спецификации' },
     { label: 'Дизайн фасадов - рабочий проект' },
   ]);
-
   const handleCheckboxChange = (event: any) => {
     const checkboxValue = Number(event.target.value);
     if (event.target.checked) {
@@ -144,7 +149,9 @@ const ProjectPriceSection: React.FC = () => {
                   className={inputName}
                   type="number"
                   placeholder="300"
-                  onChange={(e) => handleInput(e)}
+                  onChange={(e) => {
+                    handleInput(e);
+                  }}
                 />
               </div>
               <p className={totalPrice}>{totalSum} руб.</p>
