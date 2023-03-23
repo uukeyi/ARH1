@@ -4,6 +4,7 @@ import ApplicationForArch from '../components/ApplicationForArch/ApplicationForA
 import BlockHeaderSection from '../components/BlockHeaderSection/BlockHeaderSection';
 import CheapPriceSection from '../components/CheapPriceSection/CheapPriceSection';
 import CostEquivalentSection from '../components/CostEquivalentSection/CostEquivalentSection';
+import FacadeDesignSection from '../components/FacadeDesign/FacadeDesignSection';
 import HeroSection from '../components/HeroSection/HeroSection';
 import OurServicesSection from '../components/OurServicesSection/OurServicesSection';
 import ProjectPriceSection from '../components/ProjectPriceSection/ProjectPriceSection';

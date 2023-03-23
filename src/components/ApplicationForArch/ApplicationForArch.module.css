@@ -45,7 +45,7 @@
   border: none !important;
 }
 .inputPhone {
-  width: 100px !important;
+  width: 100% !important;
   border: none !important;
   outline: none !important;
   height: 55px !important;
@@ -56,11 +56,39 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.712) !important;
 }
 .inputName {
-  width: 100px;
+  width: 60%;
   padding: 15px;
   color: rgba(0, 0, 0, 0.712);
   border-bottom: 1px solid rgba(0, 0, 0, 0.712);
 }
 .optionPhone {
   color: black;
+}
+@media (max-width: 1200px) {
+  .left {
+    width: 45%;
+  }
+}
+@media (max-width: 992px) {
+  .wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .left {
+    width: 30%;
+  }
+  .right {
+    align-items: center;
+  }
+  .contactsWrapper {
+    width: 100%;
+    flex-direction: column;
+    padding: 30px;
+  }
+  .inputName {
+    width: 100%;
+  }
+  .inputPhone {
+    width: 100% !important;
+  }
 }

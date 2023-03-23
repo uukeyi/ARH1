@@ -110,6 +110,16 @@
     transform: translateX(100%);
   }
 }
+@media screen and (max-width: 768px) {
+  .wrapper {
+    width: 50vw;
+  }
+}
+@media screen and (max-width: 576px) {
+  .wrapper {
+    width: 60vw;
+  }
+}
 @keyframes shiningAnimation {
   0% {
     left: -100px;

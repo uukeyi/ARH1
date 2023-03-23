@@ -67,7 +67,7 @@ const ApplicationForArch: React.FC = () => {
                 buttonClass={optionPhone}
                 containerClass={phoneContainer}
               />
-              <OrangeButton title={'ОТПРАВИТЬ ЗАЯВКУ'} />
+              <OrangeButton title={'ОТПРАВИТЬ ЗАЯВКУ'} width="100%" />
             </div>
           </div>
         </div>

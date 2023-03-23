@@ -1,5 +1,4 @@
 import React from 'react';
-import Slider from '../BeforeAfterSlider/BeforeAfterSlider';
 import BeforeAfterSlider from '../BeforeAfterSlider/BeforeAfterSlider';
 import OrangeButton from '../OrangeButton/OrangeButton';
 import styles from './FacadeDesignSection.module.css';
@@ -12,8 +11,8 @@ const FacadeDesignSection: React.FC = () => {
         <h1 data-aos="fade-right" data-aos-duration="1500" className={title}>
           ДИЗАЙН ФАСАДОВ - НАШИ РАБОТЫ
         </h1>
-        <Slider />
-        <OrangeButton title={'ОСТАВИТЬ ЗАЯВКУ'} />
+        <BeforeAfterSlider />
+        <OrangeButton title={'ОСТАВИТЬ ЗАЯВКУ'} width="300px" />
       </div>
     </section>
   );

@@ -163,7 +163,7 @@ const ProjectPriceSection: React.FC = () => {
                   buttonClass={optionPhone}
                 />
               </div>
-              <OrangeButton title="ОСТАВИТЬ ЗАЯВКУ" />
+              <OrangeButton title="ОСТАВИТЬ ЗАЯВКУ" width="200px" />
             </div>
           </div>
           <img className={footerLine} src={quoteSectionLine} alt="Линия" />
