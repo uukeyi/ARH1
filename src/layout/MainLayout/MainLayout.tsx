@@ -20,7 +20,7 @@ const MainLayout: React.FC= () => {
                <div className={arrow}></div>
             </div>
          </main>
-         <Footer />
+         <Footer colorIcons="black"/>
       </>
    );
 };

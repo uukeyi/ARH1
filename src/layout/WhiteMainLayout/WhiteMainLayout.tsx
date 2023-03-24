@@ -14,6 +14,8 @@ const WhiteMainLayout: React.FC = () => {
     footerSubtitle,
     footerTextContainer,
     footerFeedbackContainer,
+    footerFeedbackBlock,
+    footerSocialLinks,
   } = styles;
   return (
     <>
@@ -28,8 +30,11 @@ const WhiteMainLayout: React.FC = () => {
       </main>
       <Footer
         whiteFooter={true}
+        colorIcons="#fff"
         customClassNameFooter={footer}
         customClassNameFeedbackContainer={footerFeedbackContainer}
+        customClassNameFeedbackBlock={footerFeedbackBlock}
+        customClassNameSocialLinksContainer={footerSocialLinks}
         customClassNameTextContainer={footerTextContainer}
         customClassNameSubtitle={footerSubtitle}
         customClassNameLogo={footerLogo}

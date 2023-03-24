@@ -1,42 +1,95 @@
 .headerButton {
-    background: rgb(235 51 73);
+   background: rgb(235 51 73);
 }
 .headerButton:hover {
-    background: grey;
-    border: none;
+   background: grey;
+   border: none;
 }
 .headerNavLink {
-    color: black;
-    font-family: 'Roboto';
+   color: black;
+   font-family: "Roboto";
 }
 .headerNavLink:hover {
-    color:rgb(235 51 73) ;
+   color: rgb(235 51 73);
 }
 .activeHeaderLink {
-    color:rgb(235 51 73) ;
-
+   color: rgb(235 51 73);
 }
 .footer {
-    background: #fff !important;
+   background: #fff !important;
+   padding: 0px 0px 20px 0px;
+   overflow-x: hidden;
+}
+.footer  div {
+
+    color: black;
 }
 .footerLogo {
-    width: 188px;
+   width: 188px;
 }
 .footerSubtitle {
-    font-size: 18px;
-    line-height: 23px;
-    font-family: "Roboto";
-    font-weight: 300;
+   font-size: 18px;
+   line-height: 23px;
+   font-family: "Roboto";
+   font-weight: 300;
 }
 .footerTextContainer {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
-
+   margin-top: 30px;
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   text-align: center;
 }
 .footerFeedbackContainer {
-    display: flex;
-    justify-content: space-between;
+    margin-top: 50px;
+   width: 100%;
+   display: flex;
+   justify-content: space-evenly;
 }
+
+.footerFeedbackBlock a {
+   cursor: pointer;
+   font-size: 18px;
+   font-weight: 500;
+   display: flex;
+   align-items: center;
+   gap: 15px;
+   justify-content: center;
+}
+.footerFeedbackBlock a svg {
+   transform: rotate(90deg);
+}
+.footerSocialLinks > a {
+    border-radius: 0 !important;
+    background: rgb(235 51 73);
+    border: none;
+    transition: 0.6s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.footerSocialLinks > a:hover {
+border: 1px solid rgb(235 51 73);
+background: transparent;
+transition: 0.6s;
+
+}
+.footerSocialLinks > a:hover svg {
+fill: rgb(235 51 73);
+transition: 0.6s;
+
+}
+
+
+@media screen and (max-width: 768px) {
+    .footerFeedbackContainer  {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .footerSubtitle {
+        font-size: 16px;
+    }
+     }
+     @media screen and (max-width: 576px) {
+   
+     }
