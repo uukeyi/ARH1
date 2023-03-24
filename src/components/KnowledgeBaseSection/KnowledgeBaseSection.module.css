@@ -1,0 +1,84 @@
+#knowledgeBaseSection {
+  padding: 200px 0px 100px 0px;
+  background-color: #f0f0f0;
+}
+
+.subtitle {
+  font-weight: 300;
+  font-size: 20px;
+  display: block;
+  text-align: center;
+}
+.subtitle:hover {
+  color: rgb(235 51 73);
+  transition: 0.7s;
+}
+.title {
+  color: black;
+  font-size: 51px;
+  font-weight: 300;
+  letter-spacing: 0px;
+  line-height: 58px;
+  text-transform: uppercase;
+  margin-top: 20px;
+  text-align: center;
+}
+.linkContainer {
+  display: flex;
+  justify-content: center;
+  padding: 30px 0 0;
+  flex-wrap: wrap;
+}
+.link {
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0px;
+  line-height: 20px;
+  text-transform: none;
+  font-family: 'Roboto';
+  transition: 0.5s;
+  width: 23%;
+}
+.link:hover {
+  color: rgb(235 51 73);
+}
+.cardContainer {
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-self: center;
+}
+.cardCustom {
+  width: 32%;
+  height: 370px;
+}
+.cardTitle {
+  font-size: 23px;
+}
+
+@media (max-width: 1200px) {
+  .cardCustom {
+    width: 47%;
+    height: 400px;
+  }
+  .link {
+    width: 25%;
+  }
+}
+@media (max-width: 770px) {
+  .cardCustom {
+    width: 100%;
+  }
+  .link {
+    width: 45%;
+    margin: 10px;
+  }
+}
+@media (max-width: 576px) {
+  .link {
+    display: none;
+  }
+}

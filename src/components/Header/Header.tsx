@@ -2,17 +2,21 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import styles from './Header.module.css';
-import blackLogoSrc from '../../assets/logoBlack.webp'
-import lightLogoSrc from '../../assets/logoLight.webp'
+import blackLogoSrc from '../../assets/logoBlack.webp';
+import lightLogoSrc from '../../assets/logoLight.webp';
 interface HeaderProps {
-  customClassNameLinks? : string;
-  customClassNameButton? : string;
-  blackLogo? : boolean;
-  customClassNameActiveLink? : string;
+  customClassNameLinks?: string;
+  customClassNameButton?: string;
+  blackLogo?: boolean;
+  customClassNameActiveLink?: string;
 }
 
-
-const Header :React.FC<HeaderProps>  = ({customClassNameButton , customClassNameLinks , blackLogo , customClassNameActiveLink})  => {
+const Header: React.FC<HeaderProps> = ({
+  customClassNameButton,
+  customClassNameLinks,
+  blackLogo,
+  customClassNameActiveLink,
+}) => {
   const {
     container,
     wrapper,
@@ -33,8 +37,8 @@ const Header :React.FC<HeaderProps>  = ({customClassNameButton , customClassName
     <header className={container}>
       <div className={`container ${wrapper}`}>
         <div className={logoWrapper}>
-          <NavLink className={logoLink} to = "/">
-            <img className={logoImg} alt = "ARH1" src={blackLogo ? blackLogoSrc: lightLogoSrc } />
+          <NavLink className={logoLink} to="/">
+            <img className={logoImg} alt="ARH1" src={blackLogo ? blackLogoSrc : lightLogoSrc} />
           </NavLink>
         </div>
         {/* <div className={burgerButton} onClick={() => setIsActive(!isActive)}>
@@ -50,12 +54,26 @@ const Header :React.FC<HeaderProps>  = ({customClassNameButton , customClassName
           <a href="" className={`${navLink} ${customClassNameLinks}`}>
             О НАС
           </a>
-          <NavLink to = "ourProjects" className={({isActive}) =>  !isActive ? `${navLink} ${customClassNameLinks}` : `${navLink} ${customClassNameLinks} ${customClassNameActiveLink} `}>
+          <NavLink
+            to="ourProjects"
+            className={({ isActive }) =>
+              !isActive
+                ? `${navLink} ${customClassNameLinks}`
+                : `${navLink} ${customClassNameLinks} ${customClassNameActiveLink} `
+            }
+          >
             НАШИ РАБОТЫ
           </NavLink>
-          <a href="" className={`${navLink} ${customClassNameLinks}`}>
+          <NavLink
+            to="knowledgeBase"
+            className={({ isActive }) =>
+              !isActive
+                ? `${navLink} ${customClassNameLinks}`
+                : `${navLink} ${customClassNameLinks} ${customClassNameActiveLink} `
+            }
+          >
             БАЗА ЗНАНИЙ
-          </a>
+          </NavLink>
           <a href="" className={`${navLink} ${customClassNameLinks}`}>
             КОНТАКТЫ
           </a>
