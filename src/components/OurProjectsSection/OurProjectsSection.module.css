@@ -8,6 +8,7 @@
    font-size: 20px;
    display: block;
    text-align: center;
+   color: black;
 }
 .subtitle:hover {
    color: rgb(235 51 73);

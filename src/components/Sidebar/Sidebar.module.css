@@ -21,6 +21,13 @@
   height: 100vh;
   backdrop-filter: blur(2px);
   position: absolute;
+  top: 0;
+  left: 0;
+}
+.bg {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .navWrapper {
@@ -50,6 +57,8 @@
   transition: 0.5s;
   font-size: 16px;
   margin: 10px 0;
+  font-family: "Roboto";
+
 }
 .logoImg {
   width: 150px;
@@ -121,6 +130,9 @@
 @media screen and (max-width: 576px) {
   .wrapper {
     width: 80vw;
+  }
+  .numberButton {
+    white-space: nowrap;
   }
 }
 @keyframes shiningAnimation {
