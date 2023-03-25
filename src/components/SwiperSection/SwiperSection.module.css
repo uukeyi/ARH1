@@ -45,6 +45,8 @@
    max-width: 50%;
    animation: opacity 0.6s 1 linear;
 }
+
+
 @keyframes opacity {
    0% {
       opacity: 0;
@@ -95,6 +97,9 @@
    .hiddenContainer {
       overflow: hidden !important;
    }
+   .mainBtn {
+width: 100%;
+   }
 }
 @media screen and (max-width: 576px) {
   .contentContainer {
@@ -103,6 +108,7 @@
   .title {
    font-size: 33px;
   }
+  
  }
 @media screen and (max-width: 368px) {
     

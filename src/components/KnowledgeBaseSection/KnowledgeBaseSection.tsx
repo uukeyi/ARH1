@@ -19,6 +19,8 @@ const KnowledgeBaseSection: React.FC = () => {
     cardTitle,
     cardCustom,
     link,
+    fullWidthContainer,
+    textContainer
   } = styles;
   const [cards, setCards] = useState<cardType[]>([
     {
@@ -52,7 +54,7 @@ const KnowledgeBaseSection: React.FC = () => {
   ]);
   return (
     <section id={knowledgeBaseSection}>
-      <div className="container">
+      <div className={`container ${fullWidthContainer}`}>
         <Link to={'/'} className={subtitle}>
           Главная /
           <Link to={'ourProjects'} style={{ color: 'rgb(235 51 73)' }}>
@@ -76,6 +78,7 @@ const KnowledgeBaseSection: React.FC = () => {
               <BoxShadowCard
                 customClassNameTitle={cardTitle}
                 customClassName={cardCustom}
+                customClassNameTextContainer = {textContainer}
                 key={index}
                 projectCard={false}
                 pathCard={card.pathCard}

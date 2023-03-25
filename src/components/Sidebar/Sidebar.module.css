@@ -105,6 +105,9 @@
 .close:after {
   transform: rotate(-45deg);
 }
+/* .linkActive {
+  color: rgb(235 51 73) !important;
+} */
 @media (min-width: 992px) {
   .wrapper.active {
     transform: translateX(100%);
@@ -117,7 +120,7 @@
 }
 @media screen and (max-width: 576px) {
   .wrapper {
-    width: 60vw;
+    width: 80vw;
   }
 }
 @keyframes shiningAnimation {

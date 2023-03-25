@@ -5,6 +5,7 @@ interface BoxShadowCardProps {
    customClassName?: string;
    imgSrc: string;
    customClassNameTitle?: string;
+   customClassNameTextContainer? : string;
    projectCard: boolean;
    titleText: string;
    cityText? : string;
@@ -24,13 +25,14 @@ const BoxShadowCard: React.FC<BoxShadowCardProps> = ({
    squareHouse,
    suqareFacade,
    description,
-   pathCard
+   pathCard,
+   customClassNameTextContainer
 }) => {
    const { card, title, descriptionClass , link , textContainer } = styles;
    return (
       <div className={`${customClassName} ${card}`}>
          <img src={imgSrc} alt="#" />
-         <div className={textContainer}>
+         <div className={`${textContainer} ${customClassNameTextContainer}`}>
          <p className={`${title} ${customClassNameTitle}`}>{titleText}</p>
          {projectCard ? (
             <>

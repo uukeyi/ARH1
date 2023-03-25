@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./SwiperSection.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay} from "swiper";
 import "swiper/css";
 
 type slideType = {
@@ -26,6 +27,7 @@ const SwiperSection: React.FC = () => {
       swiperSlider,
       hiddenContainer,
       sliderWrapper,
+      
    } = styles;
    const [data, setData] = useState<slideType[]>([
       {
@@ -83,10 +85,14 @@ const SwiperSection: React.FC = () => {
       }
    };
    return (
-      <section id={swiperSection} >
-         <div data-aos = "zoom-in" data-aos-duration = "1000" className={`container ${hiddenContainer}`}>
+      <section id={swiperSection}>
+         <div
+            data-aos="zoom-in"
+            data-aos-duration="1000"
+            className={`container ${hiddenContainer}`}
+         >
             <p className={title}>ЧТО ДЕЛАЕМ В ПРОЕКТЕ ФАСАДОВ</p>
-
+          
             <Swiper
                allowTouchMove
                className={swiperSlider}
@@ -104,6 +110,11 @@ const SwiperSection: React.FC = () => {
                      slidesPerView: 2,
                   },
                }}
+               autoplay = {{
+                  delay : 3500,
+                  disableOnInteraction : false
+               }}
+               modules = {[Autoplay]}
             >
                <SwiperSlide className={sliderWrapper}>
                   <button
