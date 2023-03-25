@@ -9,7 +9,7 @@ const MainLayout: React.FC= () => {
 
    return (
       <>
-         <Header />
+         <Header displayButtons = {true} />
          <main className="main">
             <Outlet />
             <div

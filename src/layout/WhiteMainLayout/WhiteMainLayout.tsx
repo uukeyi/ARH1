@@ -8,11 +8,11 @@ const WhiteMainLayout: React.FC = () => {
    const { headerButton , headerNavLink , activeHeaderLink , footer , footerLogo , footerSubtitle  , footerTextContainer , footerFeedbackContainer  , footerFeedbackBlock , footerSocialLinks} = styles;
    return (
       <>
-         <Header customClassNameButton={headerButton} customClassNameLinks = {headerNavLink} blackLogo = {true} customClassNameActiveLink = {activeHeaderLink} />
+         <Header customClassNameButton={headerButton} displayButtons = {true} customClassNameLinks = {headerNavLink} blackLogo = {true} customClassNameActiveLink = {activeHeaderLink} />
          <main className="main">   
             <Outlet />
          </main>
-         <Footer whiteFooter = {true} colorIcons = "#fff" customClassNameFooter = {footer}  customClassNameFeedbackContainer = {footerFeedbackContainer} customClassNameFeedbackBlock = {footerFeedbackBlock} customClassNameSocialLinksContainer = {footerSocialLinks} customClassNameTextContainer = {footerTextContainer} customClassNameSubtitle = {footerSubtitle} customClassNameLogo = {footerLogo} />
+         <Footer whiteFooter = {true}  colorIcons = "#fff" customClassNameFooter = {footer}  customClassNameFeedbackContainer = {footerFeedbackContainer} customClassNameFeedbackBlock = {footerFeedbackBlock} customClassNameSocialLinksContainer = {footerSocialLinks} customClassNameTextContainer = {footerTextContainer} customClassNameSubtitle = {footerSubtitle} customClassNameLogo = {footerLogo} />
       </>
    );
 };
