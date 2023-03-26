@@ -16,6 +16,7 @@ interface FooterProps {
    customClassNameFeedbackBlock?: string;
    customClassNameSocialLinksContainer?: string;
    colorIcons?: string;
+   customClassNameContainer? : string;
 }
 const Footer: React.FC<FooterProps> = ({
    whiteFooter,
@@ -27,6 +28,7 @@ const Footer: React.FC<FooterProps> = ({
    customClassNameFeedbackBlock,
    customClassNameSocialLinksContainer,
    colorIcons,
+   customClassNameContainer
 }) => {
    const {
       wrapper,
@@ -48,7 +50,7 @@ const Footer: React.FC<FooterProps> = ({
          <div className={`${top} ${customClassNameFooter}`}>
             {whiteFooter ? (
                <>
-                  <div className="container">
+                  <div className={`container ${customClassNameContainer}`}>
                      <div className={customClassNameTextContainer}>
                         <Link to={"/"}>
                            <img

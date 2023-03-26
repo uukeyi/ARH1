@@ -6,7 +6,6 @@ interface BoxShadowCardProps {
    customClassName?: string;
    imgSrc: string;
    customClassNameTitle?: string;
-   customClassNameTextContainer? : string;
    projectCard: boolean;
    titleText: string;
    cityText?: string;
@@ -14,6 +13,7 @@ interface BoxShadowCardProps {
    suqareFacade?: string;
    description?: string;
    pathCard: string;
+   customClassNameTextContainer? : string
 }
 
 const BoxShadowCard: React.FC<BoxShadowCardProps> = ({
@@ -27,6 +27,7 @@ const BoxShadowCard: React.FC<BoxShadowCardProps> = ({
    suqareFacade,
    description,
    pathCard,
+   customClassNameTextContainer
 }) => {
    const { card, title, descriptionClass, link, textContainer } = styles;
    const navigate = useNavigate();
@@ -38,7 +39,7 @@ const BoxShadowCard: React.FC<BoxShadowCardProps> = ({
          className={`${customClassName} ${card}`}
       >
          <img src={imgSrc} alt="Не удалось отобразить картинку" />
-         <div className={textContainer}>
+         <div className={`${textContainer} ${customClassNameTextContainer}`}>
             <p className={`${title} ${customClassNameTitle}`}>{titleText}</p>
             {projectCard ? (
                <>
