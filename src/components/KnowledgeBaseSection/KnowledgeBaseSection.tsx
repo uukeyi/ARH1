@@ -57,7 +57,7 @@ const KnowledgeBaseSection: React.FC = () => {
       <div className={`container ${fullWidthContainer}`}>
         <Link to={'/'} className={subtitle}>
           Главная /
-          <Link to={'ourProjects'} style={{ color: 'rgb(235 51 73)' }}>
+          <Link to={'/ourProjects'} style={{ color: 'rgb(235 51 73)' }}>
             {' '}
             База знаний
           </Link>

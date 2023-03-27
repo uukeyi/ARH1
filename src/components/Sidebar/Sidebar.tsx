@@ -47,7 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                   О НАС
                </a>
                <NavLink
-                  to={"ourProjects"}
+                  to={"/ourProjects"}
                   style={({ isActive }) => ({
                      color: isActive ? "rgb(235 51 73)" : "#fff",
                   })}
@@ -59,7 +59,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                   НАШИ РАБОТЫ
                </NavLink>
                <NavLink
-                  to={"knowledgeBase"}
+                  to={"/knowledgeBase"}
                   className={navLink}
                   style={({ isActive }) => ({
                      color: isActive ? "rgb(235 51 73)" : "#fff",

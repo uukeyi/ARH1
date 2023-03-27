@@ -15,67 +15,7 @@
 .activeHeaderLink {
    color: rgb(235 51 73);
 }
-.footer {
-   background: #fff !important;
-   padding: 0px 0px 20px 0px;
-   overflow-x: hidden;
-}
-.footer div {
-   color: black;
-}
-.footerLogo {
-   width: 188px;
-}
-.footerSubtitle {
-   font-size: 18px;
-   line-height: 23px;
-   font-family: "Roboto";
-   font-weight: 300;
-}
-.footerTextContainer {
-   margin-top: 30px;
-   display: flex;
-   flex-direction: column;
-   gap: 20px;
-   text-align: center;
-}
-.footerFeedbackContainer {
-   margin-top: 50px;
-   width: 100%;
-   display: flex;
-   justify-content: space-evenly;
-}
 
-.footerFeedbackBlock a {
-   cursor: pointer;
-   font-size: 18px;
-   font-weight: 500;
-   display: flex;
-   align-items: center;
-   gap: 15px;
-   justify-content: center;
-}
-.footerFeedbackBlock a svg {
-   transform: rotate(90deg);
-}
-.footerSocialLinks > a {
-   border-radius: 0 !important;
-   background: rgb(235 51 73);
-   border: none;
-   transition: 0.6s;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-}
-.footerSocialLinks > a:hover {
-   border: 1px solid rgb(235 51 73);
-   background: transparent;
-   transition: 0.6s;
-}
-.footerSocialLinks > a:hover svg {
-   fill: rgb(235 51 73);
-   transition: 0.6s;
-}
 .header {
    height: 60px;
    background: #fff;
@@ -83,6 +23,34 @@
 .headerLogo {
    height: 100%;
 }
+.arrowContainer {
+   width: 60px;
+   height: 60px;
+   border-radius: 50%;
+   transition: 0.7s;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   cursor: pointer;
+   position: fixed;
+   z-index: 100;
+   right: 30px;
+   background: rgb(235 51 73);
+   bottom: 30px;
+   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.arrow {
+   width: 20px;
+   height: 20px;
+   margin-top: 10px;
+   border-top: 4px solid rgb(255, 255, 255);
+   border-right: 4px solid rgb(255, 255, 255);
+   transition: 0.7s;
+   transform: rotate(-45deg);
+}
+
 
 @media screen and (max-width: 1200px) {
    .headerNav {
@@ -91,11 +59,22 @@
    }
 }
 @media screen and (max-width: 768px) {
-   .footerFeedbackContainer {
-      flex-direction: column;
-      gap: 40px;
-   }
-   .footerSubtitle {
-      font-size: 16px;
+
+   .arrowContainer {
+      right: 10px;
+      bottom: 10px;
    }
 }
+@media screen and (max-width: 576px) {
+   .arrowContainer {
+     width: 45px;
+     height: 45px;
+   }
+   .arrow {
+     width: 15px;
+     height: 15px;
+     border-top: 3px solid rgb(255, 255, 255);
+     border-right: 3px solid rgb(255, 255, 255);
+   }
+  }
+  

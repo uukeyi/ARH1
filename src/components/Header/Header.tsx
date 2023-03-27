@@ -4,15 +4,17 @@ import Sidebar from "../Sidebar/Sidebar";
 import styles from "./Header.module.css";
 import blackLogoSrc from "../../assets/logoBlack.webp";
 import lightLogoSrc from "../../assets/logoLight.webp";
+import telegramSrc from "../../assets/heroSectionIcons/telegramIcon.svg";
+import whatsAppSrc from "../../assets/heroSectionIcons/whatsappIcon.svg";
 interface HeaderProps {
    customClassNameLinks?: string;
    customClassNameButton?: string;
    blackLogo?: boolean;
    customClassNameActiveLink?: string;
    displayButtons?: boolean;
-   customClassNameNav? : string;
-   customClassNameHeader? : string;
-   customClassNameLogo? : string
+   customClassNameNav?: string;
+   customClassNameHeader?: string;
+   customClassNameLogo?: string;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -22,8 +24,8 @@ const Header: React.FC<HeaderProps> = ({
    customClassNameActiveLink,
    displayButtons,
    customClassNameNav,
-   customClassNameHeader
-   ,customClassNameLogo
+   customClassNameHeader,
+   customClassNameLogo,
 }) => {
    const {
       container,
@@ -42,7 +44,7 @@ const Header: React.FC<HeaderProps> = ({
    } = styles;
    const [isActive, setIsActive] = useState(false);
    return (
-      <header className={`${container} ${customClassNameHeader}`}>
+      <header id="header" className={`${container} ${customClassNameHeader}`}>
          <div className={`container ${wrapper}`}>
             <div className={logoWrapper}>
                <NavLink className={logoLink} to="/">
@@ -53,9 +55,7 @@ const Header: React.FC<HeaderProps> = ({
                   />
                </NavLink>
             </div>
-            {/* <div className={burgerButton} onClick={() => setIsActive(!isActive)}>
-          <span></span>
-        </div> */}
+         
             <div
                className={burgerButton}
                onClick={() => setIsActive(!isActive)}
@@ -95,16 +95,10 @@ const Header: React.FC<HeaderProps> = ({
                      className={buttonContact}
                      href="https://api.whatsapp.com/send?phone=88129709005"
                   >
-                     <img
-                        className={img}
-                        src="https://arh.yamaster.ml/images/ikon/icons8-whatsapp.svg"
-                     />
+                     <img className={img} src={whatsAppSrc} alt = "WhatsApp" />
                   </a>
-                  <a className={buttonContact} href="https://t.me/Sasha_Save">
-                     <img
-                        className={img}
-                        src="https://arh.yamaster.ml/images/ikon/icons8-telegram.svg"
-                     />
+                  <a className={buttonContact} href="https://t.me/Sasha_Save" >
+                     <img className={img} src={telegramSrc} alt = "Telegram"/>
                   </a>
                </div>
             )}
