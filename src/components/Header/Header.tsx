@@ -51,9 +51,16 @@ const Header: React.FC<HeaderProps> = ({
           <div className={stick}></div>
         </div>
         <nav className={navWrapper}>
-          <a href="" className={`${navLink} ${customClassNameLinks}`}>
+          <NavLink
+            to="aboutUs"
+            className={({ isActive }) =>
+              !isActive
+                ? `${navLink} ${customClassNameLinks}`
+                : `${navLink} ${customClassNameLinks} ${customClassNameActiveLink} `
+            }
+          >
             О НАС
-          </a>
+          </NavLink>
           <NavLink
             to="ourProjects"
             className={({ isActive }) =>
@@ -74,9 +81,16 @@ const Header: React.FC<HeaderProps> = ({
           >
             БАЗА ЗНАНИЙ
           </NavLink>
-          <a href="" className={`${navLink} ${customClassNameLinks}`}>
+          <NavLink
+            to="contacts"
+            className={({ isActive }) =>
+              !isActive
+                ? `${navLink} ${customClassNameLinks}`
+                : `${navLink} ${customClassNameLinks} ${customClassNameActiveLink} `
+            }
+          >
             КОНТАКТЫ
-          </a>
+          </NavLink>
         </nav>
         <div className={contactWrapper}>
           <a className={`${numberButton} ${customClassNameButton}`}>8 (812) 970-90-05</a>
