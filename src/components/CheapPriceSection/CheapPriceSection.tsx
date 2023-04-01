@@ -2,6 +2,7 @@ import React from "react";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade } from "swiper";
+import { Autoplay} from "swiper";
 
 import "swiper/css";
 import "swiper/css/effect-fade";
@@ -29,7 +30,7 @@ const CheapPriceSection: React.FC = () => {
             <div className={sliderContainer}>
                <Swiper
                   className={slider}
-                  modules={[Navigation, EffectFade]}
+                  modules={[Navigation, EffectFade , Autoplay]}
                   spaceBetween={0}
                   loop
                   slidesPerView={1}
@@ -41,6 +42,10 @@ const CheapPriceSection: React.FC = () => {
                   effect="fade"
                   fadeEffect={{
                      crossFade: true,
+                  }}
+
+                  autoplay = {{
+                     delay : 5500
                   }}
                >
                   {[

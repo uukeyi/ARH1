@@ -1,0 +1,268 @@
+.mainBlock {
+   width: 100%;
+   padding-top: 70px;
+   display: flex;
+   flex-direction: row;
+   position: relative;
+}
+.textContainer {
+   position: fixed;
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   height: auto;
+   width: 50vw;
+   padding: 180px 30px;
+}
+.contentContainer {
+   position: absolute;
+   right: 0px;
+   width: 50vw;
+   top: 60px;
+}
+.bg {
+   position: sticky;
+   width: 100%;
+   top: 0;
+   left: 0;
+   z-index: -10;
+   height: 100%;
+
+}
+.bgWrapper {
+   top: 0;
+   left: 0;
+   position: fixed;
+   width: 50vw;
+   height: 100vh;
+   z-index: -10;
+}
+.overlay {
+   position: sticky;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(3, 3, 3, 0.5);
+   color: #fff;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+.title {
+   font-family: "Oswald";
+   font-weight: 300;
+   text-align: center;
+   max-width: 80%;
+   font-size: 58px;
+   line-height: 68px;
+}
+.subtitle {
+   margin-top: 20px;
+   text-align: center;
+   color: rgba(255, 255, 255, 1);
+   font-size: 20px;
+   font-weight: 300;
+   font-family: "Roboto";
+   line-height: 28px;
+}
+.spaceAroundContainer {
+   display: flex;
+   width: 100%;
+   justify-content: space-around;
+}
+.card {
+   margin-top: 60px;
+   display: flex;
+   flex-direction: column;
+   gap: 5px;
+}
+.cardSubtitle {
+   color: rgba(255, 255, 255, 1);
+   font-size: 16px;
+   font-weight: 400;
+   line-height: 20px;
+   font-weight: 300;
+   gap: 5px;
+}
+
+.infoCard {
+   margin-top: 60px;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+.infoCardTitle {
+   color: rgb(235 51 73);
+   font-family: "Oswald";
+   font-size: 23px;
+   font-style: normal;
+   font-weight: 600;
+   line-height: 28px;
+}
+.infoCardSubtitle {
+   color: #fff;
+   font-size: 16px;
+   font-style: normal;
+   font-weight: 300;
+   line-height: 20px;
+   font-family: "Roboto";
+}
+.cardTitle {
+   color: rgba(255, 255, 255, 1);
+   background-image: none;
+   font-family: "Oswald";
+   font-size: 20px;
+   font-style: normal;
+   font-weight: 600;
+   line-height: 20px;
+}
+
+.footer {
+   width: 100%;
+   position: relative;
+   z-index: -1;
+   bottom: 0px;
+   background: #fff !important;
+   padding: 0px 0px 20px 0px;
+   overflow-x: hidden;
+}
+.footer div {
+   color: black;
+}
+.footerLogo {
+   width: 188px;
+}
+.footerSubtitle {
+   font-size: 18px;
+   line-height: 23px;
+   font-family: "Roboto";
+   font-weight: 300;
+}
+.footerTextContainer {
+   margin-top: 30px;
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   text-align: center;
+   width: 100%;
+}
+.fullWidthContainer {
+   width: 100%;
+}
+.footerFeedbackContainer {
+   margin-top: 50px;
+   width: 100%;
+   display: flex;
+   justify-content: space-evenly;
+}
+
+.footerFeedbackBlock a {
+   cursor: pointer;
+   font-size: 18px;
+   font-weight: 500;
+   display: flex;
+   align-items: center;
+   gap: 15px;
+   justify-content: center;
+}
+.footerFeedbackBlock a svg {
+   transform: rotate(90deg);
+}
+.footerSocialLinks > a {
+   border-radius: 0 !important;
+   background: rgb(235 51 73);
+   border: none;
+   transition: 0.6s;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.footerSocialLinks > a:hover {
+   border: 1px solid rgb(235 51 73);
+   background: transparent;
+   transition: 0.6s;
+}
+.footerSocialLinks > a:hover svg {
+   fill: rgb(235 51 73);
+   transition: 0.6s;
+}
+
+@media screen and (max-width: 1400px) {
+   .overlay {
+      padding-top: 0px;
+   }
+   .textContainer {
+      padding: 180px 40px;
+   }
+   .spaceAroundContainer {
+      justify-content: space-between;
+      align-items: center;
+   }
+}
+@media screen and (max-width: 1200px) {
+   .card {
+      width: 45%;
+   }
+   .footerFeedbackContainer {
+      flex-direction: column;
+      gap: 20px;
+   }
+}
+@media screen and (max-width: 992px) {
+   .mainBlock {
+      flex-direction: column;
+   }
+   .title {
+      font-size: 38px;
+   }
+   .bgWrapper {
+      height: 100%;
+      width: 100vw;
+      position: absolute;
+   }
+   .textContainer {
+      width: 100%;
+      position: relative;
+      max-width: none;
+      padding: 30px 0px;
+   }
+   .contentContainer {
+      width: 100%;
+      position: static;
+   }
+   .bg {
+      position: static;
+   }
+   .card {
+      width: 100%;
+      text-align: center;
+   }
+   .overlay {
+      padding-top: 20px;
+   }
+   .infoCard {
+      text-align: center;
+      margin-top: 30px;
+   }
+   .spaceAroundContainer {
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: column;
+   }
+}
+@media screen and (max-width: 768px) {
+   .footerFeedbackContainer {
+      flex-direction: column;
+      gap: 40px;
+   }
+   .footerSubtitle {
+      font-size: 16px;
+   }
+}
+@media screen and (max-width: 576px) {
+   .subtitle {
+      font-size: 17px;
+   }
+}

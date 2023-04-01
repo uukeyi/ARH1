@@ -14,7 +14,7 @@ const OurServicesSection: React.FC = () => {
    const [cards, setCards] = useState<cardType[]>([
       {
          id: 1,
-         img: 'https://i.ibb.co/RBH9ZB6/author-Supervision.webp',
+         img: "https://i.ibb.co/RBH9ZB6/author-Supervision.webp",
          title: "Дизайн фасадов",
          description:
             "Авторский дизайн фасада с использованием элементов швейцарского шале, минимализма, русского стиля, дополненных растительным декором.",
@@ -22,7 +22,7 @@ const OurServicesSection: React.FC = () => {
       },
       {
          id: 2,
-         img: 'https://i.ibb.co/xYfcrsd/building-Facades.webp',
+         img: "https://i.ibb.co/xYfcrsd/building-Facades.webp",
          title: "Строительство фасадов",
          description:
             "Осуществляем отделку фасадов натуральным и искусственным камнем, керамической плиткой. Монтируем и восстанавливаем наличники, карнизы и тяги. Производим монтаж колонн, вензелей и замковых камней.",
@@ -30,7 +30,7 @@ const OurServicesSection: React.FC = () => {
       },
       {
          id: 3,
-         img: 'https://i.ibb.co/RBH9ZB6/author-Supervision.webp',
+         img: "https://i.ibb.co/RBH9ZB6/author-Supervision.webp",
          title: "Авторский надзор",
          description:
             "Авторский надзор является частью строительного контроля, который проводится лицом, осуществившим подготовку проектной и, на её основе, рабочей документации.",
@@ -39,30 +39,32 @@ const OurServicesSection: React.FC = () => {
    ]);
 
    return (
-      <div id={ourServices}>
-         <div className="container">
-            <h1
-               data-aos="fade-right"
-               data-aos-duration="1500"
-               className={title}
-            >
-               НАШИ УСЛУГИ
-            </h1>
-            <div className={cardContainer}>
-               {cards.map((card) => {
-                  return (
-                     <OurServicesCard
-                        src={card.img}
-                        title={card.title}
-                        description={card.description}
-                        key={card.id}
-                        aosAnimation = {card.aosAnimation}
-                     />
-                  );
-               })}
+      <section id={'ourServices'}>
+         <div id={ourServices}>
+            <div className="container">
+               <h1
+                  data-aos="fade-right"
+                  data-aos-duration="1500"
+                  className={title}
+               >
+                  НАШИ УСЛУГИ
+               </h1>
+               <div className={cardContainer}>
+                  {cards.map((card) => {
+                     return (
+                        <OurServicesCard
+                           src={card.img}
+                           title={card.title}
+                           description={card.description}
+                           key={card.id}
+                           aosAnimation={card.aosAnimation}
+                        />
+                     );
+                  })}
+               </div>
             </div>
          </div>
-      </div>
+      </section>
    );
 };
 

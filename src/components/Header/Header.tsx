@@ -4,11 +4,17 @@ import Sidebar from '../Sidebar/Sidebar';
 import styles from './Header.module.css';
 import blackLogoSrc from '../../assets/logoBlack.webp';
 import lightLogoSrc from '../../assets/logoLight.webp';
+import telegramSrc from '../../assets/heroSectionIcons/telegramIcon.svg';
+import whatsAppSrc from '../../assets/heroSectionIcons/whatsappIcon.svg';
 interface HeaderProps {
   customClassNameLinks?: string;
   customClassNameButton?: string;
   blackLogo?: boolean;
   customClassNameActiveLink?: string;
+  displayButtons?: boolean;
+  customClassNameNav?: string;
+  customClassNameHeader?: string;
+  customClassNameLogo?: string;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -16,6 +22,10 @@ const Header: React.FC<HeaderProps> = ({
   customClassNameLinks,
   blackLogo,
   customClassNameActiveLink,
+  displayButtons,
+  customClassNameNav,
+  customClassNameHeader,
+  customClassNameLogo,
 }) => {
   const {
     container,

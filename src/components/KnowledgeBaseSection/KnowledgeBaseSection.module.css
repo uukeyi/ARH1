@@ -67,11 +67,24 @@
   .link {
     width: 25%;
   }
+  .textContainer {
+    gap: 15px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .fullWidthContainer {
+    width: 100%;
+  }
+  .cardCustom {
+    height: 440px;
+  }
 }
 @media (max-width: 770px) {
   .cardCustom {
     width: 100%;
+    height: 450px;
   }
+
   .link {
     width: 45%;
     margin: 10px;
@@ -79,6 +92,15 @@
 }
 @media (max-width: 576px) {
   .linkContainer {
+    display: none;
+  }
+  .cardCustom {
+    height: 450px;
+  }
+  .textContainer {
+    gap: 5px;
+  }
+  .link {
     display: none;
   }
 }

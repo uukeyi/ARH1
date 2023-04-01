@@ -75,7 +75,9 @@
     align-items: center;
   }
   .left {
-    width: 30%;
+    padding-top: 0px;
+    width: 190px;
+    height: 485px;
   }
   .right {
     align-items: center;
@@ -91,4 +93,8 @@
   .inputPhone {
     width: 100% !important;
   }
+  .title {
+    text-align: center;
+  }
+  
 }

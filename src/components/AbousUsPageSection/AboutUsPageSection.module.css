@@ -1,0 +1,165 @@
+#AboutUsSection {
+  position: relative;
+  background-image: url('../../assets/mainBg.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.baOverlay {
+  background-color: rgba(247, 247, 247, 0.88);
+  padding: 200px 0px 100px 0px;
+}
+.subtitle {
+  font-weight: 300;
+  font-size: 20px;
+  display: block;
+  text-align: center;
+}
+.subtitle:hover {
+  color: rgb(235 51 73);
+  transition: 0.7s;
+}
+.title {
+  color: black;
+  font-size: 51px;
+  font-weight: 300;
+  letter-spacing: 0px;
+  line-height: 58px;
+  text-transform: uppercase;
+  margin-top: 20px;
+  text-align: center;
+}
+.wrapper {
+  gap: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.description {
+  text-align: center;
+  max-width: 600px;
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-size: 18px;
+}
+.videoPlayer {
+  max-width: 100%;
+  width: 700px;
+}
+.featuresWrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  background: linear-gradient(50deg, rgba(236, 54, 73, 1) 50%, rgba(243, 88, 67, 1) 100%);
+  gap: 20px;
+  padding: 10px;
+  justify-content: center;
+}
+.infoCardWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 18%;
+  padding: 30px 0;
+}
+.infoCardWrapper > p {
+  color: white;
+  font-family: 'Roboto';
+}
+.cardLine {
+  border: 1.3px solid white;
+}
+.infoCardTitle {
+  font-size: 28px;
+  white-space: nowrap;
+}
+.infoCardSubtitle {
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.profWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+}
+.profCardWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 17%;
+  align-items: center;
+}
+.profPicture {
+  border-radius: 50%;
+}
+.profContent {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: center;
+}
+.profContent > p {
+  font-family: 'Roboto', sans-serif;
+}
+.profCardSubtitle {
+  font-style: italic;
+  font-size: 16px;
+  font-weight: 300;
+}
+.profCardTitle {
+  font-size: 21px;
+}
+.infoWrapper > p {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  line-height: 23px;
+  font-size: 16px;
+}
+.infoWrapper > p > span {
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+}
+@media (max-width: 1200px) {
+  .infoCardWrapper {
+    width: 18%;
+  }
+  .infoCardTitle {
+    font-size: 23px;
+  }
+  .infoCardSubtitle {
+    font-size: 14px;
+  }
+  .profCardWrapper {
+    width: 16%;
+  }
+}
+@media (max-width: 992px) {
+  .infoCardWrapper {
+    width: 30%;
+  }
+  .profCardWrapper {
+    width: 40%;
+  }
+  .profPicture {
+    width: 70%;
+  }
+}
+@media (max-width: 770px) {
+  .infoCardWrapper {
+    width: 47%;
+  }
+  .profCardWrapper {
+    width: 100%;
+  }
+  .profPicture {
+    width: 30%;
+  }
+}
+@media (max-width: 400px) {
+  .infoCardWrapper {
+    width: 100%;
+  }
+}

@@ -2,33 +2,39 @@
    width: 90px;
    height: 90px;
    border-radius: 50%;
-   /* border: 2px solid rgba(0, 0, 0, 0.404); */
-
+   border: 2px solid rgba(0, 0, 0, 0.404);
+   transition: 0.7s;
    display: flex;
    justify-content: center;
    align-items: center;
    cursor: pointer;
    position: fixed;
    z-index: 100;
-   background: transparent;
+
    right: 30px;
+   background: rgba(255, 255, 255, 0.349);
    bottom: 30px;
-   /* filter: blur(5px); */
-   /* transition: 0.5s !important; */
+   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 .arrow {
    width: 30px;
    height: 30px;
-   margin-top: 15px;
-   /* border-top: 6px solid rgba(0, 0, 0, 0.404);
-   border-right: 6px solid rgba(0, 0, 0, 0.404); */
-
+   margin-top: 10px;
+   border-top: 4px solid rgba(0, 0, 0, 0.404);
+   border-right: 4px solid rgba(0, 0, 0, 0.404);
+   transition: 0.7s;
    transform: rotate(-45deg);
 }
 .arrowContainer:hover {
-   transition: 0.7s !important;
+   transition: 0.7s;
    background: black;
    border: none;
+}
+.arrowContainer:hover .arrow {
+   border-top: 4px solid rgb(255, 255, 255);
+   border-right: 4px solid rgb(255, 255, 255);
 }
 @media screen and (max-width: 1400px) {
    .arrowContainer {
@@ -44,8 +50,6 @@
    .arrow {
       width: 25px;
       height: 25px;
-      /* border-top: 4px solid rgba(0, 0, 0, 0.404);
-   border-right: 4px solid rgba(0, 0, 0, 0.404); */
    }
 }
 @media screen and (max-width: 992px) {
@@ -57,5 +61,15 @@
    .arrowContainer {
       right: 10px;
       bottom: 10px;
+   }
+}
+@media screen and (max-width: 576px) {
+   .arrowContainer {
+      width: 60px;
+      height: 60px;
+   }
+   .arrow {
+      width: 20px;
+      height: 20px;
    }
 }
