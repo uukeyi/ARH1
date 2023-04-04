@@ -28,7 +28,6 @@
    left: 0;
    z-index: -10;
    height: 100%;
-
 }
 .bgWrapper {
    top: 0;
@@ -171,7 +170,7 @@
    transform: rotate(90deg);
 }
 .footerSocialLinks > a {
-   border-radius: 0 !important;
+   border-radius: 0;
    background: rgb(235 51 73);
    border: none;
    transition: 0.6s;
