@@ -1,9 +1,9 @@
 import React from 'react';
 import BeforeAfterSlider from '../BeforeAfterSlider/BeforeAfterSlider';
 import OrangeButton from '../OrangeButton/OrangeButton';
-import styles from './FacadeDesignSection.module.css';
+import styles from './FacadeDesignWorksSection.module.css';
 
-const FacadeDesignSection: React.FC = () => {
+const FacadeDesignWorksSection: React.FC = () => {
   const { facadeSection, title } = styles;
   return (
     <section id={facadeSection}>
@@ -18,4 +18,4 @@ const FacadeDesignSection: React.FC = () => {
   );
 };
 
-export default FacadeDesignSection;
+export default FacadeDesignWorksSection;

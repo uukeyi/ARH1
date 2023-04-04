@@ -4,7 +4,8 @@ import ApplicationForArch from '../components/ApplicationForArch/ApplicationForA
 import BlockHeaderSection from '../components/BlockHeaderSection/BlockHeaderSection';
 import CheapPriceSection from '../components/CheapPriceSection/CheapPriceSection';
 import CostEquivalentSection from '../components/CostEquivalentSection/CostEquivalentSection';
-import FacadeDesignSection from '../components/FacadeDesign/FacadeDesignSection';
+import FacadeDesignSection from '../components/FacadeDesignSection/FacadeDesignSection';
+import FacadeDesignWorksSection from '../components/FacadeDesignWorks/FacadeDesignWorksSection';
 import HeroSection from '../components/HeroSection/HeroSection';
 import OurServicesSection from '../components/OurServicesSection/OurServicesSection';
 import ProjectPriceSection from '../components/ProjectPriceSection/ProjectPriceSection';
@@ -16,7 +17,7 @@ const MainPage: React.FC = () => {
     <div>
       <HeroSection />
       <OurServicesSection />
-      {/* <FacadeDesignSection /> */}
+      {/* <FacadeDesignWorksSection /> */}
       <QuoteSection
         title="ПРИНЦИП"
         subtitle="Один подрядчик - одна ответственность."
@@ -35,6 +36,7 @@ const MainPage: React.FC = () => {
         weight="300"
         bg="white"
       />
+      <FacadeDesignSection />
       <ApplicationForArch />
       <CheapPriceSection />
       <ProjectPriceSection />

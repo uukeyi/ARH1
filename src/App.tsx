@@ -17,6 +17,10 @@ import DesignFacadeVillaticHouse from './pages/DesignFacadeVillaticHouse/DesignF
 import ProjectReconstructionRelaxBase from './pages/ProjectReconstructionRelaxBase/ProjectReconstructionRelaxBase';
 import AboutUsPage from './pages/AboutUsPage';
 import ContactsPage from './pages/ContactsPage';
+import BuyLandPlot from './pages/BuyLandPlot/BuyLandPlot';
+import MainStylesLandscapeDesign from './pages/MainStylesLandscapeDesign/MainStylesLandscapeDesign';
+import BuildHouseOrBuy from './pages/BuildHouseOrBuy/BuildHouseOrBuy';
+import DevelopmentProjectDesignHouseFacade from './pages/DevelopmentProjectDesignHouseFacade/DevelopmentProjectDesignHouseFacade';
 function App() {
   useEffect(() => {
     AOS.init();
@@ -31,6 +35,16 @@ function App() {
         <Route path="knowledgeBase" element={<KnowledgeBasePage />} />
         <Route path="contacts" element={<ContactsPage />} />
         <Route path="aboutUs" element={<AboutUsPage />} />
+        <Route path="knowledgeBase/buyLandPlot" element={<BuyLandPlot />} />
+        <Route
+          path="knowledgeBase/mainStylesLandscapeDesign"
+          element={<MainStylesLandscapeDesign />}
+        />
+        <Route path="knowledgeBase/buildHouseOrBuy" element={<BuildHouseOrBuy />} />
+        <Route
+          path="knowledgeBase/developmentProjectDesignHouseFacade"
+          element={<DevelopmentProjectDesignHouseFacade />}
+        />
       </Route>
       <Route path="ourProjects" element={<SingleProjectPageLayout />}>
         <Route path="designFacadeStyleRight" element={<DesignFacadeStyleRight />} />
