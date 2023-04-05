@@ -1,0 +1,36 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0;
+  align-items: center;
+}
+.wrapper > p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 20px;
+}
+.title {
+  font-size: 30px;
+  font-weight: 400;
+  font-family: 'Roboto', sans-serif;
+  margin: 30px;
+  text-align: center;
+}
+
+.redLine {
+  padding: 50px;
+  width: 100%;
+  border-left: 4px solid rgb(235 51 73);
+}
+.redLine > p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 20px;
+}
+@media screen and (max-width: 576px) {
+  .title {
+    font-size: 30px;
+  }
+}
