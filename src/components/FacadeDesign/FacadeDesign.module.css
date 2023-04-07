@@ -1,0 +1,53 @@
+#facadeDesign {
+  background-color: rgb(240, 240, 240);
+  padding: 70px 0 30px;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 43px;
+  line-height: 43px;
+  text-align: center;
+}
+
+.sliderImage {
+  opacity: 0;
+  transition: 0.5s;
+  background-size: cover;
+}
+
+.wrapper {
+  position: relative;
+  margin-top: 20px;
+}
+.active {
+  opacity: 1;
+  height: 700px;
+}
+.navContainer {
+  padding: 20px 0;
+  display: flex;
+  position: absolute;
+  width: 100%;
+  justify-content: space-around;
+  background-color: black;
+  opacity: 0.9;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.sliderImage > p {
+  padding: 20px;
+  width: 500px;
+  background-color: rgb(240, 240, 240);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.sliderNavItem {
+  color: #fff;
+}
+@media screen and (max-width: 576px) {
+  .title {
+    font-size: 33px;
+  }
+}

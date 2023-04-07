@@ -9,13 +9,15 @@ import OurServicesSection from '../components/OurServicesSection/OurServicesSect
 import ProjectPriceSection from '../components/ProjectPriceSection/ProjectPriceSection';
 import QuoteSection from '../components/QuoteSection/QuoteSection';
 import SwiperSection from '../components/SwiperSection/SwiperSection';
+import FacadeDesignWorksSection from '../components/FacadeDesignWorks/FacadeDesignWorksSection';
+import FacadeDesign from '../components/FacadeDesign/FacadeDesign';
 
 const MainPage: React.FC = () => {
   return (
     <div>
       <HeroSection />
       <OurServicesSection />
-      {/* <FacadeDesignWorksSection /> */}
+      <FacadeDesignWorksSection />
       <QuoteSection
         title="ПРИНЦИП"
         subtitle="Один подрядчик - одна ответственность."
@@ -35,7 +37,7 @@ const MainPage: React.FC = () => {
         weight="300"
         bg="white"
       />
-
+      <FacadeDesign />
       <ApplicationForArch />
       <CheapPriceSection />
       <ProjectPriceSection />
