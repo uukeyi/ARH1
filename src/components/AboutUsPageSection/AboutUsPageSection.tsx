@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './AboutUsPageSection.module.css';
 
-interface infoCardI {
+interface IInfoCard {
   title: string;
   subtitle: string;
 }
-interface profCardI {
+interface IProfCard {
   profPic: string;
   title: string;
   subtitle: string;
@@ -35,7 +35,7 @@ const AboutUsPageSection: React.FC = () => {
     profContent,
     infoWrapper,
   } = styles;
-  const [infoCards, setInfoCards] = useState<infoCardI[]>([
+  const [infoCards, setInfoCards] = useState<IInfoCard[]>([
     {
       title: '2005 год',
       subtitle: 'ОСНОВАНИЕ СТУДИИ',
@@ -57,7 +57,7 @@ const AboutUsPageSection: React.FC = () => {
       subtitle: 'УСПЕШНО ПРОШЛИ ЭКСПЕРТИЗУ',
     },
   ]);
-  const [profCards, setProfCards] = useState<profCardI[]>([
+  const [profCards, setProfCards] = useState<IProfCard[]>([
     {
       profPic: 'https://arh.yamaster.ml/images/sotrudniki/2_sm_0.webp',
       title: 'РЕНАТА ГАЛИМУЛИНА',

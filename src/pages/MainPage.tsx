@@ -11,6 +11,7 @@ import QuoteSection from '../components/QuoteSection/QuoteSection';
 import SwiperSection from '../components/SwiperSection/SwiperSection';
 import FacadeDesignWorksSection from '../components/FacadeDesignWorks/FacadeDesignWorksSection';
 import FacadeDesign from '../components/FacadeDesign/FacadeDesign';
+import QuoteLineBlock from '../components/QuoteLineBlock/QuoteLineBlock';
 
 const MainPage: React.FC = () => {
   return (
@@ -40,6 +41,12 @@ const MainPage: React.FC = () => {
       <FacadeDesign />
       <ApplicationForArch />
       <CheapPriceSection />
+      <QuoteLineBlock
+        titleBlock="ИНТЕРЕСНО"
+        title="Стоит ли ориентироваться на самую низкую цену?"
+        desc="Стоит, но лишь тогда, когда предложения сопоставимы по комплектации и конечному результату, а не отличаются скрытыми доплатами, качеством материалов и уровнем специалистов.
+Потому любое предложение нужно подробно анализировать."
+      />
       <ProjectPriceSection />
       <CostEquivalentSection />
       <AboutUsSection />
