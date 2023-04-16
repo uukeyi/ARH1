@@ -6,7 +6,7 @@ const BuyLandPlot: React.FC = () => {
   const { wrapper, title } = styles;
   return (
     <section>
-      <KnowledgeBaseDetailsSection pageTitle="Разработка дизайн-проекта фасада дома" />
+      <KnowledgeBaseDetailsSection pageTitle="Купить земельный участок?" />
       <div className="container">
         <div className={wrapper}>
           <p>
