@@ -1,5 +1,6 @@
 #facadeSection {
   padding: 80px 0px 100px 0px;
+  overflow: hidden;
 }
 
 .title {
@@ -22,7 +23,9 @@
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+  width: 100vw;
   justify-content: center;
+  
 }
 .sliderCardWrap {
   width: 30%;
@@ -48,5 +51,8 @@
 @media (max-width: 576px) {
   .sliderCardWrap {
     width: 100%;
+  }
+  .title {
+    font-size: 33px;
   }
 }

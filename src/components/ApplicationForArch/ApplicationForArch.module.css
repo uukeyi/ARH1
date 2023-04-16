@@ -1,5 +1,6 @@
 #ApplicationForArch {
   border-bottom: 4.7px solid rgb(255, 68, 31);
+  overflow: hidden;
 }
 .wrapper {
   display: flex;

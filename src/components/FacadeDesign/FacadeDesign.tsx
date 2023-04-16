@@ -50,7 +50,7 @@ const FacadeDesign: React.FC = () => {
 
   return (
     <section id={facadeDesign}>
-      <p className={title}>ДИЗАЙН ФАСАДОВ</p>
+      <p data-aos = "zoom-in" data-aos-duration = "1500" className={title}>ДИЗАЙН ФАСАДОВ</p>
       <div className={wrapper}>
         {images.map((image, index) => (
           <div

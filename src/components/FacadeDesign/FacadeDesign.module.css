@@ -8,11 +8,12 @@
   font-size: 43px;
   line-height: 43px;
   text-align: center;
+
 }
 
 .sliderImage {
   opacity: 0;
-  transition: 0.5s;
+  transition: 2.5s;
   background-size: cover;
 }
 
@@ -23,9 +24,10 @@
 .active {
   opacity: 1;
   height: 700px;
+
 }
 .navContainer {
-  padding: 20px 0;
+  padding: 40px 0;
   display: flex;
   position: absolute;
   width: 100%;
@@ -41,10 +43,12 @@
   background-color: rgb(240, 240, 240);
   position: absolute;
   left: 50%;
+  font-family: "Roboto";
   transform: translateX(-50%);
 }
 .sliderNavItem {
   color: #fff;
+  cursor: pointer;
 }
 @media screen and (max-width: 576px) {
   .title {
