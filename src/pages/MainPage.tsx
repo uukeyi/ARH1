@@ -12,6 +12,7 @@ import SwiperSection from '../components/SwiperSection/SwiperSection';
 import FacadeDesignWorksSection from '../components/FacadeDesignWorks/FacadeDesignWorksSection';
 import FacadeDesign from '../components/FacadeDesign/FacadeDesign';
 import QuoteLineBlock from '../components/QuoteLineBlock/QuoteLineBlock';
+import ReviewsSection from '../components/ReviewsSection/ReviewsSection';
 
 const MainPage: React.FC = () => {
   return (
@@ -50,6 +51,7 @@ const MainPage: React.FC = () => {
       <ProjectPriceSection />
       <CostEquivalentSection />
       <AboutUsSection />
+      <ReviewsSection />
     </div>
   );
 };
