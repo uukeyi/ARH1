@@ -14,9 +14,7 @@ const HeroSection: React.FC = () => {
       title,
       description,
       socialLinksContainer,
-
       arrowIcon,
-
       numberButton,
       btnContainer,
    } = styles;

@@ -44,7 +44,7 @@ const Header: React.FC<HeaderProps> = ({
   } = styles;
   const [isActive, setIsActive] = useState(false);
   return (
-    <header className={container}>
+    <header id='header' className={container}>
       <div className={`container ${wrapper}`}>
         <div className={logoWrapper}>
           <NavLink className={logoLink} to="/">
