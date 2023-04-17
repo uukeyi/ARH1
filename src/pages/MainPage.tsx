@@ -13,6 +13,7 @@ import FacadeDesignWorksSection from '../components/FacadeDesignWorks/FacadeDesi
 import FacadeDesign from '../components/FacadeDesign/FacadeDesign';
 import QuoteLineBlock from '../components/QuoteLineBlock/QuoteLineBlock';
 import ReviewsSection from '../components/ReviewsSection/ReviewsSection';
+import WorkAlgorithmSection from '../components/WorkAlgorithmSection/WorkAlgorithmSection';
 
 const MainPage: React.FC = () => {
   return (
@@ -28,7 +29,7 @@ const MainPage: React.FC = () => {
         weight="600"
         bg="#f0f0f0"
       />
-
+      <WorkAlgorithmSection />
       <BlockHeaderSection />
       <SwiperSection />
       <QuoteSection

@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import { Navigation } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectFade } from 'swiper';
+import { Autoplay } from 'swiper';
+import { Pagination } from 'swiper';
 import styles from './ReviewsSection.module.css';
-import Swiper from 'swiper';
+
 interface ReviewsSectionProps {}
 interface IReview {
   description: string;
@@ -9,7 +14,20 @@ interface IReview {
   img: string;
 }
 const ReviewsSection: React.FC<ReviewsSectionProps> = () => {
-  const { reviewsSection, title, description } = styles;
+  const {
+    reviewsSection,
+    title,
+    description,
+    slider,
+    cardDescription,
+    sliderContainer,
+    cardLine,
+    cardInfoContainer,
+    personContainer,
+    personName,
+    personDescription,
+    swiperPagination,
+  } = styles;
   const [reviews, setReviews] = useState<IReview[]>([
     {
       description:
@@ -25,16 +43,72 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = () => {
       personDescription: "Директор ТЦ 'Звёздный', Санкт-Петербург.",
       img: 'https://i.ibb.co/d6HK22S/d806b062c31db8c7cd79.webp',
     },
+    {
+      description:
+        "На волне патриотических настроений решили заняться непрофильным для нас делом - построить качественный досугово-развлекательный туристический центр 'Открытые Кижи' в Карелии. Для начала нужен проект и я нашёл в интернете компанию 'Архитектура АРХ1'. Встретились с ребятами, всё обсудили, вроде устраивает. Но как обычно захотелось сравнить, найти альтернативу. Обратились к известному в узких кругах архитектурному бюро (иностранная компания, московское представительство), вроде тоже всё устроило, решили остановиться на нём. Сроки первого этапа оказались нарушены вдвое и выдали откровенную халтуру. Тогда мы вновь вернулись к 'Архитектуре', я позвонил Александру и предложил возобновить переговоры. Ещё раз всё обсудили, подписали контракт. Получили проект вовремя и результат превзошёл наши ожидания. Рады, что воспользовались услугами компании 'Архитектура', спасибо огромное Александру и его команде! Рекомендуем к сотрудничеству всем ) И сами ещё будем обращаться... Председатель совета директоров ООО 'Группа Компаний ТрансБалт' Иванов Сергей.",
+      name: 'Иванов Сергей',
+      personDescription: "Председатель совета директоров ООО 'Группа Компаний ТрансБалт'",
+      img: 'https://i.ibb.co/rMHJyTZ/51.webp',
+    },
   ]);
   return (
     <section id={reviewsSection}>
       <div className="container">
-        <p className={title}>ОТЗЫВЫ О НАШЕЙ РАБОТЕ</p>
-        <p className={description}>
+        <p data-aos="fade-right" data-aos-duration="1500" className={title}>
+          ОТЗЫВЫ О НАШЕЙ РАБОТЕ
+        </p>
+        <p data-aos="fade-right" data-aos-duration="1500" className={description}>
           Реальные отзывы о нас в социальных сетях. <br />
           Нам важно получать обратную связь от наших клиентов.
         </p>
-        {/* <Swiper>{}</Swiper> */}
+        <div data-aos="fade-left" data-aos-duration="1500" className={sliderContainer}>
+          <Swiper
+            className={slider}
+            modules={[Navigation, EffectFade, Autoplay, Pagination]}
+            spaceBetween={0}
+            loop
+            slidesPerView={1}
+            navigation={{
+              nextEl: '.image-swiper-button-next-small',
+              prevEl: '.image-swiper-button-prev-small',
+            }}
+            speed={800}
+            effect="fade"
+            fadeEffect={{
+              crossFade: true,
+            }}
+            autoplay={{
+              delay: 5500,
+            }}
+            pagination={{
+              el: '.swiper-pagination',
+              clickable: true,
+            }}
+          >
+            {reviews.map((review, index) => {
+              return (
+                <SwiperSlide key={index}>
+                  <q className={cardDescription}>{review.description}</q>
+                  <hr className={cardLine} />
+                  <div className={cardInfoContainer}>
+                    <img src={review.img} alt="Не удалось отобразить картинку" />
+                    <div className={personContainer}>
+                      <p className={personName}>{review.name}</p>
+                      <p className={personDescription}>{review.personDescription}</p>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+          <button type="button" className="image-swiper-button-next-small"></button>
+          <button type="button" className="image-swiper-button-prev-small"></button>
+        </div>
+        <div
+          data-aos="fade-left"
+          data-aos-duration="1500"
+          className={`swiper-pagination ${swiperPagination}`}
+        ></div>
       </div>
     </section>
   );

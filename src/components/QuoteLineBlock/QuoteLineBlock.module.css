@@ -10,6 +10,9 @@
   background: black;
   margin: -25px auto;
 }
+.quoteLineBlockSection {
+  margin: 100px 0 40px;
+}
 .blackBlock > p {
   color: #fff;
   text-align: center;

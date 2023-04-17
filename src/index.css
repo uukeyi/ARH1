@@ -80,6 +80,21 @@ body {
   width: 100%;
   object-fit: cover;
 }
+.swiper-pagination-bullet  {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgb(235 51 73);
+  cursor: pointer;
+  transition: 0.7s;
+}
+.swiper-pagination-bullet:hover {
+  background-color: grey;
+}
+.swiper-pagination-bullet-active {
+  background-color: grey;
+}
 @media screen and (max-width: 1400px) {
   .container {
     width: 1200px;

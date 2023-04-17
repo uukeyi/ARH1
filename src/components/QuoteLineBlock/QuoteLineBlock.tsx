@@ -7,9 +7,10 @@ interface QuoteLineBlockProps {
 }
 
 const QuoteLineBlock: React.FC<QuoteLineBlockProps> = ({ titleBlock, title, desc }) => {
-  const { line, blackBlock, titleClass, description, titleClassDesc } = styles;
+  const { line, blackBlock, titleClass, description, titleClassDesc, quoteLineBlockSection } =
+    styles;
   return (
-    <div className="container">
+    <div className={desc ? `container ${quoteLineBlockSection}` : 'container'}>
       <hr className={line} />
       <div data-aos="zoom-in-up" data-aos-duration="1000" className={blackBlock}>
         <p>{titleBlock}</p>
