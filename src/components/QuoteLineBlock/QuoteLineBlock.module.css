@@ -11,7 +11,8 @@
   margin: -25px auto;
 }
 .quoteLineBlockSection {
-  margin: 100px 0 40px;
+  margin-top: 100px;
+  margin-bottom: 40px;
 }
 .blackBlock > p {
   color: #fff;

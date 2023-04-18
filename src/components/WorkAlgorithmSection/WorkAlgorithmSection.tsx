@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './WorkAlgorithmSection.module.css';
 const WorkAlgorithmSection: React.FC = () => {
   const { workAlgorithmSection, title, subtitle, wrapper, popupImage } = styles;
-
   return (
     <section id={workAlgorithmSection}>
       <div data-aos="zoom-in" data-aos-duration="1000" className="container">
