@@ -16,7 +16,9 @@
   text-align: center;
   margin-top: 30px;
 }
-
+.titleWrapper {
+  margin: 70px 0;
+}
 @media screen and (max-width: 576px) {
   .title {
     font-size: 33px;
