@@ -21,6 +21,7 @@ import BuyLandPlot from './pages/BuyLandPlot/BuyLandPlot';
 import MainStylesLandscapeDesign from './pages/MainStylesLandscapeDesign/MainStylesLandscapeDesign';
 import BuildHouseOrBuy from './pages/BuildHouseOrBuy/BuildHouseOrBuy';
 import DevelopmentProjectDesignHouseFacade from './pages/DevelopmentProjectDesignHouseFacade/DevelopmentProjectDesignHouseFacade';
+import DiscussionFacadePage from './pages/DiscussionFacadePage/DiscussionFacadePage';
 function App() {
   useEffect(() => {
     AOS.init();
@@ -31,6 +32,7 @@ function App() {
         <Route index element={<MainPage />} />
       </Route>
       <Route path="/" element={<WhiteMainLayout />}>
+        <Route path='discussionFacade' element = {<DiscussionFacadePage/>} />
         <Route path="ourProjects" element={<OurProjectsPage />} />
         <Route path="knowledgeBase" element={<KnowledgeBasePage />} />
         <Route path="contacts" element={<ContactsPage />} />

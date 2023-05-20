@@ -43,9 +43,18 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                />
             </NavLink>
             <nav className={navWrapper}>
-               <a href="" className={navLink}>
-                  О НАС
-               </a>
+            <NavLink
+                  to={"/aboutUs"}
+                  style={({ isActive }) => ({
+                     color: isActive ? "rgb(235 51 73)" : "#fff",
+                  })}
+                  className={navLink}
+                  onClick={() => {
+                     setIsOpen(false);
+                  }}
+               >
+                  О НАС 
+               </NavLink>
                <NavLink
                   to={"/ourProjects"}
                   style={({ isActive }) => ({
@@ -70,9 +79,30 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                >
                   БАЗА ЗНАНИЙ
                </NavLink>
-               <a href="" className={`${navLink} ${linkAcitve}`}>
+               <NavLink
+                  to={"/discussionFacade"}
+                  className={navLink}
+                  style={({ isActive }) => ({
+                     color: isActive ? "rgb(235 51 73)" : "#fff",
+                  })}
+                  onClick={() => {
+                     setIsOpen(false);
+                  }}
+               >
+                  ОБСУЖДЕНИЕ
+               </NavLink>
+               <NavLink
+                  to={"/contacts"}
+                  className={navLink}
+                  style={({ isActive }) => ({
+                     color: isActive ? "rgb(235 51 73)" : "#fff",
+                  })}
+                  onClick={() => {
+                     setIsOpen(false);
+                  }}
+               >
                   КОНТАКТЫ
-               </a>
+               </NavLink>
                <a className={numberButton}>8 (812) 970-90-05</a>
             </nav>
          </div>
