@@ -2,8 +2,16 @@
   font-size: 26px;
   margin-bottom: 20px;
 }
-.react-photo-album--photo {
-  width: 100px !important;
+.galleryImg {
+  width: 100%;
+  aspect-ratio: 185 / 133;
+  height: auto;
+}
+.photoGallery {
+  display: grid;
+  gap: 10px;
+  flex-wrap: wrap;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 .btn {
   box-shadow: rgba(3, 3, 3, 0.28) 0px 0px 8px 3px;
@@ -29,6 +37,7 @@
   left: -100px;
   animation: shiningAnimation 3s infinite linear;
 }
+
 @keyframes shiningAnimation {
   0% {
     left: -100px;
@@ -38,5 +47,22 @@
   }
   100% {
     left: 100%;
+  }
+}
+
+@media (max-width: 992px) {
+  .photoGallery {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .photoGallery {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+}
+@media (max-width: 576px) {
+  .photoGallery {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
