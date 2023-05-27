@@ -1,0 +1,32 @@
+#workAlgorithm {
+  padding: 80px 0px;
+  background: #f0f0f0;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 43px;
+  line-height: 53px;
+  text-align: center;
+}
+.subtitle {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 21px;
+  text-align: center;
+  margin-top: 30px;
+}
+.titleWrapper {
+  margin: 70px 0;
+}
+.gallery {
+  margin: 50px 0;
+}
+@media screen and (max-width: 576px) {
+  .title {
+    font-size: 33px;
+  }
+  .subtitle {
+    font-size: 17px;
+  }
+}

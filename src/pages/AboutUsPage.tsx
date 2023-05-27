@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AboutUsPageSection from '../components/AboutUsPageSection/AboutUsPageSection';
 
 const AboutUsPage: React.FC = () => {
