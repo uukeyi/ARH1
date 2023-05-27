@@ -1,0 +1,277 @@
+#contactsSection {
+  position: relative;
+  background-image: url('../../assets/mainBg.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.baOverlay {
+  background-color: rgba(247, 247, 247, 0.88);
+  padding: 200px 0px 100px 0px;
+}
+
+.iconsWrapper {
+  display: flex;
+}
+.icon {
+  background: white;
+  border-radius: 50%;
+  border: 3px solid white;
+  padding: 10px;
+  transition: 0.5s;
+  width: 50px;
+  display: flex;
+  margin: 0 5px;
+  align-items: center;
+}
+.icon:hover {
+  border: 3px solid rgb(235, 51, 73);
+  border-radius: 0;
+}
+.socialLinks > a {
+  border-radius: 0 !important;
+  background: rgb(3, 3, 3, 0.4);
+  border: none;
+  transition: 0.6s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.socialLinks > a:hover {
+  border: 1px solid rgb(235 51 73);
+  background: transparent;
+  transition: 0.6s;
+}
+.socialLinks > a:hover svg {
+  fill: rgb(235 51 73);
+  transition: 0.6s;
+}
+.socialLinks > a svg {
+  fill: white;
+}
+
+.feedbackWrapper {
+  padding: 50px 20px;
+  gap: 30px;
+  display: grid;
+  flex-direction: column;
+  width: 750px;
+  background-color: white;
+  border-radius: 10px;
+}
+.phoneTitle {
+  font-family: 'Roboto';
+  font-weight: 300;
+}
+.buttonWrapper {
+  justify-self: center;
+}
+.feedbackTextarea {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border-bottom: 1px solid rgb(3, 3, 3, 0.19);
+  resize: vertical;
+}
+.feedbackTextarea:focus {
+  border-bottom: 1px solid rgb(235, 51, 73);
+}
+.inputsWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.feedbackLeft {
+  width: 50%;
+}
+.inputWrapper {
+  display: flex;
+}
+.feedbackRight {
+  width: 50%;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.agreeLabel > p {
+  font-weight: 400;
+  font-family: 'Roboto';
+  margin-left: 40px;
+}
+.description {
+  text-align: center;
+  max-width: 750px;
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-size: 18px;
+}
+.optionPhone {
+  color: black;
+}
+.optionPhone {
+  position: absolute !important;
+  background: transparent !important;
+  top: 10px !important;
+  height: 30px !important;
+  border: none !important;
+}
+.inputPhone {
+  width: 100% !important;
+  border: none !important;
+  outline: none !important;
+  height: 55px !important;
+  font-family: 'Oswald', sans-serif !important;
+  font-size: 16px !important;
+  border-radius: 0px !important;
+  color: rgba(0, 0, 0, 0.712) !important;
+  border-bottom: 1px solid rgb(3, 3, 3, 0.19) !important;
+}
+.inputName {
+  width: 100%;
+  padding: 15px;
+  color: rgba(0, 0, 0, 0.712);
+  border-bottom: 1px solid rgb(3, 3, 3, 0.19);
+}
+
+.subtitle {
+  font-weight: 300;
+  font-size: 20px;
+  display: block;
+  text-align: center;
+}
+.agreeLabel {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.subtitle:hover {
+  color: rgb(235 51 73);
+  transition: 0.7s;
+}
+.information {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.wrapper {
+  padding-top: 50px;
+  gap: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title {
+  color: black;
+  font-size: 51px;
+  font-weight: 300;
+  letter-spacing: 0px;
+  line-height: 58px;
+  text-transform: uppercase;
+  margin-top: 20px;
+  text-align: center;
+}
+.phoneWrapper {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.phoneCard a {
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: center;
+}
+.phoneCard a svg {
+  transform: rotate(90deg);
+}
+.phoneSubtitle {
+  font-size: 18px;
+  line-height: 23px;
+  font-family: 'Roboto';
+  font-weight: 300;
+}
+.checkmark {
+  border: 2px solid #f0f0f0;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  position: absolute;
+  opacity: 1;
+  top: 50%;
+  left: 0;
+  height: 30px;
+  width: 30px;
+  transition: 0.5s;
+  transform: translateY(-50%);
+}
+
+.checkmark:hover {
+  border: 2px solid rgb(255, 68, 31);
+  opacity: 1;
+}
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+.agreeLabel .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 7px;
+  height: 17px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.agreeCheckbox:checked ~ .checkmark:after {
+  display: block;
+}
+.agreeCheckbox:checked ~ .checkmark {
+  background-color: rgb(255, 68, 31);
+  border: 2px solid rgb(255, 68, 31);
+}
+.agreeCheckbox {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  height: 30px;
+  width: 30px;
+}
+
+@media (max-width: 992px) {
+  .feedbackWrapper {
+    max-width: 700px;
+  }
+}
+@media (max-width: 770px) {
+  .phoneSubtitle {
+    font-size: 16px;
+  }
+  .phoneWrapper {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .inputsWrapper {
+    flex-direction: column;
+  }
+  .feedbackWrapper {
+    max-width: 500px;
+  }
+  .feedbackRight,
+  .feedbackLeft {
+    width: 100%;
+  }
+}
+@media (max-width: 576px) {
+  .feedbackWrapper {
+    max-width: 350px;
+  }
+}

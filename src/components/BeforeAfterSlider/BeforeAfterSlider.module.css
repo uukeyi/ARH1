@@ -1,13 +1,13 @@
 .sliderContainer {
   display: grid;
   place-items: center;
-  place-content: center;
+
   position: relative;
   overflow: hidden;
-  --position: 50%;
+  width: 100%;
 }
 .imageContainer {
-  max-width: 800px;
+  width: 100%;
   position: relative;
   max-height: 90vh;
   aspect-ratio: 16/9;
@@ -21,12 +21,11 @@
 .beforeImage {
   position: absolute;
   inset: 0;
-  width: var(--position);
 }
 .slider {
   position: absolute;
   inset: 0;
-  cursor: pointer;
+  cursor: col-resize;
   opacity: 0;
 
   width: 100%;
@@ -43,7 +42,6 @@
   height: 100%;
   background-color: white;
   z-index: 10;
-  left: var(--position);
   transform: translateX(-50%);
   pointer-events: none;
 }
@@ -55,9 +53,56 @@
   border-radius: 100vw;
   display: grid;
   place-items: center;
-  top: 50%;
-  left: var(--position);
   transform: translateX(-50%);
   pointer-events: none;
   z-index: 100;
+}
+.sliderButton > span {
+  width: 7px;
+  height: 30px;
+  background-color: #fff;
+  position: absolute;
+}
+.textContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.sliderTitle {
+  font-size: 28px;
+  font-weight: 400;
+  border-top: 3px solid black;
+  padding-top: 5px;
+  width: 255px;
+}
+.sliderSubtitle {
+  width: 50%;
+  font-size: 18px;
+  font-weight: 300;
+  font-family: 'Roboto', sans-serif;
+}
+
+.textSliderContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .sliderTitle {
+    font-size: 22px;
+  }
+  .sliderSubtitle {
+    font-size: 14px;
+  }
+}
+@media (max-width: 576px) {
+  .textContainer {
+    flex-direction: column-reverse;
+    gap: 15px;
+  }
+  .sliderSubtitle {
+    width: 100%;
+  }
 }

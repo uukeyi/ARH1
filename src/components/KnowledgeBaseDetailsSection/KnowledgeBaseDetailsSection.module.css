@@ -1,0 +1,47 @@
+.cover {
+  position: relative;
+  background-image: url('../../assets/mainBg.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.baOverlay {
+  background-color: rgba(247, 247, 247, 0.88);
+  padding: 200px 0px 100px 0px;
+}
+.subtitle {
+  font-weight: 300;
+  font-size: 20px;
+  display: flex;
+
+  justify-content: center;
+}
+.title {
+  color: black;
+  font-size: 51px;
+  font-weight: 300;
+  letter-spacing: 0px;
+  line-height: 58px;
+  text-transform: uppercase;
+  margin-top: 20px;
+  text-align: center;
+}
+.subtitle:hover {
+  color: rgb(235 51 73);
+  transition: 0.7s;
+}
+@media screen and (max-width: 576px) {
+  .title {
+    font-size: 33px;
+  }
+  .subtitle {
+    font-size: 14px;
+    white-space: nowrap;
+  }
+}
+@media screen and (max-width: 330px) { 
+  .subtitle { 
+    font-size: 13px;
+  }
+}

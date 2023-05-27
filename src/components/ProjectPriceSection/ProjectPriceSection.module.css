@@ -1,6 +1,7 @@
 #priceWrapper {
   background-color: #f0f0f0;
   padding: 50px 0;
+  overflow: hidden;
 }
 .wrapper {
   display: flex;
