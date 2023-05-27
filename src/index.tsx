@@ -5,13 +5,16 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "./store";
+import { AuthProvider } from "./contexts/AuthContext";
 const root = ReactDOM.createRoot(
    document.getElementById("root") as HTMLElement
 );
 root.render(
-   <Provider store={store}>
-      <BrowserRouter>
-         <App />
-      </BrowserRouter>
-   </Provider>
+   <AuthProvider>
+      <Provider store={store}>
+         <BrowserRouter>
+            <App />
+         </BrowserRouter>
+      </Provider>
+   </AuthProvider>
 );
