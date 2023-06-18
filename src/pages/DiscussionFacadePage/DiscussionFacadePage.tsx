@@ -11,6 +11,10 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import { makeStyles } from '@mui/styles';
+import { getDiscussionQuestions } from '../../store/actions/discussionQuestionsAction';
+import { useSelector } from 'react-redux';
+import { store } from '../../store';
+import { useNavigate } from 'react-router';
 interface DiscussionFacadePageProps {}
 
 const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
@@ -22,10 +26,14 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
       backgroundColor: '#909090',
     },
   });
+
   const classes = useStyles();
   useEffect(() => {
+    dispatch(getDiscussionQuestions('ajdajs'));
     dispatch(getCategories('asdasd'));
   }, []);
+  const navigate = useNavigate();
+
   return (
     <Box sx={{ pt: '180px', pb: '200px', background: '#f3f3f9' }}>
       <div className="container">
@@ -83,6 +91,7 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
             }}
             //   className={classes.btnAddCategory}
             variant="contained"
+            onClick={() => navigate('/createDiscussion')}
           >
             Добавить новую тему
           </Button>
@@ -98,7 +107,7 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
         >
           {state.categories.map((post, index) => {
             return (
-              <Box>
+              <Box key={index}>
                 <Card
                   sx={{
                     width: '100%',
@@ -130,11 +139,10 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                      Lizard
+                      {post.title}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      Lizards are a widespread group of squamate reptiles, with over 6,000 species,
-                      ranging across all continents except Antarctica
+                      {post.body}
                     </Typography>
                     <CardActions>
                       <Button size="small">Читать больше</Button>
@@ -150,6 +158,9 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
                   }}
                   //   className={classes.btnAddCategory}
                   variant="contained"
+                  onClick={() => {
+                    navigate(`/discussionDetails/${index}`);
+                  }}
                 >
                   Смотреть все темы
                 </Button>
