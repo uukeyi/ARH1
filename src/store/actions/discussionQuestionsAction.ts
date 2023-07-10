@@ -33,6 +33,18 @@ export const getDiscussionDetails = createAsyncThunk<
     return rejectWithValue(error.message);
   }
 });
+export const getDiscussionSearch = createAsyncThunk<
+  any,
+  string,
+  { rejectValue?: string; query: string }
+>('discussionQuestionsSlice/getDiscussionSearch', async (query, { rejectWithValue }) => {
+  try {
+    const response = await axios.get(`${$host}/api/Discussions?search=${query}`);
+    return response;
+  } catch (error: any) {
+    return rejectWithValue(error.message);
+  }
+});
 export const createDiscussionQuestion = createAsyncThunk<any, IinputData, { rejectValue?: string }>(
   'discussionQuestionsSlice/createDiscussionQuestions',
   async (inputData, { rejectWithValue }) => {

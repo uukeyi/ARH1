@@ -32,8 +32,6 @@ const CreateDiscussionPage: React.FC<CreateDiscussionPage> = () => {
         setError: setIsError,
       })
     );
-    console.log('addawd');
-
     navigate('/discussionFacade');
   };
   const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({

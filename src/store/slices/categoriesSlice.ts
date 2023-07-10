@@ -27,6 +27,7 @@ const initialState: ICategoriesArrayState = {
          img : '',
       },
    ],
+   
 };
 
 export const categoriesSlice = createSlice({

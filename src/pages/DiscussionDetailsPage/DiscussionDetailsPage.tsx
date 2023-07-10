@@ -112,7 +112,7 @@ const DiscussionDetailsPage: React.FC<DiscussionDetailsPage> = () => {
           >
             <Typography sx={{ fontSize: '18px' }}>комментариев</Typography>
             <Box sx={{ display: 'flex', gap: '10px' }}>
-              <Avatar alt="pfp" src=""></Avatar>
+              <Avatar alt="pfp" src="" />
               <Input
                 sx={{ border: '1px solid #eee', width: '100%' }}
                 type="text"
