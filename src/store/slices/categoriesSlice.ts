@@ -40,7 +40,7 @@ export const categoriesSlice = createSlice({
       builder.addCase(getDiscussionQuestions.rejected, (state, action) => {
          state.error = true;
          // state.errorMessage = action.error
-         console.log(action.error.message);
+         // console.log(action.error.message);
       });
       // getDiscussionQuestions
    },

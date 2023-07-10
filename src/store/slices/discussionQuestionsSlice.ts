@@ -42,7 +42,7 @@ export const discussionQuestionsSlice = createSlice({
     builder.addCase(getDiscussionQuestions.rejected, (state, action) => {
       state.error = true;
       // state.errorMessage = action.error
-      console.log(action.error.message);
+      // console.log(action.error.message);
     });
     // getDiscussionQuestions
     builder.addCase(createDiscussionQuestion.fulfilled, (state, action: PayloadAction<any>) => {

@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from "react";
 interface IAuthContext {
    isAuthSettings: {
       isAuth: boolean;
-      renderCount: number;
+
    };
    setIsAuth:  Function;
 }
@@ -20,8 +20,8 @@ export function useAuth(): IAuthContext {
 export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
    const [isAuth, setIsAuth] = useState<{
       isAuth: boolean;
-      renderCount: number;
-   }>({ isAuth: false, renderCount: 0 });
+ 
+   }>({ isAuth: false });
    return (
       <AuthContext.Provider
          value={{
