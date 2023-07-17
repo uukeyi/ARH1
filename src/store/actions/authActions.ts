@@ -26,7 +26,15 @@ interface ICheckAuthData {
    setError: (value: boolean | ((prevVar: boolean) => boolean)) => void;
    setIsAuth: Function;
 }
-
+interface IForogtPasswordEmailFetch {
+   setError: (value: boolean | ((prevVar: boolean) => boolean)) => void;
+   email: string
+}
+interface IConfirmEmail {
+   setError: (value: boolean | ((prevVar: boolean) => boolean)) => void;
+   code: string,
+   email: string
+}
 export const fetchRegistration = createAsyncThunk<
    IUserResponse,
    IinputData,
@@ -63,7 +71,7 @@ export const fetchRegistration = createAsyncThunk<
             Authorization: `Bearer ${localStorage.getItem("token")}`,
          },
       });
-      inputData.setIsAuth({isAuth : true});
+      inputData.setIsAuth({ isAuth: true });
       return responseUserUpdate.data.user;
    } catch (error: any) {
       inputData.setError(true);
@@ -98,9 +106,9 @@ export const fetchLogin = createAsyncThunk<
       }
 
 
-      loginData.setIsAuth({isAuth : true});
+      loginData.setIsAuth({ isAuth: true });
 
-      return response.data.user; 
+      return response.data.user;
    } catch (error: any) {
       loginData.setError(true);
       return rejectWithValue(error.message);
@@ -124,11 +132,11 @@ export const checkAuth = createAsyncThunk<
       if (!response.data.hasError) {
          localStorage.setItem("token", response.data.token.value);
          localStorage.setItem("refreshToken", response.data.refreshToken.value);
-         data.setIsAuth({isAuth : true});
+         data.setIsAuth({ isAuth: true });
       } else {
-         data.setIsAuth({isAuth : false});
+         data.setIsAuth({ isAuth: false });
          localStorage.removeItem("token");
-            localStorage.removeItem("refreshToken");
+         localStorage.removeItem("refreshToken");
          throw new Error(
             "Ваш токен авторизации истек пожалуйста авторизуйтесь еще раз"
          );
@@ -141,30 +149,76 @@ export const checkAuth = createAsyncThunk<
    }
 });
 
-export const confirmEmail = createAsyncThunk<
+// export const confirmEmail = createAsyncThunk<
+//    IUserResponse,
+//    ICheckAuthData,
+//    { rejectValue?: string }
+// >("authSlice/checkAuth", async (data, { rejectWithValue }) => {
+//    try {
+//       const response = await axios<IAuthResponse>({
+//          method: "POST",
+//          url: `http://194.87.238.163/api/Auth/refreshToken`,
+//          params: {
+//             refreshToken: localStorage.getItem("refreshToken"),
+//          },
+//          withCredentials: true,
+//       });
+
+//       if (!response.data.hasError) {
+//          localStorage.setItem("token", response.data.token.value);
+//          localStorage.setItem("refreshToken", response.data.refreshToken.value);
+//          data.setIsAuth({isAuth : true});
+//       } else {
+//          data.setIsAuth({isAuth : false});
+//          throw new Error(response.data.errorMessage);
+//       }
+
+//       return response.data.user;
+//    } catch (error: any) {
+//       data.setError(true);
+//       return rejectWithValue(error.message);
+//    }
+// });
+
+
+
+export const forgotPasswordEmailFetch = createAsyncThunk<
    IUserResponse,
-   ICheckAuthData,
+   IForogtPasswordEmailFetch,
    { rejectValue?: string }
->("authSlice/checkAuth", async (data, { rejectWithValue }) => {
+>("authSlice/forgotPasswordEmailFetch", async (data, { rejectWithValue }) => {
    try {
       const response = await axios<IAuthResponse>({
          method: "POST",
-         url: `http://194.87.238.163/api/Auth/refreshToken`,
+         url: `http://194.87.238.163/api/Auth/forgotPassword`,
          params: {
-            refreshToken: localStorage.getItem("refreshToken"),
+            email: data.email
          },
          withCredentials: true,
       });
+      console.log(response)
+      return response.data.user;
+   } catch (error: any) {
+      data.setError(true);
+      return rejectWithValue(error.message);
+   }
+});
 
-      if (!response.data.hasError) {
-         localStorage.setItem("token", response.data.token.value);
-         localStorage.setItem("refreshToken", response.data.refreshToken.value);
-         data.setIsAuth({isAuth : true});
-      } else {
-         data.setIsAuth({isAuth : false});
-         throw new Error(response.data.errorMessage);
-      }
-
+export const confirmEmail = createAsyncThunk<
+   IUserResponse,
+   IConfirmEmail,
+   { rejectValue?: string }
+>("authSlice/forgotPasswordEmailFetch", async (data, { rejectWithValue }) => {
+   try {
+      const response = await axios<IAuthResponse>({
+         method: "POST",
+         url: `http://194.87.238.163/api/Auth/forgotPassword`,
+         params: {
+            email: data.email
+         },
+         withCredentials: true,
+      });
+      console.log(response)
       return response.data.user;
    } catch (error: any) {
       data.setError(true);

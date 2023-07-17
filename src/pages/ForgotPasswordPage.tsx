@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
@@ -19,6 +18,7 @@ const defaultTheme = createTheme();
 function ForgotPasswordPage() {
    type formValues = {
       email: string;
+
    };
    const [isError, setIsError] = useState(false);
    const [isSucces, setIsSucces] = useState(false);

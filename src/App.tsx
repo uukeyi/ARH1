@@ -28,6 +28,7 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import CreateDiscussionPage from './pages/CreateDiscussionPage/CreateDiscussionPage';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import DiscussionDetailsPage from './pages/DiscussionDetailsPage/DiscussionDetailsPage';
+import { CodeConfirmPage } from './pages/CodeConfirmPage';
 function App() {
   useEffect(() => {
     AOS.init();
@@ -72,6 +73,7 @@ function App() {
       <Route path="registration" element={<RegistrationPage />} />
       <Route path="login" element={<LoginPage />} />
       <Route path="forgotPassword" element={<ForgotPasswordPage />} />
+      <Route path = "confirmEmail" element = {<CodeConfirmPage/>} />
     </Routes>
   );
 }
