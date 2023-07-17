@@ -149,53 +149,29 @@ export const checkAuth = createAsyncThunk<
    }
 });
 
-// export const confirmEmail = createAsyncThunk<
-//    IUserResponse,
-//    ICheckAuthData,
-//    { rejectValue?: string }
-// >("authSlice/checkAuth", async (data, { rejectWithValue }) => {
-//    try {
-//       const response = await axios<IAuthResponse>({
-//          method: "POST",
-//          url: `http://194.87.238.163/api/Auth/refreshToken`,
-//          params: {
-//             refreshToken: localStorage.getItem("refreshToken"),
-//          },
-//          withCredentials: true,
-//       });
-
-//       if (!response.data.hasError) {
-//          localStorage.setItem("token", response.data.token.value);
-//          localStorage.setItem("refreshToken", response.data.refreshToken.value);
-//          data.setIsAuth({isAuth : true});
-//       } else {
-//          data.setIsAuth({isAuth : false});
-//          throw new Error(response.data.errorMessage);
-//       }
-
-//       return response.data.user;
-//    } catch (error: any) {
-//       data.setError(true);
-//       return rejectWithValue(error.message);
-//    }
-// });
-
-
-
-export const forgotPasswordEmailFetch = createAsyncThunk<
+export const confirmEmail = createAsyncThunk<
    IUserResponse,
-   IForogtPasswordEmailFetch,
+   IConfirmEmail,
    { rejectValue?: string }
->("authSlice/forgotPasswordEmailFetch", async (data, { rejectWithValue }) => {
+>("authSlice/confirmEmail", async (data, { rejectWithValue }) => {
    try {
       const response = await axios<IAuthResponse>({
          method: "POST",
-         url: `http://194.87.238.163/api/Auth/forgotPassword`,
+         url: `http://194.87.238.163/api/Auth/confirmEmail`,
          params: {
-            email: data.email
+            email: data.email,
+            code: data.code
          },
-         withCredentials: true,
       });
+
+      // if (!response.data.hasError) {
+      //    localStorage.setItem("token", response.data.token.value);
+      //    localStorage.setItem("refreshToken", response.data.refreshToken.value);
+      //    data.setIsAuth({isAuth : true});
+      // } else {
+      //    data.setIsAuth({isAuth : false});
+      //    throw new Error(response.data.errorMessage);
+      // }
       console.log(response)
       return response.data.user;
    } catch (error: any) {
@@ -204,9 +180,11 @@ export const forgotPasswordEmailFetch = createAsyncThunk<
    }
 });
 
-export const confirmEmail = createAsyncThunk<
+
+
+export const forgotPasswordEmailFetch = createAsyncThunk<
    IUserResponse,
-   IConfirmEmail,
+   IForogtPasswordEmailFetch,
    { rejectValue?: string }
 >("authSlice/forgotPasswordEmailFetch", async (data, { rejectWithValue }) => {
    try {

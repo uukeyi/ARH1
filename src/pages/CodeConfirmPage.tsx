@@ -5,13 +5,12 @@ import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 import { useForm, SubmitHandler } from "react-hook-form";
 import AlertForm from "../components/AlertForm/AlertForm";
 import { Link as LinkRouter } from "react-router-dom";
-import { IForgotPassword } from "../interfaces/authResponse";
-import axios from "axios";
+import { useAppDispatch } from "../hooks/reduxTookitHooks";
+import { confirmEmail } from "../store/actions/authActions";
 
 
 export function CodeConfirmPage() {
@@ -22,33 +21,14 @@ export function CodeConfirmPage() {
     const [isError, setIsError] = useState(false);
     const [isSucces, setIsSucces] = useState(false);
     const [errorText, setIsErrorText] = useState("");
-
+    const dispatch = useAppDispatch()
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<formValues>();
     const onSubmit: SubmitHandler<formValues> = async (data) => {
-        try {
-            const response = await axios<IForgotPassword>({
-                method: "POST",
-                url: "http://194.87.238.163/api/Auth/forgotPassword",
-                params: {
-                    code: data.code,
-                    email: data.email
-                },
-            });
-            if (response.data.hasError) {
-                setIsError(true);
-                setIsErrorText(response.data.errorMessage);
-            } else {
-                setIsError(false);
-                setIsSucces(true);
-            }
-        } catch (error: any) {
-            setIsErrorText(error.message);
-            setIsError(true);
-        }
+        dispatch(confirmEmail({ email: data.email, code: data.code, setError: setIsError }))
     };
     return (
         <Box
@@ -60,7 +40,7 @@ export function CodeConfirmPage() {
                     xs: "100%",
                     sm: "400px",
                 },
-                mt : '100px'
+                mt: '100px'
             }}
         >
             <Typography component="h1" variant="h5">
@@ -101,7 +81,7 @@ export function CodeConfirmPage() {
                         fullWidth
                     />
                 )}
-                 <TextField
+                <TextField
                     margin="normal"
                     required
                     fullWidth
@@ -132,7 +112,7 @@ export function CodeConfirmPage() {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                 >
-                    Сбросить
+                    Подтвердить
                 </Button>
                 <Grid container>
                     <Grid item>

@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+
 // ! PAYLOAD ACTION ТИПИЗИРУЕТ PAYLOAD
 import {
    fetchLogin,
    fetchRegistration,
    checkAuth,
+   confirmEmail
 } from "../actions/authActions";
 import { IUserResponse } from "../../interfaces/authResponse";
 interface IAuthState {
@@ -67,8 +69,20 @@ export const authSlice = createSlice({
             state.user = action.payload;
          }
       );
+      builder.addCase(
+         confirmEmail.rejected,
+         (state, action: PayloadAction<any>) => {
+            state.errorMessage = action.payload;
+         }
+      );
+      builder.addCase(
+         confirmEmail.fulfilled,
+         (state, action: PayloadAction<any>) => {
+            state.user = action.payload;
+         }
+      );
    },
 });
 
-export const {} = authSlice.actions;
+export const { } = authSlice.actions;
 export default authSlice.reducer;
