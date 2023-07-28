@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
@@ -18,17 +18,23 @@ const defaultTheme = createTheme();
 function ForgotPasswordPage() {
    type formValues = {
       email: string;
-
+      code: string;
+      newPass: string;
    };
    const [isError, setIsError] = useState(false);
    const [isSucces, setIsSucces] = useState(false);
+   const [succesReset, setIsSuccessReset] = useState(false);
+   const [errorReset, setIsErrorReset] = useState(false);
    const [errorText, setIsErrorText] = useState("");
-
    const {
       register,
       handleSubmit,
       formState: { errors },
+      watch,
+      reset,
    } = useForm<formValues>();
+   const email = watch("email");
+
    const onSubmit: SubmitHandler<formValues> = async (data) => {
       try {
          const response = await axios<IForgotPassword>({
@@ -44,14 +50,40 @@ function ForgotPasswordPage() {
          } else {
             setIsError(false);
             setIsSucces(true);
+            sessionStorage.setItem("email", email);
+            reset();
          }
       } catch (error: any) {
          setIsErrorText(error.message);
          setIsError(true);
       }
    };
+   const onSubmitCode: SubmitHandler<formValues> = async (data) => {
+      try {
+         const response = await axios<IForgotPassword>({
+            method: "POST",
+            url: "http://194.87.238.163/api/Auth/resetPassword",
+            params: {
+               email: sessionStorage.getItem("email"),
+               code: data.code,
+               password: data.newPass,
+            },
+         });
+         if (response.data.hasError) {
+            setIsErrorReset(true);
+         } else {
+            setIsErrorReset(false);
+            setIsSuccessReset(true);
+         }
+      } catch (error: any) {
+         setIsErrorReset(true);
+      }
+   };
+
+
    return (
       <ThemeProvider theme={defaultTheme}>
+
          <Container
             sx={{
                height: "100vh",
@@ -66,7 +98,109 @@ function ForgotPasswordPage() {
             component="main"
          >
             {isSucces ? (
-               <Typography>Мы отправили вам письмо на почту</Typography>
+               // <Navigate to={`/codeConfirmPassword/${email}`} />
+               <Box
+                  sx={{
+                     display: "flex",
+                     flexDirection: "column",
+                     alignItems: "center",
+                     minWidth: {
+                        xs: "100%",
+                        sm: "400px",
+                     },
+                  }}
+               >
+                  <Typography component="h1" variant="h5">
+                     Введите данные
+                  </Typography>
+                  <Box
+                     component="form"
+                     onSubmit={handleSubmit(onSubmitCode)}
+                     noValidate
+                     sx={{
+                        mt: 1,
+                        width: {
+                           xs: "100%",
+                           sm: "500px",
+                        },
+                     }}
+                  >
+                     <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="code"
+                        label="Код"
+                        autoFocus
+                        {...register("code", {
+                           required: "Это поле обязательно!",
+                        })}
+                     />
+                     {errors?.code && (
+                        <AlertForm
+                           type="error"
+                           text={errors?.code?.message}
+                           fullWidth
+                        />
+                     )}
+
+                     <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="newPass"
+                        label="Новый пароль"
+                        autoFocus
+                        {...register("newPass", {
+                           required: "Это поле обязательно!",
+                        })}
+                     />
+                     {errors?.newPass && (
+                        <AlertForm
+                           type="error"
+                           text={errors?.newPass?.message}
+                           fullWidth
+                        />
+                     )}
+                     {errorReset && (
+                        <AlertForm
+                           type="error"
+                           text={`Возникла ошибка`}
+                           fullWidth
+                        />
+                     )}
+                      {succesReset && (
+                        <AlertForm
+                           type="success"
+                           text={`Вы успешно сбросили пароль`}
+                           fullWidth
+                        />
+                     )}
+
+                     <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                     >
+                        Сбросить
+                     </Button>
+                     <Grid container>
+                        <Grid item>
+                           <Link
+                              to={"/login"}
+                              sx={{
+                                 fontFamily: "Roboto",
+                                 fontSize: "0.875rem",
+                              }}
+                              component={LinkRouter}
+                           >
+                              Назад
+                           </Link>
+                        </Grid>
+                     </Grid>
+                  </Box>
+               </Box>
             ) : (
                <Box
                   sx={{
@@ -131,7 +265,7 @@ function ForgotPasswordPage() {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                      >
-                        Сбросить
+                        Подтвердить
                      </Button>
                      <Grid container>
                         <Grid item>

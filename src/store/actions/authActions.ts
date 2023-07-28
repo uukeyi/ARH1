@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import $host from "../../http";
 import { IAuthResponse, IUserResponse } from "../../interfaces/authResponse";
 import axios from "axios";
-import { useAuth } from "../../contexts/AuthContext";
+
 interface IRegistrationData {
    email: string;
    password: string;
@@ -12,11 +12,13 @@ interface IinputData {
    data: IRegistrationData;
    setError: (value: boolean | ((prevVar: boolean) => boolean)) => void;
    setIsAuth: Function;
+   setSuccess: (value: boolean | ((prevVar: boolean) => boolean)) => void;
 }
 interface ILoginData {
    data: ILoginInputData;
    setError: (value: boolean | ((prevVar: boolean) => boolean)) => void;
    setIsAuth: Function;
+   setSuccess: (value: boolean | ((prevVar: boolean) => boolean)) => void;
 }
 interface ILoginInputData {
    email: string;
@@ -28,12 +30,12 @@ interface ICheckAuthData {
 }
 interface IForogtPasswordEmailFetch {
    setError: (value: boolean | ((prevVar: boolean) => boolean)) => void;
-   email: string
+   email: string;
 }
 interface IConfirmEmail {
    setError: (value: boolean | ((prevVar: boolean) => boolean)) => void;
-   code: string,
-   email: string
+   code: string;
+   email: string;
 }
 export const fetchRegistration = createAsyncThunk<
    IUserResponse,
@@ -72,6 +74,7 @@ export const fetchRegistration = createAsyncThunk<
          },
       });
       inputData.setIsAuth({ isAuth: true });
+      inputData.setSuccess(true);
       return responseUserUpdate.data.user;
    } catch (error: any) {
       inputData.setError(true);
@@ -105,7 +108,7 @@ export const fetchLogin = createAsyncThunk<
          throw new Error("такого пользователя не существует");
       }
 
-
+      loginData.setSuccess(true);
       loginData.setIsAuth({ isAuth: true });
 
       return response.data.user;
@@ -160,7 +163,7 @@ export const confirmEmail = createAsyncThunk<
          url: `http://194.87.238.163/api/Auth/confirmEmail`,
          params: {
             email: data.email,
-            code: data.code
+            code: data.code,
          },
       });
 
@@ -172,15 +175,13 @@ export const confirmEmail = createAsyncThunk<
       //    data.setIsAuth({isAuth : false});
       //    throw new Error(response.data.errorMessage);
       // }
-      console.log(response)
+      console.log(response);
       return response.data.user;
    } catch (error: any) {
       data.setError(true);
       return rejectWithValue(error.message);
    }
 });
-
-
 
 export const forgotPasswordEmailFetch = createAsyncThunk<
    IUserResponse,
@@ -192,11 +193,10 @@ export const forgotPasswordEmailFetch = createAsyncThunk<
          method: "POST",
          url: `http://194.87.238.163/api/Auth/forgotPassword`,
          params: {
-            email: data.email
+            email: data.email,
          },
          withCredentials: true,
       });
-      console.log(response)
       return response.data.user;
    } catch (error: any) {
       data.setError(true);

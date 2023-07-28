@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-
 import { useForm, SubmitHandler } from "react-hook-form";
 import AlertForm from "../components/AlertForm/AlertForm";
-import { Link as LinkRouter } from "react-router-dom";
 import { useAppDispatch } from "../hooks/reduxTookitHooks";
 import { confirmEmail } from "../store/actions/authActions";
 
@@ -114,20 +110,7 @@ export function CodeConfirmPage() {
                 >
                     Подтвердить
                 </Button>
-                <Grid container>
-                    <Grid item>
-                        <Link
-                            to={"/login"}
-                            sx={{
-                                fontFamily: "Roboto",
-                                fontSize: "0.875rem",
-                            }}
-                            component={LinkRouter}
-                        >
-                            Назад
-                        </Link>
-                    </Grid>
-                </Grid>
+               
             </Box>
         </Box>
     );

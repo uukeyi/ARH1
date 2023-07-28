@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -14,6 +14,7 @@ import { Link as LinkRouter } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxTookitHooks";
 import { fetchLogin } from "../store/actions/authActions";
 import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 const defaultTheme = createTheme();
 
 function LoginPage() {
@@ -24,7 +25,8 @@ function LoginPage() {
    const dispatch = useAppDispatch();
    const store = useAppSelector((state) => state.authSlice);
    const [isError, setIsError] = useState(false);
-
+   const [isSuccess, setIsSuccess] = useState(false);
+   const navigate = useNavigate();
    const {
       register,
       handleSubmit,
@@ -33,9 +35,19 @@ function LoginPage() {
    const { setIsAuth } = useAuth();
    const onSubmit: SubmitHandler<formValues> = (data) => {
       dispatch(
-         fetchLogin({ data: data, setError: setIsError, setIsAuth: setIsAuth })
+         fetchLogin({
+            data: data,
+            setError: setIsError,
+            setIsAuth: setIsAuth,
+            setSuccess: setIsSuccess,
+         })
       );
    };
+   useEffect(() => {
+      if (isSuccess) {
+         navigate("/");
+      }
+   }, [isSuccess]);
    return (
       <ThemeProvider theme={defaultTheme}>
          <Container
@@ -70,10 +82,13 @@ function LoginPage() {
                   component="form"
                   onSubmit={handleSubmit(onSubmit)}
                   noValidate
-                  sx={{ mt: 1  , minWidth : {
-                     xs : "100%",
-                     sm : "500px"
-                  }}}
+                  sx={{
+                     mt: 1,
+                     minWidth: {
+                        xs: "100%",
+                        sm: "500px",
+                     },
+                  }}
                >
                   <TextField
                      margin="normal"

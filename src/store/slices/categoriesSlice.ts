@@ -35,7 +35,7 @@ export const categoriesSlice = createSlice({
    reducers: {},
    extraReducers: (builder) => {
       builder.addCase(getDiscussionQuestions.fulfilled, (state, action) => {
-         state.categories = action.payload.data;
+         // state.categories = action.payload;
       });
       builder.addCase(getDiscussionQuestions.rejected, (state, action) => {
          state.error = true;

@@ -3,14 +3,12 @@ import { ICommentResponse } from "../../interfaces/commentResponse";
 import $host from "../../http";
 interface ICreateCommentParams {
    message: string;
-   parentId: number;
-   discussionId: number;
-   setSuccess: (value: boolean | ((prevVar: boolean) => boolean)) => void;
+   parentId?: number;
+   discussionId: any;
    setError: (value: boolean | ((prevVar: boolean) => boolean)) => void;
 }
 interface IGetCommentsParams {
-   discussionId: number;
-   setSuccess: (value: boolean | ((prevVar: boolean) => boolean)) => void;
+   discussionId: any;
    setError: (value: boolean | ((prevVar: boolean) => boolean)) => void;
 }
 interface IDeleteCommentsParams {
@@ -19,10 +17,10 @@ interface IDeleteCommentsParams {
    setError: (value: boolean | ((prevVar: boolean) => boolean)) => void;
 }
 interface IUpdateCommentsParams {
-   commentId : number,
-   message : string,
-   parentId : number,
-   discussionId : number,
+   commentId: number;
+   message: string;
+   parentId: number;
+   discussionId: any;
    setSuccess: (value: boolean | ((prevVar: boolean) => boolean)) => void;
    setError: (value: boolean | ((prevVar: boolean) => boolean)) => void;
 }
@@ -35,13 +33,12 @@ export const createComment = createAsyncThunk<
       const response = await $host<ICommentResponse>({
          method: "POST",
          url: "/api/Discussions/comments",
-         params: {
+         data: {
             description: config.message,
             parentId: config.parentId,
-            discussionId: config.discussionId,
+            discussionId: +config.discussionId,
          },
       });
-      config.setSuccess(true);
       return response.data;
    } catch (error: any) {
       config.setError(true);
@@ -59,7 +56,6 @@ export const getComments = createAsyncThunk<
          method: "GET",
          url: `/api/Discussions/${config.discussionId}/comments`,
       });
-      config.setSuccess(true);
       return response.data;
    } catch (error: any) {
       config.setError(true);
@@ -71,7 +67,7 @@ export const deleteComment = createAsyncThunk<
    void,
    IDeleteCommentsParams,
    { rejectValue?: string }
->("commentsSlice/getComments", async (config, { rejectWithValue }) => {
+>("commentsSlice/deleteComment", async (config, { rejectWithValue }) => {
    try {
       await $host<void>({
          method: "DELETE",
@@ -84,13 +80,11 @@ export const deleteComment = createAsyncThunk<
    }
 });
 
-
-
 export const updateComment = createAsyncThunk<
    ICommentResponse,
    IUpdateCommentsParams,
    { rejectValue?: string }
->("commentsSlice/getComments", async (config, { rejectWithValue }) => {
+>("commentsSlice/updateComment", async (config, { rejectWithValue }) => {
    try {
       const response = await $host<ICommentResponse>({
          method: "POST",
@@ -99,11 +93,10 @@ export const updateComment = createAsyncThunk<
             description: config.message,
             parentId: config.parentId,
             discussionId: config.discussionId,
-         
          },
       });
       config.setSuccess(true);
-      return response.data
+      return response.data;
    } catch (error: any) {
       config.setError(true);
       return rejectWithValue(error.message);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -26,6 +26,7 @@ function RegistrationPage() {
    const navigate = useNavigate();
    const dispatch = useAppDispatch();
    const [isError, setIsError] = useState(false);
+   const [isSuccess, setIsSuccess] = useState(false);
    const { setIsAuth } = useAuth();
    const store = useAppSelector((state) => state.authSlice);
    const {
@@ -39,9 +40,15 @@ function RegistrationPage() {
             data: data,
             setError: setIsError,
             setIsAuth: setIsAuth,
+            setSuccess: setIsSuccess,
          })
       );
    };
+   useEffect(() => {
+      if (isSuccess) {
+         navigate("/confirmEmail");
+      }
+   }, [isSuccess]);
 
    return (
       <ThemeProvider theme={defaultTheme}>

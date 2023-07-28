@@ -23,14 +23,14 @@ export const commentsSlice = createSlice({
       builder.addCase(
          createComment.fulfilled,
          (state, action: PayloadAction<ICommentResponse>) => {
-            // state.comments = [...state.comments, action.payload];
+            state.comments = [...state.comments, action.payload];
             // console.log(action)
          }
       );
       builder.addCase(
          getComments.fulfilled,
          (state, action: PayloadAction<ICommentResponse[]>) => {
-            // state.comments = action.payload
+            state.comments = action.payload
             // console.log(action)
          }
       );

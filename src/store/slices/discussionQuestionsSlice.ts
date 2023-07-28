@@ -1,34 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-// ! PAYLOAD ACTION ТИПИЗИРУЕТ PAYLOAD
+
 import {
   createDiscussionQuestion,
   getDiscussionQuestions,
 } from '../actions/discussionQuestionsAction';
-interface IQuestionState {
-  title: string;
-  id: number | null;
-  description: string;
-  categoryId: number | null;
-  isDeleted: boolean;
-}
-interface IQuestionsArrayState {
-  questions: any[];
-  // ! НУЖНО БУДЕТ ТИПИЗИРОВАТЬ СТЕЙТ ДЛЯ ТЕСТА ОСТАВИЛ ПОКА ЧТО БЕЗ ТИПИЗАЦИИ (IQuestionState[])
+import { IDiscussion, IDiscussionGetResponse } from '../../interfaces/discussionsResponse';
 
-  error?: boolean;
-  errorMessage?: string;
+interface IQuestionsArrayState {
+  questions: IDiscussion[];
 }
 const initialState: IQuestionsArrayState = {
-  questions: [
-    {
-      title: '',
-      id: null,
-      description: '',
-      categoryId: null,
-      isDeleted: false,
-    },
-  ],
+  questions: [],
 };
 
 export const discussionQuestionsSlice = createSlice({
@@ -36,11 +19,12 @@ export const discussionQuestionsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getDiscussionQuestions.fulfilled, (state, action) => {
-      state.questions = action.payload.data;
+    builder.addCase(getDiscussionQuestions.fulfilled, (state, action : PayloadAction<IDiscussionGetResponse>) => {
+      // state.questions = action.payload;
+      state.questions = action.payload.entities
     });
     builder.addCase(getDiscussionQuestions.rejected, (state, action) => {
-      state.error = true;
+      // state.error = true;
       // state.errorMessage = action.error
       // console.log(action.error.message);
     });
@@ -49,7 +33,7 @@ export const discussionQuestionsSlice = createSlice({
       state.questions = [...state.questions, action.payload];
     });
     builder.addCase(createDiscussionQuestion.rejected, (state, action: PayloadAction<any>) => {
-      state.errorMessage = action.payload;
+      // state.errorMessage = action.payload;
     });
   },
 });
