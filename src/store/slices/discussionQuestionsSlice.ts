@@ -19,10 +19,13 @@ export const discussionQuestionsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getDiscussionQuestions.fulfilled, (state, action : PayloadAction<IDiscussionGetResponse>) => {
-      // state.questions = action.payload;
-      state.questions = action.payload.entities
-    });
+    builder.addCase(
+      getDiscussionQuestions.fulfilled,
+      (state, action: PayloadAction<IDiscussionGetResponse>) => {
+        // state.questions = action.payload;
+        state.questions = action.payload.entities;
+      }
+    );
     builder.addCase(getDiscussionQuestions.rejected, (state, action) => {
       // state.error = true;
       // state.errorMessage = action.error

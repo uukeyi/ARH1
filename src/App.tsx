@@ -73,7 +73,7 @@ function App() {
       <Route path="registration" element={<RegistrationPage />} />
       <Route path="login" element={<LoginPage />} />
       <Route path="forgotPassword" element={<ForgotPasswordPage />} />
-      <Route path = "confirmEmail" element = {<CodeConfirmPage/>} />
+      <Route path="confirmEmail" element={<CodeConfirmPage />} />
     </Routes>
   );
 }

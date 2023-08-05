@@ -32,7 +32,6 @@ const CreateDiscussionPage: React.FC<CreateDiscussionPage> = () => {
         setError: setIsError,
       })
     );
-
     navigate('/discussionFacade');
   };
   const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
