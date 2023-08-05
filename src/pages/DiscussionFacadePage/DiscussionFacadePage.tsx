@@ -11,19 +11,46 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import { makeStyles } from '@mui/styles';
-import { getDiscussionQuestions } from '../../store/actions/discussionQuestionsAction';
+import {
+  getDiscussionQuestions,
+  getDiscussionProps,
+} from '../../store/actions/discussionQuestionsAction';
 import { useNavigate } from 'react-router';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { FormControl, FormLabel, InputLabel, TextField } from '@mui/material';
 interface DiscussionFacadePageProps {}
 
 const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
   const dispatch = useAppDispatch();
+  const [curPage, setCurPage] = useState<number>(1);
+  const [sortBS, setSortBS] = useState<string>('');
+  const [sortCC, setSortCC] = useState<string>('');
   const state = useAppSelector((state) => state.discussionQuestions);
   const useStyles = makeStyles({
     btnAddCategory: {
       backgroundColor: '#909090',
     },
   });
-  console.log(state);
+  type formValues = {
+    query: string;
+  };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<formValues>();
+  const onSubmit: SubmitHandler<any> = (data) => {
+    if (data.query !== null || sortBS !== null || sortCC !== null) setCurPage(1);
+
+    const arr = [data, curPage, sortBS, sortCC];
+    dispatch(
+      getDiscussionProps({
+        data: arr,
+      })
+    );
+  };
+
   const [error, setError] = useState(false);
   useEffect(() => {
     dispatch(getDiscussionQuestions(setError));
@@ -34,12 +61,99 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
     if (error) {
       alert('Возникла ошибка получения данных');
       navigate('/');
+      console.log(error);
     }
   }, [error]);
   return (
     <Box sx={{ pt: '180px', pb: '200px', background: '#f3f3f9' }}>
       <div className="container">
-        <Box sx={{ marginBottom: '50px' }}>
+        <Box sx={{ display: 'flex', gap: '50px', flexDirection: 'column' }}>
+          <FormControl
+            onSubmit={handleSubmit(onSubmit)}
+            component="form"
+            sx={{ display: 'flex', gap: '10px', flexDirection: 'row' }}
+          >
+            <TextField
+              {...register('query')}
+              sx={{ width: '80%', background: 'white', border: '1px solid rgb(235 51 73)' }}
+              variant="outlined"
+              label="Поиск по обсуждениям"
+            />
+            <Button
+              sx={{
+                width: '20%',
+                background: 'white',
+                border: '1px solid rgb(235 51 73)',
+                color: 'black',
+              }}
+              type="submit"
+            >
+              Поиск
+            </Button>
+          </FormControl>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <FormControl
+              onSubmit={handleSubmit(onSubmit)}
+              component="form"
+              sx={{ display: 'flex', gap: '10px', flexDirection: 'row' }}
+            >
+              <Typography>Сортировка по:</Typography>
+              <Button
+                sx={{
+                  background: 'white',
+                  border: '1px solid rgb(235 51 73)',
+                  color: 'black',
+                }}
+                onClick={() => {
+                  setSortCC('commentsCount');
+                }}
+                type="submit"
+                value="commentsCount"
+              >
+                Кол-ву комментариев
+              </Button>
+              <Button
+                sx={{
+                  background: 'white',
+                  border: '1px solid rgb(235 51 73)',
+                  color: 'black',
+                }}
+                onClick={() => {
+                  setSortCC('createdAt');
+                }}
+                type="submit"
+                value="createdAt"
+              >
+                Дате создания
+              </Button>
+            </FormControl>
+            <FormControl
+              onSubmit={handleSubmit(onSubmit)}
+              component="form"
+              sx={{ display: 'flex', gap: '10px', flexDirection: 'row' }}
+            >
+              <Button
+                sx={{ background: 'white', border: '1px solid rgb(235 51 73)', color: 'black' }}
+                onClick={() => {
+                  setSortBS('asc');
+                }}
+                type="submit"
+                value="asc"
+              >
+                По возрастанию
+              </Button>
+              <Button
+                sx={{ background: 'white', border: '1px solid rgb(235 51 73)', color: 'black' }}
+                onClick={() => {
+                  setSortBS('desc');
+                }}
+                type="submit"
+                value="desc"
+              >
+                По убыванию
+              </Button>
+            </FormControl>
+          </Box>
           <Box
             sx={{
               display: 'flex',
@@ -101,6 +215,7 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
         <Stack
           alignItems={'center'}
           sx={{
+            marginTop: '50px',
             gap: {
               xs: 2.5,
               md: 4.5,
@@ -186,6 +301,42 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
               </Box>
             );
           })}
+
+          <FormControl
+            onSubmit={handleSubmit(onSubmit)}
+            component="form"
+            sx={{ display: 'flex', gap: '10px', flexDirection: 'row' }}
+          >
+            {' '}
+            <Button
+              sx={{
+                width: '20%',
+                background: 'white',
+                border: '1px solid rgb(235 51 73)',
+                color: 'black',
+              }}
+              type="submit"
+              onClick={() => {
+                if (curPage !== 1) {
+                  setCurPage(curPage - 1);
+                }
+              }}
+            >
+              Prev
+            </Button>
+            <Button
+              sx={{
+                width: '20%',
+                background: 'white',
+                border: '1px solid rgb(235 51 73)',
+                color: 'black',
+              }}
+              type="submit"
+              onClick={() => setCurPage(curPage + 1)}
+            >
+              Next
+            </Button>
+          </FormControl>
         </Stack>
       </div>
     </Box>

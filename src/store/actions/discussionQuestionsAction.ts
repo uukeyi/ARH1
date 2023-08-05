@@ -18,7 +18,7 @@ export const getDiscussionQuestions = createAsyncThunk<
 >('discussionQuestionsSlice/getDiscussionQuestions', async (setError, { rejectWithValue }) => {
   try {
     const response = await axios.get<IDiscussionGetResponse>(
-      'http://194.87.238.163/api/Discussions'
+      'http://194.87.238.163/api/Discussions?pageIndex=1&pageSize=5'
     );
 
     return response.data;
@@ -45,22 +45,26 @@ export const getDiscussionDetails = createAsyncThunk<
     return rejectWithValue(error.message);
   }
 });
-export const getDiscussionSearch = createAsyncThunk<
-  any,
-  string,
-  { rejectValue?: string; query: string }
->('discussionQuestionsSlice/getDiscussionSearch', async (query, { rejectWithValue }) => {
-  try {
-    const response = await axios.get(`${$host}/api/Discussions?search=${query}`);
-    return response;
-  } catch (error: any) {
-    return rejectWithValue(error.message);
+export const getDiscussionProps = createAsyncThunk<any, any, { rejectValue?: string; props: any }>(
+  'discussionQuestionsSlice/getDiscussionQuestions',
+  async (props, { rejectWithValue }) => {
+    try {
+      const response = await $host<any>({
+        method: 'GET',
+        url: `/api/Discussions?pageIndex=${props.data[1]}&pageSize=5&search=${props.data[0].query}&orderCol=${props.data[3]}&orderDirection=${props.data[2]}`,
+      });
+
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
   }
-});
+);
 export const createDiscussionQuestion = createAsyncThunk<any, IinputData, { rejectValue?: string }>(
   'discussionQuestionsSlice/createDiscussionQuestions',
   async (inputData, { rejectWithValue }) => {
     const { title, description } = inputData.data;
+
     try {
       const responseReg = await $host<any>({
         url: '/api/Discussions',
@@ -72,6 +76,7 @@ export const createDiscussionQuestion = createAsyncThunk<any, IinputData, { reje
       });
     } catch (error: any) {
       inputData.setError(true);
+
       return rejectWithValue(error.message);
     }
   }

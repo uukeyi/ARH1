@@ -6,6 +6,7 @@ import {
   getDiscussionQuestions,
 } from '../actions/discussionQuestionsAction';
 import { IDiscussion, IDiscussionGetResponse } from '../../interfaces/discussionsResponse';
+import { log } from 'console';
 
 interface IQuestionsArrayState {
   questions: IDiscussion[];
@@ -24,6 +25,7 @@ export const discussionQuestionsSlice = createSlice({
       (state, action: PayloadAction<IDiscussionGetResponse>) => {
         // state.questions = action.payload;
         state.questions = action.payload.entities;
+        console.log(action.payload.entities);
       }
     );
     builder.addCase(getDiscussionQuestions.rejected, (state, action) => {
