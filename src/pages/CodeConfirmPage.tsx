@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
@@ -11,51 +10,43 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import AlertForm from '../components/AlertForm/AlertForm';
 import { Link as LinkRouter } from 'react-router-dom';
-import { IForgotPassword } from '../interfaces/authResponse';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
-function ForgotPasswordPage() {
+function CodeConfirmPage() {
   type formValues = {
-    email: string;
+    code: string;
   };
   const [isError, setIsError] = useState(false);
   const [isSucces, setIsSucces] = useState(false);
   const [errorText, setIsErrorText] = useState('');
-  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<formValues>();
   const onSubmit: SubmitHandler<formValues> = async (data) => {
-    try {
-      const response = await axios<IForgotPassword>({
-        method: 'POST',
-        url: 'http://194.87.238.163/api/Auth/forgotPassword',
-        params: {
-          email: data.email,
-        },
-      });
-      if (response.data.hasError) {
-        setIsError(true);
-        setIsErrorText(response.data.errorMessage);
-      } else {
-        setIsError(false);
-        setIsSucces(true);
-      }
-    } catch (error: any) {
-      setIsErrorText(error.message);
-      setIsError(true);
-    }
+    // try {
+    //   const response = await axios<IForgotPassword>({
+    //     method: 'POST',
+    //     url: 'http://194.87.238.163/api/Auth/forgotPassword',
+    //     params: {
+    //       code: data.code,
+    //     },
+    //   });
+    //   if (response.data.hasError) {
+    //     setIsError(true);
+    //     setIsErrorText(response.data.errorMessage);
+    //   } else {
+    //     setIsError(false);
+    //     setIsSucces(true);
+    //   }
+    // } catch (error: any) {
+    //   setIsErrorText(error.message);
+    //   setIsError(true);
+    // }
   };
-  useEffect(() => {
-    if (isSucces) {
-      navigate('/codeConfirm');
-    }
-  }, [isSucces]);
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container
@@ -83,7 +74,7 @@ function ForgotPasswordPage() {
           }}
         >
           <Typography component="h1" variant="h5">
-            Забыли пароль?
+            Код с почты
           </Typography>
           <Box
             component="form"
@@ -101,19 +92,15 @@ function ForgotPasswordPage() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Почта"
-              autoComplete="email"
+              id="code"
+              label="Код"
+              autoComplete="code"
               autoFocus
-              {...register('email', {
+              {...register('code', {
                 required: 'Это поле обязательно!',
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Неправильный Email адрес',
-                },
               })}
             />
-            {errors?.email && <AlertForm type="error" text={errors?.email?.message} fullWidth />}
+            {errors?.code && <AlertForm type="error" text={errors?.code?.message} fullWidth />}
             {isError && <AlertForm type="error" text={`Ошибка ${errorText}`} fullWidth />}
 
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
@@ -139,4 +126,4 @@ function ForgotPasswordPage() {
     </ThemeProvider>
   );
 }
-export default ForgotPasswordPage;
+export default CodeConfirmPage;

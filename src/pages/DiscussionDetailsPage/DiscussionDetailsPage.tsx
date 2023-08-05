@@ -1,23 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import { useAppDispatch } from '../../hooks/reduxTookitHooks';
-import { useAppSelector } from '../../hooks/reduxTookitHooks';
-import { makeStyles } from '@mui/styles';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxTookitHooks';
 import { getDiscussionDetails } from '../../store/actions/discussionQuestionsAction';
-import { useSelector } from 'react-redux';
-import { store } from '../../store';
 import { useLocation, useNavigate } from 'react-router';
-import { Avatar, Input, Typography } from '@mui/material';
+import { Avatar, Button, Input, Typography } from '@mui/material';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
-interface DiscussionDetailsPage {}
-interface IDiscussion {
-  title: string;
-  body: string;
-  id: number;
-  userId: number;
-}
+import { useAuth } from '../../contexts/AuthContext';
+import UnauthorizedPopup from '../../components/UnauthorizedPopup/UnauthorizedPopup';
 
-const DiscussionDetailsPage: React.FC<DiscussionDetailsPage> = () => {
+const DiscussionDetailsPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [discussion, setDiscussion] = useState<{
     title: string;
@@ -33,21 +24,19 @@ const DiscussionDetailsPage: React.FC<DiscussionDetailsPage> = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const currentLocation = location.pathname;
-  const currentId = Number(currentLocation.at(-1)) + 1;
+  const { isAuthSettings } = useAuth();
+  const navigate = useNavigate();
 
-  const state = useAppSelector((state) => state.categoriesSlice);
-  //TODO ТУТ НУЖНО ПОЛУЧИТЬ МАССИВ ИЗ СТЕЙТА , ПОКА ЧТО БЕРЕМ СТАТИЧНЫЕ ДАННЫЕ
-  const useStyles = makeStyles({
-    btnAddCategory: {
-      backgroundColor: '#909090',
-    },
-  });
+  const currentId = Number(currentLocation.at(-1)) + 1;
+  const userState = useAppSelector((state) => state.authSlice.user);
+  console.log(userState);
   let item: any = [];
   const fetchData = async () => {
     setIsLoading(true);
     try {
       item = await dispatch(getDiscussionDetails(`${currentId}`));
       setDiscussion(item.payload.data);
+
       setIsLoading(false);
 
       return item.payload.data;
@@ -59,12 +48,12 @@ const DiscussionDetailsPage: React.FC<DiscussionDetailsPage> = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  useEffect(() => {
-    console.log(discussion);
-    console.log(discussion.title);
-  }, [discussion]);
 
-  const navigate = useNavigate();
+  if (discussion.id) {
+    console.log('ok');
+  } else {
+    return <LoadingSpinner />;
+  }
 
   return (
     <Box sx={{ pt: '180px', pb: '200px', background: '#f3f3f9' }}>
@@ -112,13 +101,64 @@ const DiscussionDetailsPage: React.FC<DiscussionDetailsPage> = () => {
           >
             <Typography sx={{ fontSize: '18px' }}>комментариев</Typography>
             <Box sx={{ display: 'flex', gap: '10px' }}>
-              <Avatar alt="pfp" src="" />
+              <Avatar alt="pfp" src=""></Avatar>
               <Input
                 sx={{ border: '1px solid #eee', width: '100%' }}
                 type="text"
                 placeholder="Оставьте свой комментарий.."
               />
+              <Button
+                variant="outlined"
+                onClick={() => {
+                  if (!isAuthSettings.isAuth) {
+                    //   return <UnauthorizedPopup  />
+                    navigate('/login');
+                  } else {
+                  }
+                }}
+              >
+                ✓
+              </Button>
             </Box>
+            <Box
+              sx={{
+                marginTop: '15px',
+                display: 'flex',
+                gap: '10px',
+                justifyContent: 'space-between',
+                alignItems: 'flex-start',
+              }}
+            >
+              <Box
+                sx={{
+                  display: 'flex',
+                  gap: '10px',
+                }}
+              >
+                <Avatar alt="pfp" src=""></Avatar>
+                <Box>
+                  <Typography sx={{ fontWeight: '800', marginBottom: '5px' }}>
+                    Андрей Кириленко
+                  </Typography>
+                  <Typography>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque, ea libero.
+                    Assumenda officiis ad, deserunt necessitatibus facilis sunt placeat ducimus
+                    magni error. Obcaecati vel fugit dolorum inventore ad minima modi dignissimos
+                    unde quos ducimus? Perspiciatis veritatis harum recusandae blanditiis! Nam animi
+                    quae, quibusdam veritatis fugit dignissimos laborum. Similique placeat eos
+                    accusantium quasi unde repellat? Dolores, expedita inventore. Molestiae tempore
+                    dolore sed, asperiores saepe natus amet nisi expedita eveniet autem modi aperiam
+                    architecto itaque iusto dolores minima nostrum dignissimos soluta voluptate hic,
+                    quis totam, alias ducimus ab! Neque repellat aliquam corrupti, ratione magnam
+                    deleniti libero, sunt odit quaerat dolore iusto! Temporibus?
+                  </Typography>
+                </Box>
+              </Box>
+
+              <Button>Ответить</Button>
+            </Box>
+
+            {/* <Input placeholder="asdasdasd"/> */}
           </Box>
         </Box>
       </div>

@@ -37,12 +37,14 @@ export const discussionQuestionsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getDiscussionQuestions.fulfilled, (state, action) => {
+      console.log(action.payload.data);
       state.questions = action.payload.data;
     });
     builder.addCase(getDiscussionQuestions.rejected, (state, action) => {
       state.error = true;
-      // state.errorMessage = action.error
       console.log(action.error.message);
+      // state.errorMessage = action.error
+      // console.log(action.error.message);
     });
     // getDiscussionQuestions
     builder.addCase(createDiscussionQuestion.fulfilled, (state, action: PayloadAction<any>) => {

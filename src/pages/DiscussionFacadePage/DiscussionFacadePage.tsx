@@ -11,15 +11,12 @@ import {
   getDiscussionQuestions,
   getDiscussionSearch,
 } from '../../store/actions/discussionQuestionsAction';
-import Card from '@mui/material';
-import { useSelector } from 'react-redux';
-import CardContent from '@mui/material';
-import CardMedia from '@mui/material';
-import CardActions from '@mui/material';
-import { store } from '../../store';
+import { CardActions } from '@mui/material';
 import { useNavigate } from 'react-router';
-import { Input, TextField, FormControl } from '@mui/material';
-
+import { Card } from '@mui/material';
+import { CardMedia } from '@mui/material';
+import { TextField, FormControl } from '@mui/material';
+import { CardContent } from '@mui/material';
 interface DiscussionFacadePageProps {}
 
 const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
@@ -43,15 +40,17 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
     formState: { errors },
   } = useForm<formValues>();
   const onSubmit: SubmitHandler<formValues> = (data) => {
-    dispatch(
-      getDiscussionSearch({
-        data: data,
-      })
-    );
-    navigate('/discussionFacade');
+    // dispatch(
+    //   getDiscussionSearch({
+    //     data: data,
+    //   })
+    // );
+    // navigate('/discussionFacade');
+    console.log('idi nahui');
   };
   const classes = useStyles();
   useEffect(() => {
+    dispatch(getDiscussionQuestions('sdf'));
     dispatch(getDiscussionSearch(query));
   }, []);
   const navigate = useNavigate();
@@ -151,6 +150,7 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
             }}
           >
             {state.categories.map((post, index) => {
+              // console.log(post);
               return (
                 <Box key={index}>
                   <Card

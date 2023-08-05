@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { AuthContext, useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function ProtectedRoutes(): JSX.Element {
-  const isAuth = useContext(AuthContext);
+  const { isAuthSettings } = useAuth();
 
   function isAllowed(): boolean {
-    if (isAuth?.isAuthSettings.isAuth) return true;
+    if (isAuthSettings.isAuth) return true;
+    // return false;
+    console.log(isAuthSettings.isAuth);
     return false;
   }
 

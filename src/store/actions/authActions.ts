@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import $host from "../../http";
 import { IAuthResponse, IUserResponse } from "../../interfaces/authResponse";
 import axios from "axios";
+import { useAuth } from "../../contexts/AuthContext";
 interface IRegistrationData {
    email: string;
    password: string;
@@ -25,6 +26,7 @@ interface ICheckAuthData {
    setError: (value: boolean | ((prevVar: boolean) => boolean)) => void;
    setIsAuth: Function;
 }
+
 export const fetchRegistration = createAsyncThunk<
    IUserResponse,
    IinputData,
@@ -46,7 +48,7 @@ export const fetchRegistration = createAsyncThunk<
          responseReg.data.hasError
       ) {
          inputData.setError(true);
-         throw new Error("пользовтель уже существует");
+         throw new Error("пользователь уже существует");
       }
       localStorage.setItem("token", responseReg.data.token.value);
       localStorage.setItem("refreshToken", responseReg.data.refreshToken.value);
@@ -61,7 +63,7 @@ export const fetchRegistration = createAsyncThunk<
             Authorization: `Bearer ${localStorage.getItem("token")}`,
          },
       });
-      inputData.setIsAuth(true);
+      inputData.setIsAuth({isAuth : true});
       return responseUserUpdate.data.user;
    } catch (error: any) {
       inputData.setError(true);
@@ -94,8 +96,11 @@ export const fetchLogin = createAsyncThunk<
          loginData.setError(true);
          throw new Error("такого пользователя не существует");
       }
-      loginData.setIsAuth(true);
-      return response.data.user;
+
+
+      loginData.setIsAuth({isAuth : true});
+
+      return response.data.user; 
    } catch (error: any) {
       loginData.setError(true);
       return rejectWithValue(error.message);
@@ -115,15 +120,15 @@ export const checkAuth = createAsyncThunk<
          },
          withCredentials: true,
       });
+
       if (!response.data.hasError) {
          localStorage.setItem("token", response.data.token.value);
          localStorage.setItem("refreshToken", response.data.refreshToken.value);
-         data.setIsAuth(true);
+         data.setIsAuth({isAuth : true});
       } else {
-         data.setIsAuth(false);
+         data.setIsAuth({isAuth : false});
          localStorage.removeItem("token");
             localStorage.removeItem("refreshToken");
-
          throw new Error(
             "Ваш токен авторизации истек пожалуйста авторизуйтесь еще раз"
          );
@@ -132,7 +137,6 @@ export const checkAuth = createAsyncThunk<
       return response.data.user;
    } catch (error: any) {
       data.setError(true);
-      console.log(error);
       return rejectWithValue(error.message);
    }
 });
@@ -155,16 +159,15 @@ export const confirmEmail = createAsyncThunk<
       if (!response.data.hasError) {
          localStorage.setItem("token", response.data.token.value);
          localStorage.setItem("refreshToken", response.data.refreshToken.value);
-         data.setIsAuth(true);
+         data.setIsAuth({isAuth : true});
       } else {
-         data.setIsAuth(false);
+         data.setIsAuth({isAuth : false});
          throw new Error(response.data.errorMessage);
       }
 
       return response.data.user;
    } catch (error: any) {
       data.setError(true);
-      console.log(error);
       return rejectWithValue(error.message);
    }
 });

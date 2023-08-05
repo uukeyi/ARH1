@@ -13,10 +13,11 @@ export const getDiscussionQuestions = createAsyncThunk<any, string, { rejectValu
   'discussionQuestionsSlice/getDiscussionQuestions',
   async (path, { rejectWithValue }) => {
     try {
-      const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+      const response = await axios.get('http://194.87.238.163/api/Discussionss');
       console.log(response);
       return response;
     } catch (error: any) {
+      console.log(error.message);
       return rejectWithValue(error.message);
     }
   }

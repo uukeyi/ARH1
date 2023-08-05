@@ -45,7 +45,6 @@ const FacadeDesign: React.FC = () => {
 
   const handleNavHover = (index: number) => {
     setActiveIndex(index);
-    console.log(activeIndex);
   };
 
   return (
