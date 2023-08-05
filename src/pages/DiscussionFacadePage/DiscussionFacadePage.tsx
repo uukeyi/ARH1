@@ -23,7 +23,7 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
       backgroundColor: '#909090',
     },
   });
-  // console.log(state)
+  console.log(state);
   const [error, setError] = useState(false);
   useEffect(() => {
     dispatch(getDiscussionQuestions(setError));
