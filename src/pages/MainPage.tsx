@@ -19,11 +19,13 @@ import { useAuth } from "../contexts/AuthContext";
 import QuoteLineBlock from "../components/QuoteLineBlock/QuoteLineBlock";
 import WorkAlgorithmSection from "../components/WorkAlgorithmSection/WorkAlgorithmSection";
 import UnauthorizedPopup from "../components/UnauthorizedPopup/UnauthorizedPopup";
+import { getLandingPageBlocks } from "../store/actions/landingPageActions";
 const MainPage: React.FC = () => {
    const dispatch = useAppDispatch();
    const { setIsAuth, isAuthSettings } = useAuth();
    const [isError, setIsError] = useState<boolean>(false);
    const [isOpen, setIsOpen] = useState<boolean>(false);
+   const [errorLandingBlocks, setErrorLandingBlocks] = useState(false);
    const store = useAppSelector((state) => state.authSlice.user);
    useEffect(() => {
       if (
@@ -37,14 +39,20 @@ const MainPage: React.FC = () => {
    }, []);
    useEffect(() => {
       dispatch(checkAuth({ setError: setIsError, setIsAuth: setIsAuth }));
+      dispatch(
+         getLandingPageBlocks({
+            showInvisible: false,
+            setError: setErrorLandingBlocks,
+         })
+      );
    }, []);
-  //  console.log(isAuthSettings.isAuth);
-  //  console.log(store)
-  //  useEffect(() => {
-  //     if (isError) {
-  //        alert(store.errorMessage);
-  //     }
-  //  }, [isError]);
+   //  console.log(isAuthSettings.isAuth);
+   //  console.log(store)
+   //  useEffect(() => {
+   //     if (isError) {
+   //        alert(store.errorMessage);
+   //     }
+   //  }, [isError]);
 
    return (
       <div>

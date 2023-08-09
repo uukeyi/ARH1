@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import { useAppDispatch } from '../../hooks/reduxTookitHooks';
 import { useAppSelector } from '../../hooks/reduxTookitHooks';
-import { getCategories } from '../../store/actions/categoriesAction';
 import Card from '@mui/material/Card';
-
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
@@ -53,14 +51,13 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
 
   const [error, setError] = useState(false);
   useEffect(() => {
-    dispatch(getDiscussionQuestions(setError));
-    dispatch(getCategories('asdasd'));
+    dispatch(getDiscussionQuestions(setError))
   }, []);
   const navigate = useNavigate();
   useEffect(() => {
     if (error) {
       alert('Возникла ошибка получения данных');
-      navigate('/');
+      // navigate('/');
       console.log(error);
     }
   }, [error]);

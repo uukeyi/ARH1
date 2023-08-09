@@ -1,20 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-
 import {
   createDiscussionQuestion,
   getDiscussionQuestions,
 } from '../actions/discussionQuestionsAction';
 import { IDiscussion, IDiscussionGetResponse } from '../../interfaces/discussionsResponse';
-import { log } from 'console';
-
 interface IQuestionsArrayState {
   questions: IDiscussion[];
 }
 const initialState: IQuestionsArrayState = {
   questions: [],
 };
-
 export const discussionQuestionsSlice = createSlice({
   name: 'discussionQuestionsSlice',
   initialState,

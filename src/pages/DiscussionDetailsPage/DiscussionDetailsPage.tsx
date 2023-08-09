@@ -121,10 +121,11 @@ const DiscussionDetailsPage: React.FC = () => {
         <Box
           sx={{
             marginTop: '15px',
-            display: 'flex',
+            // display: 'flex',
             gap: '10px',
-            justifyContent: 'space-between',
-            alignItems: 'flex-start',
+            // justifyContent: 'space-between',
+            // alignItems: 'flex-start',
+            // flexDirection : 'columnn'
           }}
         >
           <Typography sx={{ fontSize: '22px', fontWeight: '700' }}>Комментарии</Typography>
@@ -181,6 +182,7 @@ const DiscussionDetailsPage: React.FC = () => {
                         justifyContent: 'space-between',
                         alignItems: 'flex-start',
                       }}
+                      key={comment.id}
                     >
                       <Box
                         sx={{

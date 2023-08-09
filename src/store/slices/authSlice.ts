@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-
-// ! PAYLOAD ACTION ТИПИЗИРУЕТ PAYLOAD
 import {
    fetchLogin,
    fetchRegistration,
