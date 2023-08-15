@@ -4,7 +4,7 @@ export interface ILandingBlockElement {
    typeId: number;
    value: string;
    orderIndex: number;
-   block: string;
+   block: ILandingBlock;
    type: {
       id: number;
       name: string;
@@ -19,3 +19,4 @@ export interface ILandingBlock {
    isDeleted: boolean;
    elements: ILandingBlockElement[];
 }
+

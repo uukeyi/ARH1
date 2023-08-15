@@ -8,7 +8,6 @@ export default function ProtectedRoutes(): JSX.Element {
   function isAllowed(): boolean {
     if (isAuthSettings.isAuth) return true;
     // return false;
-    console.log(isAuthSettings.isAuth);
     return false;
   }
 

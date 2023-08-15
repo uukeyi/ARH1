@@ -22,7 +22,7 @@ import UnauthorizedPopup from "../components/UnauthorizedPopup/UnauthorizedPopup
 import { getLandingPageBlocks } from "../store/actions/landingPageActions";
 const MainPage: React.FC = () => {
    const dispatch = useAppDispatch();
-   const { setIsAuth, isAuthSettings } = useAuth();
+   const { setIsAuth} = useAuth();
    const [isError, setIsError] = useState<boolean>(false);
    const [isOpen, setIsOpen] = useState<boolean>(false);
    const [errorLandingBlocks, setErrorLandingBlocks] = useState(false);

@@ -73,7 +73,7 @@ export const fetchRegistration = createAsyncThunk<
             Authorization: `Bearer ${localStorage.getItem("token")}`,
          },
       });
-      inputData.setIsAuth({ isAuth: true });
+      inputData.setIsAuth({ isAuth: true  , isAdmin : responseUserUpdate.data.user.isAdmin});
       inputData.setSuccess(true);
       return responseUserUpdate.data.user;
    } catch (error: any) {
@@ -109,8 +109,7 @@ export const fetchLogin = createAsyncThunk<
       }
 
       loginData.setSuccess(true);
-      loginData.setIsAuth({ isAuth: true });
-
+      loginData.setIsAuth({ isAuth: true  , isAdmin : response.data.user.isAdmin});
       return response.data.user;
    } catch (error: any) {
       loginData.setError(true);
@@ -135,9 +134,9 @@ export const checkAuth = createAsyncThunk<
       if (!response.data.hasError) {
          localStorage.setItem("token", response.data.token.value);
          localStorage.setItem("refreshToken", response.data.refreshToken.value);
-         data.setIsAuth({ isAuth: true });
+         data.setIsAuth({ isAuth: true , isAdmin : response.data.user.isAdmin });
       } else {
-         data.setIsAuth({ isAuth: false });
+         data.setIsAuth({ isAuth: false  , isAdmin : false });
          localStorage.removeItem("token");
          localStorage.removeItem("refreshToken");
          throw new Error(
@@ -175,7 +174,6 @@ export const confirmEmail = createAsyncThunk<
       //    data.setIsAuth({isAuth : false});
       //    throw new Error(response.data.errorMessage);
       // }
-      console.log(response);
       return response.data.user;
    } catch (error: any) {
       data.setError(true);
