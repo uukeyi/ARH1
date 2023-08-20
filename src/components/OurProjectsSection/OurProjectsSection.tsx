@@ -11,6 +11,9 @@ type cardType = {
    img : string;
    pathCard : string;
 };
+
+
+
 const OurProjectsSection: React.FC = () => {
    const { ourProjectsSection, subtitle, title, cardContainer , cardTitle , fullWidthContainer } = styles;
    const [cards, setCards] = useState<cardType[]>([
