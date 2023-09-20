@@ -13,6 +13,11 @@ interface IGetLandingPageBlocksParams {
 interface IUpdateElement {
    elementId: number | string;
    value: string;
+   blockId: number | string;
+   typeId: string | number;
+   orderIndex: number | string;
+   aosAnimation: number | string;
+   setIsOpen: Function;
    setError: (value: boolean | ((prevVar: boolean) => boolean)) => void;
 }
 interface ICreateBlock {
@@ -51,9 +56,11 @@ export const getLandingPageBlocks = createAsyncThunk<
                showInvisible: params.showInvisible,
             },
          });
+
          return response.data;
       } catch (error: any) {
          params.setError(true);
+
          return rejectWithValue(error.message);
       }
    }
@@ -66,17 +73,23 @@ export const updateElement = createAsyncThunk<
    try {
       const response = await $host<ILandingBlockElement>({
          method: "PUT",
-         url: "/api/LandingBlocks/elements",
-         params: {
-            id: params.elementId,
-         },
+         url: `/api/LandingBlocks/elements/${params.elementId}`,
          data: {
+            id: params.elementId,
             value: params.value,
+            typeId: params.typeId,
+            blockId: params.blockId,
+            orderIndex: params.orderIndex,
+            aosAnimation: params.aosAnimation,
          },
       });
+
+      params.setIsOpen(false);
+      // window.location.reloadX();
       return response.data;
    } catch (error: any) {
       params.setError(true);
+      console.log(error);
       return rejectWithValue(error.message);
    }
 });

@@ -1,50 +1,148 @@
 import React from "react";
 import styles from "./CostEquivalentSection.module.css";
+import { ILandingBlockElement } from "../../interfaces/landingPageResponse";
+import { useAuth } from "../../contexts/AuthContext";
+import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
 
-const CostEquivalentSection: React.FC = () => {
+interface CostEquivalentSectionProps {
+   titleConfig: ILandingBlockElement;
+   imgConfig: ILandingBlockElement;
+   desc1: ILandingBlockElement;
+   desc2: ILandingBlockElement;
+   desc3: ILandingBlockElement;
+   desc4: ILandingBlockElement;
+   desc5: ILandingBlockElement;
+   desc6: ILandingBlockElement;
+}
+
+const CostEquivalentSection: React.FC<CostEquivalentSectionProps> = ({
+   titleConfig,
+   desc1,
+   desc2,
+   desc3,
+   desc4,
+   desc5,
+   imgConfig,
+   desc6,
+}) => {
    const { costEquivalentSection, title, contentContainer } = styles;
+   const {isAuthSettings} = useAuth()
+   const {setIsOpen , setElSettings} = useAdminModalEdit()
    return (
       <section id={costEquivalentSection}>
          <div className="container">
-            <p data-aos="zoom-in" data-aos-duration="1000" className={title}>
-               ЭКВИВАЛЕНТ СТОИМОСТИ
+            <p
+            
+               onClick={() => {
+                  if (isAuthSettings.isAdmin) {
+                     setIsOpen(true);
+                     setElSettings(titleConfig);
+                  }
+               }}
+               data-aos="zoom-in"
+               data-aos-duration="1000"
+               className={title}
+            >
+               {titleConfig.value}
+
             </p>
             <div className={contentContainer}>
                <img
                   data-aos="fade-right"
                   data-aos-duration="1000"
-                  src="https://i.ibb.co/wNGTqsH/71.webp"
+                 
+                  src={imgConfig.value}
+                  onClick={() => {
+                     if (isAuthSettings.isAdmin) {
+                        setIsOpen(true);
+                        setElSettings(imgConfig);
+                     }
+                  }}
+
                   alt="Не удалось загрузить фото"
                />
                <p data-aos="fade-left" data-aos-duration="1000">
-                  К примеру: стоимость эскизного проекта дизайна для отделки
-                  фасадов дома площадью 250 м2 составит 85 000 руб.
+                  <span
+                   
+                     onClick={() => {
+                        if (isAuthSettings.isAdmin) {
+                           setIsOpen(true);
+                           setElSettings(desc1);
+                        }
+                     }}
+                  >
+                     {desc1.value}
+                  </span>
                   <br />
                   <br />
-                  За эти деньги, например, можно приобрести 30 м2 искусственного
-                  камня и облицевать фасад.
+                  <span
+                   
+                     onClick={() => {
+                        if (isAuthSettings.isAdmin) {
+                           setIsOpen(true);
+                           setElSettings(desc2);
+                        }
+                     }}
+                  >
+                     {desc2.value}
+                  </span>
+
                   <br />
                   <br />
-                  Всё же это похоже на покупку одежды без примерки. На вешалке
-                  она смотрится совершенно иначе, чем когда примеряешь её на
-                  себя. Кроме того, может не подойти цвет, форма, размер и
-                  сочетание цветов.
+                  <span
+                    
+                     onClick={() => {
+                        if (isAuthSettings.isAdmin) {
+                           setIsOpen(true);
+                           setElSettings(desc3);
+                        }
+                     }}
+                  >
+                     {desc3.value}
+                  </span>
+
                   <br />
                   <br />
-                  С дизайном фасадов дома всё очень похоже, только речь идёт о
-                  суммах на порядок выше и вернуть их как одежду не получится -
-                  работа будет оплачена. А «примерить» материал в проекте -
-                  можно.
+                  <span
+                     
+                     onClick={() => {
+                        if (isAuthSettings.isAdmin) {
+                           setIsOpen(true);
+                           setElSettings(desc4);
+                        }
+                     }}
+                  >
+                     {desc4.value}
+                  </span>
+
                   <br />
                   <br />
-                  По статистике человек теряет более 450 000 руб., не используя
-                  помощь и знания архитектора, обходясь без проекта. И это не
-                  считая того, что результат в 98% случаев разочаровывает все
-                  ожидания.
+                  <span
+                    
+                     onClick={() => {
+                        if (isAuthSettings.isAdmin) {
+                           setIsOpen(true);
+                           setElSettings(desc5);
+                        }
+                     }}
+                  >
+                     {desc5.value}
+                  </span>
+
                   <br />
                   <br />
-                  Воспользуйтесь помощью архитектора, инвестируйте в себя и свой
-                  дом, это точно окупится.
+                  <span
+                  
+                     onClick={() => {
+                        if (isAuthSettings.isAdmin) {
+                           setIsOpen(true);
+                           setElSettings(desc6);
+                        }
+                     }}
+                  >
+                     {desc6.value}
+                  </span>
+
                </p>
             </div>
          </div>

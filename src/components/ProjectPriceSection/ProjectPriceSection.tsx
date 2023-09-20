@@ -10,6 +10,13 @@ type CheckBoxType = {
 type RadioType = {
    label: string;
 };
+
+
+
+interface ProjectPriceSectionProps {
+   
+}
+
 const ProjectPriceSection: React.FC = () => {
    const {
       title,

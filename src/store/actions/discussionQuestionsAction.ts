@@ -24,7 +24,6 @@ export const getDiscussionQuestions = createAsyncThunk<
     return response.data;
   } catch (error: any) {
     setError(true);
-    console.log(error)
     return rejectWithValue(error.message);
   }
 });

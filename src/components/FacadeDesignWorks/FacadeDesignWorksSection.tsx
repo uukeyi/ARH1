@@ -1,13 +1,40 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
 import BeforeAfterSlider from "../BeforeAfterSlider/BeforeAfterSlider";
 import OrangeButton from "../OrangeButton/OrangeButton";
+import {
+   ILandingBlockElement,
+   landingBlockPrototype,
+} from "../../interfaces/landingPageResponse";
 import styles from "./FacadeDesignWorksSection.module.css";
+import { useAuth } from "../../contexts/AuthContext";
+import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
 
-const FacadeDesignWorksSection: React.FC = () => {
+interface FacadeDesignWorksSectionProps {
+   title: ILandingBlockElement;
+   elWithNoDesc: ILandingBlockElement[];
+   elWithDesc: ILandingBlockElement[];
+   extraElWithDesc: ILandingBlockElement[];
+}
+
+const FacadeDesignWorksSection: React.FC<FacadeDesignWorksSectionProps> = ({
+   title,
+   elWithDesc,
+   elWithNoDesc,
+   extraElWithDesc,
+}) => {
    const [more, setMore] = useState<boolean>(false);
+   let indexElWithNoDesc = 0;
+   let indexElWithDesc = 0;
+   let beforeImg: ILandingBlockElement = landingBlockPrototype;
+   let afterImg: ILandingBlockElement = landingBlockPrototype;
+   let subtitle: ILandingBlockElement = landingBlockPrototype;
+   let titleText: ILandingBlockElement = landingBlockPrototype;
+   const { isAuthSettings } = useAuth();
+   const { setIsOpen, setElSettings } = useAdminModalEdit();
    const {
       facadeSection,
-      title,
+      titleClass,
       wrapper,
       sliderContainer,
       sliderCard,
@@ -20,100 +47,66 @@ const FacadeDesignWorksSection: React.FC = () => {
             <h1
                data-aos="fade-right"
                data-aos-duration="1500"
-               className={title}
+               className={titleClass}
+               data-el = {title}
+               onClick={() => {
+                  if (isAuthSettings.isAdmin) {
+                     setIsOpen(true);
+                     setElSettings(title);
+                  }
+               }}
             >
-               ДИЗАЙН ФАСАДОВ - НАШИ РАБОТЫ
+               {title.value}
             </h1>
             <div className={wrapper}>
                <div className={sliderContainer}>
-                  <BeforeAfterSlider
-                     customClassName={sliderCardWrap}
-                     aosAnimation="fade-right"
-                     beforeImg="https://arh.yamaster.ml/images/fasadi/image9-1.jpg"
-                     afterImg="https://arh.yamaster.ml/images/fasadi/image9-2.jpg"
-                  />
-                  <BeforeAfterSlider
-                     customClassName={sliderCardWrap}
-                     aosAnimation="fade-down"
-                     beforeImg="https://arh.yamaster.ml/images/fasadi/image56-1.jpg"
-                     afterImg="https://arh.yamaster.ml/images/fasadi/image56-2.jpg"
-                  />
-                  <BeforeAfterSlider
-                     customClassName={sliderCardWrap}
-                     aosAnimation="fade-left"
-                     beforeImg="https://arh.yamaster.ml/images/fasadi/image77-1.jpg"
-                     afterImg="https://arh.yamaster.ml/images/fasadi/image77-2.jpg"
-                  />
-                  <BeforeAfterSlider
-                     customClassName={sliderCardWrap}
-                     aosAnimation="fade-right"
-                     beforeImg="https://arh.yamaster.ml/images/fasadi/image9911-1.jpg"
-                     afterImg="https://arh.yamaster.ml/images/fasadi/image9911-2.jpg"
-                  />
-                  <BeforeAfterSlider
-                     customClassName={sliderCardWrap}
-                     aosAnimation="fade-up"
-                     beforeImg="https://arh.yamaster.ml/images/fasadi/image9912-1.jpg"
-                     afterImg="https://arh.yamaster.ml/images/fasadi/image9912-2.jpg"
-                  />
-                  <BeforeAfterSlider
-                     customClassName={sliderCardWrap}
-                     aosAnimation="fade-left"
-                     beforeImg="https://arh.yamaster.ml/images/fasadi/image9917-1.jpg"
-                     afterImg="https://arh.yamaster.ml/images/fasadi/image9917-2.jpg"
-                  />
+                  {elWithNoDesc.map((el, index) => {
+                     indexElWithNoDesc++;
+                     if (indexElWithNoDesc === 2) {
+                        indexElWithNoDesc = 0;
+                        return (
+                           <BeforeAfterSlider
+                              customClassName={sliderCardWrap}
+                              aosAnimation={
+                                 elWithNoDesc[index - 1].aosAnimation
+                              }
+                              beforeImg={elWithNoDesc[index - 1]}
+                              afterImg={el}
+                           />
+                        );
+                     } else {
+                        return null;
+                     }
+                  })}
                </div>
-
-               <BeforeAfterSlider
-                  customClassName={sliderCard}
-                  aosAnimation="zoom-in"
-                  beforeImg="https://arh.yamaster.ml/images/fasadi/1/img_20191115.webp"
-                  afterImg="https://arh.yamaster.ml/images/fasadi/1/img_20191115.webp"
-                  isText={true}
-                  subtitle="Проект дизайна фасадов и полная перепланировка дома, 
-            Украина, Полтава 2020"
-                  title="Особняка стиль Прерий"
-               />
-               <BeforeAfterSlider
-                  customClassName={sliderCard}
-                  aosAnimation="zoom-in"
-                  beforeImg="https://arh.yamaster.ml/images/fasadi/1/22-01.webp"
-                  afterImg="https://arh.yamaster.ml/images/fasadi/1/22-01.webp"
-                  isText={true}
-                  subtitle="Дизайн фасадов, перепланировка и строительство
-            дома с плоской кровлей, СПб. 2017"
-                  title="Дом в стиле Hi-Tech"
-               />
-               <BeforeAfterSlider
-                  customClassName={sliderCard}
-                  aosAnimation="zoom-in"
-                  beforeImg="https://arh.yamaster.ml/images/fasadi/image9911-1.jpg"
-                  afterImg="https://arh.yamaster.ml/images/fasadi/image9911-2.jpg"
-                  isText={true}
-                  subtitle="Рабочий проект дизайна фасадов дома в стиле Френка Ллойда Райта СПб, Охта Парк 2018"
-                  title="Стиль Райта"
-               />
-               <BeforeAfterSlider
-                  aosAnimation="zoom-in"
-                  customClassName={sliderCard}
-                  beforeImg="https://arh.yamaster.ml/images/fasadi/image9912-1.jpg"
-                  afterImg="https://arh.yamaster.ml/images/fasadi/image9912-2.jpg"
-                  isText={true}
-                  subtitle="Рабочий проект дизайна фасадов дома, строительство, авторский надзор
-            СПб, п. Песочный 2018"
-                  title="Фасад из камня"
-               />
-               <BeforeAfterSlider
-                  customClassName={sliderCard}
-                  aosAnimation="zoom-in"
-                  beforeImg="https://arh.yamaster.ml/images/fasadi/1/11.webp"
-                  afterImg="https://arh.yamaster.ml/images/fasadi/1/11-1.webp"
-                  isText={true}
-                  subtitle="Рабочий проект дизайна фасадов для загородного дома в п.Тярлево.
-            Составили подробную спецификацию архитектурных элементов
-            для отделки фасадов. СПб, Тярлево 2017"
-                  title="Классический фасад"
-               />
+               {elWithDesc.map((el) => {
+                  indexElWithDesc = indexElWithDesc + 1;
+                  switch (indexElWithDesc) {
+                     case 4:
+                        indexElWithDesc = 0;
+                        titleText = el;
+                        return (
+                           <BeforeAfterSlider
+                              customClassName={sliderCard}
+                              aosAnimation="zoom-in"
+                              beforeImg={beforeImg}
+                              afterImg={afterImg}
+                              isText={true}
+                              subtitle={subtitle}
+                              title={titleText}
+                           />
+                        );
+                     case 3:
+                        subtitle = el;
+                        break;
+                     case 2:
+                        afterImg = el;
+                        break;
+                     case 1:
+                        beforeImg = el;
+                        break;
+                  }
+               })}
                <button
                   onClick={() => {
                      setMore(!more);
@@ -130,25 +123,34 @@ const FacadeDesignWorksSection: React.FC = () => {
                         : { height: 0, opacity: 0, transition: "1s" }
                   }
                >
-                  <BeforeAfterSlider
-                     customClassName={sliderCard}
-                     beforeImg="https://arh.yamaster.ml/images/fasadi/1/11.webp"
-                     afterImg="https://arh.yamaster.ml/images/fasadi/1/11-1.webp"
-                     isText={true}
-                     subtitle="Рабочий проект дизайна фасадов для загородного дома в п.Тярлево.
-            Составили подробную спецификацию архитектурных элементов
-            для отделки фасадов. СПб, Тярлево 2017"
-                     title="Классический фасад"
-                  />
-                  <BeforeAfterSlider
-                     customClassName={sliderCard}
-                     beforeImg="https://arh.yamaster.ml/images/fasadi/image9912-1.jpg"
-                     afterImg="https://arh.yamaster.ml/images/fasadi/image9912-2.jpg"
-                     isText={true}
-                     subtitle="Рабочий проект дизайна фасадов дома, строительство, авторский надзор
-            СПб, п. Песочный 2018"
-                     title="Фасад из камня"
-                  />
+                  {extraElWithDesc.map((el) => {
+                     indexElWithDesc = indexElWithDesc + 1;
+                     switch (indexElWithDesc) {
+                        case 4:
+                           indexElWithDesc = 0;
+                           titleText = el;
+                           return (
+                              <BeforeAfterSlider
+                                 customClassName={sliderCard}
+                                 aosAnimation={titleText.aosAnimation}
+                                 beforeImg={beforeImg}
+                                 afterImg={afterImg}
+                                 isText={true}
+                                 subtitle={subtitle}
+                                 title={titleText}
+                              />
+                           );
+                        case 3:
+                           subtitle = el;
+                           break;
+                        case 2:
+                           afterImg = el;
+                           break;
+                        case 1:
+                           beforeImg = el;
+                           break;
+                     }
+                  })}
                </div>
 
                <OrangeButton title={"ОСТАВИТЬ ЗАЯВКУ"} width="250px" />

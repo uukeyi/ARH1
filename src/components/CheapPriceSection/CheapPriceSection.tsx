@@ -2,12 +2,54 @@ import React from "react";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade } from "swiper";
-import { Autoplay} from "swiper";
-
+import { Autoplay } from "swiper";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import styles from "./CheapPriceSection.module.css";
-const CheapPriceSection: React.FC = () => {
+import { ILandingBlockElement } from "../../interfaces/landingPageResponse";
+import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
+import { useAuth } from "../../contexts/AuthContext";
+interface CheapPriceSectionProps {
+   titleConfig: ILandingBlockElement;
+   firstSlide: {
+      title: ILandingBlockElement;
+      desc: ILandingBlockElement;
+      subtitle: ILandingBlockElement | false;
+   };
+   secondSlide: {
+      title: ILandingBlockElement;
+      desc: ILandingBlockElement;
+      subtitle: ILandingBlockElement | false;
+   };
+   thirdSlide: {
+      title: ILandingBlockElement;
+      desc: ILandingBlockElement;
+      subtitle: ILandingBlockElement | false;
+   };
+   fourthSlide: {
+      title: ILandingBlockElement;
+      desc: ILandingBlockElement;
+      subtitle: ILandingBlockElement | false;
+   };
+   fifthSlide: {
+      title: ILandingBlockElement;
+      desc: ILandingBlockElement;
+      subtitle: ILandingBlockElement | false;
+   };
+   imgConfig: ILandingBlockElement;
+   subtitleConfig: ILandingBlockElement;
+}
+
+const CheapPriceSection: React.FC<CheapPriceSectionProps> = ({
+   titleConfig,
+   firstSlide,
+   secondSlide,
+   thirdSlide,
+   fifthSlide,
+   fourthSlide,
+   imgConfig,
+   subtitleConfig,
+}) => {
    const {
       cheapPriceSection,
       title,
@@ -19,18 +61,47 @@ const CheapPriceSection: React.FC = () => {
       slider,
       sliderContainer,
    } = styles;
-
+   const slides = [
+      firstSlide,
+      secondSlide,
+      thirdSlide,
+      fourthSlide,
+      fifthSlide,
+   ];
+   const {isAuthSettings} = useAuth()
+   const {setIsOpen , setElSettings} = useAdminModalEdit()
    return (
       <section id={cheapPriceSection}>
-         <div  data-aos = "zoom-in" data-aos-duration = "1000" className="container">
-            <p className={title}>ПОЧЕМУ НИЗКАЯ ЦЕНА?</p>
-            <p className={subtitle}>
-               Есть несколько вариантов манипуляций низкой ценой.
+         <div data-aos="zoom-in" data-aos-duration="1000" className="container">
+            <p
+              
+               className={title}
+             
+               onClick={() => {
+                  if (isAuthSettings.isAdmin) {
+                     setIsOpen(true);
+                     setElSettings(titleConfig);
+                  }
+               }}
+            >
+               {titleConfig.value}
+            </p>
+            <p
+               className={subtitle}
+            
+               onClick={() => {
+                  if (isAuthSettings.isAdmin) {
+                     setIsOpen(true);
+                     setElSettings(subtitleConfig);
+                  }
+               }}
+            >
+               {subtitleConfig.value}
             </p>
             <div className={sliderContainer}>
                <Swiper
                   className={slider}
-                  modules={[Navigation, EffectFade , Autoplay]}
+                  modules={[Navigation, EffectFade, Autoplay]}
                   spaceBetween={0}
                   loop
                   slidesPerView={1}
@@ -43,70 +114,79 @@ const CheapPriceSection: React.FC = () => {
                   fadeEffect={{
                      crossFade: true,
                   }}
-
-                  autoplay = {{
-                     delay : 5500
+                  autoplay={{
+                     delay: 5500,
                   }}
                >
-                  {[
-                     {
-                        title: "1. Урезанная комплектация",
-                        description:
-                           "Неопытному человеку сложно сразу определить ряд строительных нюансов, потому нередко пользуются этим, предлагая более дешёвую смету.",
-                        subDescription:
-                           "В результате вы получаете не капитальный дом для постоянного проживания, а дачный домик с урезанной комплектацией.",
-                     },
-                     {
-                        title: "2. Экономия на материалах",
-                        description:
-                           "Применяется дешёвый строительный материал: более дешёвый утеплитель, более дешёвый материал для стен и их отделки, металлочерепица из тонкого метала, второсортное сырое дерево на стропильную систему. В погоне за более красивой ценой в смете, вам мало кто расскажет о минусах дешёвого материала. При таком подходе качество вашего дома является задачей второстепенной. Подмена качественного материала на более дешёвый с худшими характеристиками или меньшей прочности, например, подмена качественного фасадного клея на дешёвый, приведёт к разрушению отделки фасада уже через 3-4 года.",
-                        subDescription: false,
-                     },
-                     {
-                        title: "3. Нарушение технологии строительства",
-                        description:
-                           "Исключение какого-либо материала из технологии производства работ зрительно может быть незаметно, но в результате приведёт к дополнительным потерям тепла и уменьшению срока службы дома, о чём заказчик узнает только через несколько лет. Например, исключение из кровли контробрешётки, отвечающей за отвод влаги и проветривание утеплителя, может привести к потере утеплителем своих свойств, увеличению теплопотерь и к образованию плесени, хотя внешне крыша ничем не будет отличаться. На этом нередко экономят в смете.",
-                        subDescription: false,
-                     },
-                     {
-                        title: "4. Экономия на рабочих",
-                        description:
-                           "Использование неквалифицированных недорогих рабочих, которые допускают не только технологические, но и качественные ошибки. Нередко происходит обучение строительству на вашем доме, страдает не только качество, но и затягиваются сроки сдачи.",
-                        subDescription: false,
-                     },
-                     {
-                        title: "5. Неправильный расчёт сметы",
-                        description:
-                           "Из-за отсутствия достаточного опыта, некоторые нередко выдают желаемое за действительное, показывая красивые и приятные для заказчика цифры в смете, а по итогам строительства понимают, что многие моменты не учли в расчётах и тогда стройка останавливается. Речь идёт о неправильном расчёте сметы и затрат на строительство.",
-                        subDescription:
-                           "Потому есть большой риск попасть на недострой. Грамотный прогноз стоимости строительного материала и накладных расходов - очень важный момент.",
-                     },
-                  ].map((slider, index) => {
+                  {slides.map((slider, index) => {
                      return (
                         <SwiperSlide key={index}>
                            <div className={contentContainer}>
                               <img
-                                 src="https://i.ibb.co/d00BJjj/kasa.webp"
+                                 
+                                 src={imgConfig.value}
+                                 onClick={() => {
+                                    if (isAuthSettings.isAdmin) {
+                                       setIsOpen(true);
+                                       setElSettings(imgConfig);
+                                    }
+                                 }}
                                  alt="Не удалось отобразить картинку"
                               />
                               <div className={textContainer}>
-                                 <p className={sliderTitle}>{slider.title}</p>
-                                 <p className={descriptionSlider}>
-                                    {slider.description}
-                                    <br />
-                                    <br />
-                                    {slider.subDescription
-                                       ? slider.subDescription
-                                       : null}
+                                 <p
+                                    className={sliderTitle}
+                                    
+                                    onClick={() => {
+                                       if (isAuthSettings.isAdmin) {
+                                          setIsOpen(true);
+                                          setElSettings(slider.title);
+                                       }
+                                    }}
+                                 >
+                                    {slider.title.value}
                                  </p>
+
+                                 <span
+                                    className={descriptionSlider}
+                                   
+                                    onClick={() => {
+                                       if (isAuthSettings.isAdmin) {
+                                          setIsOpen(true);
+                                          setElSettings(slider.desc);
+                                       }
+                                    }}
+                                 >
+                                    {slider.desc.value}
+                                 </span>
+                                 <span
+                                    className={descriptionSlider}
+                                  
+                                    onClick={() => {
+                                       if (isAuthSettings.isAdmin && slider.subtitle) {
+                                          setIsOpen(true);
+                                          setElSettings(slider.subtitle);
+                                       }
+                                    }}
+                                 >
+                                    {slider.subtitle
+                                       ? slider.subtitle.value
+                                       : null}
+                                 </span>
                               </div>
                            </div>
                         </SwiperSlide>
                      );
                   })}
                </Swiper>
-               <button type="button" className="image-swiper-button-next-small"></button>
-               <button type="button" className="image-swiper-button-prev-small"></button>
+               <button
+                  type="button"
+                  className="image-swiper-button-next-small"
+               ></button>
+               <button
+                  type="button"
+                  className="image-swiper-button-prev-small"
+               ></button>
             </div>
          </div>
       </section>

@@ -16,7 +16,7 @@
 .contentContainer img {
   max-width: 50%;
 }
-.contentContainer p {
+.contentContainer p > span{
   color: black;
   font-size: 18px;
   font-family: 'Roboto';

@@ -14,18 +14,18 @@
   flex-direction: column;
   height: 100%;
 }
-.img {
+.imgClass {
   height: 100%;
   width: 100%;
 }
-.title {
+.titleClass {
   font-weight: 400;
   font-size: 43px;
   line-height: 43px;
   padding: 20px 0;
 }
-.description {
-  padding: 50px 0;
+.description  > span{
+  margin: 50px 0;
   font-size: 18px;
   font-weight: 300;
 }
@@ -95,7 +95,7 @@
   .inputPhone {
     width: 100% !important;
   }
-  .title {
+  .titleClass {
     text-align: center;
   }
 }

@@ -1,8 +1,45 @@
 import React from "react";
 import styles from "./AboutUsSection.module.css";
 import quoteSectionLine from "../../assets/icons/quoteSectionLine.webp";
+import { ILandingBlockElement } from "../../interfaces/landingPageResponse";
+import { useAuth } from "../../contexts/AuthContext";
+import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
 
-const AboutUsSection: React.FC = () => {
+interface AboutUsSectionProps {
+   mainTitle: ILandingBlockElement;
+   titleConfig: ILandingBlockElement;
+   titleDesc: ILandingBlockElement;
+   subTitle: ILandingBlockElement;
+   mainDesc: ILandingBlockElement;
+   card1: {
+      title: ILandingBlockElement;
+      subtitle: ILandingBlockElement;
+   };
+   card2: {
+      title: ILandingBlockElement;
+      subtitle: ILandingBlockElement;
+   };
+   card3: {
+      title: ILandingBlockElement;
+      subtitle: ILandingBlockElement;
+   };
+   card4: {
+      title: ILandingBlockElement;
+      subtitle: ILandingBlockElement;
+   };
+}
+
+const AboutUsSection: React.FC<AboutUsSectionProps> = ({
+   mainTitle,
+   titleConfig,
+   titleDesc,
+   subTitle,
+   mainDesc,
+   card1,
+   card2,
+   card3,
+   card4,
+}) => {
    const {
       aboutUsSection,
       title,
@@ -12,52 +49,126 @@ const AboutUsSection: React.FC = () => {
       cardSubtitle,
       contentContainer,
       cardClass,
-      line
+      line,
    } = styles;
+   const data = [card1, card2, card3, card4];
+   const { isAuthSettings } = useAuth();
+   const { setIsOpen, setElSettings } = useAdminModalEdit();
    return (
       <section id={aboutUsSection}>
          <div className="container">
-            <p data-aos = "zoom-in" data-aos-duration = "1000" className={title}>О НАС</p>
-            <p  data-aos = "zoom-in" data-aos-duration = "1000" className={subtitle}>
-               <strong>АРХИТЕКТУРА АРХ1</strong> - архитектурно-строительная
-               компания, основанная в 2006 году. <br />
-               Мы специализируемся на разработке дизайна фасадов загородных
-               домов.
+            <p
+       
+               data-aos="zoom-in"
+               data-aos-duration="1000"
+               className={title}
+               onClick={() => {
+                  if (isAuthSettings.isAdmin) {
+                     setIsOpen(true);
+                     setElSettings(mainTitle);
+                  }
+               }}
+            >
+               {mainTitle.value}
+
             </p>
-            <p  data-aos = "zoom-in" data-aos-duration = "1000" className={subdescription}>
-               Компетентность подтверждают результаты, потому несколько фактов о
-               нас в цифрах.
+            <p data-aos="zoom-in" data-aos-duration="1000" className={subtitle}>
+               <strong
+                
+                  onClick={() => {
+                     if (isAuthSettings.isAdmin) {
+                        setIsOpen(true);
+                        setElSettings(titleConfig);
+                     }
+                  }}
+               >
+                  {titleConfig.value}
+     
+               </strong>
+               <span
+                 
+                  onClick={() => {
+                     if (isAuthSettings.isAdmin) {
+                        setIsOpen(true);
+                        setElSettings(titleDesc);
+                     }
+                  }}
+               >
+                  {titleDesc.value}
+               </span>
+
+               <br />
+               <span
+                
+                  onClick={() => {
+                     if (isAuthSettings.isAdmin) {
+                        setIsOpen(true);
+                        setElSettings(subTitle);
+                     }
+                  }}
+               >
+                  {subTitle.value}
+               </span>
+              
             </p>
-            <div data-aos = "zoom-in" data-aos-duration = "1000" className={contentContainer}>
-               {[
-                  {
-                     title: "25 000 м2",
-                     subtitle: "Опыт строительства на одном участке",
-                  },
-                  {
-                     title: "7 500 000 м2",
-                     subtitle: "Задизайнили за 14 лет работы",
-                  },
-                  {
-                     title: "200 объектов",
-                     subtitle: "Больше 200 реализованных объектов",
-                  },
-                  {
-                     title: "250 га",
-                     subtitle:
-                        "Максимальная площадь застройки, которую мы спроектировали",
-                  },
-               ].map((card, index) => {
+            <p
+               data-aos="zoom-in"
+               data-aos-duration="1000"
+               className={subdescription}
+              
+               onClick={() => {
+                  if (isAuthSettings.isAdmin) {
+                     setIsOpen(true);
+                     setElSettings(mainDesc);
+                  }
+               }}
+            >
+               {mainDesc.value}
+               {/* Компетентность подтверждают результаты, потому несколько фактов о
+               нас в цифрах. */}
+            </p>
+            <div
+               data-aos="zoom-in"
+               data-aos-duration="1000"
+               className={contentContainer}
+            >
+               {data.map((card, index) => {
                   return (
                      <div key={index} className={cardClass}>
-                        <p className={cardTitle}>{card.title}</p>
+                        <p
+                           className={cardTitle}
+                          
+                           onClick={() => {
+                              if (isAuthSettings.isAdmin) {
+                                 setIsOpen(true);
+                                 setElSettings(card.title);
+                              }
+                           }}
+                        >
+                           {card.title.value}
+                        </p>
                         <hr />
-                        <p className={cardSubtitle}>{card.subtitle}</p>
+                        <p
+                           className={cardSubtitle}
+                           
+                           onClick={() => {
+                              if (isAuthSettings.isAdmin) {
+                                 setIsOpen(true);
+                                 setElSettings(card.subtitle);
+                              }
+                           }}
+                        >
+                           {card.subtitle.value}
+                        </p>
                      </div>
                   );
                })}
             </div>
-            <img className={line} src={quoteSectionLine} alt="_________________________" />
+            <img
+               className={line}
+               src={quoteSectionLine}
+               alt="_________________________"
+            />
          </div>
       </section>
    );
