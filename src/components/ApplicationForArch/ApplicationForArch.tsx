@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import OrangeButton from "../OrangeButton/OrangeButton";
 import styles from "./ApplicationForArch.module.css";
-import { ILandingBlockElement } from "../../interfaces/landingPageResponse";
+import { ILandingBlock, ILandingBlockElement } from "../../interfaces/landingPageResponse";
 import { useAuth } from "../../contexts/AuthContext";
 import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
-
+import { Button } from "@mui/material";
 interface ApplicationForArchProps {
    title: ILandingBlockElement;
    img: ILandingBlockElement;
@@ -17,6 +17,7 @@ interface ApplicationForArchProps {
    liEl4: ILandingBlockElement;
    desc: ILandingBlockElement;
    bottomDesc: ILandingBlockElement;
+   block : ILandingBlock
 }
 
 const ApplicationForArch: React.FC<ApplicationForArchProps> = ({
@@ -30,6 +31,7 @@ const ApplicationForArch: React.FC<ApplicationForArchProps> = ({
    liEl4,
    bottomDesc,
    liTitle,
+   block
 }) => {
    const {
       ApplicationForArch,
@@ -47,9 +49,22 @@ const ApplicationForArch: React.FC<ApplicationForArchProps> = ({
    } = styles;
    const [value, setValue] = useState("");
    const {isAuthSettings} = useAuth()
-   const {setIsOpen , setElSettings} = useAdminModalEdit()
+   const {setIsOpen , setElSettings , setIsOpenBlockEdit , setBlockSettings} = useAdminModalEdit()
    return (
       <section id={ApplicationForArch}>
+          {isAuthSettings.isAdmin ? (
+            <Button
+               onClick={() => {
+                  if (isAuthSettings.isAdmin) {
+                     setIsOpenBlockEdit(true);
+                     setBlockSettings(block);
+                  }
+               }}
+               variant="outlined"
+            >
+               Изменить порядок блока
+            </Button>
+         ) : null}
          <div className="container">
             <div className={wrapper}>
                <div className={left}>
@@ -202,7 +217,7 @@ const ApplicationForArch: React.FC<ApplicationForArchProps> = ({
                         buttonClass={optionPhone}
                         containerClass={phoneContainer}
                      />
-                     <OrangeButton title={"ОТПРАВИТЬ ЗАЯВКУ"} width="100%" />
+                     <OrangeButton title={"ОТПРАВИТЬ ЗАЯВКУ"} width="90%" />
                   </div>
                </div>
             </div>

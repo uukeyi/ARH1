@@ -11,6 +11,10 @@
    font-family: "Oswald";
    text-align: center;
 }
+.description  {
+   display: flex;
+   flex-direction: column;
+}
 .description > span {
    color: black;
    font-weight: 400;

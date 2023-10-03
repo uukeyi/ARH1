@@ -1,109 +1,113 @@
 .sliderContainer {
-  display: grid;
-  place-items: center;
-
-  position: relative;
-  overflow: hidden;
-  width: 100%;
+   display: grid;
+   place-items: center;
+   margin: 0 auto;
+   position: relative;
+   overflow: hidden;
+   width: 100%;
+}
+.sliderContainerWithDesc {
+  width: 80%;
 }
 .imageContainer {
-  width: 100%;
-  position: relative;
-  max-height: 90vh;
-  aspect-ratio: 16/9;
+   width: 100%;
+   position: relative;
+   max-height: 90vh;
+   aspect-ratio: 16/9;
 }
 
 .sliderImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: left;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   object-position: left;
 }
 .beforeImage {
-  position: absolute;
-  inset: 0;
+   position: absolute;
+   inset: 0;
 }
 .slider {
-  position: absolute;
-  inset: 0;
-  cursor: col-resize;
-  opacity: 0;
+   position: absolute;
+   inset: 0;
+   cursor: col-resize;
+   opacity: 0;
 
-  width: 100%;
-  height: 100%;
+   width: 100%;
+   height: 100%;
 }
 .slider:focus-visible ~ .sliderButton {
-  outline: 5px solid black;
-  outline-offset: 3px;
+   outline: 5px solid black;
+   outline-offset: 3px;
 }
 .sliderLine {
-  position: absolute;
-  inset: 0;
-  width: 0.2rem;
-  height: 100%;
-  background-color: white;
-  z-index: 10;
-  transform: translateX(-50%);
-  pointer-events: none;
+   position: absolute;
+   inset: 0;
+   width: 0.2rem;
+   height: 100%;
+   background-color: white;
+   z-index: 10;
+   transform: translateX(-50%);
+   pointer-events: none;
 }
 .sliderButton {
-  position: absolute;
-  color: black;
-  background-color: whtie;
-  padding: 0.5rem;
-  border-radius: 100vw;
-  display: grid;
-  place-items: center;
-  transform: translateX(-50%);
-  pointer-events: none;
-  z-index: 100;
+   position: absolute;
+   color: black;
+   background-color: whtie;
+   padding: 0.5rem;
+   border-radius: 100vw;
+   display: grid;
+   place-items: center;
+   transform: translateX(-50%);
+   pointer-events: none;
+   z-index: 100;
 }
 .sliderButton > span {
-  width: 7px;
-  height: 30px;
-  background-color: #fff;
-  position: absolute;
+   width: 7px;
+   height: 30px;
+   background-color: #fff;
+   position: absolute;
 }
 .textContainer {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
+   display: flex;
+   width: 80%;
+   margin: 0 auto;
+   justify-content: space-between;
 }
 .sliderTitle {
-  font-size: 28px;
-  font-weight: 400;
-  border-top: 3px solid black;
-  padding-top: 5px;
-  width: 255px;
+   font-size: 28px;
+   font-weight: 400;
+   border-top: 3px solid black;
+   padding-top: 5px;
+   width: 255px;
 }
 .sliderSubtitle {
-  width: 50%;
-  font-size: 18px;
-  font-weight: 300;
-  font-family: 'Roboto', sans-serif;
+   width: 50%;
+   font-size: 18px;
+   font-weight: 300;
+   font-family: "Roboto", sans-serif;
 }
 
 .textSliderContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  width: 100%;
+   display: flex;
+   flex-direction: column;
+   gap: 25px;
+   width: 100%;
 }
 
 @media (max-width: 768px) {
-  .sliderTitle {
-    font-size: 22px;
-  }
-  .sliderSubtitle {
-    font-size: 14px;
-  }
+   .sliderTitle {
+      font-size: 22px;
+   }
+   .sliderSubtitle {
+      font-size: 14px;
+   }
 }
 @media (max-width: 576px) {
-  .textContainer {
-    flex-direction: column-reverse;
-    gap: 15px;
-  }
-  .sliderSubtitle {
-    width: 100%;
-  }
+   .textContainer {
+      flex-direction: column-reverse;
+      gap: 15px;
+   }
+   .sliderSubtitle {
+      width: 100%;
+   }
 }

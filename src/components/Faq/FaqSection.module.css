@@ -1,0 +1,24 @@
+.title {
+   font-weight: 400;
+   font-size: 43px;
+   line-height: 53px;
+   text-align: center;
+}
+.faq {
+   padding: 100px 0px 100px 0px;
+}
+.subtitle {
+   margin-top: 50px;
+   font-weight: 600;
+   font-family: "Roboto";
+   font-size: 21px;
+   line-height: 23px;
+}
+.description {
+   font-weight: 300;
+   margin-top: 20px;
+   font-size: 18px;
+}
+.subtitle:not(:first-child) {
+    margin-top: 30px;
+}

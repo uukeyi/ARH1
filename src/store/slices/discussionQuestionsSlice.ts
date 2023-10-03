@@ -2,14 +2,18 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import {
   createDiscussionQuestion,
+  getDiscussionDetails,
+  getDiscussionProps,
   getDiscussionQuestions,
 } from '../actions/discussionQuestionsAction';
-import { IDiscussion, IDiscussionGetResponse } from '../../interfaces/discussionsResponse';
+import { IDiscussion, IDiscussionGetResponse, discussionPrototype } from '../../interfaces/discussionsResponse';
 interface IQuestionsArrayState {
   questions: IDiscussion[];
+  singleQuestion : IDiscussion
 }
 const initialState: IQuestionsArrayState = {
   questions: [],
+  singleQuestion : discussionPrototype
 };
 export const discussionQuestionsSlice = createSlice({
   name: 'discussionQuestionsSlice',
@@ -19,22 +23,20 @@ export const discussionQuestionsSlice = createSlice({
     builder.addCase(
       getDiscussionQuestions.fulfilled,
       (state, action: PayloadAction<IDiscussionGetResponse>) => {
-        // state.questions = action.payload;
         state.questions = action.payload.entities;
-        console.log(action.payload.entities);
       }
     );
-    builder.addCase(getDiscussionQuestions.rejected, (state, action) => {
-      // state.error = true;
-      // state.errorMessage = action.error
-      // console.log(action.error.message);
-    });
-    // getDiscussionQuestions
-    builder.addCase(createDiscussionQuestion.fulfilled, (state, action: PayloadAction<any>) => {
+    builder.addCase(
+      getDiscussionProps.fulfilled,
+      (state, action: PayloadAction<IDiscussionGetResponse>) => {
+        state.questions = action.payload.entities;
+      }
+    );
+    builder.addCase(createDiscussionQuestion.fulfilled, (state, action: PayloadAction<IDiscussion>) => {
       state.questions = [...state.questions, action.payload];
     });
-    builder.addCase(createDiscussionQuestion.rejected, (state, action: PayloadAction<any>) => {
-      // state.errorMessage = action.payload;
+    builder.addCase(getDiscussionDetails.fulfilled, (state, action: PayloadAction<IDiscussion>) => {
+      state.singleQuestion = action.payload
     });
   },
 });

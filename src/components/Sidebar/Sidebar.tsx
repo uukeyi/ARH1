@@ -14,10 +14,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
       navWrapper,
       navLink,
       numberButton,
-      blur,
       active,
       close,
-      linkAcitve,
    } = styles;
    const classList = `${wrapper} ${active}`;
    return (
@@ -28,7 +26,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
             }}
             className={close}
          />
-         <div className={container}>
+         <div data-id = "1" onClick={(e : any) => console.log(e.target.dataset.id)}  className={container}>
             <NavLink
                onClick={() => {
                   setIsOpen(false);
@@ -38,7 +36,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
             >
                <img
                   className={logoImg}
-                  src="https://arh.yamaster.ml/images/arhlogotip02.webp"
+                  src="https://i.ibb.co/db8vJWH/11113.png"
                   alt="logo"
                />
             </NavLink>

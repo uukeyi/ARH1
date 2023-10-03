@@ -24,6 +24,8 @@
 .infoContainer {
   padding: 20px 0px;
   display: flex;
+  width: 80%;
+  margin: 0 auto;
   gap: 30px;
 }
 .mainText {

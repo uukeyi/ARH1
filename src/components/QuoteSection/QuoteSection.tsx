@@ -2,9 +2,10 @@ import React from "react";
 import styles from "./QuoteSection.module.css";
 import quoteSectionLine from "../../assets/icons/quoteSectionLine.webp";
 import QuoteLineBlock from "../QuoteLineBlock/QuoteLineBlock";
-import { ILandingBlockElement } from "../../interfaces/landingPageResponse";
+import { ILandingBlock, ILandingBlockElement, landingBlockPrototype, landingElPrototype } from "../../interfaces/landingPageResponse";
 import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
 import { useAuth } from "../../contexts/AuthContext";
+import { Button } from "@mui/material";
 interface QuoteSectionProps {
    desc: ILandingBlockElement;
    subDesc: ILandingBlockElement;
@@ -15,6 +16,7 @@ interface QuoteSectionProps {
    personName: ILandingBlockElement;
    personImg: ILandingBlockElement;
    personDesc: ILandingBlockElement;
+   block : ILandingBlock
 }
 const QuoteSection: React.FC<QuoteSectionProps> = ({
    desc,
@@ -25,6 +27,7 @@ const QuoteSection: React.FC<QuoteSectionProps> = ({
    bg,
    personName,
    personDesc,
+   block,
    personImg,
 }) => {
    const {
@@ -37,12 +40,25 @@ const QuoteSection: React.FC<QuoteSectionProps> = ({
       cardSubtitle,
       footerLine,
    } = styles;
-   const { setIsOpen, setElSettings } = useAdminModalEdit();
+   const { setIsOpen, setElSettings , setIsOpenBlockEdit , setBlockSettings } = useAdminModalEdit();
    const { isAuthSettings } = useAuth();
    return (
       <div id={quoteSection} style={{ backgroundColor: bg }}>
+          {isAuthSettings.isAdmin ? (
+            <Button
+               onClick={() => {
+                  if (isAuthSettings.isAdmin) {
+                     setIsOpenBlockEdit(true);
+                     setBlockSettings(block);
+                  }
+               }}
+               variant="outlined"
+            >
+               Изменить порядок блока
+            </Button>
+         ) : null}
          <div className="container">
-            <QuoteLineBlock titleBlock={title} title={subtitle} />
+            <QuoteLineBlock titleBlock={title} title={subtitle} desc= {landingElPrototype} block={landingBlockPrototype} />
             <div className={infoContainer}>
                <p
                   data-aos="fade-right"

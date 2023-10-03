@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import styles from "./FacadeDesign.module.css";
-import { ILandingBlockElement } from "../../interfaces/landingPageResponse";
+import { ILandingBlock, ILandingBlockElement } from "../../interfaces/landingPageResponse";
 import { useAuth } from "../../contexts/AuthContext";
 import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
-// import { SwiperSlide, Swiper } from 'swiper/react';
-
+import { Button } from "@mui/material";
 interface FacadeDesignProps {
    titleText: ILandingBlockElement;
    card1: {
@@ -32,6 +31,7 @@ interface FacadeDesignProps {
       title: ILandingBlockElement;
       description: ILandingBlockElement;
    };
+   block : ILandingBlock
 }
 
 const FacadeDesign: React.FC<FacadeDesignProps> = ({
@@ -41,6 +41,7 @@ const FacadeDesign: React.FC<FacadeDesignProps> = ({
    card3,
    card4,
    card5,
+   block
 }) => {
    const {
       facadeDesign,
@@ -53,13 +54,26 @@ const FacadeDesign: React.FC<FacadeDesignProps> = ({
    } = styles;
    const [activeIndex, setActiveIndex] = useState<number>(1);
    const { isAuthSettings } = useAuth();
-   const { setIsOpen, setElSettings } = useAdminModalEdit();
+   const { setIsOpen, setElSettings , setBlockSettings , setIsOpenBlockEdit } = useAdminModalEdit();
    const handleNavHover = (index: number) => {
       setActiveIndex(index);
    };
    const data = [card1, card2, card3, card4, card5];
    return (
       <section id={facadeDesign}>
+          {isAuthSettings.isAdmin ? (
+            <Button
+               onClick={() => {
+                  if (isAuthSettings.isAdmin) {
+                     setIsOpenBlockEdit(true);
+                     setBlockSettings(block);
+                  }
+               }}
+               variant="outlined"
+            >
+               Изменить порядок блока
+            </Button>
+         ) : null}
          <p
             onClick={() => {
                if (isAuthSettings.isAdmin) {

@@ -40,7 +40,6 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
   } = useForm<formValues>();
   const onSubmit: SubmitHandler<any> = (data) => {
     if (data.query !== null || sortBS !== null || sortCC !== null) setCurPage(1);
-
     const arr = [data, curPage, sortBS, sortCC];
     dispatch(
       getDiscussionProps({
@@ -57,8 +56,7 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
   useEffect(() => {
     if (error) {
       alert('Возникла ошибка получения данных');
-      // navigate('/');
-      console.log(error);
+      navigate('/');
     }
   }, [error]);
   return (
@@ -290,7 +288,7 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
                   //   className={classes.btnAddCategory}
                   variant="contained"
                   onClick={() => {
-                    navigate(`/discussionDetails/${index}`);
+                    navigate(`/discussionDetails/${post.id}`);
                   }}
                 >
                   Подробнее

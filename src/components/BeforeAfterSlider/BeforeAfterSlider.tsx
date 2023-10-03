@@ -5,8 +5,8 @@ import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
 import { ILandingBlockElement } from "../../interfaces/landingPageResponse";
 
 interface BeforeAfterSliderI {
-   beforeImg: ILandingBlockElement;
-   afterImg: ILandingBlockElement;
+   beforeImgEl: ILandingBlockElement;
+   afterImageEl: ILandingBlockElement;
    customClassName?: string;
    isText?: boolean;
    title?: ILandingBlockElement;
@@ -14,8 +14,8 @@ interface BeforeAfterSliderI {
    aosAnimation?: string;
 }
 const BeforeAfterSlider: React.FC<BeforeAfterSliderI> = ({
-   beforeImg,
-   afterImg,
+   beforeImgEl,
+   afterImageEl,
    customClassName,
    isText,
    title,
@@ -35,6 +35,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderI> = ({
       sliderTitle,
       textSliderContainer,
       textContainer,
+      sliderContainerWithDesc
    } = styles;
    const [perc, setPerc] = useState<string>("50");
    const { isAuthSettings } = useAuth();
@@ -42,31 +43,31 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderI> = ({
    return isText ? (
       <div className={textSliderContainer}>
          <div
-            className={`${sliderContainer} ${customClassName}`}
+            className={`${sliderContainer} ${customClassName} ${sliderContainerWithDesc}`}
             data-aos={aosAnimation}
             data-aos-duration="1500"
          >
             <div className={imageContainer}>
                <img
-                  src={beforeImg.value}
+                  src={beforeImgEl.value}
                   alt="img"
                   className={`${beforeImage} ${sliderImage}`}
                   style={{ width: `${perc}%` }}
-                  onClick={() => {
+                  onClick={(e) => {
                      if (isAuthSettings.isAdmin) {
                         setIsOpen(true);
-                        setElSettings(beforeImage);
+                        setElSettings(beforeImgEl);
                      }
                   }}
                />
                <img
-                  src={afterImg.value}
+                  src={afterImageEl.value}
                   alt="img"
                   className={`${afterImage} ${sliderImage}`}
                   onClick={() => {
                      if (isAuthSettings.isAdmin) {
                         setIsOpen(true);
-                        setElSettings(afterImage);
+                        setElSettings(afterImageEl);
                      }
                   }}
                />
@@ -140,28 +141,27 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderI> = ({
       >
          <div className={imageContainer}>
             <img
-               src={beforeImg.value}
+               src={beforeImgEl.value}
                alt="img"
                className={`${beforeImage} ${sliderImage}`}
                style={{ width: `${perc}%` }}
                onClick={(e) => {
                   e.stopPropagation();
-                  console.log("asdasd");
                   if (isAuthSettings.isAdmin) {
                      setIsOpen(true);
-                     setElSettings(beforeImg);
+                     setElSettings(beforeImgEl);
                   }
                }}
             />
             <img
-               src={afterImg.value}
+               src={afterImageEl.value}
                alt="img"
                onClick={(e) => {
                   e.stopPropagation();
 
                   if (isAuthSettings.isAdmin) {
                      setIsOpen(true);
-                     setElSettings(afterImg);
+                     setElSettings(afterImageEl);
                   }
                }}
                className={`${afterImage} ${sliderImage}`}
@@ -204,17 +204,3 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderI> = ({
 };
 
 export default BeforeAfterSlider;
-
-// import React from 'react';
-
-// interface BeforeAfterSliderProps {
-
-// }
-
-// const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = () => (
-//   <div>
-
-//   </div>
-// );
-
-// export default BeforeAfterSlider;

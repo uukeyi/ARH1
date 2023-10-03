@@ -5,10 +5,10 @@ import { EffectFade } from "swiper";
 import { Autoplay } from "swiper";
 import { Pagination } from "swiper";
 import styles from "./ReviewsSection.module.css";
-import { ILandingBlockElement } from "../../interfaces/landingPageResponse";
+import { ILandingBlock, ILandingBlockElement } from "../../interfaces/landingPageResponse";
 import { useAuth } from "../../contexts/AuthContext";
 import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
-
+import { Button } from "@mui/material";
 interface ReviewsSectionProps {
    mainTitle: ILandingBlockElement;
    subtitle: ILandingBlockElement;
@@ -31,6 +31,7 @@ interface ReviewsSectionProps {
       description: ILandingBlockElement;
       img: ILandingBlockElement;
    };
+   block : ILandingBlock
 }
 
 const ReviewsSection: React.FC<ReviewsSectionProps> = ({
@@ -40,6 +41,7 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = ({
    slide1,
    slide2,
    slide3,
+   block
 }) => {
    const {
       reviewsSection,
@@ -55,42 +57,28 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = ({
       personDescription,
       swiperPagination,
    } = styles;
-   //  const [reviews, setReviews] = useState<IReview[]>([
-   //     {
-   //        description:
-   //           "Добрый день! Очень хотелось оставить отзыв о работе с архитектурным бюро АРХ1! Я очень доволен Вашей работой. Мы примерно пол года мучались с этим дизайном до обращения к Вам, и как же быстро и красиво мы вместе все решили. Мы кстати 2 раза оплачивали дизайн нашего дома в других компаниях, но так и не получили решение, которое нам на 100% нравится. Команде дизайнеров под руководством Александра большое СПАСИБО! Мы строим загородный дом для постоянного проживания нашей семьи в пос. Песочный Курортного р-на и на момент когда нужно было выходить на отделку фасада возникли некоторые сложности. Первое: был конец лета, второе: бюджет был ограничен и было очень размытое понимание того, какой фасад в итоге хочется увидеть. Через несколько дней после встречи на объекте ребята прислали несколько визуализаций, которые нам очень понравились и стало понятно в каком направлении двигаться. Хочется отметить, что дизайнеры сразу поняли наши предпочтения и смогли в кратчайшие сроки дать решения, после чего работать было уже проще. Мы остались очень довольны работой компании АРХ1 под руководством Александра и готовы рекомендовать ее друзьям и знакомым))!",
-   //        name: "Антон Рябцев",
-   //        personDescription:
-   //           "Директор сети магазинов и шоу-румов 'Готовим на огне', Санкт-Петербург.",
-   //        img: "https://i.ibb.co/rGs9rtM/e52uyvt-1s.webp",
-   //     },
-   //     {
-   //        description:
-   //           "Воспользовался услугами Александра и его команды при решении проблемы по разработке рабочего проекта отделки фасада загородного дома вол Всеволожском районе Ленобласти. Дом большой, двухэтажный, достаточно сложной конфигурации и архитектуры. Несмотря на это команда профессиональных архитекторов и дизайнеров под руководством Александра великолепно справилась с поставленной задачей. Проект был завершен в кратчайшие сроки и на должном уровне. В настоящее время полным ходом идут работы по отделке фасада, при этом разработчиками проекта осуществляется авторский надзор за всеми производимыми работами. За все это огромное спасибо архитектурному бюро АРХ1 и его руководителю! С уважением, Дергачев Олег Васильевич, дер. Кирполье, Всеволожский район, Ленинградской области",
-   //        name: "Дергачев Олег Васильевич",
-   //        personDescription: "Директор ТЦ 'Звёздный', Санкт-Петербург.",
-   //        img: "https://i.ibb.co/d6HK22S/d806b062c31db8c7cd79.webp",
-   //     },
-   //     {
-   //        description:
-   //           "На волне патриотических настроений решили заняться непрофильным для нас делом - построить качественный досугово-развлекательный туристический центр 'Открытые Кижи' в Карелии. Для начала нужен проект и я нашёл в интернете компанию 'Архитектура АРХ1'. Встретились с ребятами, всё обсудили, вроде устраивает. Но как обычно захотелось сравнить, найти альтернативу. Обратились к известному в узких кругах архитектурному бюро (иностранная компания, московское представительство), вроде тоже всё устроило, решили остановиться на нём. Сроки первого этапа оказались нарушены вдвое и выдали откровенную халтуру. Тогда мы вновь вернулись к 'Архитектуре', я позвонил Александру и предложил возобновить переговоры. Ещё раз всё обсудили, подписали контракт. Получили проект вовремя и результат превзошёл наши ожидания. Рады, что воспользовались услугами компании 'Архитектура', спасибо огромное Александру и его команде! Рекомендуем к сотрудничеству всем ) И сами ещё будем обращаться... Председатель совета директоров ООО 'Группа Компаний ТрансБалт' Иванов Сергей.",
-   //        name: "Иванов Сергей",
-   //        personDescription:
-   //           "Председатель совета директоров ООО 'Группа Компаний ТрансБалт'",
-   //        img: "https://i.ibb.co/rMHJyTZ/51.webp",
-   //     },
-   //  ]);
+
    const {isAuthSettings}  = useAuth()
-   const {setIsOpen , setElSettings} = useAdminModalEdit()
+   const { setIsOpen, setElSettings , setIsOpenBlockEdit , setBlockSettings } = useAdminModalEdit()
    const data = [slide1, slide2, slide3];
    return (
       <section id={reviewsSection}>
+         {isAuthSettings.isAdmin ? (
+            <Button
+               onClick={() => {
+                  if (isAuthSettings.isAdmin) {
+                     setIsOpenBlockEdit(true);
+                     setBlockSettings(block);
+                  }
+               }}
+               variant="outlined"
+            >
+               Изменить порядок блока
+            </Button>
+         ) : null}
          <div className="container">
             <p
-               data-typeId={mainTitle.typeId}
-               data-orderIndex={mainTitle.orderIndex}
-               data-blockId={mainTitle.blockId}
-               data-id={mainTitle.id}
+         
                data-aos="fade-right"
                data-aos-duration="1500"
                className={title}
@@ -102,7 +90,6 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = ({
              }}
             >
                {mainTitle.value}
-               {/* ОТЗЫВЫ О НАШЕЙ РАБОТЕ */}
             </p>
             <p
                data-aos="fade-right"
@@ -110,10 +97,7 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                className={description}
             >
                <span
-                  data-typeId={subtitle.typeId}
-                  data-orderIndex={subtitle.orderIndex}
-                  data-blockId={subtitle.blockId}
-                  data-id={subtitle.id}
+   
                   onClick={() => {
                     if (isAuthSettings.isAdmin) {
                        setIsOpen(true);
@@ -123,12 +107,8 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                >
                   {subtitle.value}
                </span>
-               {/* Реальные отзывы о нас в социальных сетях. <br /> */}
                <span
-                  data-typeId={subtitleDesc.typeId}
-                  data-orderIndex={subtitleDesc.orderIndex}
-                  data-blockId={subtitleDesc.blockId}
-                  data-id={subtitleDesc.id}
+   
                   onClick={() => {
                     if (isAuthSettings.isAdmin) {
                        setIsOpen(true);
@@ -138,7 +118,6 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                >
                   {subtitleDesc.value}
                </span>
-               {/* Нам важно получать обратную связь от наших клиентов. */}
             </p>
             <div
                data-aos="fade-left"
