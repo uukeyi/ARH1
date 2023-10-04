@@ -85,7 +85,7 @@ const CheapPriceSection: React.FC<CheapPriceSectionProps> = ({
                }}
                variant="outlined"
             >
-               Изменить порядок блока
+               Изменить блок
             </Button>
          ) : null}
          <div data-aos="zoom-in" data-aos-duration="1000" className="container">

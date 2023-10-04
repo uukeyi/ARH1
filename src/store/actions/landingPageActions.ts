@@ -159,8 +159,10 @@ export const updateBlock = createAsyncThunk<
          },
       });
       params.setIsOpen(false);
+      console.log(response.data)
       return response.data;
    } catch (error: any) {
+      console.log(error)
       params.setError(true);
 
       return rejectWithValue(error.message);

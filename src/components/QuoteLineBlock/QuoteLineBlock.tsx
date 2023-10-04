@@ -41,7 +41,7 @@ const QuoteLineBlock: React.FC<QuoteLineBlockProps> = ({
                }}
                variant="outlined"
             >
-               Изменить порядок блока
+               Изменить блок
             </Button>
          ) : null}
          <hr className={line} />

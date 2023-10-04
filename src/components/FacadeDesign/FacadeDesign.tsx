@@ -71,7 +71,7 @@ const FacadeDesign: React.FC<FacadeDesignProps> = ({
                }}
                variant="outlined"
             >
-               Изменить порядок блока
+               Изменить блок
             </Button>
          ) : null}
          <p

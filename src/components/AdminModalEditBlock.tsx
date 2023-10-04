@@ -21,9 +21,10 @@ const style = {
 };
 
 const AdminModalEditBlock: React.FC = () => {
-    const { blockSettings, isOpenBlockEdit, setIsOpenBlockEdit } =
-    useAdminModalEdit();
-   const [inputValue, setInputValue] = useState('');
+   const { blockSettings, isOpenBlockEdit, setIsOpenBlockEdit } =
+      useAdminModalEdit();
+   const [inputValue, setInputValue] = useState("");
+   // console.log(blockSettings)
    const [error, setError] = useState(false);
    const dispatch = useAppDispatch();
 
@@ -44,11 +45,13 @@ const AdminModalEditBlock: React.FC = () => {
          >
             <Box sx={style}>
                <Typography>Изменяем блок "{blockSettings.name}"</Typography>
-               <Typography>Значение порядка "{blockSettings.orderIndex}"</Typography>
+               <Typography>
+                  Значение порядка "{blockSettings.orderIndex}"
+               </Typography>
 
                <TextField
                   sx={{ width: "100%" }}
-                  placeholder="Введите значение"
+                  placeholder="Введите значение порядка"
                   variant="outlined"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
@@ -73,15 +76,40 @@ const AdminModalEditBlock: React.FC = () => {
                                  isMain: blockSettings.isMain,
                                  name: blockSettings.name,
                                  page: blockSettings.page,
-                                 setIsOpen : setIsOpenBlockEdit
+                                 setIsOpen: setIsOpenBlockEdit,
                               })
                            );
-                           //    console.log("hello");
                         }
                      }
                   }}
                >
-                  Подтвердить
+                  Установить значение
+               </Button>
+
+               <Button
+                  sx={{ display: "block", margin: "30px auto" }}
+                  variant="outlined"
+                  onClick={(e) => {
+                     if (!blockSettings.id) {
+                        alert("Произошла ошибка получения данных");
+                     } else {
+                        dispatch(
+                           updateBlock({
+                              setError: setError,
+                              idBlock: blockSettings.id,
+                              orderIndex: blockSettings.orderIndex,
+                              isDeleted: blockSettings.isDeleted,
+                              isVisible: !blockSettings.isVisible,
+                              isMain: blockSettings.isMain,
+                              name: blockSettings.name,
+                              page: blockSettings.page,
+                              setIsOpen: setIsOpenBlockEdit,
+                           })
+                        );
+                     }
+                  }}
+               >
+                  Скрыть / Показать 
                </Button>
             </Box>
          </Modal>

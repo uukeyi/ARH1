@@ -42,7 +42,7 @@ const CostEquivalentSection: React.FC<CostEquivalentSectionProps> = ({
                }}
                variant="outlined"
             >
-               Изменить порядок блока
+               Изменить блок
             </Button>
          ) : null}
          <div className="container">

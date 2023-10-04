@@ -46,9 +46,10 @@ const OurServicesSection: React.FC<OurServicesSectionProps> = ({
                }}
                variant="outlined"
             >
-               Изменить порядок блока
+               Изменить блок
             </Button>
          ) : null}
+
          <div id={ourServices}>
             <div className="container">
                <h1

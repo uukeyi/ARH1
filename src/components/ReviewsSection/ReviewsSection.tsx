@@ -73,7 +73,7 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                }}
                variant="outlined"
             >
-               Изменить порядок блока
+               Изменить блок
             </Button>
          ) : null}
          <div className="container">

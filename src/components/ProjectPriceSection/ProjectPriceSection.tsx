@@ -92,7 +92,7 @@ const ProjectPriceSection: React.FC<ProjectPriceSectionProps> = ({block}) => {
                }}
                variant="outlined"
             >
-               Изменить порядок блока
+               Изменить блок
             </Button>
          ) : null}
          <div className="container">

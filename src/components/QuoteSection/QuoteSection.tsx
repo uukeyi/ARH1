@@ -54,7 +54,7 @@ const QuoteSection: React.FC<QuoteSectionProps> = ({
                }}
                variant="outlined"
             >
-               Изменить порядок блока
+               Изменить блок
             </Button>
          ) : null}
          <div className="container">

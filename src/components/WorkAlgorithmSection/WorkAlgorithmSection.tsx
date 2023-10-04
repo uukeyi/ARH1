@@ -141,7 +141,7 @@ const WorkAlgorithmSection: React.FC<WorkAlgorithmSectionProps> = ({
                }}
                variant="outlined"
             >
-               Изменить порядок блока
+               Изменить блок
             </Button>
          ) : null}
          <div data-aos="zoom-in" data-aos-duration="1000" className="container">

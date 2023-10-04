@@ -68,7 +68,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({
                }}
                variant="outlined"
             >
-               Изменить порядок блока
+               Изменить блок
             </Button>
          ) : null}
          <section

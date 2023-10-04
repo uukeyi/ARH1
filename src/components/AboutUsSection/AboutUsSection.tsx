@@ -68,7 +68,7 @@ const AboutUsSection: React.FC<AboutUsSectionProps> = ({
                }}
                variant="outlined"
             >
-               Изменить порядок блока
+               Изменить блок
             </Button>
          ) : null}
          <div className="container">

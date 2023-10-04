@@ -62,7 +62,7 @@ const ApplicationForArch: React.FC<ApplicationForArchProps> = ({
                }}
                variant="outlined"
             >
-               Изменить порядок блока
+               Изменить блок
             </Button>
          ) : null}
          <div className="container">

@@ -100,7 +100,7 @@ const SwiperSection: React.FC<SwiperSectionProps> = ({
                }}
                variant="outlined"
             >
-               Изменить порядок блока
+               Изменить блок
             </Button>
          ) : null}
          <div

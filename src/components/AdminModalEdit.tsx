@@ -77,8 +77,34 @@ const AdminModalEdit: React.FC = () => {
                      }
                   }}
                >
-                  Подтвердить
+                  Изменить значение
                </Button>
+               {/* <Button
+                  sx={{ display: "block", margin: "30px auto" }}
+                  variant="outlined"
+                  onClick={(e) => {
+                     if (!elSettings.id) {
+                        alert("Произошла ошибка получения данных");
+                     } else {
+                      
+                           dispatch(
+                              updateElement({
+                                 elementId: elSettings.id,
+                                 setError: setError,
+                                 value: inputValue,
+                                 blockId: elSettings.blockId,
+                                 typeId: elSettings.typeId,
+                                 orderIndex: elSettings.orderIndex,
+                                 aosAnimation: elSettings.aosAnimation,
+                                 setIsOpen: setIsOpen,
+                              })
+                           )
+                        
+                     }
+                  }}
+               >
+                Скрыть / Показать
+               </Button> */}
             </Box>
          </Modal>
       </div>

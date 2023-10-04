@@ -69,7 +69,7 @@ const DiscussionDetailsPage: React.FC = () => {
    }, [errorFetchComments]);
    useEffect(() => {
       if (errorDeleting) {
-         alert("Не получилось удалить коментарий");
+         alert("Нельзя удалить комментарий с ответами");
         //  navigate("/");
       }
    }, [errorDeleting]);
@@ -331,7 +331,7 @@ const DiscussionDetailsPage: React.FC = () => {
                                                       xs: "11px",
                                                    },
                                                 }}
-                                                data-id={comment.id}
+                                                data-id={replyComment.id}
                                                 onClick={(e: any) => {
                                                    dispatch(
                                                       deleteComment({

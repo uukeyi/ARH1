@@ -26,7 +26,7 @@ import FaqSection from "../components/Faq/FaqSection";
 
 const MainPage: React.FC = () => {
    const dispatch = useAppDispatch();
-   const { setIsAuth } = useAuth();
+   const { setIsAuth , isAuthSettings } = useAuth();
    const [isError, setIsError] = useState<boolean>(false);
    const [isOpen, setIsOpen] = useState<boolean>(false);
    const [errorLandingBlocks, setErrorLandingBlocks] = useState(false);
@@ -66,6 +66,9 @@ const MainPage: React.FC = () => {
          <AdminModalEdit />
          <AdminModalEditBlock />
          {landingBlocks.elements.map((el, index) => {
+            if (!el.isVisible && !isAuthSettings.isAdmin) {
+               return null;
+            }
             switch (el.name) {
                case "ПРОЕКТ ДИЗАЙНА ФАСАДОВ ДОМА ЗА 7 ДНЕЙ":
                   return (
