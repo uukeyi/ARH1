@@ -3,10 +3,10 @@ import styles from "./SwiperSection.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
 import "swiper/css";
-import { ILandingBlockElement } from "../../interfaces/landingPageResponse";
+import { ILandingBlock, ILandingBlockElement } from "../../interfaces/landingPageResponse";
 import { useAuth } from "../../contexts/AuthContext";
 import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
-
+import { Button } from "@mui/material";
 type cardType = {
    title: ILandingBlockElement;
    subtitle: ILandingBlockElement | false;
@@ -22,6 +22,7 @@ interface SwiperSectionProps {
    backlight: cardType;
    attached: cardType;
    redevelopment: cardType;
+   block : ILandingBlock
 }
 
 const SwiperSection: React.FC<SwiperSectionProps> = ({
@@ -32,6 +33,7 @@ const SwiperSection: React.FC<SwiperSectionProps> = ({
    designGroup,
    redevelopment,
    titleText,
+   block
 }) => {
    const {
       swiperSection,
@@ -49,52 +51,6 @@ const SwiperSection: React.FC<SwiperSectionProps> = ({
       hiddenContainer,
       sliderWrapper,
    } = styles;
-   // const [data, setData] = useState<slideType[]>([
-   //    {
-   //       id: 1,
-   //       title: "МЕНЯЕМ КОНЦЕПЦИЮ",
-   //       description:
-   //          "При необходимости меняем концепцию дома без капитальных затрат, в том числе конструкцию кровли на более практичную и эстетичную, увеличиваем проёмы, подбираем цвет и материал кровли, водосточной системы и карнизной подшивки. Увязываем планировку участка с входными группами и заездом в гараж.",
-   //       subtitle: "КРОВЛЮ, ПРОЕМЫ, ФАСАДЫ",
-   //       img: "https://i.ibb.co/Vq4y1ST/change-Concept.webp",
-   //    },
-   //    {
-   //       id: 2,
-   //       title: "ДЕЛАЕМ ДИЗАЙН ВХОДНОЙ ГРУППЫ",
-   //       description:
-   //          "Продумываем и разрабатываем дизайн входной группы дома, с учётом общей архитектуры фасадов.",
-   //       img: "https://i.ibb.co/9N5bgK9/design-Doors.webp",
-   //    },
-   //    {
-   //       id: 3,
-   //       title: "ПРОРАБАТЫВАЕМ ДЕТАЛИ",
-   //       description:
-   //          "Моделируем внешний вид дома в деталях, продумываем архитектурные элементы, учитываем конструктивные особенности. Реальный материал для 3D визуализации. Составляем подробную спецификацию отделочного материала с артикулами и ценами.",
-   //       img: "https://i.ibb.co/whJhjPt/working-On-Details.webp",
-   //    },
-   //    {
-   //       id: 4,
-   //       title: "НОЧНАЯ ПОДСВЕТКА ФАСАДА",
-   //       description:
-   //          "Разрабатываем проект подсветки фасадов функциональной, декоративной и праздничной. Подбираем осветительные приборы.",
-   //       img: "https://i.ibb.co/4Sff5hp/night-Lighting.webp",
-   //    },
-   //    {
-   //       id: 5,
-   //       title: "ПРИСТРАИВАЕМ ПОМЕЩЕНИЯ",
-   //       description:
-   //          "Пристраиваем тамбуры, проектируем террасы, продумываем ограждение и планировку пространства, а также новые и модернизацию существующих коммуникаций.",
-   //       subtitle: "ТЕРРАСУ, БАЛКОНЫ, ЭТАЖ",
-   //       img: "https://i.ibb.co/cC4k3xR/attach-Room.webp",
-   //    },
-   //    {
-   //       id: 6,
-   //       title: "ДЕЛАЕМ ПЕРЕПЛАНИРОВКУ",
-   //       description:
-   //          "Продумываем внутреннюю планировку дома, увязываем со сторонами света и внешними элементами: террасой, гаражом, навесом.",
-   //       img: "https://i.ibb.co/jLXyYZ8/doLayout.webp",
-   //    },
-   // ]);
    const data = [
       {
          id: 1,
@@ -131,9 +87,22 @@ const SwiperSection: React.FC<SwiperSectionProps> = ({
       }
    };
    const { isAuthSettings } = useAuth();
-   const { setIsOpen, setElSettings } = useAdminModalEdit();
+   const { setIsOpen, setElSettings  ,setIsOpenBlockEdit , setBlockSettings } = useAdminModalEdit();
    return (
       <section id={swiperSection}>
+          {isAuthSettings.isAdmin ? (
+            <Button
+               onClick={() => {
+                  if (isAuthSettings.isAdmin) {
+                     setIsOpenBlockEdit(true);
+                     setBlockSettings(block);
+                  }
+               }}
+               variant="outlined"
+            >
+               Изменить порядок блока
+            </Button>
+         ) : null}
          <div
             data-aos="zoom-in"
             data-aos-duration="1000"

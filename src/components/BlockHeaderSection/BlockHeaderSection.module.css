@@ -20,7 +20,11 @@
 .feedbackContainer {
    width: 100%;
    display: flex;
+   align-items: center;
    gap: 20px;
+}
+.phoneContainer {
+   width: 310px !important;
 }
 .optionPhone {
    position: absolute !important;

@@ -72,7 +72,9 @@ export const deleteComment = createAsyncThunk<
       await $host<void>({
          method: "DELETE",
          url: `/api/Discussions/comments/${config.commentId}`,
+
       });
+
       config.setSuccess(true);
    } catch (error: any) {
       config.setError(true);

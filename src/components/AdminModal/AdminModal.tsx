@@ -10,7 +10,7 @@ import {
   createElement,
   getLandingPageBlocks,
 } from '../../store/actions/landingPageActions';
-import { ILandingBlock } from '../../interfaces/landingPageResponse';
+import { ILandingBlock, landingBlockPrototype } from '../../interfaces/landingPageResponse';
 interface AdminModalProps {
   open: boolean;
   setOpen: (value: boolean | ((prevVar: boolean) => boolean)) => void;
@@ -35,15 +35,7 @@ const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, isOurProjects })
     value: false,
     type: 'title',
   });
-  const [block, setBlock] = useState<ILandingBlock>({
-    id: 0,
-    name: '',
-    orderIndex: 0,
-    isVisible: true,
-    isDeleted: true,
-    page: '',
-    elements: [],
-  });
+  const [block, setBlock] = useState<ILandingBlock>(landingBlockPrototype);
   const [inputValue, setInputValue] = useState('');
   const [elements, setElements] = useState<IElement[]>([]);
   const [edit, setIsEdit] = useState(false);

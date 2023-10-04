@@ -8,7 +8,11 @@ import {
   updateBlock,
   updateElement,
 } from '../actions/landingPageActions';
-import { ILandingBlock, ILandingBlockElement } from '../../interfaces/landingPageResponse';
+import {
+  ILandingBlock,
+  ILandingBlockElement,
+  landingBlockPrototype,
+} from '../../interfaces/landingPageResponse';
 
 interface IDataState {
   elements: ILandingBlock[];
@@ -17,15 +21,7 @@ interface IDataState {
 
 const initialState: IDataState = {
   elements: [],
-  singleBlock: {
-    id: 0,
-    name: '',
-    orderIndex: 0,
-    isVisible: false,
-    isDeleted: false,
-    page: '',
-    elements: [],
-  },
+  singleBlock: landingBlockPrototype,
 };
 
 export const landingPageSlice = createSlice({

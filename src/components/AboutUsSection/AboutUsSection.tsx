@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./AboutUsSection.module.css";
 import quoteSectionLine from "../../assets/icons/quoteSectionLine.webp";
-import { ILandingBlockElement } from "../../interfaces/landingPageResponse";
+import { ILandingBlock, ILandingBlockElement } from "../../interfaces/landingPageResponse";
 import { useAuth } from "../../contexts/AuthContext";
 import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
-
+import { Button } from "@mui/material";
 interface AboutUsSectionProps {
    mainTitle: ILandingBlockElement;
    titleConfig: ILandingBlockElement;
@@ -27,6 +27,7 @@ interface AboutUsSectionProps {
       title: ILandingBlockElement;
       subtitle: ILandingBlockElement;
    };
+   block : ILandingBlock
 }
 
 const AboutUsSection: React.FC<AboutUsSectionProps> = ({
@@ -39,6 +40,7 @@ const AboutUsSection: React.FC<AboutUsSectionProps> = ({
    card2,
    card3,
    card4,
+   block
 }) => {
    const {
       aboutUsSection,
@@ -53,9 +55,22 @@ const AboutUsSection: React.FC<AboutUsSectionProps> = ({
    } = styles;
    const data = [card1, card2, card3, card4];
    const { isAuthSettings } = useAuth();
-   const { setIsOpen, setElSettings } = useAdminModalEdit();
+   const { setIsOpen, setElSettings , setIsOpenBlockEdit , setBlockSettings } = useAdminModalEdit();
    return (
       <section id={aboutUsSection}>
+          {isAuthSettings.isAdmin ? (
+            <Button
+               onClick={() => {
+                  if (isAuthSettings.isAdmin) {
+                     setIsOpenBlockEdit(true);
+                     setBlockSettings(block);
+                  }
+               }}
+               variant="outlined"
+            >
+               Изменить порядок блока
+            </Button>
+         ) : null}
          <div className="container">
             <p
        

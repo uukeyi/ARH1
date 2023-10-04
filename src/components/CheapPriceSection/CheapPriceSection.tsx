@@ -6,9 +6,10 @@ import { Autoplay } from "swiper";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import styles from "./CheapPriceSection.module.css";
-import { ILandingBlockElement } from "../../interfaces/landingPageResponse";
+import { ILandingBlock, ILandingBlockElement } from "../../interfaces/landingPageResponse";
 import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext"
+import { Button } from "@mui/material";
 interface CheapPriceSectionProps {
    titleConfig: ILandingBlockElement;
    firstSlide: {
@@ -38,6 +39,7 @@ interface CheapPriceSectionProps {
    };
    imgConfig: ILandingBlockElement;
    subtitleConfig: ILandingBlockElement;
+   block : ILandingBlock
 }
 
 const CheapPriceSection: React.FC<CheapPriceSectionProps> = ({
@@ -49,6 +51,7 @@ const CheapPriceSection: React.FC<CheapPriceSectionProps> = ({
    fourthSlide,
    imgConfig,
    subtitleConfig,
+   block
 }) => {
    const {
       cheapPriceSection,
@@ -69,9 +72,22 @@ const CheapPriceSection: React.FC<CheapPriceSectionProps> = ({
       fifthSlide,
    ];
    const {isAuthSettings} = useAuth()
-   const {setIsOpen , setElSettings} = useAdminModalEdit()
+   const {setIsOpen , setElSettings , setIsOpenBlockEdit , setBlockSettings} = useAdminModalEdit()
    return (
       <section id={cheapPriceSection}>
+          {isAuthSettings.isAdmin ? (
+            <Button
+               onClick={() => {
+                  if (isAuthSettings.isAdmin) {
+                     setIsOpenBlockEdit(true);
+                     setBlockSettings(block);
+                  }
+               }}
+               variant="outlined"
+            >
+               Изменить порядок блока
+            </Button>
+         ) : null}
          <div data-aos="zoom-in" data-aos-duration="1000" className="container">
             <p
               

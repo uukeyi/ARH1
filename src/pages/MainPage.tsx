@@ -21,6 +21,8 @@ import UnauthorizedPopup from '../components/UnauthorizedPopup/UnauthorizedPopup
 import { getLandingPageBlocks } from '../store/actions/landingPageActions';
 import AdminModalEdit from '../components/AdminModalEdit';
 import FacadeDesignWorksSection from '../components/FacadeDesignWorks/FacadeDesignWorksSection';
+import AdminModalEditBlock from '../components/AdminModalEditBlock';
+import FaqSection from '../components/Faq/FaqSection';
 
 const MainPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -40,38 +42,39 @@ const MainPage: React.FC = () => {
       setIsOpen(true);
     } else {
       dispatch(checkAuth({ setError: setIsError, setIsAuth: setIsAuth }));
+      dispatch(
+        getLandingPageBlocks({
+          showInvisible: true,
+          setError: setErrorLandingBlocks,
+        })
+      );
     }
-  }, []);
-  useEffect(() => {
-    dispatch(checkAuth({ setError: setIsError, setIsAuth: setIsAuth }));
-    dispatch(
-      getLandingPageBlocks({
-        showInvisible: true,
-        setError: setErrorLandingBlocks,
-      })
-    );
   }, []);
   if (errorLandingBlocks) {
     alert('Не получилось загрузить сайт');
   }
-  //  console.log(isAuthSettings.isAuth);
-  //  console.log(store)
-  //  useEffect(() => {
-  //     if (isError) {
-  //        alert(store.errorMessage);
-  //     }
-  //  }, [isError]);
-
   return (
     <div>
       <UnauthorizedPopup isOpen={isOpen} setIsOpen={setIsOpen} isTimeout={true} />
       <AdminModalEdit />
-      <HeroSection />
+      <AdminModalEditBlock />
       {landingBlocks.elements.map((el, index) => {
         switch (el.name) {
+          case 'ПРОЕКТ ДИЗАЙНА ФАСАДОВ ДОМА ЗА 7 ДНЕЙ':
+            return (
+              <HeroSection
+                titleText={el.elements[0]}
+                subtitle={el.elements[1]}
+                desc1={el.elements[2]}
+                desc2={el.elements[3]}
+                desc3={el.elements[4]}
+                desc4={el.elements[5]}
+              />
+            );
           case 'НАШИ УСЛУГИ':
             return (
               <OurServicesSection
+                block={el}
                 titleText={el.elements[0]}
                 firstCard={{
                   img: el.elements[1],
@@ -96,6 +99,7 @@ const MainPage: React.FC = () => {
           case 'ДИЗАЙН ФАСАДОВ - НАШИ РАБОТЫ':
             return (
               <FacadeDesignWorksSection
+                block={el}
                 elWithNoDesc={el.elements.slice(0, 11)}
                 elWithDesc={el.elements.slice(12, 32)}
                 extraElWithDesc={el.elements.slice(32, 40)}
@@ -105,6 +109,7 @@ const MainPage: React.FC = () => {
           case 'ОДИН ПОДРЯДЧИК - ОДНА ОТВЕТСТВЕННОСТЬ.':
             return (
               <QuoteSection
+                block={el}
                 title={el.elements[0]}
                 subtitle={el.elements[1]}
                 desc={el.elements[2]}
@@ -119,6 +124,7 @@ const MainPage: React.FC = () => {
           case 'АЛГОРИТМ РАБОТЫ':
             return (
               <WorkAlgorithmSection
+                block={el}
                 titleText={el.elements[el.elements.length - 1]}
                 subtitleText={el.elements[el.elements.length - 2]}
                 thirdBlockElements={el.elements.slice(30, 44)}
@@ -132,6 +138,7 @@ const MainPage: React.FC = () => {
           case 'ЗАГОЛОВОК БЛОКА':
             return (
               <BlockHeaderSection
+                block={el}
                 elements={el.elements.slice(0, el.elements.length - 1)}
                 titleText={el.elements[el.elements.length - 1]}
               />
@@ -139,6 +146,7 @@ const MainPage: React.FC = () => {
           case 'ЧТО ДЕЛАЕМ В ПРОЕКТЕ ФАСАДОВ':
             return (
               <SwiperSection
+                block={el}
                 titleText={el.elements[el.elements.length - 1]}
                 changeConception={{
                   img: el.elements[0],
@@ -181,6 +189,7 @@ const MainPage: React.FC = () => {
           case 'ПОЧЕМУ СТРОИТЕЛЕЙ МНОГО, А КАЧЕСТВЕННЫХ ДОМОВ МАЛО?':
             return (
               <QuoteSection
+                block={el}
                 title={el.elements[0]}
                 subtitle={el.elements[1]}
                 desc={el.elements[2]}
@@ -195,6 +204,7 @@ const MainPage: React.FC = () => {
           case 'ДИЗАЙН ФАСАДОВ':
             return (
               <FacadeDesign
+                block={el}
                 titleText={el.elements[0]}
                 card1={{
                   img: el.elements[1],
@@ -226,6 +236,7 @@ const MainPage: React.FC = () => {
           case 'ОСТАВЬТЕ ЗАЯВКУ АРХИТЕКТОРУ':
             return (
               <ApplicationForArch
+                block={el}
                 title={el.elements[0]}
                 img={el.elements[1]}
                 subtitle={el.elements[2]}
@@ -241,6 +252,7 @@ const MainPage: React.FC = () => {
           case 'ПОЧЕМУ НИЗКАЯ ЦЕНА?':
             return (
               <CheapPriceSection
+                block={el}
                 titleConfig={el.elements[13]}
                 firstSlide={{
                   title: el.elements[0],
@@ -273,20 +285,19 @@ const MainPage: React.FC = () => {
             );
           case 'СТОИТ ЛИ ОРИЕНТИРОВАТЬСЯ НА САМУЮ НИЗКУЮ ЦЕНУ?':
             return (
-              //                         <QuoteLineBlock
-              //                            titleBlock="ИНТЕРЕСНО"
-              //                            title="Стоит ли ориентироваться на самую низкую цену?"
-              //                            desc="Стоит, но лишь тогда, когда предложения сопоставимы по комплектации и конечному результату, а не отличаются скрытыми доплатами, качеством материалов и уровнем специалистов.
-              // Потому любое предложение нужно подробно анализировать."
-
-              //                         />
-              null
+              <QuoteLineBlock
+                titleBlock={el.elements[0]}
+                title={el.elements[1]}
+                desc={el.elements[2]}
+                block={el}
+              />
             );
           case 'СТОИМОСТЬ ПРОЕКТА':
-            return <ProjectPriceSection />;
+            return <ProjectPriceSection block={el} />;
           case 'ЭКВИВАЛЕНТ СТОИМОСТИ':
             return (
               <CostEquivalentSection
+                block={el}
                 titleConfig={el.elements[0]}
                 imgConfig={el.elements[1]}
                 desc1={el.elements[2]}
@@ -300,6 +311,7 @@ const MainPage: React.FC = () => {
           case 'О НАС':
             return (
               <AboutUsSection
+                block={el}
                 mainTitle={el.elements[0]}
                 titleConfig={el.elements[1]}
                 titleDesc={el.elements[2]}
@@ -323,45 +335,60 @@ const MainPage: React.FC = () => {
                 }}
               />
             );
+          case 'ВОПРОСЫ И ОТВЕТЫ':
+            return (
+              <FaqSection
+                block={el}
+                titleText={el.elements[0]}
+                subtitle1={el.elements[1]}
+                desc1={el.elements[2]}
+                subtitle2={el.elements[3]}
+                desc2={el.elements[4]}
+                desc3={el.elements[5]}
+                desc4={el.elements[6]}
+                subtitle3={el.elements[7]}
+                desc5={el.elements[8]}
+                subtitle4={el.elements[9]}
+                desc6={el.elements[10]}
+                subtitle5={el.elements[11]}
+                desc7={el.elements[12]}
+                subtitle6={el.elements[13]}
+                desc8={el.elements[14]}
+                subtitle7={el.elements[15]}
+                desc9={el.elements[16]}
+                subtitle8={el.elements[17]}
+                desc10={el.elements[18]}
+              />
+            );
           case 'ОТЗЫВЫ О НАШЕЙ РАБОТЕ':
-          // return <ReviewsSection />;
+            return (
+              <ReviewsSection
+                block={el}
+                mainTitle={el.elements[0]}
+                subtitle={el.elements[1]}
+                subtitleDesc={el.elements[2]}
+                slide1={{
+                  name: el.elements[3],
+                  personDescription: el.elements[4],
+                  img: el.elements[5],
+                  description: el.elements[6],
+                }}
+                slide2={{
+                  name: el.elements[7],
+                  personDescription: el.elements[8],
+                  img: el.elements[9],
+                  description: el.elements[10],
+                }}
+                slide3={{
+                  name: el.elements[11],
+                  personDescription: el.elements[12],
+                  img: el.elements[13],
+                  description: el.elements[14],
+                }}
+              />
+            );
         }
       })}
-
-      {/* <OurServicesSection /> */}
-      {/* <FacadeDesignWorksSection /> */}
-      {/* <QuoteSection
-            title="ПРИНЦИП"
-            subtitle="Один подрядчик - одна ответственность."
-            desc="Часто бывает так, что разные этапы выполняют отдельные фирмы, предложившие лучшую цену, в результате заказчик получает комплекс недочётов, за которые никто не отвечает."
-            subDesc="Бывает сложно найти 'крайнего' и каждый переносит ответственность на другого исполнителя. Потому удобно, когда подрядчик один."
-            weight="600"
-            bg="#f0f0f0"
-         /> */}
-      {/* <WorkAlgorithmSection /> */}
-      {/* <BlockHeaderSection /> */}
-      {/* <SwiperSection /> */}
-      {/* <QuoteSection
-            title="ВАЖНО"
-            subtitle="Почему строителей много, а качественных домов мало?"
-            desc="Большое желание сэкономить деньги, искажает рынок, формируя предложение недорогих некачественных домов от разных фирм и строителей под руководством маркетологов и экономистов. Они называют это малобюджетным строительством."
-            subDesc="Когда заказчик соглашается на такое предложение, он стимулирует недобросовестных строителей и ставит себя в невыгодное положение, как в мультфильме: можно сделать из одной шкурки одну, две, три, семь шапок, но вопрос: это именно то, что вы ожидаете?"
-            weight="300"
-            bg="white"
-         /> */}
-      {/* <FacadeDesign /> */}
-      {/* <ApplicationForArch /> */}
-      {/* <CheapPriceSection /> */}
-      {/* <QuoteLineBlock
-            titleBlock="ИНТЕРЕСНО"
-            title="Стоит ли ориентироваться на самую низкую цену?"
-            desc="Стоит, но лишь тогда, когда предложения сопоставимы по комплектации и конечному результату, а не отличаются скрытыми доплатами, качеством материалов и уровнем специалистов.
-Потому любое предложение нужно подробно анализировать."
-         /> */}
-      <ProjectPriceSection />
-      {/* <CostEquivalentSection /> */}
-      {/* <AboutUsSection /> */}
-      {/* <ReviewsSection /> */}
     </div>
   );
 };

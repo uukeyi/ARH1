@@ -42,6 +42,12 @@ interface IDeleteBlock {
 interface IUpdateBlock {
   orderIndex: number | string;
   idBlock: number | string;
+  name: string;
+  isVisible: boolean;
+  isDeleted: boolean;
+  isMain: boolean;
+  page: string;
+  setIsOpen: Function;
   setError: (value: boolean | ((prevVar: boolean) => boolean)) => void;
 }
 interface ICreateElement {
@@ -172,17 +178,22 @@ export const updateBlock = createAsyncThunk<ILandingBlock, IUpdateBlock, { rejec
     try {
       const response = await $host<ILandingBlock>({
         method: 'PUT',
-        url: '/api/LandingBlocks',
+        url: `/api/LandingBlocks/${params.idBlock}`,
         data: {
-          orderIndex: params.orderIndex,
-        },
-        params: {
           id: params.idBlock,
+          orderIndex: params.orderIndex,
+          isVisible: params.isVisible,
+          isMain: params.isMain,
+          isDeleted: params.isDeleted,
+          name: params.name,
+          page: params.page,
         },
       });
+      params.setIsOpen(false);
       return response.data;
     } catch (error: any) {
       params.setError(true);
+
       return rejectWithValue(error.message);
     }
   }

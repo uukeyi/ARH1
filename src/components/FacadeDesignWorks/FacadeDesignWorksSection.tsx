@@ -3,18 +3,20 @@ import { useState } from "react";
 import BeforeAfterSlider from "../BeforeAfterSlider/BeforeAfterSlider";
 import OrangeButton from "../OrangeButton/OrangeButton";
 import {
+   ILandingBlock,
    ILandingBlockElement,
-   landingBlockPrototype,
+   landingElPrototype
 } from "../../interfaces/landingPageResponse";
 import styles from "./FacadeDesignWorksSection.module.css";
 import { useAuth } from "../../contexts/AuthContext";
 import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
-
+import { Button } from "@mui/material";
 interface FacadeDesignWorksSectionProps {
    title: ILandingBlockElement;
    elWithNoDesc: ILandingBlockElement[];
    elWithDesc: ILandingBlockElement[];
    extraElWithDesc: ILandingBlockElement[];
+   block : ILandingBlock
 }
 
 const FacadeDesignWorksSection: React.FC<FacadeDesignWorksSectionProps> = ({
@@ -22,16 +24,17 @@ const FacadeDesignWorksSection: React.FC<FacadeDesignWorksSectionProps> = ({
    elWithDesc,
    elWithNoDesc,
    extraElWithDesc,
+   block
 }) => {
    const [more, setMore] = useState<boolean>(false);
    let indexElWithNoDesc = 0;
    let indexElWithDesc = 0;
-   let beforeImg: ILandingBlockElement = landingBlockPrototype;
-   let afterImg: ILandingBlockElement = landingBlockPrototype;
-   let subtitle: ILandingBlockElement = landingBlockPrototype;
-   let titleText: ILandingBlockElement = landingBlockPrototype;
+   let beforeImg: ILandingBlockElement = landingElPrototype;
+   let afterImg: ILandingBlockElement = landingElPrototype;
+   let subtitle: ILandingBlockElement = landingElPrototype;
+   let titleText: ILandingBlockElement = landingElPrototype;
    const { isAuthSettings } = useAuth();
-   const { setIsOpen, setElSettings } = useAdminModalEdit();
+   const { setIsOpen, setElSettings , setIsOpenBlockEdit , setBlockSettings } = useAdminModalEdit();
    const {
       facadeSection,
       titleClass,
@@ -43,6 +46,19 @@ const FacadeDesignWorksSection: React.FC<FacadeDesignWorksSectionProps> = ({
    } = styles;
    return (
       <section id={facadeSection}>
+          {isAuthSettings.isAdmin ? (
+            <Button
+               onClick={() => {
+                  if (isAuthSettings.isAdmin) {
+                     setIsOpenBlockEdit(true);
+                     setBlockSettings(block);
+                  }
+               }}
+               variant="outlined"
+            >
+               Изменить порядок блока
+            </Button>
+         ) : null}
          <div className="container">
             <h1
                data-aos="fade-right"
@@ -70,8 +86,8 @@ const FacadeDesignWorksSection: React.FC<FacadeDesignWorksSectionProps> = ({
                               aosAnimation={
                                  elWithNoDesc[index - 1].aosAnimation
                               }
-                              beforeImg={elWithNoDesc[index - 1]}
-                              afterImg={el}
+                              beforeImgEl={elWithNoDesc[index - 1]}
+                              afterImageEl={el}
                            />
                         );
                      } else {
@@ -89,8 +105,8 @@ const FacadeDesignWorksSection: React.FC<FacadeDesignWorksSectionProps> = ({
                            <BeforeAfterSlider
                               customClassName={sliderCard}
                               aosAnimation="zoom-in"
-                              beforeImg={beforeImg}
-                              afterImg={afterImg}
+                              beforeImgEl={beforeImg}
+                              afterImageEl={afterImg}
                               isText={true}
                               subtitle={subtitle}
                               title={titleText}
@@ -133,8 +149,8 @@ const FacadeDesignWorksSection: React.FC<FacadeDesignWorksSectionProps> = ({
                               <BeforeAfterSlider
                                  customClassName={sliderCard}
                                  aosAnimation={titleText.aosAnimation}
-                                 beforeImg={beforeImg}
-                                 afterImg={afterImg}
+                                 beforeImgEl={beforeImg}
+                                 afterImageEl={afterImg}
                                  isText={true}
                                  subtitle={subtitle}
                                  title={titleText}

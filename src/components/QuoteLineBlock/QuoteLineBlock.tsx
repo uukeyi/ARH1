@@ -1,18 +1,21 @@
 import React from "react";
 import styles from "./QuoteLineBlock.module.css";
-import { ILandingBlockElement } from "../../interfaces/landingPageResponse";
+import { ILandingBlock, ILandingBlockElement } from "../../interfaces/landingPageResponse";
 import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
 import { useAuth } from "../../contexts/AuthContext";
+import { Button } from "@mui/material";
 interface QuoteLineBlockProps {
    titleBlock: ILandingBlockElement;
    title: ILandingBlockElement;
-   desc?: ILandingBlockElement;
+   desc: ILandingBlockElement;
+   block : ILandingBlock
 }
 
 const QuoteLineBlock: React.FC<QuoteLineBlockProps> = ({
    titleBlock,
    title,
    desc,
+   block
 }) => {
    const {
       line,
@@ -22,12 +25,25 @@ const QuoteLineBlock: React.FC<QuoteLineBlockProps> = ({
       titleClassDesc,
       quoteLineBlockSection,
    } = styles;
-   const { setIsOpen, setElSettings } = useAdminModalEdit();
+   const { setIsOpen, setElSettings , setIsOpenBlockEdit , setBlockSettings  } = useAdminModalEdit();
    const { isAuthSettings } = useAuth();
    return (
       <div
-         className={desc ? `container ${quoteLineBlockSection}` : "container"}
+         className={desc.value ? `container ${quoteLineBlockSection}` : "container"}
       >
+           {isAuthSettings.isAdmin && block.name ? (
+            <Button
+               onClick={() => {
+                  if (isAuthSettings.isAdmin ) {
+                     setIsOpenBlockEdit(true);
+                     setBlockSettings(block);
+                  }
+               }}
+               variant="outlined"
+            >
+               Изменить порядок блока
+            </Button>
+         ) : null}
          <hr className={line} />
          <div
             data-aos="zoom-in-up"
@@ -55,7 +71,7 @@ const QuoteLineBlock: React.FC<QuoteLineBlockProps> = ({
          >
             {title.value}
          </p>
-         {desc ? (
+         {desc.value ? (
             <p
                data-aos="zoom-in-up"
                data-aos-duration="1000"

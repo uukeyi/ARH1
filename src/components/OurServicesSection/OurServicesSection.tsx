@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./OurServicesSection.module.css";
-
+import { Button } from "@mui/material";
 import OurServicesCard from "../OurServicesCard/OurServicesCard";
 import { useAuth } from "../../contexts/AuthContext";
-import AdminModalEdit from "../AdminModalEdit";
 import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
-import { ILandingBlockElement } from "../../interfaces/landingPageResponse";
+import {
+   ILandingBlock,
+   ILandingBlockElement,
+} from "../../interfaces/landingPageResponse";
 type cardType = {
    img: ILandingBlockElement;
    description: ILandingBlockElement;
@@ -17,6 +19,7 @@ interface OurServicesSectionProps {
    firstCard: cardType;
    secondCard: cardType;
    thirdCard: cardType;
+   block: ILandingBlock;
 }
 
 const OurServicesSection: React.FC<OurServicesSectionProps> = ({
@@ -24,13 +27,28 @@ const OurServicesSection: React.FC<OurServicesSectionProps> = ({
    firstCard,
    secondCard,
    thirdCard,
+   block,
 }) => {
    const { ourServices, title, cardContainer } = styles;
    const { isAuthSettings } = useAuth();
-   const { setElSettings, setIsOpen } = useAdminModalEdit();
+   const { setElSettings, setIsOpen, setIsOpenBlockEdit, setBlockSettings } =
+      useAdminModalEdit();
    const cards: cardType[] = [firstCard, secondCard, thirdCard];
    return (
       <section id={"ourServices"}>
+         {isAuthSettings.isAdmin ? (
+            <Button
+               onClick={() => {
+                  if (isAuthSettings.isAdmin) {
+                     setIsOpenBlockEdit(true);
+                     setBlockSettings(block);
+                  }
+               }}
+               variant="outlined"
+            >
+               Изменить порядок блока
+            </Button>
+         ) : null}
          <div id={ourServices}>
             <div className="container">
                <h1
@@ -40,7 +58,6 @@ const OurServicesSection: React.FC<OurServicesSectionProps> = ({
                   style={{
                      cursor: isAuthSettings.isAdmin ? "pointer" : "default",
                   }}
-      
                   onClick={(e: any) => {
                      if (isAuthSettings.isAdmin) {
                         setIsOpen(true);

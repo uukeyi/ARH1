@@ -3,6 +3,10 @@ import OrangeButton from "../OrangeButton/OrangeButton";
 import styles from "./ProjectPriceSection.module.css";
 import quoteSectionLine from "../../assets/icons/quoteSectionLine.webp";
 import PhoneInput from "react-phone-input-2";
+import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
+import { useAuth } from "../../contexts/AuthContext";
+import { Button } from "@mui/material";
+import { ILandingBlock } from "../../interfaces/landingPageResponse";
 type CheckBoxType = {
    label: string;
    price: number;
@@ -14,10 +18,12 @@ type RadioType = {
 
 
 interface ProjectPriceSectionProps {
-   
+   block : ILandingBlock
 }
 
-const ProjectPriceSection: React.FC = () => {
+
+
+const ProjectPriceSection: React.FC<ProjectPriceSectionProps> = ({block}) => {
    const {
       title,
       subtitle,
@@ -68,12 +74,27 @@ const ProjectPriceSection: React.FC = () => {
          setTotalSum(totalSum - square * checkboxValue);
       }
    };
+   const { setIsOpen, setElSettings , setIsOpenBlockEdit , setBlockSettings  } = useAdminModalEdit();
+   const { isAuthSettings } = useAuth();
    const handleInput = (event: any) => {
       setSquare(event.target.value);
    };
 
    return (
       <section id={priceWrapper}>
+         {isAuthSettings.isAdmin ? (
+            <Button
+               onClick={() => {
+                  if (isAuthSettings.isAdmin ) {
+                     setIsOpenBlockEdit(true);
+                     setBlockSettings(block);
+                  }
+               }}
+               variant="outlined"
+            >
+               Изменить порядок блока
+            </Button>
+         ) : null}
          <div className="container">
             <p data-aos="zoom-in" data-aos-duration="1500" className={title}>
                СТОИМОСТЬ ПРОЕКТА
@@ -197,7 +218,7 @@ const ProjectPriceSection: React.FC = () => {
                            buttonClass={optionPhone}
                         />
                      </div>
-                     <OrangeButton title="ОСТАВИТЬ ЗАЯВКУ" width="200px" />
+                     <OrangeButton title="ОСТАВИТЬ ЗАЯВКУ" width="300px" />
                   </div>
                </div>
                <img className={footerLine} src={quoteSectionLine} alt="Линия" />

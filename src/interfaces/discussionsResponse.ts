@@ -34,3 +34,32 @@ export interface IDiscussion {
     pageIndex : number,
     totalPages : number
   }
+
+  export let discussionPrototype = {
+   id: 0,
+   title: "",
+   description: "",
+   authorId: 0,
+   categoryId: 0,
+   createdAt: "",
+   isDeleted: false,
+   author: {
+      id: 0,
+      email: "",
+      password: "",
+      emailConfirmed: false,
+      name: "",
+      isAdmin: false,
+      createdAt: "",
+      isBlocked: false,
+      isDeleted: false,
+   },
+   category: {
+      id: 0,
+      name: "",
+      description: "",
+      iconUrl: null,
+      isDeleted: "",
+   },
+   comments: [],
+}

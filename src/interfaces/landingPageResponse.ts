@@ -18,11 +18,12 @@ export interface ILandingBlock {
   orderIndex: number | string;
   isVisible: boolean;
   isDeleted: boolean;
+  isMain: boolean;
   page: string;
   elements: ILandingBlockElement[];
 }
 
-export let landingBlockPrototype: ILandingBlockElement = {
+export let landingElPrototype: ILandingBlockElement = {
   id: '',
   blockId: '',
   typeId: '',
@@ -36,6 +37,7 @@ export let landingBlockPrototype: ILandingBlockElement = {
     orderIndex: '',
     isVisible: false,
     isDeleted: false,
+    isMain: false,
     page: '',
     elements: [],
   },
@@ -43,4 +45,14 @@ export let landingBlockPrototype: ILandingBlockElement = {
     id: '',
     name: '',
   },
+};
+export let landingBlockPrototype: ILandingBlock = {
+  id: '',
+  name: '',
+  isVisible: false,
+  isDeleted: false,
+  isMain: false,
+  page: '',
+  orderIndex: '',
+  elements: [],
 };

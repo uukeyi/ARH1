@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./CostEquivalentSection.module.css";
-import { ILandingBlockElement } from "../../interfaces/landingPageResponse";
+import { ILandingBlock, ILandingBlockElement } from "../../interfaces/landingPageResponse";
 import { useAuth } from "../../contexts/AuthContext";
 import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
-
+import { Button } from "@mui/material";
 interface CostEquivalentSectionProps {
    titleConfig: ILandingBlockElement;
    imgConfig: ILandingBlockElement;
@@ -13,6 +13,7 @@ interface CostEquivalentSectionProps {
    desc4: ILandingBlockElement;
    desc5: ILandingBlockElement;
    desc6: ILandingBlockElement;
+   block : ILandingBlock
 }
 
 const CostEquivalentSection: React.FC<CostEquivalentSectionProps> = ({
@@ -24,12 +25,26 @@ const CostEquivalentSection: React.FC<CostEquivalentSectionProps> = ({
    desc5,
    imgConfig,
    desc6,
+   block
 }) => {
    const { costEquivalentSection, title, contentContainer } = styles;
    const {isAuthSettings} = useAuth()
-   const {setIsOpen , setElSettings} = useAdminModalEdit()
+   const {setIsOpen , setElSettings , setBlockSettings , setIsOpenBlockEdit} = useAdminModalEdit()
    return (
       <section id={costEquivalentSection}>
+          {isAuthSettings.isAdmin ? (
+            <Button
+               onClick={() => {
+                  if (isAuthSettings.isAdmin) {
+                     setIsOpenBlockEdit(true);
+                     setBlockSettings(block);
+                  }
+               }}
+               variant="outlined"
+            >
+               Изменить порядок блока
+            </Button>
+         ) : null}
          <div className="container">
             <p
             

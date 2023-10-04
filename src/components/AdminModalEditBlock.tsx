@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 
 import { Modal, Typography } from "@mui/material";
 import { useAppDispatch } from "../hooks/reduxTookitHooks";
-import { updateElement } from "../store/actions/landingPageActions";
+import { updateBlock } from "../store/actions/landingPageActions";
 import { useAdminModalEdit } from "../contexts/AdminModalEditContext";
 
 const style = {
@@ -20,12 +20,13 @@ const style = {
    p: 4,
 };
 
-const AdminModalEdit: React.FC = () => {
-   const { elSettings, isOpen, setIsOpen } = useAdminModalEdit();
-
+const AdminModalEditBlock: React.FC = () => {
+    const { blockSettings, isOpenBlockEdit, setIsOpenBlockEdit } =
+    useAdminModalEdit();
    const [inputValue, setInputValue] = useState('');
    const [error, setError] = useState(false);
    const dispatch = useAppDispatch();
+
    useEffect(() => {
       if (error) {
          alert("Произошла ошибка замены данных");
@@ -34,15 +35,16 @@ const AdminModalEdit: React.FC = () => {
    return (
       <div>
          <Modal
-            open={isOpen}
+            open={isOpenBlockEdit}
             onClose={() => {
-               setIsOpen(false);
+               setIsOpenBlockEdit(false);
             }}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
          >
             <Box sx={style}>
-               <Typography>Изменяем "{elSettings.value}"</Typography>
+               <Typography>Изменяем блок "{blockSettings.name}"</Typography>
+               <Typography>Значение порядка "{blockSettings.orderIndex}"</Typography>
 
                <TextField
                   sx={{ width: "100%" }}
@@ -55,24 +57,26 @@ const AdminModalEdit: React.FC = () => {
                   sx={{ display: "block", margin: "30px auto" }}
                   variant="outlined"
                   onClick={(e) => {
-                     if (!elSettings.id) {
+                     if (!blockSettings.id) {
                         alert("Произошла ошибка получения данных");
                      } else {
                         if (!inputValue) {
                            alert("Заполните поле!");
                         } else {
                            dispatch(
-                              updateElement({
-                                 elementId: elSettings.id,
+                              updateBlock({
                                  setError: setError,
-                                 value: inputValue,
-                                 blockId: elSettings.blockId,
-                                 typeId: elSettings.typeId,
-                                 orderIndex: elSettings.orderIndex,
-                                 aosAnimation: elSettings.aosAnimation,
-                                 setIsOpen: setIsOpen,
+                                 idBlock: blockSettings.id,
+                                 orderIndex: inputValue,
+                                 isDeleted: blockSettings.isDeleted,
+                                 isVisible: blockSettings.isVisible,
+                                 isMain: blockSettings.isMain,
+                                 name: blockSettings.name,
+                                 page: blockSettings.page,
+                                 setIsOpen : setIsOpenBlockEdit
                               })
                            );
+                           //    console.log("hello");
                         }
                      }
                   }}
@@ -84,4 +88,4 @@ const AdminModalEdit: React.FC = () => {
       </div>
    );
 };
-export default AdminModalEdit;
+export default AdminModalEditBlock;

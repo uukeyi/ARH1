@@ -1,10 +1,19 @@
 import React, { createContext, useContext, useState } from 'react';
-import { ILandingBlockElement } from '../interfaces/landingPageResponse';
+import {
+  ILandingBlock,
+  ILandingBlockElement,
+  landingBlockPrototype,
+  landingElPrototype,
+} from '../interfaces/landingPageResponse';
 interface IAdminModalEditContext {
   elSettings: ILandingBlockElement;
   isOpen: boolean;
   setIsOpen: Function;
   setElSettings: Function;
+  isOpenBlockEdit: boolean;
+  setIsOpenBlockEdit: Function;
+  blockSettings: ILandingBlock;
+  setBlockSettings: Function;
 }
 interface IAdminModalEditProps {
   children?: React.ReactNode;
@@ -19,27 +28,9 @@ export function useAdminModalEdit(): IAdminModalEditContext {
 }
 export const AdminModalEditProvider: React.FC<IAdminModalEditProps> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [elSettings, setElSettings] = useState<ILandingBlockElement>({
-    id: '',
-    blockId: '',
-    typeId: '',
-    value: '',
-    orderIndex: '',
-    aosAnimation: '',
-    block: {
-      id: '',
-      name: '',
-      orderIndex: '',
-      page: '',
-      isVisible: false,
-      isDeleted: false,
-      elements: [],
-    },
-    type: {
-      id: '',
-      name: '',
-    },
-  });
+  const [elSettings, setElSettings] = useState<ILandingBlockElement>(landingElPrototype);
+  const [isOpenBlockEdit, setIsOpenBlockEdit] = useState(false);
+  const [blockSettings, setBlockSettings] = useState<ILandingBlock>(landingBlockPrototype);
   return (
     <AdminModalEditContext.Provider
       value={{
@@ -47,6 +38,10 @@ export const AdminModalEditProvider: React.FC<IAdminModalEditProps> = ({ childre
         isOpen: isOpen,
         setElSettings: setElSettings,
         setIsOpen: setIsOpen,
+        isOpenBlockEdit: isOpenBlockEdit,
+        setIsOpenBlockEdit: setIsOpenBlockEdit,
+        blockSettings: blockSettings,
+        setBlockSettings: setBlockSettings,
       }}
     >
       {children}

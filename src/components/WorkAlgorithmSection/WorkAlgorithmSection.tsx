@@ -2,10 +2,11 @@ import React from "react";
 import styles from "./WorkAlgorithmSection.module.css";
 import "yet-another-react-lightbox/styles.css";
 import WorkAlgorithmGallery from "../WorkAlgorithmGallery/WorkAlgorithmGallery";
-import { ILandingBlockElement } from "../../interfaces/landingPageResponse";
+import { ILandingBlock, ILandingBlockElement } from "../../interfaces/landingPageResponse";
 import { useAuth } from "../../contexts/AuthContext";
 import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
-
+import { Button } from "@mui/material";
+import OrangeButton from "../OrangeButton/OrangeButton";
 interface WorkAlgorithmSectionProps {
    titleText: ILandingBlockElement;
    firstBlockTitle: ILandingBlockElement;
@@ -15,6 +16,7 @@ interface WorkAlgorithmSectionProps {
    secondBlockElements: ILandingBlockElement[];
    thirdBlockElements: ILandingBlockElement[];
    thirdBlockTitle: ILandingBlockElement;
+   block : ILandingBlock
 }
 
 const WorkAlgorithmSection: React.FC<WorkAlgorithmSectionProps> = ({
@@ -25,6 +27,7 @@ const WorkAlgorithmSection: React.FC<WorkAlgorithmSectionProps> = ({
    secondBlockTitle,
    firstBlockTitle,
    thirdBlockElements,
+   block,
    thirdBlockTitle,
 }) => {
    const {
@@ -36,7 +39,7 @@ const WorkAlgorithmSection: React.FC<WorkAlgorithmSectionProps> = ({
       gallery,
    } = styles;
    const { isAuthSettings } = useAuth();
-   const { setIsOpen, setElSettings } = useAdminModalEdit();
+   const { setIsOpen, setElSettings , setBlockSettings , setIsOpenBlockEdit } = useAdminModalEdit();
    const breakpoints = [4320, 2160, 1080, 640, 384, 256, 128];
 
    const photos1 = firstBlockElements.map((photo, index) => {
@@ -128,6 +131,19 @@ const WorkAlgorithmSection: React.FC<WorkAlgorithmSectionProps> = ({
    }));
    return (
       <section id={workAlgorithmSection}>
+          {isAuthSettings.isAdmin ? (
+            <Button
+               onClick={() => {
+                  if (isAuthSettings.isAdmin) {
+                     setIsOpenBlockEdit(true);
+                     setBlockSettings(block);
+                  }
+               }}
+               variant="outlined"
+            >
+               Изменить порядок блока
+            </Button>
+         ) : null}
          <div data-aos="zoom-in" data-aos-duration="1000" className="container">
             <div className={titleWrapper}>
                <p
