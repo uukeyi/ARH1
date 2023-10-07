@@ -10,7 +10,6 @@ import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 const ProjectPage: React.FC = () => {
   const { linkContainer, video } = styles;
   const [errorLandingBlocks, setErrorLandingBlocks] = useState(false);
-  // const [projectBlock, setProjectBlock] = useState([])
   const location = useLocation();
   const currentLocation = location.pathname;
   const currentId = currentLocation.match(/\d+/g);
@@ -33,15 +32,8 @@ const ProjectPage: React.FC = () => {
     );
   }, []);
   const dispatch = useAppDispatch();
-  // const landingBlocks = useAppSelector((state) => state.landingPageSlice);
   const projectBlock = useAppSelector((state) => state.landingPageSlice.singleBlock);
-  // const projectBlock = landingBlocks.elements.filter((block) => {
-  //   return block.page == 'projects';
-  // });
-  useEffect(() => {
-    console.log(projectBlock);
-    console.log(currentId);
-  }, [projectBlock]);
+  const leftSideElements = projectBlock.elements.slice(7);
   if (projectBlock) {
     return (
       <div style={{ height: '100%' }}>
@@ -52,9 +44,8 @@ const ProjectPage: React.FC = () => {
           facadeSquare={projectBlock.elements[6]?.value}
           floors={projectBlock.elements[5]?.value}
           date={projectBlock.elements[3]?.value}
-          reconstructionPage={true}
-          // imgSrc={projectBlock.elements[0]?.value}
-          imgSrc="https://platinumlist.net/guide/wp-content/uploads/2023/03/IMG-worlds-of-adventure.webp"
+          reconstructionPage={false}
+          imgSrc={projectBlock.elements[0]?.value}
         >
           <div className="single-project-page-content-container">
             <p className={linkContainer}>
@@ -78,7 +69,7 @@ const ProjectPage: React.FC = () => {
               <br />
             </p>
 
-            {projectBlock?.elements.map((element: ILandingBlockElement): any => {
+            {leftSideElements?.map((element: ILandingBlockElement): any => {
               if (element.typeId === 1) {
                 return (
                   <p

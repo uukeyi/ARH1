@@ -14,18 +14,20 @@ import { ILandingBlock, landingBlockPrototype } from '../../interfaces/landingPa
 interface AdminModalProps {
   open: boolean;
   setOpen: (value: boolean | ((prevVar: boolean) => boolean)) => void;
-  isOurProjects?: boolean;
+  pageBlock: string;
 }
 interface IElement {
   value: string;
   type: string | number;
   id: number;
+  name?: string;
 }
 
-const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, isOurProjects }) => {
+const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, pageBlock }) => {
   const [isText, setIsText] = useState({
     value: false,
     type: 'description',
+    name: 'desc',
   });
   const [isImg, setIsImg] = useState({
     value: false,
@@ -44,17 +46,14 @@ const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, isOurProjects })
   const [editValue, setEditValue] = useState('');
   const [errorLandingBlocks, setErrorLandingBlocks] = useState(false);
   const landingBlocks = useAppSelector((state) => state.landingPageSlice);
-  // useEffect(() => {
-  //   dispatch(
-  //     getLandingPageBlocks({
-  //       showInvisible: true,
-  //       setError: setErrorLandingBlocks,
-  //     })
-  //   );
-  // }, []);
-  // useEffect(() => {
-  //   console.log(landingBlocks);
-  // }, [landingBlocks]);
+  useEffect(() => {
+    dispatch(
+      getLandingPageBlocks({
+        showInvisible: true,
+        setError: setErrorLandingBlocks,
+      })
+    );
+  }, []);
   type formValues = {
     elements: string;
   };
@@ -66,20 +65,24 @@ const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, isOurProjects })
     formState: { errors },
   } = useForm<formValues>();
   let orderBlock = 0;
+  const orderHandler = (element: IElement, index: number) => {};
   const onSubmit: SubmitHandler<any> = async () => {
-    dispatch(
-      createBlock({
-        orderIndex: orderBlock,
-        nameBlock: '',
-        pageBlock: isOurProjects ? 'projects' : 'articles',
-        setError: setIsError,
-        elements: [],
-        isVisible: true,
-        isDeleted: false,
-        setBlock: setBlock,
-      })
-    );
-    let order = 0;
+    if (pageBlock != 'facadeDesign') {
+      dispatch(
+        createBlock({
+          orderIndex: orderBlock,
+          nameBlock: '',
+          pageBlock: pageBlock,
+          setError: setIsError,
+          elements: [],
+          isVisible: true,
+          isDeleted: false,
+          setBlock: setBlock,
+        })
+      );
+    }
+
+    let order = 200;
     await elements.map((element) => {
       if (element.type === 'title') {
         element.type = 1;
@@ -93,7 +96,7 @@ const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, isOurProjects })
         createElement({
           value: element.value,
           typeId: element.type,
-          idBlock: 56,
+          idBlock: pageBlock === 'facadeDesign' ? 57 : block.id,
           orderIndex: order,
           aosAnimation: '',
           setError: setIsError,
@@ -129,7 +132,7 @@ const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, isOurProjects })
             }}
           >
             <Box sx={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
-              {isOurProjects ? (
+              {pageBlock === 'projects' ? (
                 <Box sx={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
                   <Box
                     sx={{
@@ -142,6 +145,27 @@ const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, isOurProjects })
                       gap: '10px',
                     }}
                   >
+                    {' '}
+                    <Button
+                      variant="outlined"
+                      onClick={() => {
+                        setIsText({
+                          value: false,
+                          type: 'description',
+                          name: 'desc',
+                        });
+                        setIsTitle({
+                          value: false,
+                          type: 'title',
+                        });
+                        setIsImg({
+                          value: true,
+                          type: 'image',
+                        });
+                      }}
+                    >
+                      Картинка
+                    </Button>
                     <Button
                       variant="outlined"
                       onClick={() => {
@@ -152,6 +176,7 @@ const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, isOurProjects })
                         setIsText({
                           value: false,
                           type: 'description',
+                          name: 'desc',
                         });
                         setIsTitle({
                           value: true,
@@ -175,29 +200,11 @@ const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, isOurProjects })
                         setIsText({
                           value: true,
                           type: 'description',
+                          name: 'place',
                         });
                       }}
                     >
                       Место
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      onClick={() => {
-                        setIsText({
-                          value: false,
-                          type: 'description',
-                        });
-                        setIsTitle({
-                          value: false,
-                          type: 'title',
-                        });
-                        setIsImg({
-                          value: true,
-                          type: 'image',
-                        });
-                      }}
-                    >
-                      Картинка
                     </Button>
                   </Box>
                   <Box
@@ -221,6 +228,7 @@ const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, isOurProjects })
                         setIsText({
                           value: true,
                           type: 'description',
+                          name: 'time',
                         });
                         setIsTitle({
                           value: false,
@@ -252,6 +260,7 @@ const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, isOurProjects })
                         setIsText({
                           value: true,
                           type: 'description',
+                          name: 'shouse',
                         });
                         setIsTitle({
                           value: false,
@@ -275,6 +284,7 @@ const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, isOurProjects })
                         setIsText({
                           value: true,
                           type: 'description',
+                          name: 'floor',
                         });
                       }}
                     >
@@ -286,6 +296,7 @@ const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, isOurProjects })
                         setIsText({
                           value: true,
                           type: 'description',
+                          name: 'sfacade',
                         });
                         setIsTitle({
                           value: false,
@@ -328,6 +339,7 @@ const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, isOurProjects })
                     setIsText({
                       value: true,
                       type: 'description',
+                      name: 'desc',
                     });
                   }}
                 >
@@ -339,6 +351,7 @@ const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, isOurProjects })
                     setIsText({
                       value: false,
                       type: 'description',
+                      name: 'desc',
                     });
                     setIsTitle({
                       value: false,
@@ -362,6 +375,7 @@ const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, isOurProjects })
                     setIsText({
                       value: false,
                       type: 'description',
+                      name: 'desc',
                     });
                     setIsTitle({
                       value: true,
@@ -425,6 +439,7 @@ const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, isOurProjects })
                     setIsText({
                       value: false,
                       type: 'description',
+                      name: 'desc',
                     });
                     setInputValue('');
                   }}
