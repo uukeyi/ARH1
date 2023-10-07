@@ -6,6 +6,7 @@ import { Button } from '@mui/material';
 import AdminModal from '../AdminModal/AdminModal';
 import { getLandingPageBlocks } from '../../store/actions/landingPageActions';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxTookitHooks';
+import { useAuth } from '../../contexts/AuthContext';
 
 type cardType = {
   titleText: string;
@@ -57,7 +58,7 @@ const KnowledgeBaseSection: React.FC = () => {
     },
   ]);
   const [adminModal, setAdminModal] = useState(false);
-
+  const { isAuthSettings } = useAuth();
   const [errorLandingBlocks, setErrorLandingBlocks] = useState(false);
   useEffect(() => {
     dispatch(
@@ -75,7 +76,7 @@ const KnowledgeBaseSection: React.FC = () => {
   });
   return (
     <section id={knowledgeBaseSection}>
-      <AdminModal open={adminModal} setOpen={setAdminModal} isOurProjects={false} />
+      <AdminModal open={adminModal} setOpen={setAdminModal} pageBlock="articles" />
       <div className={`container ${fullWidthContainer}`}>
         <Link to={'/'} className={subtitle}>
           Главная /
@@ -85,18 +86,22 @@ const KnowledgeBaseSection: React.FC = () => {
           </Link>
         </Link>
         <p className={title}>БАЗА ЗНАНИЙ</p>
-        <Button
-          variant="outlined"
-          sx={{
-            display: 'block',
-            margin: '20px auto',
-          }}
-          onClick={() => {
-            setAdminModal(true);
-          }}
-        >
-          Добавить новую статью
-        </Button>
+        {isAuthSettings.isAdmin ? (
+          <Button
+            variant="outlined"
+            sx={{
+              display: 'block',
+              margin: '20px auto',
+            }}
+            onClick={() => {
+              setAdminModal(true);
+            }}
+          >
+            Добавить новую статью
+          </Button>
+        ) : (
+          <></>
+        )}
         <div className={linkContainer}>
           {cards.map((card) => {
             return (

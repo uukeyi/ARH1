@@ -37,6 +37,9 @@
   left: -100px;
   animation: shiningAnimation 3s infinite linear;
 }
+.activeImg {
+  border: 3px solid red;
+}
 
 @keyframes shiningAnimation {
   0% {

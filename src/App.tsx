@@ -31,6 +31,7 @@ import DiscussionDetailsPage from './pages/DiscussionDetailsPage/DiscussionDetai
 import { CodeConfirmPage } from './pages/CodeConfirmPage';
 import ProjectPage from './pages/ProjectPage/ProjectPage';
 import ArticlePage from './pages/ArticlePage/ArticlePage';
+import ServicePage from './pages/ServicePage/ServicePage';
 function App() {
   useEffect(() => {
     AOS.init();
@@ -50,6 +51,7 @@ function App() {
         <Route path="knowledgeBase" element={<KnowledgeBasePage />} />
         <Route path="contacts" element={<ContactsPage />} />
         <Route path="aboutUs" element={<AboutUsPage />} />
+        <Route path="ourServices" element={<ServicePage />} />
         <Route path="knowledgeBase/buyLandPlot" element={<BuyLandPlot />} />
         <Route
           path="knowledgeBase/mainStylesLandscapeDesign"

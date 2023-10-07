@@ -52,7 +52,9 @@
 .burgerButton {
   display: none;
 }
-
+.white {
+  color: white !important;
+}
 .numberButton {
   color: white;
   background: transparent;

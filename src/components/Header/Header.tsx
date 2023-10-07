@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import styles from './Header.module.css';
 import blackLogoSrc from '../../assets/logoBlack.webp';
@@ -13,6 +13,7 @@ interface HeaderProps {
   customClassNameNav?: string;
   customClassNameHeader?: string;
   customClassNameLogo?: string;
+  isWhite?: boolean;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -20,6 +21,7 @@ const Header: React.FC<HeaderProps> = ({
   customClassNameLinks,
   blackLogo,
   customClassNameActiveLink,
+  isWhite,
 }) => {
   const {
     container,
@@ -35,7 +37,9 @@ const Header: React.FC<HeaderProps> = ({
     buttonContact,
     burgerButton,
     stick,
+    white,
   } = styles;
+
   const [isActive, setIsActive] = useState(false);
   return (
     <header id="header" className={container}>
@@ -59,8 +63,10 @@ const Header: React.FC<HeaderProps> = ({
             to="/aboutUs"
             className={({ isActive }) =>
               !isActive
-                ? `${navLink} ${customClassNameLinks}`
-                : `${navLink} ${customClassNameLinks} ${customClassNameActiveLink} `
+                ? `${navLink} ${customClassNameLinks} ${isWhite ? white : null}`
+                : `${navLink} ${customClassNameLinks} ${customClassNameActiveLink} ${
+                    isWhite ? white : null
+                  }`
             }
           >
             О НАС
@@ -69,8 +75,10 @@ const Header: React.FC<HeaderProps> = ({
             to="/ourProjects"
             className={({ isActive }) =>
               !isActive
-                ? `${navLink} ${customClassNameLinks}`
-                : `${navLink} ${customClassNameLinks} ${customClassNameActiveLink} `
+                ? `${navLink} ${customClassNameLinks} ${isWhite ? white : null}`
+                : `${navLink} ${customClassNameLinks} ${customClassNameActiveLink} ${
+                    isWhite ? white : null
+                  }`
             }
           >
             НАШИ РАБОТЫ
@@ -79,18 +87,22 @@ const Header: React.FC<HeaderProps> = ({
             to="/knowledgeBase"
             className={({ isActive }) =>
               !isActive
-                ? `${navLink} ${customClassNameLinks}`
-                : `${navLink} ${customClassNameLinks} ${customClassNameActiveLink} `
+                ? `${navLink} ${customClassNameLinks} ${isWhite ? white : null}`
+                : `${navLink} ${customClassNameLinks} ${customClassNameActiveLink} ${
+                    isWhite ? white : null
+                  }`
             }
           >
-           БЛОГ
+            БЛОГ
           </NavLink>
           <NavLink
             to="/contacts"
             className={({ isActive }) =>
               !isActive
-                ? `${navLink} ${customClassNameLinks}`
-                : `${navLink} ${customClassNameLinks} ${customClassNameActiveLink} `
+                ? `${navLink} ${customClassNameLinks} ${isWhite ? white : null}`
+                : `${navLink} ${customClassNameLinks} ${customClassNameActiveLink} ${
+                    isWhite ? white : null
+                  }`
             }
           >
             КОНТАКТЫ
@@ -99,8 +111,10 @@ const Header: React.FC<HeaderProps> = ({
             to="/discussionFacade"
             className={({ isActive }) =>
               !isActive
-                ? `${navLink} ${customClassNameLinks}`
-                : `${navLink} ${customClassNameLinks} ${customClassNameActiveLink} `
+                ? `${navLink} ${customClassNameLinks} ${isWhite ? white : null}`
+                : `${navLink} ${customClassNameLinks} ${customClassNameActiveLink} ${
+                    isWhite ? white : null
+                  }`
             }
           >
             ОБСУЖДЕНИЕ
@@ -108,11 +122,21 @@ const Header: React.FC<HeaderProps> = ({
         </nav>
         <div className={contactWrapper}>
           <a className={`${numberButton} ${customClassNameButton}`}>8 (812) 970-90-05</a>
-          <a className={buttonContact} target='_blank'  href="https://api.whatsapp.com/send?phone=88129709005">
-            <img className={img} src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-whatsapp-mobile-software-icon-png-image_6315991.png" />
+          <a
+            className={buttonContact}
+            target="_blank"
+            href="https://api.whatsapp.com/send?phone=88129709005"
+          >
+            <img
+              className={img}
+              src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-whatsapp-mobile-software-icon-png-image_6315991.png"
+            />
           </a>
-          <a className={buttonContact} target='_blank' href="https://t.me/Sasha_Save">
-            <img className={img} src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Telegram_2019_Logo.svg/640px-Telegram_2019_Logo.svg.png" />
+          <a className={buttonContact} target="_blank" href="https://t.me/Sasha_Save">
+            <img
+              className={img}
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Telegram_2019_Logo.svg/640px-Telegram_2019_Logo.svg.png"
+            />
           </a>
         </div>
       </div>

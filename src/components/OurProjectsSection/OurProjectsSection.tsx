@@ -6,6 +6,7 @@ import { Button } from '@mui/material';
 import AdminModal from '../AdminModal/AdminModal';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxTookitHooks';
 import { getLandingPageBlocks } from '../../store/actions/landingPageActions';
+import { useAuth } from '../../contexts/AuthContext';
 
 type cardType = {
   titleText: string;
@@ -94,11 +95,12 @@ const OurProjectsSection: React.FC = () => {
   const projectBlocks = landingBlocks.elements.filter((block) => {
     return block.page == 'projects';
   });
+  const { isAuthSettings } = useAuth();
 
   const [adminModal, setAdminModal] = useState(false);
   return (
     <section id={ourProjectsSection}>
-      <AdminModal open={adminModal} setOpen={setAdminModal} isOurProjects={true} />
+      <AdminModal open={adminModal} setOpen={setAdminModal} pageBlock="projects" />
       <div className={`${fullWidthContainer} container`}>
         <Link to={'/'} className={subtitle}>
           Главная /
@@ -108,18 +110,23 @@ const OurProjectsSection: React.FC = () => {
           </Link>
         </Link>
         <p className={title}>ПРОЕКТЫ</p>
-        <Button
-          variant="outlined"
-          sx={{
-            display: 'block',
-            margin: '20px auto',
-          }}
-          onClick={() => {
-            setAdminModal(true);
-          }}
-        >
-          Добавить новую статью
-        </Button>
+        {isAuthSettings.isAdmin ? (
+          <Button
+            variant="outlined"
+            sx={{
+              display: 'block',
+              margin: '20px auto',
+            }}
+            onClick={() => {
+              setAdminModal(true);
+            }}
+          >
+            Добавить новую статью
+          </Button>
+        ) : (
+          <></>
+        )}
+
         <div className={cardContainer}>
           {cards.map((card, index) => {
             return (

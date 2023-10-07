@@ -35,14 +35,18 @@ interface IGallery {
    images: fullImageType[];
    slidesData: slideType[];
    customClass?: string;
+   showBtn?: boolean;
+   isHoverOnImages?: boolean;
 }
 const WorkAlgorithmGallery: React.FC<IGallery> = ({
    title,
    images,
    slidesData,
    customClass,
+   showBtn,
+   isHoverOnImages,
 }) => {
-   const { wrapper, btn, galleryImg, photoGallery, customLightbox } = styles;
+   const { wrapper, btn, galleryImg, photoGallery, customLightbox , activeImg } = styles;
    const [index, setIndex] = React.useState(-1);
    const { isAuthSettings } = useAuth();
    const { setIsOpen, setElSettings } = useAdminModalEdit();
@@ -69,6 +73,16 @@ const WorkAlgorithmGallery: React.FC<IGallery> = ({
                      }
                      setIndex(img.index);
                   }}
+                  onMouseEnter={(e) => {
+                     if (isHoverOnImages) {
+                     e.currentTarget.classList.add(activeImg)
+                     }
+                  }}
+                  onMouseLeave={(e) => {
+                     if (isHoverOnImages) {
+                     e.currentTarget.classList.remove(activeImg)
+                     }
+                  }}
                   src={img.src}
                   className={galleryImg}
                />
@@ -89,9 +103,11 @@ const WorkAlgorithmGallery: React.FC<IGallery> = ({
             />
          )}
 
-         <button className={btn} onClick={() => setIndex(0)}>
-            СМОТРЕТЬ ПРИМЕР
-         </button>
+         {showBtn ? (
+            <button className={btn} onClick={() => setIndex(0)}>
+               СМОТРЕТЬ ПРИМЕР
+            </button>
+         ) : null}
       </div>
    );
 };

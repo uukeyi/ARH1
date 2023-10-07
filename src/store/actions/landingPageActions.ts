@@ -63,6 +63,8 @@ export const getLandingPageBlock = createAsyncThunk<
   IGetLandingBlockDetails,
   { rejectValue?: string }
 >(`landingPageSlice/getLandingPageBlock`, async (params, { rejectWithValue }) => {
+  console.log(params.id);
+
   try {
     const response = await axios<ILandingBlock>({
       method: 'GET',
@@ -71,8 +73,6 @@ export const getLandingPageBlock = createAsyncThunk<
         showInvisible: params.showInvisible,
       },
     });
-    console.log(response.data);
-
     return response.data;
   } catch (error: any) {
     params.setError(true);
