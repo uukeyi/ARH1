@@ -26,7 +26,7 @@ import FaqSection from "../components/Faq/FaqSection";
 
 const MainPage: React.FC = () => {
    const dispatch = useAppDispatch();
-   const { setIsAuth , isAuthSettings } = useAuth();
+   const { setIsAuth, isAuthSettings } = useAuth();
    const [isError, setIsError] = useState<boolean>(false);
    const [isOpen, setIsOpen] = useState<boolean>(false);
    const [errorLandingBlocks, setErrorLandingBlocks] = useState(false);
@@ -34,6 +34,9 @@ const MainPage: React.FC = () => {
    // const store = useAppSelector((state) => state.authSlice.user);
 
    const landingBlocks = useAppSelector((state) => state.landingPageSlice);
+   useEffect(() => {
+      console.log(landingBlocks);
+   }, [landingBlocks]);
    useEffect(() => {
       if (
          localStorage.getItem("token") === null ||
@@ -43,9 +46,6 @@ const MainPage: React.FC = () => {
       } else {
          dispatch(checkAuth({ setError: setIsError, setIsAuth: setIsAuth }));
       }
-   }, []);
-   useEffect(() => {
-      dispatch(checkAuth({ setError: setIsError, setIsAuth: setIsAuth }));
       dispatch(
          getLandingPageBlocks({
             showInvisible: true,

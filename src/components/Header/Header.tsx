@@ -38,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({
   } = styles;
   const [isActive, setIsActive] = useState(false);
   return (
-    <header id='header' className={container}>
+    <header id="header" className={container}>
       <div className={`container ${wrapper}`}>
         <div className={logoWrapper}>
           <NavLink className={logoLink} to="/">
@@ -56,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({
         </div>
         <nav className={navWrapper}>
           <NavLink
-            to="aboutUs"
+            to="/aboutUs"
             className={({ isActive }) =>
               !isActive
                 ? `${navLink} ${customClassNameLinks}`
@@ -66,7 +66,7 @@ const Header: React.FC<HeaderProps> = ({
             О НАС
           </NavLink>
           <NavLink
-            to="ourProjects"
+            to="/ourProjects"
             className={({ isActive }) =>
               !isActive
                 ? `${navLink} ${customClassNameLinks}`
@@ -76,7 +76,7 @@ const Header: React.FC<HeaderProps> = ({
             НАШИ РАБОТЫ
           </NavLink>
           <NavLink
-            to="knowledgeBase"
+            to="/knowledgeBase"
             className={({ isActive }) =>
               !isActive
                 ? `${navLink} ${customClassNameLinks}`
@@ -86,7 +86,7 @@ const Header: React.FC<HeaderProps> = ({
            БЛОГ
           </NavLink>
           <NavLink
-            to="contacts"
+            to="/contacts"
             className={({ isActive }) =>
               !isActive
                 ? `${navLink} ${customClassNameLinks}`
@@ -96,7 +96,7 @@ const Header: React.FC<HeaderProps> = ({
             КОНТАКТЫ
           </NavLink>
           <NavLink
-            to="discussionFacade"
+            to="/discussionFacade"
             className={({ isActive }) =>
               !isActive
                 ? `${navLink} ${customClassNameLinks}`

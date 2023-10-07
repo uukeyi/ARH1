@@ -29,6 +29,8 @@ import CreateDiscussionPage from './pages/CreateDiscussionPage/CreateDiscussionP
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import DiscussionDetailsPage from './pages/DiscussionDetailsPage/DiscussionDetailsPage';
 import { CodeConfirmPage } from './pages/CodeConfirmPage';
+import ProjectPage from './pages/ProjectPage/ProjectPage';
+import ArticlePage from './pages/ArticlePage/ArticlePage';
 function App() {
   useEffect(() => {
     AOS.init();
@@ -58,6 +60,7 @@ function App() {
           path="knowledgeBase/developmentProjectDesignHouseFacade"
           element={<DevelopmentProjectDesignHouseFacade />}
         />
+        <Route path="knowledgeBase/:knowledgeBaseId" element={<ArticlePage />} />
       </Route>
       <Route path="ourProjects" element={<SingleProjectPageLayout />}>
         <Route path="designFacadeStyleRight" element={<DesignFacadeStyleRight />} />
@@ -66,6 +69,7 @@ function App() {
           path="designFacadePrivateHousePeterhof"
           element={<DesignFacadePrivateHousePeterhof />}
         />
+        <Route path=":ourProjectsId" element={<ProjectPage />} />
         <Route path="designFacadePrivateHouseSand" element={<DesignFacadePrivateHouseSand />} />
         <Route path="designFacadeVillaticHouse" element={<DesignFacadeVillaticHouse />} />
         <Route path="projectReconstructionRelaxBase" element={<ProjectReconstructionRelaxBase />} />
