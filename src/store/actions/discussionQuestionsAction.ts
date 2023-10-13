@@ -12,8 +12,13 @@ interface IinputData {
 interface ICreateData {
    title: string;
    description: string;
+   authorId: any;
+   categoryId: string | number;
 }
-
+interface IDeleteData {
+   idDiscussion: number | string;
+   setError: Function;
+}
 export const getDiscussionQuestions = createAsyncThunk<
    IDiscussionGetResponse,
    (value: boolean | ((prevVar: boolean) => boolean)) => void,
@@ -80,21 +85,44 @@ export const createDiscussionQuestion = createAsyncThunk<
 >(
    "discussionQuestionsSlice/createDiscussionQuestions",
    async (inputData, { rejectWithValue }) => {
-      const { title, description } = inputData.data;
       try {
          const responseReg = await $host<IDiscussion>({
             url: "/api/Discussions",
             method: "POST",
-            params: {
-               title: title,
-               description: description,
+            data: {
+               title: inputData.data.title,
+               description: inputData.data.description,
+               authorId: inputData.data.authorId,
+               categoryId: inputData.data.categoryId,
             },
          });
+         console.log(responseReg.data);
          return responseReg.data;
       } catch (error: any) {
+         console.log(error);
+
          inputData.setError(true);
 
          return rejectWithValue(error.message);
+      }
+   }
+);
+
+export const deleteDiscussionQuestion = createAsyncThunk<
+   void,
+   IDeleteData,
+   { rejectValue?: string }
+>(
+   "discussionQuestionsSlice/deleteDiscussion",
+   async (data, { rejectWithValue }) => {
+      try {
+         await $host<void>({
+            url: `/api/Discussions/${data.idDiscussion}`,
+            method: "DELETE",
+         });
+      } catch (error : any) {
+         data.setError(true);
+         return rejectWithValue(error.message)
       }
    }
 );

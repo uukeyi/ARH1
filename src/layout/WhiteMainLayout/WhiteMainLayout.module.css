@@ -37,7 +37,8 @@
    display: flex;
    flex-direction: column;
    gap: 20px;
-   text-align: center;
+   justify-content: center;
+   align-items: center;
 }
 .footerFeedbackContainer {
    margin-top: 50px;
@@ -104,7 +105,6 @@
    transform: rotate(-45deg);
 }
 
-
 @media screen and (max-width: 992px) {
    .container {
       width: 720px;
@@ -124,14 +124,14 @@
    }
 }
 @media screen and (max-width: 576px) {
- .arrowContainer {
-   width: 45px;
-   height: 45px;
- }
- .arrow {
-   width: 15px;
-   height: 15px;
-   border-top: 3px solid rgb(255, 255, 255);
-   border-right: 3px solid rgb(255, 255, 255);
- }
+   .arrowContainer {
+      width: 45px;
+      height: 45px;
+   }
+   .arrow {
+      width: 15px;
+      height: 15px;
+      border-top: 3px solid rgb(255, 255, 255);
+      border-right: 3px solid rgb(255, 255, 255);
+   }
 }

@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 
 import { Modal, Typography } from "@mui/material";
 import { useAppDispatch } from "../hooks/reduxTookitHooks";
-import { updateElement } from "../store/actions/landingPageActions";
+import { deleteEl, updateElement } from "../store/actions/landingPageActions";
 import { useAdminModalEdit } from "../contexts/AdminModalEditContext";
 
 const style = {
@@ -23,8 +23,9 @@ const style = {
 const AdminModalEdit: React.FC = () => {
    const { elSettings, isOpen, setIsOpen } = useAdminModalEdit();
 
-   const [inputValue, setInputValue] = useState('');
+   const [inputValue, setInputValue] = useState("");
    const [error, setError] = useState(false);
+   const [deleteError, setDeleteError] = useState(false);
    const dispatch = useAppDispatch();
    useEffect(() => {
       if (error) {
@@ -79,32 +80,24 @@ const AdminModalEdit: React.FC = () => {
                >
                   Изменить значение
                </Button>
-               {/* <Button
+               <Button
                   sx={{ display: "block", margin: "30px auto" }}
                   variant="outlined"
                   onClick={(e) => {
                      if (!elSettings.id) {
                         alert("Произошла ошибка получения данных");
                      } else {
-                      
-                           dispatch(
-                              updateElement({
-                                 elementId: elSettings.id,
-                                 setError: setError,
-                                 value: inputValue,
-                                 blockId: elSettings.blockId,
-                                 typeId: elSettings.typeId,
-                                 orderIndex: elSettings.orderIndex,
-                                 aosAnimation: elSettings.aosAnimation,
-                                 setIsOpen: setIsOpen,
-                              })
-                           )
-                        
+                        dispatch(
+                           deleteEl({
+                              idEl: elSettings.id,
+                              setError: setDeleteError,
+                           })
+                        );
                      }
                   }}
                >
-                Скрыть / Показать
-               </Button> */}
+                  Удалить
+               </Button>
             </Box>
          </Modal>
       </div>

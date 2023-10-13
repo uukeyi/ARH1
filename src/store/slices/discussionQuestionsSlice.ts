@@ -38,6 +38,7 @@ export const discussionQuestionsSlice = createSlice({
     builder.addCase(getDiscussionDetails.fulfilled, (state, action: PayloadAction<IDiscussion>) => {
       state.singleQuestion = action.payload
     });
+
   },
 });
 

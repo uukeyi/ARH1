@@ -1,109 +1,150 @@
-import React, { useEffect, useState } from 'react';
-import SingleProjectPageImgCover from '../../components/SingleProjectPageSection/SingleProjectPageSection';
-import { Link, useLocation } from 'react-router-dom';
-import styles from './ProjectPage.module.css';
-import { ILandingBlock, ILandingBlockElement } from '../../interfaces/landingPageResponse';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxTookitHooks';
-import { getLandingPageBlock, getLandingPageBlocks } from '../../store/actions/landingPageActions';
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
-
+import React, { useEffect, useState } from "react";
+import SingleProjectPageImgCover from "../../components/SingleProjectPageSection/SingleProjectPageSection";
+import { Link, useLocation } from "react-router-dom";
+import styles from "./ProjectPage.module.css";
+import { ILandingBlockElement } from "../../interfaces/landingPageResponse";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxTookitHooks";
+import {
+   getLandingPageBlock,
+   getLandingPageBlocks,
+} from "../../store/actions/landingPageActions";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import { useAuth } from "../../contexts/AuthContext";
+import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
+import AdminModalEdit from "../../components/AdminModalEdit";
 const ProjectPage: React.FC = () => {
-  const { linkContainer, video } = styles;
-  const [errorLandingBlocks, setErrorLandingBlocks] = useState(false);
-  const location = useLocation();
-  const currentLocation = location.pathname;
-  const currentId = currentLocation.match(/\d+/g);
+   const { linkContainer, video } = styles;
+   const [errorLandingBlocks, setErrorLandingBlocks] = useState(false);
+   const location = useLocation();
+   const currentLocation = location.pathname;
+   const currentId = currentLocation.match(/\d+/g);
 
-  useEffect(() => {
-    dispatch(
-      getLandingPageBlock({
-        id: currentId,
-        showInvisible: true,
-        setError: setErrorLandingBlocks,
-      })
-    );
-  }, []);
-  useEffect(() => {
-    dispatch(
-      getLandingPageBlocks({
-        showInvisible: true,
-        setError: setErrorLandingBlocks,
-      })
-    );
-  }, []);
-  const dispatch = useAppDispatch();
-  const projectBlock = useAppSelector((state) => state.landingPageSlice.singleBlock);
-  const leftSideElements = projectBlock.elements.slice(7);
-  if (projectBlock) {
-    return (
-      <div style={{ height: '100%' }}>
-        <SingleProjectPageImgCover
-          titleText={projectBlock.elements[1]?.value}
-          city={projectBlock.elements[2]?.value}
-          houseSquare={projectBlock.elements[4]?.value}
-          facadeSquare={projectBlock.elements[6]?.value}
-          floors={projectBlock.elements[5]?.value}
-          date={projectBlock.elements[3]?.value}
-          reconstructionPage={false}
-          imgSrc={projectBlock.elements[0]?.value}
-        >
-          <div className="single-project-page-content-container">
-            <p className={linkContainer}>
-              <Link to={'/'}> Главная </Link> /<Link to={'/ourProjects'}> &nbsp; Наши работы</Link>{' '}
-              /
-              <span style={{ color: 'rgb(235 51 73)' }}>
-                {' '}
-                &nbsp;{projectBlock.elements[1]?.value}
-              </span>
-            </p>
-            <p style={{ marginTop: '30px' }} className="single-project-page-title">
-              {projectBlock.elements[1]?.value}
-            </p>
-            <p style={{ marginTop: '30px' }} className="single-project-page-description">
-              {projectBlock.elements[2]?.value}
-              <br /> Площадь дома:
-              <strong>{projectBlock.elements[4]?.value}</strong>
-              <br />
-              Площадь фасадов: <strong>{projectBlock.elements[6]?.value}</strong>
-              <br />
-              <br />
-            </p>
-
-            {leftSideElements?.map((element: ILandingBlockElement): any => {
-              if (element.typeId === 1) {
-                return (
+   useEffect(() => {
+      dispatch(
+         getLandingPageBlock({
+            id: currentId,
+            showInvisible: true,
+            setError: setErrorLandingBlocks,
+         })
+      );
+   }, []);
+   useEffect(() => {
+      dispatch(
+         getLandingPageBlocks({
+            showInvisible: true,
+            setError: setErrorLandingBlocks,
+         })
+      );
+   }, []);
+   const dispatch = useAppDispatch();
+   const projectBlock = useAppSelector(
+      (state) => state.landingPageSlice.singleBlock
+   );
+   const leftSideElements = projectBlock.elements.slice(7);
+   const { isAuthSettings } = useAuth();
+   const { setElSettings, setIsOpen } = useAdminModalEdit();
+   if (projectBlock) {
+      return (
+         <div style={{ height: "100%" }}>
+            <AdminModalEdit />
+            <SingleProjectPageImgCover
+               titleText={projectBlock.elements[1]}
+               city={projectBlock.elements[2]}
+               houseSquare={projectBlock.elements[4]}
+               facadeSquare={projectBlock.elements[6]}
+               floors={projectBlock.elements[5]}
+               date={projectBlock.elements[3]}
+               reconstructionPage={false}
+               imgSrc={projectBlock.elements[0]}
+            >
+               <div
+                  onClick={(e: any) => {
+                     if (isAuthSettings.isAdmin) {
+                        setElSettings(JSON.parse(e.target.dataset.el));
+                        setIsOpen(true);
+                     }
+                  }}
+                  className="single-project-page-content-container"
+               >
+                  <p className={linkContainer}>
+                     <Link to={"/"}> Главная </Link> /
+                     <Link to={"/ourProjects"}> &nbsp; Наши работы</Link> /
+                     <span
+                        data-el={JSON.stringify(projectBlock.elements[1])}
+                        style={{ color: "rgb(235 51 73)" }}
+                     >
+                        {" "}
+                        &nbsp;{projectBlock.elements[1]?.value}
+                     </span>
+                  </p>
                   <p
-                    onClick={() => console.log(element)}
-                    style={{ marginTop: '30px' }}
-                    className="single-project-page-title"
+                     style={{ marginTop: "30px" }}
+                     className="single-project-page-title"
+                     data-el={JSON.stringify(projectBlock.elements[1])}
                   >
-                    {element.value}
+                     {projectBlock.elements[1]?.value}
                   </p>
-                );
-              } else if (element.typeId === 2) {
-                return (
-                  <p style={{ marginTop: '30px' }} className="single-project-page-description">
-                    {element.value}
+                  <p
+                     style={{ marginTop: "30px" }}
+                     className="single-project-page-description"
+                     data-el={JSON.stringify(projectBlock.elements[2])}
+                  >
+                     {projectBlock.elements[2]?.value}
+                     <br /> Площадь дома:
+                     <strong data-el={JSON.stringify(projectBlock.elements[4])}>
+                        {projectBlock.elements[4]?.value}
+                     </strong>
+                     <br />
+                     Площадь фасадов:{" "}
+                     <strong data-el={JSON.stringify(projectBlock.elements[6])}>
+                        {projectBlock.elements[6]?.value}
+                     </strong>
+                     <br />
+                     <br />
                   </p>
-                );
-              } else if (element.typeId === 3) {
-                return (
-                  <img
-                    className="single-project-page-img"
-                    style={{ marginTop: '20px' }}
-                    src={element.value}
-                    alt="Не удалось отобразить картинку"
-                  />
-                );
-              }
-            })}
-          </div>
-        </SingleProjectPageImgCover>
-      </div>
-    );
-  } else {
-    return <LoadingSpinner></LoadingSpinner>;
-  }
+
+                  {leftSideElements?.map(
+                     (element: ILandingBlockElement): any => {
+                        if (element.typeId === 1) {
+                           return (
+                              <p
+                                 data-el={JSON.stringify(element)}
+                                 style={{ marginTop: "30px" }}
+                                 className="single-project-page-title"
+                              >
+                                 {element.value}
+                              </p>
+                           );
+                        } else if (element.typeId === 2) {
+                           return (
+                              <p
+                                 data-el={JSON.stringify(element)}
+                                 style={{ marginTop: "30px" }}
+                                 className="single-project-page-description"
+                              >
+                                 {element.value}
+                              </p>
+                           );
+                        } else if (element.typeId === 3) {
+                           return (
+                              <img
+                                 data-el={JSON.stringify(element)}
+                                 className="single-project-page-img"
+                                 style={{ marginTop: "20px" }}
+                                 src={element.value}
+                                 alt="Не удалось отобразить картинку"
+                              />
+                           );
+                        }
+                     }
+                  )}
+               </div>
+            </SingleProjectPageImgCover>
+         </div>
+      );
+   } else {
+      return <LoadingSpinner></LoadingSpinner>;
+   }
 };
 
 export default ProjectPage;

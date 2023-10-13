@@ -73,7 +73,7 @@ export const fetchRegistration = createAsyncThunk<
             Authorization: `Bearer ${localStorage.getItem("token")}`,
          },
       });
-      inputData.setIsAuth({ isAuth: true  , isAdmin : responseUserUpdate.data.user.isAdmin});
+      inputData.setIsAuth({ isAuth: true  , isAdmin : responseUserUpdate.data.user.isAdmin , user : responseUserUpdate.data.user});
       inputData.setSuccess(true);
       return responseUserUpdate.data.user;
    } catch (error: any) {
@@ -109,7 +109,7 @@ export const fetchLogin = createAsyncThunk<
       }
 
       loginData.setSuccess(true);
-      loginData.setIsAuth({ isAuth: true  , isAdmin : response.data.user.isAdmin});
+      loginData.setIsAuth({ isAuth: true  , isAdmin : response.data.user.isAdmin , user : response.data.user});
       return response.data.user;
    } catch (error: any) {
       loginData.setError(true);
@@ -134,7 +134,7 @@ export const checkAuth = createAsyncThunk<
       if (!response.data.hasError) {
          localStorage.setItem("token", response.data.token.value);
          localStorage.setItem("refreshToken", response.data.refreshToken.value);
-         data.setIsAuth({ isAuth: true , isAdmin : response.data.user.isAdmin });
+         data.setIsAuth({ isAuth: true , isAdmin : response.data.user.isAdmin , user : response.data.user });
       } else {
          data.setIsAuth({ isAuth: false  , isAdmin : false });
          localStorage.removeItem("token");

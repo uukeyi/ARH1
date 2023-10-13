@@ -51,9 +51,7 @@ const OurServicesSection: React.FC<OurServicesSectionProps> = ({
             data-aos="fade-right"
             data-aos-duration="1500"
             className={title}
-            style={{
-              cursor: isAuthSettings.isAdmin ? 'pointer' : 'default',
-            }}
+      
             onClick={(e: any) => {
               if (isAuthSettings.isAdmin) {
                 setIsOpen(true);

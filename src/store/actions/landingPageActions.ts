@@ -35,8 +35,8 @@ interface ICreateBlock {
   setBlock: Function;
   setError: (value: boolean | ((prevVar: boolean) => boolean)) => void;
 }
-interface IDeleteBlock {
-  idBlock: number | string;
+interface IDeleteEl {
+  idEl: number | string;
   setError: (value: boolean | ((prevVar: boolean) => boolean)) => void;
 }
 interface IUpdateBlock {
@@ -63,7 +63,7 @@ export const getLandingPageBlock = createAsyncThunk<
   IGetLandingBlockDetails,
   { rejectValue?: string }
 >(`landingPageSlice/getLandingPageBlock`, async (params, { rejectWithValue }) => {
-  console.log(params.id);
+  // console.log(params.id);
 
   try {
     const response = await axios<ILandingBlock>({
@@ -73,7 +73,9 @@ export const getLandingPageBlock = createAsyncThunk<
         showInvisible: params.showInvisible,
       },
     });
+    // console.log(response.data)
     return response.data;
+
   } catch (error: any) {
     params.setError(true);
     return rejectWithValue(error.message);
@@ -145,26 +147,27 @@ export const createBlock = createAsyncThunk<ILandingBlock, ICreateBlock, { rejec
         },
       });
       params.setBlock(response.data);
+      console.log(response.data)
       return response.data;
     } catch (error: any) {
+      console.log(error)
       params.setError(true);
       return rejectWithValue(error.message);
     }
   }
 );
 
-export const deleteBlock = createAsyncThunk<void, IDeleteBlock, { rejectValue?: string }>(
-  'landingPageSlice/deleteBlock',
+export const deleteEl = createAsyncThunk<void, IDeleteEl, { rejectValue?: string }>(
+  'landingPageSlice/deleteEl',
   async (params, { rejectWithValue }) => {
     try {
       await $host<ILandingBlock>({
         method: 'DELETE',
-        url: '/api/LandingBlocks',
-        params: {
-          id: params.idBlock,
-        },
+        url: `/api/LandingBlocks/elements/${params.idEl}`,
+
       });
     } catch (error: any) {
+      console.log(error)
       params.setError(true);
       return rejectWithValue(error.message);
     }
@@ -192,7 +195,6 @@ export const updateBlock = createAsyncThunk<ILandingBlock, IUpdateBlock, { rejec
       return response.data;
    } catch (error: any) {
       params.setError(true);
-
       return rejectWithValue(error.message);
     }
   }
@@ -217,7 +219,6 @@ export const createElement = createAsyncThunk<
         aosAnimation: params.aosAnimation,
       },
     });
-    console.log(response.data);
 
     return response.data;
   } catch (error: any) {

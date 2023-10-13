@@ -56,6 +56,9 @@
 .card:hover {
   box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 6px 6px;
 }
+.activeImg {
+  border: 12px solid red !important;
+}
 @media screen and (max-width: 1200px) {
   .card {
     width: 24%;

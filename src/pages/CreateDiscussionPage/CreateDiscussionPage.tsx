@@ -10,6 +10,7 @@ import Button, { ButtonProps } from '@mui/material/Button';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { createDiscussionQuestion } from '../../store/actions/discussionQuestionsAction';
 import { useNavigate } from 'react-router';
+import { useAuth } from '../../contexts/AuthContext';
 interface CreateDiscussionPage {}
 
 const CreateDiscussionPage: React.FC<CreateDiscussionPage> = () => {
@@ -25,15 +26,15 @@ const CreateDiscussionPage: React.FC<CreateDiscussionPage> = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<formValues>();
+  const {isAuthSettings} = useAuth()
   const onSubmit: SubmitHandler<formValues> = (data) => {
+    const dataCreate = {title  : data.title , description : data.description , authorId : isAuthSettings.user.id , categoryId : 1} 
     dispatch(
       createDiscussionQuestion({
-        data: data,
+        data: dataCreate,
         setError: setIsError,
       })
     );
-    console.log(data);
-
     navigate('/discussionFacade');
   };
   const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({

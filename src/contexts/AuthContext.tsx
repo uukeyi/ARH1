@@ -1,8 +1,10 @@
 import React, { createContext, useContext, useState } from "react";
+import { IUserResponse } from "../interfaces/authResponse";
 interface IAuthContext {
    isAuthSettings: {
       isAuth: boolean;
-      isAdmin : boolean
+      isAdmin: boolean;
+      user : IUserResponse
    };
    setIsAuth: Function;
 }
@@ -21,7 +23,22 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
    const [isAuth, setIsAuth] = useState<{
       isAuth: boolean;
       isAdmin: boolean;
-   }>({ isAuth: false, isAdmin: false });
+      user: IUserResponse;
+   }>({
+      isAuth: false,
+      isAdmin: false,
+      user: {
+         id: null,
+         email: "",
+         password: "",
+         emailConfirmed: false,
+         name: "",
+         isAdmin: false,
+         createdAt: "",
+         isBlocked: false,
+         isDeleted: false,
+      },
+   });
    return (
       <AuthContext.Provider
          value={{

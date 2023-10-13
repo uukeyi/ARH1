@@ -23,11 +23,12 @@
 }
 .bg {
    position: sticky;
-   width: 100%;
+   width: 100% !important;
+   background-size: cover !important;
    top: 0;
    left: 0;
    z-index: -10;
-   height: 100%;
+   height: 100% !important;
 }
 .bgWrapper {
    top: 0;
@@ -57,7 +58,7 @@
    font-size: 58px;
    line-height: 68px;
 }
-.subtitle {
+.subtitle > span {
    margin-top: 20px;
    text-align: center;
    color: rgba(255, 255, 255, 1);
@@ -143,6 +144,7 @@
    margin-top: 30px;
    display: flex;
    flex-direction: column;
+   align-items: center;
    gap: 20px;
    text-align: center;
    width: 100%;
@@ -261,7 +263,7 @@
    }
 }
 @media screen and (max-width: 576px) {
-   .subtitle {
+   .subtitle > span {
       font-size: 17px;
    }
 }

@@ -205,7 +205,7 @@ const Footer: React.FC<FooterProps> = ({
             </div>
             {whiteFooter ? null : (
                <div className={phoneWrapper}>
-                  <input className={phoneInput} />
+                  <input placeholder="+7 (999) 999-9999" className={phoneInput} />
                   <button className={phoneButton}>ОТПРАВИТЬ ЗАЯВКУ</button>
                </div>
             )}

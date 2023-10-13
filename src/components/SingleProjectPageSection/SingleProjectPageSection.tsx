@@ -1,15 +1,19 @@
 import React from "react";
 import Footer from "../Footer/Footer";
 import styles from "./SingleProjectPageSection.module.css";
+import { useAuth } from "../../contexts/AuthContext";
+import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
+import { ILandingBlockElement } from "../../interfaces/landingPageResponse";
+import AdminModalEdit from "../AdminModalEdit";
 interface SingleProjectPageSection {
-   titleText: string;
-   city: string;
-   date: string;
-   facadeSquare: string;
-   floors: string;
-   houseSquare: string;
+   titleText: ILandingBlockElement;
+   city: ILandingBlockElement;
+   date: ILandingBlockElement;
+   facadeSquare: ILandingBlockElement;
+   floors: ILandingBlockElement;
+   houseSquare: ILandingBlockElement;
    children?: any;
-   imgSrc: string;
+   imgSrc: ILandingBlockElement;
    reconstructionPage?: boolean;
 }
 
@@ -49,15 +53,32 @@ const SingleProjectPageImgCover: React.FC<SingleProjectPageSection> = ({
       bgWrapper,
       fullWidthContainer,
    } = styles;
+   const { isAuthSettings } = useAuth();
+   const { setElSettings, setIsOpen } = useAdminModalEdit();
+
    return (
       <>
+         <AdminModalEdit />
          <div className={mainBlock}>
-            <div className={textContainer}>
-               <p style={{ color: "white" }} className={title}>
-                  {titleText}
+            <div
+               onClick={(e: any) => {
+                  if (isAuthSettings.isAdmin) {
+                     setElSettings(JSON.parse(e.target.dataset.el));
+                     setIsOpen(true);
+                  }
+               }}
+               className={textContainer}
+            >
+               <p
+                  data-el={JSON.stringify(titleText)}
+                  style={{ color: "white" }}
+                  className={title}
+               >
+                  {titleText?.value}
                </p>
                <p className={subtitle}>
-                  {city} , {date}
+                  <span data-el={JSON.stringify(city)}>{city?.value}</span> ,{" "}
+                  <span data-el={JSON.stringify(date)}>{date?.value}</span>
                </p>
                <div className={spaceAroundContainer}>
                   <div className={card}>
@@ -75,8 +96,11 @@ const SingleProjectPageImgCover: React.FC<SingleProjectPageSection> = ({
                </div>
                <div className={spaceAroundContainer}>
                   <div className={infoCard}>
-                     <p className={infoCardTitle}>
-                        {reconstructionPage ? "6 га" : houseSquare}
+                     <p
+                        data-el={JSON.stringify(houseSquare)}
+                        className={infoCardTitle}
+                     >
+                        {reconstructionPage ? "6 га" : houseSquare?.value}
                      </p>
                      <p className={infoCardSubtitle}>
                         {reconstructionPage
@@ -85,16 +109,22 @@ const SingleProjectPageImgCover: React.FC<SingleProjectPageSection> = ({
                      </p>
                   </div>
                   <div className={infoCard}>
-                     <p className={infoCardTitle}>
-                        {reconstructionPage ? "11500 м2" : floors}
+                     <p
+                        data-el={JSON.stringify(floors)}
+                        className={infoCardTitle}
+                     >
+                        {reconstructionPage ? "11500 м2" : floors?.value}
                      </p>
                      <p className={infoCardSubtitle}>
                         {reconstructionPage ? "ПЛОЩАДЬ СТРОЕНИЙ" : "Этажность"}
                      </p>
                   </div>
                   <div className={infoCard}>
-                     <p className={infoCardTitle}>
-                        {reconstructionPage ? "2016 год" : facadeSquare}
+                     <p
+                        data-el={JSON.stringify(facadeSquare)}
+                        className={infoCardTitle}
+                     >
+                        {reconstructionPage ? "2016 год" : facadeSquare?.value}
                      </p>
                      <p className={infoCardSubtitle}>
                         {reconstructionPage
@@ -105,14 +135,23 @@ const SingleProjectPageImgCover: React.FC<SingleProjectPageSection> = ({
                </div>
                <div className={bgWrapper}>
                   <div
+                     // onClick={(e: any) => {
+                     //    if (isAuthSettings.isAdmin) {
+                     //       setElSettings(JSON.parse(e.target.dataset.el));
+                     //       setIsOpen(true);
+                     //    }
+                     // }}
                      style={{
-                        background: `url(${imgSrc}) no-repeat`,
+                        background: `url(${imgSrc?.value}) no-repeat`,
                         backgroundSize: "cover",
                         backgroundPosition: "center center",
                      }}
                      className={bg}
                   >
-                     <div className={overlay}></div>
+                     <div
+                        data-el={JSON.stringify(imgSrc)}
+                        className={overlay}
+                     ></div>
                   </div>
                </div>
             </div>

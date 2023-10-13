@@ -37,18 +37,14 @@ const OurServicesCard: React.FC<OurServicesCardProps> = ({
         <img
           src={imgEl.value}
           alt={'Не получилось отобразить картинку'}
-          style={{
-            cursor: isAuthSettings.isAdmin ? 'pointer' : 'default',
-          }}
+      
           onClick={(e: any) => {
             setIsOpen(true);
             setElSettings(imgEl);
           }}
         />
         <p
-          style={{
-            cursor: isAuthSettings.isAdmin ? 'pointer' : 'default',
-          }}
+         
           className={titleClass}
           onClick={(e: any) => {
             setIsOpen(true);
@@ -58,9 +54,7 @@ const OurServicesCard: React.FC<OurServicesCardProps> = ({
           {titleEl.value}
         </p>
         <p
-          style={{
-            cursor: isAuthSettings.isAdmin ? 'pointer' : 'default',
-          }}
+      
           className={descriptionClass}
           onClick={(e: any) => {
             setIsOpen(true);

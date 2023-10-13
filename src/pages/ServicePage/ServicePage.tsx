@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ServicePage.module.css";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxTookitHooks";
-import {
-   getLandingPageBlock,
-} from "../../store/actions/landingPageActions";
+import { getLandingPageBlock } from "../../store/actions/landingPageActions";
 import {
    ILandingBlockElement,
    landingElPrototype,
@@ -14,6 +12,7 @@ import AdminModal from "../../components/AdminModal/AdminModal";
 import { useAuth } from "../../contexts/AuthContext";
 import { Button } from "@mui/material";
 import WorkAlgorithmGallery from "../../components/WorkAlgorithmGallery/WorkAlgorithmGallery";
+import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
 const ServicePage: React.FC = () => {
    const [errorLandingBlocks, setErrorLandingBlocks] = useState(false);
    const location = useLocation();
@@ -30,7 +29,9 @@ const ServicePage: React.FC = () => {
    }, []);
    const [adminModal, setAdminModal] = useState(false);
    const { isAuthSettings } = useAuth();
-   const { wrapper, title, subtitle, listItem, video , gallery } = styles;
+   const { setIsOpen, setElSettings } = useAdminModalEdit();
+
+   const { wrapper, title, subtitle, listItem, video, gallery } = styles;
    const dispatch = useAppDispatch();
    const serviceBlock = useAppSelector(
       (state) => state.landingPageSlice.singleBlock
@@ -110,18 +111,26 @@ const ServicePage: React.FC = () => {
                )}
                <Link to={"/"} className={subtitle}>
                   Главная /{" "}
-                  <Link to={"/ourServices"} className={subtitle}>
-                     Наши услуги /{" "}
+                
                      <Link to="/" style={{ color: "rgb(235 51 73)" }}>
                         Проект фасада дома
                      </Link>
-                  </Link>
+             
                </Link>
                {mainContent?.map(
                   (element: ILandingBlockElement, index): any => {
                      if (element.typeId === 1) {
                         return (
-                           <h3 className={title} key={index}>
+                           <h3
+                              onClick={() => {
+                                 if (isAuthSettings.isAdmin) {
+                                    setIsOpen(true);
+                                    setElSettings(element);
+                                 }
+                              }}
+                              className={title}
+                              key={index}
+                           >
                               {element.value}
                            </h3>
                         );
@@ -146,6 +155,12 @@ const ServicePage: React.FC = () => {
                                     ? listItem
                                     : ""
                               }
+                              onClick={() => {
+                                 if (isAuthSettings.isAdmin) {
+                                    setIsOpen(true);
+                                    setElSettings(element);
+                                 }
+                              }}
                            >
                               {element.value}
                            </p>
@@ -153,7 +168,17 @@ const ServicePage: React.FC = () => {
                         //   }
                      } else if (element.typeId === 3) {
                         return (
-                           <img key={index} src={element.value} alt="img" />
+                           <img
+                              onClick={() => {
+                                 if (isAuthSettings.isAdmin) {
+                                    setIsOpen(true);
+                                    setElSettings(element);
+                                 }
+                              }}
+                              key={index}
+                              src={element.value}
+                              alt="img"
+                           />
                         );
                      }
                   }
@@ -163,9 +188,8 @@ const ServicePage: React.FC = () => {
                   images={photosGallery}
                   slidesData={slidesGallery}
                   customClass={gallery}
-                  showBtn = {false}
-                  isHoverOnImages = {true}
-                  
+                  showBtn={false}
+                  isHoverOnImages={true}
                />
             </div>
          </div>
