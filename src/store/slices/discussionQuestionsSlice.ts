@@ -6,14 +6,18 @@ import {
   getDiscussionProps,
   getDiscussionQuestions,
 } from '../actions/discussionQuestionsAction';
-import { IDiscussion, IDiscussionGetResponse, discussionPrototype } from '../../interfaces/discussionsResponse';
+import {
+  IDiscussion,
+  IDiscussionGetResponse,
+  discussionPrototype,
+} from '../../interfaces/discussionsResponse';
 interface IQuestionsArrayState {
   questions: IDiscussion[];
-  singleQuestion : IDiscussion
+  singleQuestion: IDiscussion;
 }
 const initialState: IQuestionsArrayState = {
   questions: [],
-  singleQuestion : discussionPrototype
+  singleQuestion: discussionPrototype,
 };
 export const discussionQuestionsSlice = createSlice({
   name: 'discussionQuestionsSlice',
@@ -32,13 +36,17 @@ export const discussionQuestionsSlice = createSlice({
         state.questions = action.payload.entities;
       }
     );
-    builder.addCase(createDiscussionQuestion.fulfilled, (state, action: PayloadAction<IDiscussion>) => {
-      state.questions = [...state.questions, action.payload];
-    });
+    builder.addCase(
+      createDiscussionQuestion.fulfilled,
+      (state, action: PayloadAction<IDiscussion>) => {
+        state.questions.length >= 5
+          ? (state.questions = [...state.questions])
+          : (state.questions = [...state.questions, action.payload]);
+      }
+    );
     builder.addCase(getDiscussionDetails.fulfilled, (state, action: PayloadAction<IDiscussion>) => {
-      state.singleQuestion = action.payload
+      state.singleQuestion = action.payload;
     });
-
   },
 });
 

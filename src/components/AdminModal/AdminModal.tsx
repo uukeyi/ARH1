@@ -3,18 +3,15 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { FormControl, TextField } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxTookitHooks';
+import { useAppDispatch } from '../../hooks/reduxTookitHooks';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import {
-  createBlock,
-  createElement,
-  getLandingPageBlocks,
-} from '../../store/actions/landingPageActions';
-import { ILandingBlock, landingBlockPrototype } from '../../interfaces/landingPageResponse';
+import { createElement } from '../../store/actions/landingPageActions';
+import { ILandingBlock } from '../../interfaces/landingPageResponse';
 interface AdminModalProps {
   open: boolean;
   setOpen: (value: boolean | ((prevVar: boolean) => boolean)) => void;
-  pageBlock: string;
+  pageBlock: ILandingBlock;
+  orderEl?: number | string;
 }
 interface IElement {
   value: string;
@@ -23,7 +20,7 @@ interface IElement {
   name?: string;
 }
 
-const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, pageBlock }) => {
+const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, pageBlock, orderEl }) => {
   const [isText, setIsText] = useState({
     value: false,
     type: 'description',
@@ -37,52 +34,18 @@ const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, pageBlock }) => 
     value: false,
     type: 'title',
   });
-  const [block, setBlock] = useState<ILandingBlock>(landingBlockPrototype);
   const [inputValue, setInputValue] = useState('');
   const [elements, setElements] = useState<IElement[]>([]);
   const [edit, setIsEdit] = useState(false);
   const [id, setId] = useState(0);
   const [isError, setIsError] = useState(false);
   const [editValue, setEditValue] = useState('');
-  const [errorLandingBlocks, setErrorLandingBlocks] = useState(false);
-  const landingBlocks = useAppSelector((state) => state.landingPageSlice);
-  useEffect(() => {
-    dispatch(
-      getLandingPageBlocks({
-        showInvisible: true,
-        setError: setErrorLandingBlocks,
-      })
-    );
-  }, []);
   type formValues = {
     elements: string;
   };
-
   const dispatch = useAppDispatch();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<formValues>();
-  let orderBlock = 0;
-  const orderHandler = (element: IElement, index: number) => {};
+  const { handleSubmit } = useForm<formValues>();
   const onSubmit: SubmitHandler<any> = async () => {
-    if (pageBlock != 'facadeDesign') {
-      dispatch(
-        createBlock({
-          orderIndex: orderBlock,
-          nameBlock: '',
-          pageBlock: pageBlock,
-          setError: setIsError,
-          elements: [],
-          isVisible: true,
-          isDeleted: false,
-          setBlock: setBlock,
-        })
-      );
-    }
-
-    let order = 200;
     await elements.map((element) => {
       if (element.type === 'title') {
         element.type = 1;
@@ -91,22 +54,23 @@ const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, pageBlock }) => 
       } else if (element.type === 'image') {
         element.type = 3;
       }
-
       dispatch(
         createElement({
           value: element.value,
           typeId: element.type,
-          idBlock: pageBlock === 'facadeDesign' ? 57 : block.id,
-          orderIndex: order,
+          idBlock: pageBlock.id,
+          orderIndex: orderEl ? orderEl : pageBlock.elements.length,
           aosAnimation: '',
           setError: setIsError,
         })
       );
-
-      orderBlock += 1;
-      order += 1;
     });
   };
+  useEffect(() => {
+    if (isError) {
+      alert('Не получилось создать элемент');
+    }
+  }, [isError]);
   return (
     <div>
       <Modal
@@ -131,189 +95,13 @@ const AdminModal: React.FC<AdminModalProps> = ({ open, setOpen, pageBlock }) => 
               p: 4,
             }}
           >
-            <Box sx={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
-              {pageBlock === 'projects' ? (
-                <Box sx={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: {
-                        xs: 'column',
-                        sm: 'row',
-                      },
-                      justifyContent: 'end',
-                      gap: '10px',
-                    }}
-                  >
-                    {' '}
-                    <Button
-                      variant="outlined"
-                      onClick={() => {
-                        setIsText({
-                          value: false,
-                          type: 'description',
-                          name: 'desc',
-                        });
-                        setIsTitle({
-                          value: false,
-                          type: 'title',
-                        });
-                        setIsImg({
-                          value: true,
-                          type: 'image',
-                        });
-                      }}
-                    >
-                      Картинка
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      onClick={() => {
-                        setIsImg({
-                          value: false,
-                          type: 'image',
-                        });
-                        setIsText({
-                          value: false,
-                          type: 'description',
-                          name: 'desc',
-                        });
-                        setIsTitle({
-                          value: true,
-                          type: 'title',
-                        });
-                      }}
-                    >
-                      Заголовок
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      onClick={() => {
-                        setIsImg({
-                          value: false,
-                          type: 'image',
-                        });
-                        setIsTitle({
-                          value: false,
-                          type: 'title',
-                        });
-                        setIsText({
-                          value: true,
-                          type: 'description',
-                          name: 'place',
-                        });
-                      }}
-                    >
-                      Место
-                    </Button>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: {
-                        xs: 'column',
-                        sm: 'row',
-                      },
-                      justifyContent: 'end',
-                      gap: '10px',
-                    }}
-                  >
-                    <Button
-                      variant="outlined"
-                      onClick={() => {
-                        setIsImg({
-                          value: false,
-                          type: 'image',
-                        });
-                        setIsText({
-                          value: true,
-                          type: 'description',
-                          name: 'time',
-                        });
-                        setIsTitle({
-                          value: false,
-                          type: 'title',
-                        });
-                      }}
-                    >
-                      Время
-                    </Button>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: {
-                        xs: 'column',
-                        sm: 'row',
-                      },
-                      justifyContent: 'end',
-                      gap: '10px',
-                    }}
-                  >
-                    <Button
-                      variant="outlined"
-                      onClick={() => {
-                        setIsImg({
-                          value: false,
-                          type: 'image',
-                        });
-                        setIsText({
-                          value: true,
-                          type: 'description',
-                          name: 'shouse',
-                        });
-                        setIsTitle({
-                          value: false,
-                          type: 'title',
-                        });
-                      }}
-                    >
-                      Площадь
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      onClick={() => {
-                        setIsImg({
-                          value: false,
-                          type: 'image',
-                        });
-                        setIsTitle({
-                          value: false,
-                          type: 'title',
-                        });
-                        setIsText({
-                          value: true,
-                          type: 'description',
-                          name: 'floor',
-                        });
-                      }}
-                    >
-                      Этажность
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      onClick={() => {
-                        setIsText({
-                          value: true,
-                          type: 'description',
-                          name: 'sfacade',
-                        });
-                        setIsTitle({
-                          value: false,
-                          type: 'title',
-                        });
-                        setIsImg({
-                          value: false,
-                          type: 'image',
-                        });
-                      }}
-                    >
-                      Площадь
-                    </Button>
-                  </Box>
-                </Box>
-              ) : null}
-
+            <Box
+              sx={{
+                display: 'flex',
+                gap: '10px',
+                flexDirection: 'column',
+              }}
+            >
               <Box
                 sx={{
                   display: 'flex',
