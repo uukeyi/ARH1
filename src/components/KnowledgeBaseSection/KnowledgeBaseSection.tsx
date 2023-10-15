@@ -3,33 +3,22 @@ import { Link, useNavigate } from 'react-router-dom';
 import BoxShadowCard from '../BoxShadowCard/BoxShadowCard';
 import styles from './KnowledgeBaseSection.module.css';
 import { Button } from '@mui/material';
-import AdminModal from '../AdminModal/AdminModal';
 import { getLandingPageBlocks } from '../../store/actions/landingPageActions';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxTookitHooks';
 import { useAuth } from '../../contexts/AuthContext';
-import { useAdminModalEdit } from '../../contexts/AdminModalEditContext';
-type cardType = {
-  titleText: string;
-  description: string;
-  img: string;
-  pathCard: string;
-};
+import { createBlock } from '../../store/actions/landingPageActions';
 const KnowledgeBaseSection: React.FC = () => {
   const {
     knowledgeBaseSection,
     subtitle,
-    linkContainer,
     title,
     cardContainer,
     cardTitle,
     cardCustom,
-    link,
     fullWidthContainer,
     textContainer,
   } = styles;
-  const [adminModal, setAdminModal] = useState(false);
   const { isAuthSettings } = useAuth();
-  const { setBlockSettings, setIsOpenBlockEdit } = useAdminModalEdit();
   const [errorLandingBlocks, setErrorLandingBlocks] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
@@ -40,7 +29,7 @@ const KnowledgeBaseSection: React.FC = () => {
       })
     );
   }, []);
-
+  const [errorCreate, setErrorCreate] = useState(false);
   const dispatch = useAppDispatch();
   const landingBlocks = useAppSelector((state) => state.landingPageSlice);
   const articlesBlocks = landingBlocks.elements.filter((block) => {
@@ -52,6 +41,12 @@ const KnowledgeBaseSection: React.FC = () => {
       navigate('/');
     }
   }, [errorLandingBlocks]);
+  useEffect(() => {
+    if (errorCreate) {
+      alert('Не получилось создать блок');
+    }
+  }, [errorCreate]);
+  console.log(articlesBlocks);
   return (
     <section id={knowledgeBaseSection}>
       <div className={`container ${fullWidthContainer}`}>
@@ -63,6 +58,53 @@ const KnowledgeBaseSection: React.FC = () => {
           </Link>
         </Link>
         <p className={title}>БАЗА ЗНАНИЙ</p>
+        {isAuthSettings.isAdmin ? (
+          <Button
+            variant="outlined"
+            sx={{
+              display: 'block',
+              margin: '20px auto',
+            }}
+            onClick={() => {
+              dispatch(
+                createBlock({
+                  nameBlock: `new article block ${articlesBlocks.length + 1}`,
+                  orderIndex: articlesBlocks.length,
+                  pageBlock: 'articles',
+                  isVisible: true,
+                  isDeleted: false,
+                  elements: [],
+                  setError: setErrorCreate,
+                  createWithInitialData: true,
+                  initialElements: [
+                    {
+                      value: 'заголовок',
+                      orderIndex: 0,
+                      typeId: 1,
+                      aosAnimation: '',
+                    },
+                    {
+                      value: 'описание',
+                      orderIndex: 1,
+                      typeId: 2,
+                      aosAnimation: '',
+                    },
+                    {
+                      value: 'https://i.ibb.co/qWP5dgs/22.jpg',
+                      orderIndex: 2,
+                      typeId: 3,
+                      aosAnimation: '',
+                    },
+                  ],
+                })
+              );
+            }}
+          >
+            Создать блок
+          </Button>
+        ) : (
+          <></>
+        )}
 
         <div className={cardContainer}>
           {articlesBlocks.map((card, index) => {

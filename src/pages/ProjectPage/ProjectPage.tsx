@@ -17,17 +17,6 @@ const ProjectPage: React.FC = () => {
   const location = useLocation();
   const currentLocation = location.pathname;
   const currentId = currentLocation.match(/\d+/g);
-  const [adminModal, setAdminModal] = useState(false);
-  const dispatch = useAppDispatch();
-  const projectBlock = useAppSelector((state) => state.landingPageSlice.singleBlock);
-  const leftSideElements = projectBlock.elements.slice(7);
-  const { isAuthSettings } = useAuth();
-  const { setElSettings, setIsOpen } = useAdminModalEdit();
-  const [elOrder, setElOrder] = useState<string | number>('');
-  const [blockId, setBlockId] = useState<string | number>(0);
-  useEffect(() => {
-    console.log(projectBlock);
-  }, [projectBlock]);
   useEffect(() => {
     dispatch(
       getLandingPageBlock({
@@ -37,16 +26,40 @@ const ProjectPage: React.FC = () => {
       })
     );
   }, []);
+  useEffect(() => {
+    if (errorLandingBlocks) {
+      alert('Не получилось получить данные');
+    }
+  }, [errorLandingBlocks]);
+  useEffect(() => {
+    dispatch(
+      getLandingPageBlocks({
+        showInvisible: true,
+        setError: setErrorLandingBlocks,
+      })
+    );
+  }, []);
+
+  const dispatch = useAppDispatch();
+  const projectBlock = useAppSelector((state) => state.landingPageSlice.singleBlock);
+  const leftSideElements = projectBlock.elements.slice(7);
+  const { isAuthSettings } = useAuth();
+  const { setElSettings, setIsOpen } = useAdminModalEdit();
+  const [adminModal, setAdminModal] = useState(false);
+  const [elOrder, setElOrder] = useState<string | number>('');
+  useEffect(() => {
+    console.log(projectBlock);
+  }, [projectBlock]);
   if (projectBlock) {
     return (
       <div style={{ height: '100%' }}>
+        <AdminModalEdit />
         <AdminModal
+          pageBlock={projectBlock}
           open={adminModal}
           setOpen={setAdminModal}
-          pageBlock={projectBlock}
           orderEl={elOrder}
         />
-        <AdminModalEdit />
         <SingleProjectPageImgCover
           titleText={projectBlock.elements[1]}
           city={projectBlock.elements[2]}
@@ -66,6 +79,22 @@ const ProjectPage: React.FC = () => {
             }}
             className="single-project-page-content-container"
           >
+            {isAuthSettings.isAdmin ? (
+              <Button
+                variant="outlined"
+                sx={{
+                  display: 'block',
+                  margin: '20px auto',
+                }}
+                onClick={() => {
+                  setAdminModal(true);
+                }}
+              >
+                Добавить элемент
+              </Button>
+            ) : (
+              <></>
+            )}
             <p className={linkContainer}>
               <Link to={'/'}> Главная </Link> /<Link to={'/ourProjects'}> &nbsp; Наши работы</Link>{' '}
               /
@@ -125,7 +154,6 @@ const ProjectPage: React.FC = () => {
                         onClick={() => {
                           setAdminModal(true);
                           setElOrder(element.orderIndex);
-                          setBlockId(element.blockId);
                         }}
                       >
                         Добавить новую статью
@@ -155,7 +183,6 @@ const ProjectPage: React.FC = () => {
                         onClick={() => {
                           setAdminModal(true);
                           setElOrder(element.orderIndex);
-                          setBlockId(element.blockId);
                         }}
                       >
                         Добавить новую статью
@@ -185,7 +212,6 @@ const ProjectPage: React.FC = () => {
                         onClick={() => {
                           setAdminModal(true);
                           setElOrder(element.orderIndex);
-                          setBlockId(element.blockId);
                         }}
                       >
                         Добавить новую статью

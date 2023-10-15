@@ -162,13 +162,3 @@ const ServicePage: React.FC = () => {
 };
 
 export default ServicePage;
-// {element.aosAnimation == 'youtubeLink' ? <iframe
-//                 className={video}
-//                 src="https://www.youtube.com/embed/vxB5YMJQUos?start=0&showinfo=1&controls=1&autoplay=0"
-//                 frameBorder="0"
-//                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-//                 allowFullScreen
-//                 title="Embedded youtube"
-//              /> : (<p className={element.aosAnimation == 'liElement' ? listItem : ''}>
-//              {element.value}
-//            </p>)}
