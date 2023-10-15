@@ -50,6 +50,7 @@ const ProjectPage: React.FC = () => {
    const { isAuthSettings } = useAuth();
    const { setElSettings, setIsOpen } = useAdminModalEdit();
    const [adminModal, setAdminModal] = useState(false);
+
    if (projectBlock) {
       return (
          <div style={{ height: "100%" }}>
