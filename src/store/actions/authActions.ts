@@ -139,14 +139,16 @@ export const checkAuth = createAsyncThunk<
          data.setIsAuth({ isAuth: false  , isAdmin : false });
          localStorage.removeItem("token");
          localStorage.removeItem("refreshToken");
+         data.setError(true)
          throw new Error(
             "Ваш токен авторизации истек пожалуйста авторизуйтесь еще раз"
          );
+    
       }
 
       return response.data.user;
    } catch (error: any) {
-      data.setError(true);
+
       return rejectWithValue(error.message);
    }
 });

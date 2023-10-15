@@ -143,6 +143,7 @@ const MainPage: React.FC = () => {
                         firstBlockElements={el.elements.slice(0, 14)}
                         secondBlockElements={el.elements.slice(15, 29)}
                         secondBlockTitle={el.elements[29]}
+                        
                      />
                   );
                case "ЗАГОЛОВОК БЛОКА":

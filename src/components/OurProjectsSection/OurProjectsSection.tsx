@@ -5,8 +5,15 @@ import styles from "./OurProjectsSection.module.css";
 import { Button } from "@mui/material";
 import AdminModal from "../AdminModal/AdminModal";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxTookitHooks";
-import { getLandingPageBlocks } from "../../store/actions/landingPageActions";
+import {
+   createBlock,
+   getLandingPageBlocks,
+} from "../../store/actions/landingPageActions";
 import { useAuth } from "../../contexts/AuthContext";
+import {
+   ILandingBlock,
+   landingBlockPrototype,
+} from "../../interfaces/landingPageResponse";
 
 type cardType = {
    titleText: string;
@@ -53,13 +60,13 @@ const OurProjectsSection: React.FC = () => {
       }
    }, [errorLandingBlocks]);
    const [adminModal, setAdminModal] = useState(false);
+   const [block, setBlock] = useState<ILandingBlock>(landingBlockPrototype);
+   const [error, setError] = useState(false);
+   useEffect(() => {
+      console.log(projectBlocks);
+   }, [projectBlocks]);
    return (
       <section id={ourProjectsSection}>
-         <AdminModal
-            open={adminModal}
-            setOpen={setAdminModal}
-            pageBlock="projects"
-         />
          <div className={`${fullWidthContainer} container`}>
             <Link to={"/"} className={subtitle}>
                Главная /
@@ -69,6 +76,7 @@ const OurProjectsSection: React.FC = () => {
                </Link>
             </Link>
             <p className={title}>ПРОЕКТЫ</p>
+          
             {isAuthSettings.isAdmin ? (
                <Button
                   variant="outlined"
@@ -77,10 +85,67 @@ const OurProjectsSection: React.FC = () => {
                      margin: "20px auto",
                   }}
                   onClick={() => {
-                     setAdminModal(true);
+                     dispatch(
+                        createBlock({
+                           nameBlock: `new project block ${projectBlocks.length + 1}`,
+                           orderIndex: projectBlocks.length ,
+                           pageBlock: "projects",
+                           isVisible: true,
+                           isDeleted: false,
+                           elements : [],
+                           setError: setError,
+                           createWithInitialData : true,
+                           initialElements : [
+                              {
+                                 value : 'https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cmFuZG9tfGVufDB8fDB8fHww&w=1000&q=80',
+                                 orderIndex : 0,
+                                 typeId : 3,
+                                 aosAnimation : ''
+                              },
+                              {
+                                 value : 'заголовок',
+                                 orderIndex : 1,
+                                 typeId : 2,
+                                 aosAnimation : ''
+                              },
+                              {
+                                 value : 'место',
+                                 orderIndex : 2,
+                                 typeId : 2,
+                                 aosAnimation : ''
+                              },
+                              {
+                                 value : 'дата',
+                                 orderIndex : 3,
+                                 typeId : 2,
+                                 aosAnimation : ''
+                              },
+                              {
+                                 value : 'площадь дома',
+                                 orderIndex : 4,
+                                 typeId : 2,
+                                 aosAnimation : ''
+                              },
+                              {
+                                 value : 'этажность',
+                                 orderIndex : 5,
+                                 typeId : 2,
+                                 aosAnimation : ''
+                              },
+                              {
+                                 value : 'площадь фасадов',
+                                 orderIndex : 6,
+                                 typeId : 2,
+                                 aosAnimation : ''
+                              },
+                           ]
+                        })
+                     );
+
+                     // setAdminModal(true);
                   }}
                >
-                  Добавить новую статью
+                  Создать блок
                </Button>
             ) : (
                <></>

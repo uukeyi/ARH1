@@ -85,11 +85,11 @@ const ServicePage: React.FC = () => {
    });
    return (
       <section>
-         <AdminModal
+         {/* <AdminModal
             open={adminModal}
             setOpen={setAdminModal}
             pageBlock="facadeDesign"
-         />
+         /> */}
          <ServiceDetailsSection />
          <div className="container">
             <div className={wrapper}>

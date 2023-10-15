@@ -24,6 +24,11 @@ const MainLayout: React.FC = () => {
          dispatch(checkAuth({ setError: setIsError, setIsAuth: setIsAuth }));
       }
    }, []);
+   // useEffect(() => {
+   //    if (error) {
+   //       alert("Ваш токен авторизации истек войдите еще раз");
+   //    }
+   // }, [error]);
    return (
       <>
          <UnauthorizedPopup
@@ -31,7 +36,7 @@ const MainLayout: React.FC = () => {
             setIsOpen={setIsOpen}
             isTimeout={true}
          />
-         <Header isMainPage = {true}  displayButtons={true} />
+         <Header isMainPage={true} displayButtons={true} />
          <main className="main">
             <Outlet />
             <Link to="header" smooth duration={1000}>

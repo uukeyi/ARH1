@@ -175,18 +175,23 @@ const WorkAlgorithmSection: React.FC<WorkAlgorithmSectionProps> = ({
                   images={photos1}
                   slidesData={slides1}
                   customClass={gallery}
+                  showBtn = {true}
                />
                <WorkAlgorithmGallery
                   title={secondBlockTitle}
                   images={photos2}
                   slidesData={slides2}
                   customClass={gallery}
+                  showBtn = {true}
+
                />
                <WorkAlgorithmGallery
                   title={thirdBlockTitle}
                   images={photos3}
                   slidesData={slides3}
                   customClass={gallery}
+                  showBtn = {true}
+
                />
             </div>
          </div>

@@ -11,7 +11,8 @@ import { useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
 import AdminModalEdit from "../../components/AdminModalEdit";
-
+import AdminModal from "../../components/AdminModal/AdminModal";
+import { Button } from "@mui/material";
 const ArticlePage: React.FC = () => {
    const [errorLandingBlocks, setErrorLandingBlocks] = useState(false);
    const location = useLocation();
@@ -26,10 +27,16 @@ const ArticlePage: React.FC = () => {
          })
       );
    }, []);
-   const { wrapper, title , pinkList } = styles;
+   useEffect(() => {
+      if (errorLandingBlocks) {
+         alert("Не получилось получить данные");
+      }
+   }, [errorLandingBlocks]);
+   const { wrapper, title, pinkList } = styles;
    const dispatch = useAppDispatch();
    const { isAuthSettings } = useAuth();
    const { setElSettings, setIsOpen } = useAdminModalEdit();
+   const [isOpen, setOpen] = useState(false);
    const articlesBlock = useAppSelector(
       (state) => state.landingPageSlice.singleBlock
    );
@@ -45,6 +52,12 @@ const ArticlePage: React.FC = () => {
       <section>
          <KnowledgeBaseDetailsSection pageTitle={articlesBlock.elements[0]} />
          <AdminModalEdit />
+         <AdminModal
+            open={isOpen}
+            setOpen={setOpen}
+            pageBlock={articlesBlock}
+         />
+
          <div className="container">
             <div
                onClick={(e: any) => {
@@ -55,6 +68,22 @@ const ArticlePage: React.FC = () => {
                }}
                className={wrapper}
             >
+               {isAuthSettings.isAdmin ? (
+                  <Button
+                     variant="outlined"
+                     sx={{
+                        display: "block",
+                        margin: "20px auto",
+                     }}
+                     onClick={() => {
+                        setOpen(true);
+                     }}
+                  >
+                     Добавить элемент
+                  </Button>
+               ) : (
+                  <></>
+               )}
                {articlesBlock?.elements.map(
                   (element: ILandingBlockElement): any => {
                      if (element.typeId === 1) {
@@ -87,12 +116,8 @@ const ArticlePage: React.FC = () => {
                         element.typeId === 2
                      ) {
                         return (
-                           <div className={pinkList} >
-                              <p
-                             
-                              >
-                                 {element.value}
-                              </p>
+                           <div className={pinkList}>
+                              <p>{element.value}</p>
                            </div>
                         );
                      } else if (element.typeId === 2) {

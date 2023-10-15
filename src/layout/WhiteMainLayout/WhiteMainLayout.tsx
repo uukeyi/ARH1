@@ -41,6 +41,11 @@ const WhiteMainLayout: React.FC = () => {
          dispatch(checkAuth({ setError: setIsError, setIsAuth: setIsAuth }));
       }
    }, []);
+   // useEffect(() => {
+   //    if (error) {
+   //       alert("Ваш токен авторизации истек войдите еще раз");
+   //    }
+   // }, [error]);
    return (
       <>
          <UnauthorizedPopup

@@ -12,13 +12,14 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { useAuth } from "../../contexts/AuthContext";
 import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
 import AdminModalEdit from "../../components/AdminModalEdit";
+import { Button } from "@mui/material";
+import AdminModal from "../../components/AdminModal/AdminModal";
 const ProjectPage: React.FC = () => {
    const { linkContainer, video } = styles;
    const [errorLandingBlocks, setErrorLandingBlocks] = useState(false);
    const location = useLocation();
    const currentLocation = location.pathname;
    const currentId = currentLocation.match(/\d+/g);
-
    useEffect(() => {
       dispatch(
          getLandingPageBlock({
@@ -28,6 +29,11 @@ const ProjectPage: React.FC = () => {
          })
       );
    }, []);
+   useEffect(() => {
+      if (errorLandingBlocks) {
+         alert("Не получилось получить данные");
+      }
+   }, [errorLandingBlocks]);
    useEffect(() => {
       dispatch(
          getLandingPageBlocks({
@@ -43,10 +49,16 @@ const ProjectPage: React.FC = () => {
    const leftSideElements = projectBlock.elements.slice(7);
    const { isAuthSettings } = useAuth();
    const { setElSettings, setIsOpen } = useAdminModalEdit();
+   const [adminModal, setAdminModal] = useState(false);
    if (projectBlock) {
       return (
          <div style={{ height: "100%" }}>
             <AdminModalEdit />
+            <AdminModal
+               pageBlock={projectBlock}
+               open={adminModal}
+               setOpen={setAdminModal}
+            />
             <SingleProjectPageImgCover
                titleText={projectBlock.elements[1]}
                city={projectBlock.elements[2]}
@@ -66,6 +78,22 @@ const ProjectPage: React.FC = () => {
                   }}
                   className="single-project-page-content-container"
                >
+                  {isAuthSettings.isAdmin ? (
+                     <Button
+                        variant="outlined"
+                        sx={{
+                           display: "block",
+                           margin: "20px auto",
+                        }}
+                        onClick={() => {
+                           setAdminModal(true);
+                        }}
+                     >
+                        Добавить элемент
+                     </Button>
+                  ) : (
+                     <></>
+                  )}
                   <p className={linkContainer}>
                      <Link to={"/"}> Главная </Link> /
                      <Link to={"/ourProjects"}> &nbsp; Наши работы</Link> /
