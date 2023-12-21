@@ -129,7 +129,6 @@ const MainPage: React.FC = () => {
                      />
                   );
                case "АЛГОРИТМ РАБОТЫ":
-                  console.log(el.elements)
                   let firstIndex = el.elements.findIndex((el, index) => {
                      if (el.aosAnimation === "first") {
                         return index;

@@ -128,6 +128,7 @@ const ArticlePage: React.FC = () => {
                                     fontSize: "20px",
                                     marginTop: "30px",
                                  }}
+                                 data-el={JSON.stringify(element)}
                                  
                               >
                                  {element.value}
@@ -157,7 +158,7 @@ const ArticlePage: React.FC = () => {
                         return (
                            <>
                               <div className={pinkList}>
-                                 <p>{element.value}</p>
+                                 <p   data-el={JSON.stringify(element)}>{element.value}</p>
                               </div>
                               {isAuthSettings.isAdmin ? (
                                  <Button

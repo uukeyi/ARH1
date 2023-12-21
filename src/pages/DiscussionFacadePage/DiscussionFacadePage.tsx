@@ -8,7 +8,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-import { makeStyles } from '@mui/styles';
+import { useLocation } from 'react-router-dom';
 import {
   getDiscussionQuestions,
   getDiscussionProps,
@@ -16,7 +16,7 @@ import {
 } from '../../store/actions/discussionQuestionsAction';
 import { useNavigate } from 'react-router';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { FormControl, FormLabel, InputLabel, TextField } from '@mui/material';
+import { FormControl, TextField } from '@mui/material';
 import { useAuth } from '../../contexts/AuthContext';
 import { useAdminModalEdit } from '../../contexts/AdminModalEditContext';
 interface DiscussionFacadePageProps {}
@@ -26,7 +26,9 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
   const [curPage, setCurPage] = useState<number>(1);
   const [sortBS, setSortBS] = useState<string>('');
   const [sortCC, setSortCC] = useState<string>('');
+
   const state = useAppSelector((state) => state.discussionQuestions);
+  const categories = useAppSelector((state) => state.discussionQuestions.categories);
   type formValues = {
     query: string;
   };
@@ -49,10 +51,18 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
       })
     );
   };
-
+  const location = useLocation();
+  const currentLocation = location.pathname;
+  const currentId = currentLocation.match(/\d+/g);
   const [error, setError] = useState(false);
+  const dataArray = [currentId, setError];
   useEffect(() => {
-    dispatch(getDiscussionQuestions(setError));
+    dispatch(
+      getDiscussionQuestions({
+        categoryId: currentId,
+        setError: setError,
+      })
+    );
   }, []);
   const navigate = useNavigate();
   useEffect(() => {
@@ -237,7 +247,7 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
             }}
             //   className={classes.btnAddCategory}
             variant="contained"
-            onClick={() => navigate('/createDiscussion')}
+            onClick={() => navigate(`/createDiscussion/topic&${currentId}`)}
           >
             Добавить новую тему
           </Button>

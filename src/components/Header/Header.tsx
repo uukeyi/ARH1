@@ -5,6 +5,8 @@ import styles from "./Header.module.css";
 import blackLogoSrc from "../../assets/logoBlack.webp";
 import lightLogoSrc from "../../assets/logoLight.webp";
 import { Link } from "react-scroll";
+// @ts-ignore
+import { NavHashLink } from "react-router-hash-link";
 interface HeaderProps {
    customClassNameLinks?: string;
    customClassNameButton?: string;
@@ -126,7 +128,7 @@ const Header: React.FC<HeaderProps> = ({
                   КОНТАКТЫ
                </NavLink>
                <NavLink
-                  to="/discussionFacade"
+                  to="/discussionCategories"
                   className={({ isActive }) =>
                      !isActive
                         ? `${navLink} ${customClassNameLinks} ${
@@ -139,16 +141,13 @@ const Header: React.FC<HeaderProps> = ({
                >
                   ОБСУЖДЕНИЕ
                </NavLink>
-               {isMainPage ? (
-                  <Link
-                     className={navLink}
-                     to="ourServices"
-                     smooth
-                     duration={1000}
-                  >
-                     УСЛУГИ
-                  </Link>
-               ) : null}
+               <NavHashLink
+               className = {navLink}
+               style = {{color : isMainPage ? 'white' : 'black'}}
+                  to="/#ourServices"
+               >
+                  УСЛУГИ
+               </NavHashLink>
             </nav>
             <div className={contactWrapper}>
                <a className={`${numberButton} ${customClassNameButton}`}>

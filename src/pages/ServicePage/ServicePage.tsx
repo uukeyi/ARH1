@@ -56,7 +56,7 @@ const ServicePage: React.FC = () => {
    }, []);
    const breakpoints = [4320, 2160, 1080, 640, 384, 256, 128];
    const sliderImages: ILandingBlockElement[] = [];
-   console.log(serviceBlock.elements)
+   console.log(serviceBlock.elements);
    return (
       <section>
          <ServiceDetailsSection />
@@ -126,9 +126,7 @@ const ServicePage: React.FC = () => {
                                        setAdminModal(true);
                                        setElOrder(element.orderIndex);
                                     }}
-                                 >
-                       
-                                 </Button>
+                                 ></Button>
                               ) : null}
                            </>
                         );
@@ -137,35 +135,35 @@ const ServicePage: React.FC = () => {
                         element.aosAnimation === "youtubeLink"
                      ) {
                         return (
-                           <iframe
-                              key={index}
-                              className={video}
-                              src={element.value}
-                              frameBorder="0"
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                              allowFullScreen
-                              onContextMenu={() => {
-                                 if (isAuthSettings.isAdmin) {
-                                    setElSettings(element);
-                                    setIsOpen(true);
-                                 }
-                              }}
-                              title="Embedded youtube"
-                           />
+                           <>
+                              <button
+                                 style={{
+                                    opacity: isAuthSettings.isAdmin ? "1" : "0",
+                                    pointerEvents: isAuthSettings.isAdmin
+                                       ? "all"
+                                       : "none",
+                                 }}
+                                 onClick={() => {
+                                    if (isAuthSettings.isAdmin) {
+                                       setElSettings(element);
+                                       setIsOpen(true);
+                                    }
+                                 }}
+                              >
+                                 изменить видео
+                              </button>
+                              <iframe
+                                 key={index}
+                                 className={video}
+                                 src={element.value}
+                                 frameBorder="0"
+                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                 allowFullScreen
+                                 title="Embedded youtube"
+                              />
+                           </>
                         );
                      } else if (element.typeId === 2) {
-                        // {
-                        //   element.aosAnimation === 'youtubeLink' ? (
-                        // <iframe
-                        //   key={index}
-                        //   className={video}
-                        //   src={element.value}
-                        //   frameBorder="0"
-                        //   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        //   allowFullScreen
-                        //   title="Embedded youtube"
-                        // />
-                        //   ) : (
                         return (
                            <>
                               <p
@@ -193,9 +191,7 @@ const ServicePage: React.FC = () => {
                                        setAdminModal(true);
                                        setElOrder(element.orderIndex);
                                     }}
-                                 >
-                               
-                                 </Button>
+                                 ></Button>
                               ) : null}
                            </>
                         );
@@ -206,10 +202,9 @@ const ServicePage: React.FC = () => {
                      ) {
                         if (sliderImages.length !== 22) {
                            sliderImages.push(element);
-                           console.log('asdasd')
-
+                           console.log("asdasd");
                         } else {
-                           console.log(sliderImages)
+                           console.log(sliderImages);
                            let photosGallery: IPhoto[] =
                               sliderImages.length === 22
                                  ? sliderImages.map((photo, index) => {
@@ -273,9 +268,7 @@ const ServicePage: React.FC = () => {
                                           setAdminModal(true);
                                           setElOrder(element.orderIndex);
                                        }}
-                                    >
-                                    
-                                    </Button>
+                                    ></Button>
                                  ) : null}
                                  <WorkAlgorithmGallery
                                     title={landingElPrototype}
@@ -298,9 +291,7 @@ const ServicePage: React.FC = () => {
                                           setAdminModal(true);
                                           setElOrder(element.orderIndex);
                                        }}
-                                    >
-                                 
-                                    </Button>
+                                    ></Button>
                                  ) : null}
                               </>
                            );
@@ -327,9 +318,7 @@ const ServicePage: React.FC = () => {
                                        setAdminModal(true);
                                        setElOrder(element.orderIndex);
                                     }}
-                                 >
-                                 
-                                 </Button>
+                                 ></Button>
                               ) : null}
                            </>
                         );
