@@ -2,11 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import {
   createDiscussionQuestion,
+  getDiscussionCategories,
   getDiscussionDetails,
   getDiscussionProps,
   getDiscussionQuestions,
 } from '../actions/discussionQuestionsAction';
 import {
+  // ICategoriesGetResponse,
+  ICategory,
   IDiscussion,
   IDiscussionGetResponse,
   discussionPrototype,
@@ -14,9 +17,11 @@ import {
 interface IQuestionsArrayState {
   questions: IDiscussion[];
   singleQuestion: IDiscussion;
+  categories: ICategory[];
 }
 const initialState: IQuestionsArrayState = {
   questions: [],
+  categories: [],
   singleQuestion: discussionPrototype,
 };
 export const discussionQuestionsSlice = createSlice({
@@ -24,6 +29,9 @@ export const discussionQuestionsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(getDiscussionCategories.fulfilled, (state, action: PayloadAction<any>) => {
+      state.categories = action.payload;
+    });
     builder.addCase(
       getDiscussionQuestions.fulfilled,
       (state, action: PayloadAction<IDiscussionGetResponse>) => {

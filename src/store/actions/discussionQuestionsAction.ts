@@ -1,7 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import $host from '../../http';
-import { IDiscussion, IDiscussionGetResponse } from '../../interfaces/discussionsResponse';
+import {
+  IDiscussion,
+  IDiscussionGetResponse,
+  // ICategoriesGetResponse,
+} from '../../interfaces/discussionsResponse';
 interface IinputData {
   data: ICreateData;
   setError: (value: boolean | ((prevVar: boolean) => boolean)) => void;
@@ -16,19 +20,35 @@ interface IDeleteData {
   idDiscussion: number | string;
   setError: Function;
 }
-export const getDiscussionQuestions = createAsyncThunk<
-  IDiscussionGetResponse,
+export const getDiscussionCategories = createAsyncThunk<
+  any,
   (value: boolean | ((prevVar: boolean) => boolean)) => void,
   { rejectValue?: string }
->('discussionQuestionsSlice/getDiscussionQuestions', async (setError, { rejectWithValue }) => {
+>('discussionQuestionsSlice/getDiscussionCategories', async (setError, { rejectWithValue }) => {
+  try {
+    const response = await axios.get<any>('http://194.87.238.163/api/DiscussionCategorys');
+    return response.data;
+  } catch (error: any) {
+    setError(true);
+    return rejectWithValue(error.message);
+  }
+});
+export const getDiscussionQuestions = createAsyncThunk<
+  IDiscussionGetResponse,
+  {
+    categoryId: number | string | null | RegExpMatchArray;
+    setError: (value: boolean | ((prevVar: boolean) => boolean)) => void;
+  },
+  { rejectValue?: string }
+>('discussionQuestionsSlice/getDiscussionQuestions', async (data, { rejectWithValue }) => {
   try {
     const response = await axios.get<IDiscussionGetResponse>(
-      'http://194.87.238.163/api/Discussions?pageIndex=1&pageSize=5'
+      `http://194.87.238.163/api/Discussions?categoryId=${data.categoryId}&pageIndex=1&pageSize=5`
     );
 
     return response.data;
   } catch (error: any) {
-    setError(true);
+    data.setError(true);
     return rejectWithValue(error.message);
   }
 });

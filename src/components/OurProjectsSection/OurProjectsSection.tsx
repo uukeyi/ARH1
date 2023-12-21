@@ -158,13 +158,13 @@ const OurProjectsSection: React.FC = () => {
                   cityText={card.elements[2]?.value}
                   key={index}
                   projectCard={true}
-                  floor={card.elements[5]?.value}
+                  floor={card.elements[9]?.value}
                   date={card.elements[3]?.value}
                   pathCard={String(card?.id)}
                   titleText={card.elements[1]?.value}
                   imgSrc={card.elements[0]?.value}
-                  squareHouse={card.elements[4]?.value}
-                  suqareFacade={card.elements[6]?.value}
+                  squareHouse={card.elements[8]?.value}
+                  suqareFacade={card.elements[10]?.value}
                   isStatic={false}
                   block={card}
                 />

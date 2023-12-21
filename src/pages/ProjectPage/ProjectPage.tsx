@@ -42,7 +42,7 @@ const ProjectPage: React.FC = () => {
 
   const dispatch = useAppDispatch();
   const projectBlock = useAppSelector((state) => state.landingPageSlice.singleBlock);
-  const leftSideElements = projectBlock.elements.slice(7);
+  const leftSideElements = projectBlock.elements.slice(11);
   const { isAuthSettings } = useAuth();
   const { setElSettings, setIsOpen } = useAdminModalEdit();
   const [adminModal, setAdminModal] = useState(false);
@@ -63,12 +63,16 @@ const ProjectPage: React.FC = () => {
         <SingleProjectPageImgCover
           titleText={projectBlock.elements[1]}
           city={projectBlock.elements[2]}
-          houseSquare={projectBlock.elements[4]}
-          facadeSquare={projectBlock.elements[6]}
-          floors={projectBlock.elements[5]}
+          houseSquare={projectBlock.elements[8]}
+          facadeSquare={projectBlock.elements[10]}
+          floors={projectBlock.elements[9]}
           date={projectBlock.elements[3]}
           reconstructionPage={false}
           imgSrc={projectBlock.elements[0]}
+          engineer={projectBlock.elements[4]}
+          engineerName={projectBlock.elements[5]}
+          architector={projectBlock.elements[6]}
+          architectorName={projectBlock.elements[7]}
         >
           <div
             onClick={(e: any) => {
@@ -121,12 +125,12 @@ const ProjectPage: React.FC = () => {
               {projectBlock.elements[2]?.value}
               <br /> Площадь дома:
               <strong data-el={JSON.stringify(projectBlock.elements[4])}>
-                {projectBlock.elements[4]?.value}
+                {projectBlock.elements[8]?.value}
               </strong>
               <br />
               Площадь фасадов:{' '}
               <strong data-el={JSON.stringify(projectBlock.elements[6])}>
-                {projectBlock.elements[6]?.value}
+                {projectBlock.elements[10]?.value}
               </strong>
               <br />
               <br />
@@ -148,7 +152,6 @@ const ProjectPage: React.FC = () => {
                         variant="outlined"
                         sx={{
                           display: 'block',
-                          opacity: '0',
                           margin: '20px auto',
                         }}
                         onClick={() => {
