@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "../Footer/Footer";
 import styles from "./SingleProjectPageSection.module.css";
 import { useAuth } from "../../contexts/AuthContext";
 import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
 import { ILandingBlockElement } from "../../interfaces/landingPageResponse";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxTookitHooks";
+import { getLandingPageBlocks } from "../../store/actions/landingPageActions";
 import AdminModalEdit from "../AdminModalEdit";
 interface SingleProjectPageSection {
    titleText: ILandingBlockElement;
@@ -55,6 +57,23 @@ const SingleProjectPageImgCover: React.FC<SingleProjectPageSection> = ({
    } = styles;
    const { isAuthSettings } = useAuth();
    const { setElSettings, setIsOpen } = useAdminModalEdit();
+   const [errorBlocks, setErrorLandingBlocks] = useState(false);
+   const landingBlocks = useAppSelector((state) => state.landingPageSlice);
+   const dispatch = useAppDispatch();
+   useEffect(() => {
+      dispatch(
+         getLandingPageBlocks({
+            showInvisible: true,
+            setError: setErrorLandingBlocks,
+         })
+      );
+   }, []);
+   if (errorBlocks) {
+      alert("Не получилось загрузить сайт");
+   }
+   const footerObj = landingBlocks.elements.find((el) => {
+      return el.name === "WHITE FOOTER";
+   });
 
    return (
       <>
@@ -158,19 +177,32 @@ const SingleProjectPageImgCover: React.FC<SingleProjectPageSection> = ({
 
             <div className={contentContainer}>
                {children}
-
-               <Footer
-                  whiteFooter={true}
-                  colorIcons="#fff"
-                  customClassNameFooter={footer}
-                  customClassNameFeedbackContainer={footerFeedbackContainer}
-                  customClassNameFeedbackBlock={footerFeedbackBlock}
-                  customClassNameSocialLinksContainer={footerSocialLinks}
-                  customClassNameTextContainer={footerTextContainer}
-                  customClassNameSubtitle={footerSubtitle}
-                  customClassNameLogo={footerLogo}
-                  customClassNameContainer={fullWidthContainer}
-               />
+               {footerObj ? (
+                  <Footer
+                     whiteFooter={true}
+                     colorIcons="#fff"
+                     isRelative = {true}
+                     customClassNameFooter={footer}
+                     customClassNameFeedbackContainer={footerFeedbackContainer}
+                     customClassNameFeedbackBlock={footerFeedbackBlock}
+                     customClassNameSocialLinksContainer={footerSocialLinks}
+                     customClassNameTextContainer={footerTextContainer}
+                     customClassNameSubtitle={footerSubtitle}
+                     customClassNameLogo={footerLogo}
+                     customClassNameContainer={fullWidthContainer}
+                     footerWhite={{
+                        desc: footerObj.elements[0],
+                        phoneNumber1: footerObj.elements[1],
+                        adress1: footerObj.elements[2],
+                        phoneNumber2: footerObj.elements[3],
+                        adress2: footerObj.elements[4],
+                     }}
+                     vkLink={footerObj.elements[5]}
+                     instagramLink={footerObj.elements[6]}
+                     whatsappLink={footerObj.elements[7]}
+                     telegramLink={footerObj.elements[8]}
+                  />
+               ) : null}
             </div>
          </div>
       </>

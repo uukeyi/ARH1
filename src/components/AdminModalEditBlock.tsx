@@ -33,7 +33,7 @@ const AdminModalEditBlock: React.FC = () => {
          alert("Произошла ошибка замены данных");
       }
    }, [error]);
-   console.log(blockSettings)
+
    return (
       <div>
          <Modal

@@ -34,23 +34,37 @@
   font-size: 18px;
 }
 .customCard {
-  width: 32%;
+  width: 23%;
   height: 370px;
+}
+
+
+@media screen and (max-width: 1400px) {
+
 }
 @media screen and (max-width: 1200px) {
   .cardContainer {
     gap: 10px;
+  }
+  .customCard {
+    width: 32%;
   }
   .fullWidthContainer {
     width: 100%;
   }
 }
 @media screen and (max-width: 992px) {
+  .customCard {
+    width: 49%;
+  }
   .cardTitle {
     font-size: 16px;
   }
 }
 @media screen and (max-width: 768px) {
+  .customCard {
+    width: 100%;
+  }
   .cardTitle {
     font-size: 18px;
   }

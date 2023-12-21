@@ -5,8 +5,8 @@
   box-shadow: rgba(3, 3, 3, 0.43) 0 0 8px;
   position: relative;
   overflow: hidden;
-  padding: 16px 48px;
-  font-size: 21px;
+  font-size: 20px;
+  padding: 14px 48px;
   transition: 0.5s;
 }
 .btn:hover {

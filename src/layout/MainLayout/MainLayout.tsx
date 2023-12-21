@@ -8,12 +8,16 @@ import { useAppDispatch } from "../../hooks/reduxTookitHooks";
 import { checkAuth } from "../../store/actions/authActions";
 import UnauthorizedPopup from "../../components/UnauthorizedPopup/UnauthorizedPopup";
 import { useAuth } from "../../contexts/AuthContext";
+import { useAppSelector } from "../../hooks/reduxTookitHooks";
+import { getLandingPageBlocks } from "../../store/actions/landingPageActions";
 const MainLayout: React.FC = () => {
    const { arrowContainer, arrow } = styles;
    const dispatch = useAppDispatch();
    const [isOpen, setIsOpen] = useState(false);
    const [error, setIsError] = useState(false);
+   const [errorBlocks, setErrorLandingBlocks] = useState(false);
    const { setIsAuth } = useAuth();
+   const landingBlocks = useAppSelector((state) => state.landingPageSlice);
    useEffect(() => {
       if (
          localStorage.getItem("token") === null ||
@@ -23,12 +27,20 @@ const MainLayout: React.FC = () => {
       } else {
          dispatch(checkAuth({ setError: setIsError, setIsAuth: setIsAuth }));
       }
+      dispatch(
+         getLandingPageBlocks({
+            showInvisible: true,
+            setError: setErrorLandingBlocks,
+         })
+      );
    }, []);
-   // useEffect(() => {
-   //    if (error) {
-   //       alert("Ваш токен авторизации истек войдите еще раз");
-   //    }
-   // }, [error]);
+   if (errorBlocks) {
+      alert("Не получилось загрузить сайт");
+   }
+   const footer = landingBlocks.elements.find((el) => {
+      return el.name === "FOOTER";
+   });
+
    return (
       <>
          <UnauthorizedPopup
@@ -49,7 +61,19 @@ const MainLayout: React.FC = () => {
                </div>
             </Link>
          </main>
-         <Footer colorIcons="black" />
+         {footer ? (
+            <Footer
+               vkLink={footer.elements[2]}
+               instagramLink={footer.elements[3]}
+               whatsappLink={footer.elements[4]}
+               telegramLink={footer.elements[5]}
+               footerBlack={{
+                  phoneNumber: footer.elements[0],
+                  adress: footer.elements[1],
+               }}
+               colorIcons="black"
+            />
+         ) : null}
       </>
    );
 };

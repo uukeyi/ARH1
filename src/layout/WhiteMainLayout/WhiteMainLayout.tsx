@@ -10,6 +10,8 @@ import { useAppDispatch } from "../../hooks/reduxTookitHooks";
 import { checkAuth } from "../../store/actions/authActions";
 import UnauthorizedPopup from "../../components/UnauthorizedPopup/UnauthorizedPopup";
 import { useAuth } from "../../contexts/AuthContext";
+import { useAppSelector } from "../../hooks/reduxTookitHooks";
+import { getLandingPageBlocks } from "../../store/actions/landingPageActions";
 const WhiteMainLayout: React.FC = () => {
    const {
       headerButton,
@@ -31,6 +33,8 @@ const WhiteMainLayout: React.FC = () => {
    const [isOpen, setIsOpen] = useState(false);
    const [error, setIsError] = useState(false);
    const { setIsAuth } = useAuth();
+   const [errorBlocks, setErrorLandingBlocks] = useState(false);
+   const landingBlocks = useAppSelector((state) => state.landingPageSlice);
    useEffect(() => {
       if (
          localStorage.getItem("token") === null ||
@@ -40,12 +44,20 @@ const WhiteMainLayout: React.FC = () => {
       } else {
          dispatch(checkAuth({ setError: setIsError, setIsAuth: setIsAuth }));
       }
+      dispatch(
+         getLandingPageBlocks({
+            showInvisible: true,
+            setError: setErrorLandingBlocks,
+         })
+      );
    }, []);
-   // useEffect(() => {
-   //    if (error) {
-   //       alert("Ваш токен авторизации истек войдите еще раз");
-   //    }
-   // }, [error]);
+   if (errorBlocks) {
+      alert("Не получилось загрузить сайт");
+   }
+   const footerObj = landingBlocks.elements.find((el) => {
+      return el.name === "WHITE FOOTER";
+   });
+
    return (
       <>
          <UnauthorizedPopup
@@ -61,7 +73,7 @@ const WhiteMainLayout: React.FC = () => {
             customClassNameLinks={headerNavLink}
             blackLogo={currentLocation.includes("ourServices") ? false : true}
             isWhite={currentLocation.includes("ourServices") ? true : false}
-            isMainPage = {false}
+            isMainPage={false}
             customClassNameActiveLink={activeHeaderLink}
          />
          <main className="main">
@@ -76,17 +88,30 @@ const WhiteMainLayout: React.FC = () => {
                </div>
             </Link>
          </main>
-         <Footer
-            whiteFooter={true}
-            colorIcons="#fff"
-            customClassNameFooter={footer}
-            customClassNameFeedbackContainer={footerFeedbackContainer}
-            customClassNameFeedbackBlock={footerFeedbackBlock}
-            customClassNameSocialLinksContainer={footerSocialLinks}
-            customClassNameTextContainer={footerTextContainer}
-            customClassNameSubtitle={footerSubtitle}
-            customClassNameLogo={footerLogo}
-         />
+         {footerObj ? (
+            <Footer
+               whiteFooter={true}
+               colorIcons="#fff"
+               customClassNameFooter={footer}
+               customClassNameFeedbackContainer={footerFeedbackContainer}
+               customClassNameFeedbackBlock={footerFeedbackBlock}
+               customClassNameSocialLinksContainer={footerSocialLinks}
+               customClassNameTextContainer={footerTextContainer}
+               customClassNameSubtitle={footerSubtitle}
+               customClassNameLogo={footerLogo}
+               footerWhite={{
+                  desc: footerObj.elements[0],
+                  phoneNumber1: footerObj.elements[1],
+                  adress1: footerObj.elements[2],
+                  phoneNumber2: footerObj.elements[3],
+                  adress2: footerObj.elements[4],
+               }}
+               vkLink={footerObj.elements[5]}
+               instagramLink={footerObj.elements[6]}
+               whatsappLink={footerObj.elements[7]}
+               telegramLink={footerObj.elements[8]}
+            />
+         ) : null}
       </>
    );
 };

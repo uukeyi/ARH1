@@ -217,7 +217,7 @@ const ApplicationForArch: React.FC<ApplicationForArchProps> = ({
                         buttonClass={optionPhone}
                         containerClass={phoneContainer}
                      />
-                     <OrangeButton title={"ОТПРАВИТЬ ЗАЯВКУ"} width="90%" />
+                     <OrangeButton title={"ОТПРАВИТЬ ЗАЯВКУ"} width="450px" />
                   </div>
                </div>
             </div>

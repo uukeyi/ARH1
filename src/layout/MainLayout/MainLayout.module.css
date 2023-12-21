@@ -1,6 +1,6 @@
 .arrowContainer {
-   width: 60px;
-   height: 60px;
+   width: 60px !important;
+   height: 60px !important;
    border-radius: 50%;
    transition: 0.7s;
    display: flex;
@@ -9,7 +9,7 @@
    cursor: pointer;
    position: fixed;
    z-index: 100;
-   right: 30px;
+   right: 30px ;
    background: rgb(235 51 73);
    bottom: 30px;
    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
@@ -27,18 +27,18 @@
 }
 @media screen and (max-width: 1400px) {
    .arrowContainer {
-      width: 80px;
-      height: 80px;
+      width: 80px !important;
+      height: 80px !important;
    }
 }
 @media screen and (max-width: 1200px) {
    .arrowContainer {
-      width: 70px;
-      height: 70px;
+      width: 70px !important;
+      height: 70px !important;
    }
    .arrow {
-      width: 25px;
-      height: 25px;
+      width: 25px !important;
+      height: 25px !important;
    }
 }
 @media screen and (max-width: 992px) {
@@ -54,8 +54,8 @@
 }
 @media screen and (max-width: 576px) {
    .arrowContainer {
-      width: 45px;
-      height: 45px;
+      width: 45px !important;
+      height: 45px !important;
     }
     .arrow {
       width: 15px;

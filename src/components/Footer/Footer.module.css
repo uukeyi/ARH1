@@ -3,6 +3,10 @@
   flex-direction: column;
   color: white;
 }
+.relative {
+  position:relative;
+  z-index: 1000000;
+}
 .top {
   background: rgba(28, 28, 28, 1);
   display: flex;
@@ -18,7 +22,10 @@
   align-items: center;
   padding: 40px 0;
 }
-
+.descClass {
+  text-align: center;
+  width: 60%;
+}
 .bottomText {
   font-size: 16px;
   text-align: center;
@@ -126,6 +133,16 @@
   border: 3px solid rgb(235, 51, 73);
   border-radius: 0;
 }
+@media (max-width: 1200px) {
+.descClass {
+  width: 80%;
+}
+}
+@media (max-width: 992px) {
+  .descClass {
+    width: 100%;
+  }
+  }
 @media (max-width: 800px) {
   .bottomText {
     font-size: 13px;

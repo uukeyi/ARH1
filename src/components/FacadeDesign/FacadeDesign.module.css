@@ -1,57 +1,164 @@
 #facadeDesign {
-  background-color: rgb(240, 240, 240);
-  padding: 70px 0 30px;
+   background-color: rgb(240, 240, 240);
+   padding: 70px 0 30px;
 }
 
 .title {
-  font-weight: 400;
-  font-size: 43px;
-  line-height: 43px;
-  text-align: center;
-
-}
-
-.sliderImage {
-  opacity: 0;
-  transition: 2.5s;
-  background-size: cover;
+   font-weight: 400;
+   font-size: 43px;
+   line-height: 43px;
+   text-align: center;
 }
 
 .wrapper {
-  position: relative;
-  margin-top: 20px;
+   margin-top: 40px;
+   position: relative;
+   display: grid;
+   object-fit: cover;
+   background: no-repeat;
+   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
-.active {
-  opacity: 1;
-  height: 700px;
-
+.cardClass {
+   position: relative;
+   z-index: 1000;
+   height: 600px;
+   object-fit: cover;
+   background-position: center center;
+   cursor: pointer;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-end;
 }
-.navContainer {
-  padding: 40px 0;
+.cardClass:not(:first-child) {
+   border-left: 2px solid rgba(128, 128, 128, 0.39);
+}
+.cardTitle {
+   color: #fff !important;
+   background-color: rgba(0, 0, 0, 0.5);
+   padding: 20px 50px;
+   text-align: center;
+   height: 100px;
+   font-size: 25px;
+   white-space: nowrap;
+}
+.cardDesc {
+   padding: 25px;
+   background: white;
+   height: 0px;
+   transition: 0.6s;
+   opacity: 0;
+   pointer-events: none;
+}
+.cardClass:hover .cardDesc {
+   height: 150px;
+   opacity: 1;
+   pointer-events: all;
+}
+.bgImg {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   pointer-events: none;
+   transition: 0.8s;
+   opacity: 0;
+   pointer-events: none;
+}
+.activeImg {
+   opacity: 1;
+   pointer-events: all;
+}
+.subDesc {
+  text-align: center;
   display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  font-size: 22px;
+  
+}
+.subDesc p {
+  margin-top: 10px;
+  font-size: 17px;
+}
+.slider {
+  display: none;
+}
+.cardTel {
+  margin-top: 20px;
+  height: 500px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.cardTelTitle {
+  font-size: 23px;
+}
+.cardTelDesc {
+  margin: 10px auto;
+  font-weight: 300;
+  width: 70%;
+}
+.cardTel div {
+  height: 100px;
+  background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.4066001400560224) 100%);
+  filter: blur(10px);
   position: absolute;
+  z-index: 100;
   width: 100%;
-  justify-content: space-around;
-  background-color: black;
-  opacity: 0.9;
-  top: 50%;
-  transform: translateY(-50%);
+  bottom: 0px;
 }
-.sliderImage > p {
-  padding: 20px;
-  width: 500px;
-  background-color: rgb(240, 240, 240);
+.cardTel > p {
+  position: relative;
+  z-index: 1000;
+color: #fff !important;
+text-align: center;
+}
+.cardTel img {
+  width: 100%;
+  height: 100%;
   position: absolute;
-  left: 50%;
-  font-family: "Roboto";
-  transform: translateX(-50%);
+  object-fit: cover;
+  z-index: 0;
 }
-.sliderNavItem {
-  color: #fff;
-  cursor: pointer;
-}
+
 @media screen and (max-width: 576px) {
-  .title {
-    font-size: 33px;
+   .title {
+      font-size: 33px;
+   }
+}
+@media screen and (max-width: 1400px) {
+.cardTitle {
+  white-space: wrap;
+  font-size: 20px;
+}
+.cardClass:hover .cardDesc  {
+  height: 250px;
+}
+}
+@media screen and (max-width: 1200px) {
+  .container {
+    width: 960px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .container {
+    width: 720px;
+  }
+  .wrapper {
+    display: none;
+  }
+  .slider {
+    display: block;
+    /* opacity: 1; */
+  }
+}
+@media screen and (max-width: 768px) {
+  .container {
+    width: 540px;
+  }
+  .single-project-page-title {
+    font-size: 30px;
   }
 }

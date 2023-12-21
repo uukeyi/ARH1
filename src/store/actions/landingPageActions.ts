@@ -134,12 +134,11 @@ export const updateElement = createAsyncThunk<
          },
       });
 
-      params.setIsOpen(false);
+      params.setIsOpen(false)
       // window.location.reloadX();
       return response.data;
    } catch (error: any) {
       params.setError(true);
-      console.log(error);
       return rejectWithValue(error.message);
    }
 });

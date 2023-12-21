@@ -117,7 +117,7 @@ const BlockHeaderSection: React.FC<BlockHeaderSectionProps> = ({
                   buttonClass={optionPhone}
                   containerClass={phoneContainer}
                />
-            <OrangeButton title="ОСТАВИТЬ ЗАЯВКУ" width="300px" />
+            <OrangeButton title="ОСТАВИТЬ ЗАЯВКУ" width="240px" />
 
             </div>
          </div>

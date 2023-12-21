@@ -58,7 +58,8 @@
    font-size: 58px;
    line-height: 68px;
 }
-.subtitle > span , .subtitle  {
+.subtitle > span,
+.subtitle {
    margin-top: 20px;
    text-align: center;
    color: rgba(255, 255, 255, 1);
@@ -71,6 +72,7 @@
    display: flex;
    width: 100%;
    justify-content: space-around;
+
 }
 .card {
    margin-top: 60px;
@@ -206,12 +208,6 @@
    .card {
       width: 45%;
    }
-   .footerFeedbackContainer {
-      flex-direction: column;
-      gap: 20px;
-   }
-}
-@media screen and (max-width: 992px) {
    .mainBlock {
       flex-direction: column;
    }
@@ -252,7 +248,12 @@
       align-items: center;
       flex-direction: column;
    }
+   .footerFeedbackContainer {
+      flex-direction: column;
+      gap: 20px;
+   }
 }
+
 @media screen and (max-width: 768px) {
    .footerFeedbackContainer {
       flex-direction: column;

@@ -6,6 +6,20 @@ import whatsappIcon from "../../assets/icons/whatsappIcon.svg";
 import styles from "./Footer.module.css";
 import blackLogo from "../../assets/logoBlack.webp";
 import { Link } from "react-router-dom";
+import { ILandingBlockElement } from "../../interfaces/landingPageResponse";
+import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
+import { useAuth } from "../../contexts/AuthContext";
+interface IWhtieFooter {
+   phoneNumber1: ILandingBlockElement;
+   phoneNumber2: ILandingBlockElement;
+   adress1: ILandingBlockElement;
+   adress2: ILandingBlockElement;
+   desc: ILandingBlockElement;
+}
+interface IFooter {
+   phoneNumber: ILandingBlockElement;
+   adress: ILandingBlockElement;
+}
 interface FooterProps {
    whiteFooter?: boolean;
    customClassNameFooter?: string;
@@ -16,7 +30,14 @@ interface FooterProps {
    customClassNameFeedbackBlock?: string;
    customClassNameSocialLinksContainer?: string;
    colorIcons?: string;
-   customClassNameContainer? : string;
+   customClassNameContainer?: string;
+   footerBlack?: IFooter;
+   footerWhite?: IWhtieFooter;
+   isRelative?: boolean;
+   whatsappLink: ILandingBlockElement;
+   vkLink: ILandingBlockElement;
+   instagramLink: ILandingBlockElement;
+   telegramLink: ILandingBlockElement;
 }
 const Footer: React.FC<FooterProps> = ({
    whiteFooter,
@@ -28,7 +49,14 @@ const Footer: React.FC<FooterProps> = ({
    customClassNameFeedbackBlock,
    customClassNameSocialLinksContainer,
    colorIcons,
-   customClassNameContainer
+   customClassNameContainer,
+   footerBlack,
+   footerWhite,
+   whatsappLink,
+   vkLink,
+   instagramLink,
+   telegramLink,
+   isRelative,
 }) => {
    const {
       wrapper,
@@ -44,9 +72,28 @@ const Footer: React.FC<FooterProps> = ({
       phoneButton,
       bottom,
       bottomText,
+      descClass,
+      relative,
    } = styles;
+   const { isAuthSettings } = useAuth();
+   const { setIsOpen, setElSettings } = useAdminModalEdit();
+   const formatPhoneNumber = (arr: any) => {
+      const newArr = arr.filter((letter: any) => {
+         if (
+            letter !== "+" &&
+            letter !== "(" &&
+            letter !== ")" &&
+            letter !== "-" &&
+            letter !== " "
+         ) {
+            return letter;
+         }
+      });
+      return newArr.join("");
+   };
+
    return (
-      <footer className={wrapper}>
+      <footer className={isRelative ? `${wrapper} ${relative}` : wrapper}>
          <div className={`${top} ${customClassNameFooter}`}>
             {whiteFooter ? (
                <>
@@ -59,15 +106,37 @@ const Footer: React.FC<FooterProps> = ({
                               alt="ARH1"
                            />
                         </Link>
-                        <p data-aos = "zoom-in" data-aos-duration = "1000" className={customClassNameSubtitle}>
-                           Архитектурное проектирование и строительство зданий,
-                           ландшафтный дизайн <br /> садово-парковых зон,
-                           создание уникальных проектов городов и микрорайонов
+                        <p
+                           // data-aos="zoom-in"
+                           // data-aos-duration="1000"
+                           className={`${customClassNameSubtitle} ${descClass}`}
+                           onClick={() => {
+                              if (isAuthSettings.isAdmin) {
+                                 setIsOpen(true);
+                                 setElSettings(footerWhite?.desc);
+                              }
+                           }}
+                        >
+                           {footerWhite?.desc.value}
                         </p>
                      </div>
                      <div className={customClassNameFeedbackContainer}>
-                        <div data-aos = "fade-right" data-aos-duration = "1000" className={customClassNameFeedbackBlock}>
-                           <a href="tel:+78129709005">
+                        <div
+                           // data-aos="fade-right"
+                           // data-aos-duration="1000"
+                           className={customClassNameFeedbackBlock}
+                        >
+                           <a
+                              onContextMenu={() => {
+                                 if (isAuthSettings.isAdmin) {
+                                    setIsOpen(true);
+                                    setElSettings(footerWhite?.phoneNumber1);
+                                 }
+                              }}
+                              href={`tel:${formatPhoneNumber(
+                                 footerWhite?.phoneNumber1.value.split("")
+                              )}`}
+                           >
                               <svg
                                  aria-hidden="true"
                                  fill="rgb(235 51 73)"
@@ -79,7 +148,7 @@ const Footer: React.FC<FooterProps> = ({
                               >
                                  <path d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z" />
                               </svg>
-                              <p>+7 (812) 970-90-05</p>
+                              <p>{footerWhite?.phoneNumber1.value}</p>
                            </a>
                            <div
                               style={{
@@ -90,13 +159,32 @@ const Footer: React.FC<FooterProps> = ({
                            <p
                               style={{ textAlign: "center", fontSize: "16px" }}
                               className={customClassNameSubtitle}
+                              onClick={() => {
+                                 if (isAuthSettings.isAdmin) {
+                                    setIsOpen(true);
+                                    setElSettings(footerWhite?.adress1);
+                                 }
+                              }}
                            >
-                              Санкт-Петербург <br /> Красногвардейская площадь,
-                              3Е.
+                              {footerWhite?.adress1.value}
                            </p>
                         </div>
-                        <div data-aos = "fade-left" data-aos-duration = "1000"  className={customClassNameFeedbackBlock}>
-                           <a href="tel:+78129709005">
+                        <div
+                           // data-aos="fade-left"
+                           // data-aos-duration="1000"
+                           className={customClassNameFeedbackBlock}
+                        >
+                           <a
+                              onContextMenu={() => {
+                                 if (isAuthSettings.isAdmin) {
+                                    setIsOpen(true);
+                                    setElSettings(footerWhite?.phoneNumber2);
+                                 }
+                              }}
+                              href={`tel:${formatPhoneNumber(
+                                 footerWhite?.phoneNumber2.value.split("")
+                              )}`}
+                           >
                               <svg
                                  aria-hidden="true"
                                  fill="rgb(235 51 73)"
@@ -108,7 +196,7 @@ const Footer: React.FC<FooterProps> = ({
                               >
                                  <path d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z" />
                               </svg>
-                              <p>+7 (812) 970-90-05</p>
+                              <p>{footerWhite?.phoneNumber2.value}</p>
                            </a>
                            <div
                               style={{
@@ -117,11 +205,16 @@ const Footer: React.FC<FooterProps> = ({
                               }}
                            ></div>
                            <p
+                              onClick={() => {
+                                 if (isAuthSettings.isAdmin) {
+                                    setIsOpen(true);
+                                    setElSettings(footerWhite?.adress2);
+                                 }
+                              }}
                               style={{ textAlign: "center", fontSize: "16px" }}
                               className={customClassNameSubtitle}
                            >
-                              Санкт-Петербург <br /> Красногвардейская площадь,
-                              3Е.
+                              {footerWhite?.adress2.value}
                            </p>
                         </div>
                      </div>
@@ -130,13 +223,30 @@ const Footer: React.FC<FooterProps> = ({
             ) : (
                <>
                   <p className={callText}>ПОЗВОНИТЬ:</p>
-                  <a className={contactsLink} href="tel:+78129709005">
-                     +7 (812) 970-90-05
+                  <a
+                     onContextMenu={() => {
+                        if (isAuthSettings.isAdmin) {
+                           setIsOpen(true);
+                           setElSettings(footerBlack?.phoneNumber);
+                        }
+                     }}
+                     className={contactsLink}
+                     href={`tel:${formatPhoneNumber(
+                        footerBlack?.phoneNumber.value.split("")
+                     )}`}
+                  >
+                     {footerBlack?.phoneNumber.value}
                   </a>
-                  <p className={topText}>
-                     Красногвардейская площадь 3Е <br />
-                     ARTPLAY, метро Новочеркасская, <br />
-                     Санкт-Петербург
+                  <p
+                     onClick={() => {
+                        if (isAuthSettings.isAdmin) {
+                           setIsOpen(true);
+                           setElSettings(footerBlack?.adress);
+                        }
+                     }}
+                     className={topText}
+                  >
+                     {footerBlack?.adress.value}
                   </p>
                </>
             )}
@@ -144,7 +254,16 @@ const Footer: React.FC<FooterProps> = ({
             <div
                className={`${iconsWrapper} ${customClassNameSocialLinksContainer}`}
             >
-               <a className={icon} href="https://vk.com/arh1_ru">
+               <a
+                  onContextMenu={() => {
+                     if (isAuthSettings.isAdmin) {
+                        setIsOpen(true);
+                        setElSettings(vkLink);
+                     }
+                  }}
+                  className={icon}
+                  href={vkLink.value}
+               >
                   <svg
                      xmlns="http://www.w3.org/2000/svg"
                      x="0px"
@@ -159,7 +278,13 @@ const Footer: React.FC<FooterProps> = ({
                </a>
                <a
                   className={icon}
-                  href="https://www.instagram.com/design_facad"
+                  onContextMenu={() => {
+                     if (isAuthSettings.isAdmin) {
+                        setIsOpen(true);
+                        setElSettings(instagramLink);
+                     }
+                  }}
+                  href={instagramLink.value}
                >
                   <svg
                      xmlns="http://www.w3.org/2000/svg"
@@ -177,7 +302,13 @@ const Footer: React.FC<FooterProps> = ({
                </a>
                <a
                   className={icon}
-                  href="https://api.whatsapp.com/send?phone=88129709005"
+                  onContextMenu={() => {
+                     if (isAuthSettings.isAdmin) {
+                        setIsOpen(true);
+                        setElSettings(whatsappLink);
+                     }
+                  }}
+                  href={whatsappLink.value}
                >
                   <svg
                      xmlns="http://www.w3.org/2000/svg"
@@ -189,7 +320,16 @@ const Footer: React.FC<FooterProps> = ({
                      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
                   </svg>
                </a>
-               <a className={icon} href="https://t.me/Sasha_Save">
+               <a
+                  className={icon}
+                  onContextMenu={() => {
+                     if (isAuthSettings.isAdmin) {
+                        setIsOpen(true);
+                        setElSettings(telegramLink);
+                     }
+                  }}
+                  href={telegramLink.value}
+               >
                   <svg
                      width="24px"
                      height="24px"
@@ -205,7 +345,10 @@ const Footer: React.FC<FooterProps> = ({
             </div>
             {whiteFooter ? null : (
                <div className={phoneWrapper}>
-                  <input placeholder="+7 (999) 999-9999" className={phoneInput} />
+                  <input
+                     placeholder="+7 (999) 999-9999"
+                     className={phoneInput}
+                  />
                   <button className={phoneButton}>ОТПРАВИТЬ ЗАЯВКУ</button>
                </div>
             )}

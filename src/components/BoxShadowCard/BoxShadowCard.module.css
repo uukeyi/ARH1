@@ -46,12 +46,15 @@
 .title:hover {
   color: rgb(235 51 73);
 }
-.descriptionClass {
+.descriptionClass  {
   color: black;
   font-size: 16px;
   font-weight: 300;
   line-height: 20px;
   font-family: 'Roboto';
+}
+.descriptionClass  strong {
+  font-size: 13px;
 }
 .card:hover {
   box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 6px 6px;

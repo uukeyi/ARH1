@@ -43,6 +43,7 @@ const FacadeDesignWorksSection: React.FC<FacadeDesignWorksSectionProps> = ({
       sliderCard,
       sliderCardWrap,
       moreButton,
+
    } = styles;
    return (
       <section id={facadeSection}>

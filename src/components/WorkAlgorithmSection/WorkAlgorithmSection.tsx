@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./WorkAlgorithmSection.module.css";
 import "yet-another-react-lightbox/styles.css";
 import WorkAlgorithmGallery from "../WorkAlgorithmGallery/WorkAlgorithmGallery";
-import { ILandingBlock, ILandingBlockElement } from "../../interfaces/landingPageResponse";
+import {
+   ILandingBlock,
+   ILandingBlockElement,
+} from "../../interfaces/landingPageResponse";
 import { useAuth } from "../../contexts/AuthContext";
 import { useAdminModalEdit } from "../../contexts/AdminModalEditContext";
 import { Button } from "@mui/material";
 import OrangeButton from "../OrangeButton/OrangeButton";
+import AdminModal from "../AdminModal/AdminModal";
 interface WorkAlgorithmSectionProps {
    titleText: ILandingBlockElement;
    firstBlockTitle: ILandingBlockElement;
@@ -16,7 +20,7 @@ interface WorkAlgorithmSectionProps {
    secondBlockElements: ILandingBlockElement[];
    thirdBlockElements: ILandingBlockElement[];
    thirdBlockTitle: ILandingBlockElement;
-   block : ILandingBlock
+   block: ILandingBlock;
 }
 
 const WorkAlgorithmSection: React.FC<WorkAlgorithmSectionProps> = ({
@@ -39,9 +43,14 @@ const WorkAlgorithmSection: React.FC<WorkAlgorithmSectionProps> = ({
       gallery,
    } = styles;
    const { isAuthSettings } = useAuth();
-   const { setIsOpen, setElSettings , setBlockSettings , setIsOpenBlockEdit } = useAdminModalEdit();
+   const { setIsOpen, setElSettings, setBlockSettings, setIsOpenBlockEdit } =
+      useAdminModalEdit();
    const breakpoints = [4320, 2160, 1080, 640, 384, 256, 128];
-
+   const [isOpenAdminModal, setIsOpenAdminModal] = useState(false);
+   const [orderEl, setOrderEl] = useState(0);
+   useEffect(() => {
+      console.log(orderEl);
+   }, [orderEl]);
    const photos1 = firstBlockElements.map((photo, index) => {
       return {
          src: photo.value,
@@ -131,7 +140,8 @@ const WorkAlgorithmSection: React.FC<WorkAlgorithmSectionProps> = ({
    }));
    return (
       <section id={workAlgorithmSection}>
-          {isAuthSettings.isAdmin ? (
+         <AdminModal pageBlock={block} open={isOpenAdminModal} orderEl={orderEl}  setOpen={setIsOpenAdminModal}/>
+         {isAuthSettings.isAdmin ? (
             <Button
                onClick={() => {
                   if (isAuthSettings.isAdmin) {
@@ -175,24 +185,63 @@ const WorkAlgorithmSection: React.FC<WorkAlgorithmSectionProps> = ({
                   images={photos1}
                   slidesData={slides1}
                   customClass={gallery}
-                  showBtn = {true}
+                  showBtn={true}
                />
+               {isAuthSettings.isAdmin ? (
+                  <Button
+                     onClick={() => {
+                        setOrderEl(
+                           +photos1[photos1.length - 1].el.orderIndex 
+                        );
+                        setIsOpenAdminModal(true)
+                     }}
+                     variant="outlined"
+                  >
+                     Добавить картинку к первому блоку
+                  </Button>
+               ) : null}
                <WorkAlgorithmGallery
                   title={secondBlockTitle}
                   images={photos2}
                   slidesData={slides2}
                   customClass={gallery}
-                  showBtn = {true}
-
+                  showBtn={true}
                />
+               {isAuthSettings.isAdmin ? (
+                  <Button
+                     onClick={() => {
+                        setOrderEl(
+                           +photos2[photos2.length - 1].el.orderIndex
+                        );
+                        setIsOpenAdminModal(true)
+
+                     }}
+                     variant="outlined"
+                  >
+                     Добавить картинку ко второму блоку
+                  </Button>
+               ) : null}
                <WorkAlgorithmGallery
                   title={thirdBlockTitle}
                   images={photos3}
                   slidesData={slides3}
                   customClass={gallery}
-                  showBtn = {true}
-
+                  showBtn={true}
                />
+               {isAuthSettings.isAdmin ? (
+                  <Button
+                     onClick={() => {
+                        setOrderEl(
+                           +photos3[photos3.length - 1].el.orderIndex
+                        );
+                        setIsOpenAdminModal(true)
+
+                     }}
+                     variant="outlined"
+                  >
+                     Добавить картинку к третьему блоку
+                  </Button>
+               ) : null}
             </div>
          </div>
       </section>

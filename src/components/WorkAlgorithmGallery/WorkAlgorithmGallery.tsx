@@ -73,7 +73,7 @@ const WorkAlgorithmGallery: React.FC<IGallery> = ({
             {title.value}
          </p>
          <div className={photoGallery}>
-            {images.map((img: any) => (
+            {images.slice(0 , isAuthSettings.isAdmin ? images.length : 14).map((img: any) => (
                <>
                   <div
                     onClick={() => {

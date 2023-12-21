@@ -37,6 +37,7 @@ const ArticlePage: React.FC = () => {
    const { isAuthSettings } = useAuth();
    const { setElSettings, setIsOpen } = useAdminModalEdit();
    const [isOpen, setOpen] = useState(false);
+   const [order, setElOrder] = useState<string | number>("");
    const articlesBlock = useAppSelector(
       (state) => state.landingPageSlice.singleBlock
    );
@@ -56,6 +57,7 @@ const ArticlePage: React.FC = () => {
             open={isOpen}
             setOpen={setOpen}
             pageBlock={articlesBlock}
+            orderEl={order}
          />
 
          <div className="container">
@@ -88,55 +90,144 @@ const ArticlePage: React.FC = () => {
                   (element: ILandingBlockElement): any => {
                      if (element.typeId === 1) {
                         return (
-                           <h3
-                              data-el={JSON.stringify(element)}
-                              className={title}
-                           >
-                              {element.value}
-                           </h3>
+                           <>
+                              <h3
+                                 data-el={JSON.stringify(element)}
+                                 className={title}
+                              >
+                                 {element.value}
+                              </h3>
+
+                              {isAuthSettings.isAdmin ? (
+                                 <Button
+                                    variant="outlined"
+                                    sx={{
+                                       display: "block",
+                                       opacity: "0",
+                                       margin: "20px auto",
+                                       width: "100%",
+                                    }}
+                                    onClick={() => {
+                                       setOpen(true);
+                                       setElOrder(element.orderIndex);
+                                    }}
+                                 ></Button>
+                              ) : null}
+                           </>
                         );
                      } else if (
                         element.aosAnimation === "blackLiElement" &&
                         element.typeId === 2
                      ) {
                         return (
-                           <p
-                              style={{
-                                 fontWeight: "700",
-                                 fontFamily: "Roboto",
-                                 fontSize: "20px",
-                                 marginTop: "30px",
-                              }}
-                           >
-                              {element.value}
-                           </p>
+                           <>
+                              <p
+                                 style={{
+                                    fontWeight: "700",
+                                    fontFamily: "Roboto",
+                                    fontSize: "20px",
+                                    marginTop: "30px",
+                                 }}
+                                 
+                              >
+                                 {element.value}
+                              </p>
+
+                              {isAuthSettings.isAdmin ? (
+                                 <Button
+                                    variant="outlined"
+                                    sx={{
+                                       display: "block",
+                                       opacity: "0",
+                                       margin: "20px auto",
+                                       width: "100%",
+                                    }}
+                                    onClick={() => {
+                                       setOpen(true);
+                                       setElOrder(element.orderIndex);
+                                    }}
+                                 ></Button>
+                              ) : null}
+                           </>
                         );
                      } else if (
                         element.aosAnimation === "pinkLiElement" &&
                         element.typeId === 2
                      ) {
                         return (
-                           <div className={pinkList}>
-                              <p>{element.value}</p>
-                           </div>
+                           <>
+                              <div className={pinkList}>
+                                 <p>{element.value}</p>
+                              </div>
+                              {isAuthSettings.isAdmin ? (
+                                 <Button
+                                    variant="outlined"
+                                    sx={{
+                                       display: "block",
+                                       opacity: "0",
+                                       margin: "20px auto",
+                                       width: "100%",
+                                    }}
+                                    onClick={() => {
+                                       setOpen(true);
+                                       setElOrder(element.orderIndex);
+                                    }}
+                                 ></Button>
+                              ) : null}
+                           </>
                         );
                      } else if (element.typeId === 2) {
                         return (
-                           <p
-                              data-el={JSON.stringify(element)}
-                              style={{ marginTop: "15px" }}
-                           >
-                              {element.value}
-                           </p>
+                           <>
+                              <p
+                                 data-el={JSON.stringify(element)}
+                                 style={{ marginTop: "15px" }}
+                              >
+                                 {element.value}
+                              </p>
+
+                              {isAuthSettings.isAdmin ? (
+                                 <Button
+                                    variant="outlined"
+                                    sx={{
+                                       display: "block",
+                                       opacity: "0",
+                                       margin: "20px auto",
+                                       width: "100%",
+                                    }}
+                                    onClick={() => {
+                                       setOpen(true);
+                                       setElOrder(element.orderIndex);
+                                    }}
+                                 ></Button>
+                              ) : null}
+                           </>
                         );
                      } else if (element.typeId === 3) {
                         return (
-                           <img
-                              data-el={JSON.stringify(element)}
-                              src={element.value}
-                              alt="img"
-                              style={{ marginTop: "25px" }}
-                           />
+                           <>
+                              <img
+                                 data-el={JSON.stringify(element)}
+                                 src={element.value}
+                                 alt="img"
+                                 style={{ marginTop: "25px" }}
+                              />
+                              {isAuthSettings.isAdmin ? (
+                                 <Button
+                                    variant="outlined"
+                                    sx={{
+                                       display: "block",
+                                       opacity: "0",
+                                       margin: "20px auto",
+                                       width: "100%",
+                                    }}
+                                    onClick={() => {
+                                       setOpen(true);
+                                       setElOrder(element.orderIndex);
+                                    }}
+                                 ></Button>
+                              ) : null}
+                           </>
                         );
                      }
                   }

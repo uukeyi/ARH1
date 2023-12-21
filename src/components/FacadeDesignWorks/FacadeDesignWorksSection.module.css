@@ -20,15 +20,18 @@
    gap: 30px;
 }
 .sliderContainer {
-   display: grid;
-   grid-template-columns: 1fr 1fr 1fr;
+   display: flex;
+padding: 0px 40px;
    gap: 20px;
    width: 100vw;
-   justify-items: center;
    align-items: center;
-
+   justify-content: center;
+flex-wrap: wrap;
 }
-
+.sliderContainer > div {
+   width: 32% !important   ;
+   margin: 0 !important;
+}
 
 .moreButton {
    border: 3px solid black;
@@ -43,12 +46,32 @@
    border: 3px solid rgb(255, 68, 31);
 }
 
+
+@media screen and (max-width: 1200px) {
+   .sliderContainer > div {
+      width: 79.8% !important;
+   } 
+
+}
+ @media screen and (max-width: 992px) {
+   .sliderContainer > div {
+      width: 65.1% !important;
+   }
+ }
+
 @media (max-width: 768px) {
    .sliderCardWrap {
       width: 47%;
    }
+   .sliderContainer > div {
+      width: 61.3% !important;
+   }
+
 }
 @media (max-width: 576px) {
+   .sliderContainer > div {
+      width: 74.2% !important   ;
+   }
    .sliderCardWrap {
       width: 100%;
    }

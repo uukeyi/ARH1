@@ -25,6 +25,7 @@ body {
 }
 * {
   color: black;
+  /* font-family: 'Oswald', sans-serif; */
   font-family: 'Oswald', sans-serif;
 }
 
@@ -49,6 +50,13 @@ body {
 .image-swiper-button-prev-small {
   left: -30px;
   transform: rotate(-135deg);
+}
+.image-swiper-button-next-facade {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: absolute;
+  z-index: 10000;
 }
 .single-project-page-title {
   font-family: 'Oswald';

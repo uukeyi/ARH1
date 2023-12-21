@@ -35,9 +35,6 @@ const MainPage: React.FC = () => {
 
    const landingBlocks = useAppSelector((state) => state.landingPageSlice);
    useEffect(() => {
-      console.log(landingBlocks);
-   }, [landingBlocks]);
-   useEffect(() => {
       if (
          localStorage.getItem("token") === null ||
          !localStorage.getItem("token")
@@ -132,18 +129,33 @@ const MainPage: React.FC = () => {
                      />
                   );
                case "АЛГОРИТМ РАБОТЫ":
+                  console.log(el.elements)
+                  let firstIndex = el.elements.findIndex((el, index) => {
+                     if (el.aosAnimation === "first") {
+                        return index;
+                     }
+                  });
+                  let secondIndex = el.elements.findIndex((el, index) => {
+                     if (el.aosAnimation === "second") {
+                        return index;
+                     }
+                  });
+                  let thirdIndex = el.elements.findIndex((el, index) => {
+                     if (el.aosAnimation === "third") {
+                        return index;
+                     }
+                  });
                   return (
                      <WorkAlgorithmSection
                         block={el}
                         titleText={el.elements[el.elements.length - 1]}
                         subtitleText={el.elements[el.elements.length - 2]}
-                        thirdBlockElements={el.elements.slice(30, 44)}
-                        thirdBlockTitle={el.elements[44]}
-                        firstBlockTitle={el.elements[14]}
-                        firstBlockElements={el.elements.slice(0, 14)}
-                        secondBlockElements={el.elements.slice(15, 29)}
-                        secondBlockTitle={el.elements[29]}
-                        
+                        thirdBlockElements={el.elements.slice(secondIndex + 1, thirdIndex)}
+                        thirdBlockTitle={el.elements[thirdIndex]}
+                        firstBlockTitle={el.elements[firstIndex]}
+                        firstBlockElements={el.elements.slice(0, firstIndex )}
+                        secondBlockElements={el.elements.slice(firstIndex + 1, secondIndex)}
+                        secondBlockTitle={el.elements[secondIndex]}
                      />
                   );
                case "ЗАГОЛОВОК БЛОКА":
