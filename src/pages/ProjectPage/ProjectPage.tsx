@@ -42,6 +42,7 @@ const ProjectPage: React.FC = () => {
          })
       );
    }, []);
+
    const dispatch = useAppDispatch();
    const projectBlock = useAppSelector(
       (state) => state.landingPageSlice.singleBlock
@@ -50,7 +51,10 @@ const ProjectPage: React.FC = () => {
    const { isAuthSettings } = useAuth();
    const { setElSettings, setIsOpen } = useAdminModalEdit();
    const [adminModal, setAdminModal] = useState(false);
-
+   const [elOrder, setElOrder] = useState<string | number>("");
+   useEffect(() => {
+      console.log(projectBlock);
+   }, [projectBlock]);
    if (projectBlock) {
       return (
          <div style={{ height: "100%" }}>
@@ -59,6 +63,7 @@ const ProjectPage: React.FC = () => {
                pageBlock={projectBlock}
                open={adminModal}
                setOpen={setAdminModal}
+               orderEl={elOrder}
             />
             <SingleProjectPageImgCover
                titleText={projectBlock.elements[1]}
@@ -76,6 +81,7 @@ const ProjectPage: React.FC = () => {
                         setElSettings(JSON.parse(e.target.dataset.el));
                         setIsOpen(true);
                      }
+             
                   }}
                   className="single-project-page-content-container"
                >
@@ -136,33 +142,93 @@ const ProjectPage: React.FC = () => {
                      (element: ILandingBlockElement): any => {
                         if (element.typeId === 1) {
                            return (
-                              <p
-                                 data-el={JSON.stringify(element)}
-                                 style={{ marginTop: "30px" }}
-                                 className="single-project-page-title"
-                              >
-                                 {element.value}
-                              </p>
+                              <>
+                                 <p
+                                    data-el={JSON.stringify(element)}
+                                    style={{ marginTop: "30px" }}
+                                    className="single-project-page-title"
+                                 >
+                                    {element.value}
+                                 </p>
+                                 {isAuthSettings.isAdmin ? (
+                                    <Button
+                                       variant="outlined"
+                                       sx={{
+                                          display: "block",
+                                          opacity: "0",
+                                          margin: "20px auto",
+                                          width: "100%",
+                                       }}
+                                   
+                                       onClick={() => {
+                                          setAdminModal(true);
+                                          setElOrder(element.orderIndex);
+                                       }}
+                                    >
+                                    
+                                    </Button>
+                                 ) : null}
+                              </>
                            );
                         } else if (element.typeId === 2) {
                            return (
-                              <p
-                                 data-el={JSON.stringify(element)}
-                                 style={{ marginTop: "30px" }}
-                                 className="single-project-page-description"
-                              >
-                                 {element.value}
-                              </p>
+                              <>
+                                 <p
+                                    data-el={JSON.stringify(element)}
+                                    style={{ marginTop: "30px" }}
+                                    className="single-project-page-description"
+                                 >
+                                    {element.value}
+                                 </p>
+                                 {isAuthSettings.isAdmin ? (
+                                    <Button
+                                       variant="outlined"
+                                       sx={{
+                                          display: "block",
+                                          margin: "20px auto",
+                                          width: "100%",
+                                          opacity: "0",
+                                       }}
+                                     
+                                       onClick={() => {
+                                          setAdminModal(true);
+                                          setElOrder(element.orderIndex);
+                                       }}
+                                    >
+                                  
+                                    </Button>
+                                 ) : null}
+                              </>
                            );
                         } else if (element.typeId === 3) {
                            return (
-                              <img
-                                 data-el={JSON.stringify(element)}
-                                 className="single-project-page-img"
-                                 style={{ marginTop: "20px" }}
-                                 src={element.value}
-                                 alt="Не удалось отобразить картинку"
-                              />
+                              <>
+                                 <img
+                                    data-el={JSON.stringify(element)}
+                                    className="single-project-page-img"
+                                    style={{ marginTop: "20px" }}
+                                    src={element.value}
+                                    alt="Не удалось отобразить картинку"
+                                 />
+                                 {isAuthSettings.isAdmin ? (
+                                    <Button
+                                       variant="outlined"
+                                       sx={{
+                                          display: "block",
+                                          margin: "20px auto",
+                                          width: "100%",
+                                          opacity: "0",
+                                       }}
+                                      
+                                       onClick={() => {
+                                          setAdminModal(true);
+                                          setElOrder(element.orderIndex);
+                                       }}
+                                    >
+                                    
+                                    </Button>
+                                 ) : null}
+                              </>
                            );
                         }
                      }

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import { useAppDispatch } from '../../hooks/reduxTookitHooks';
-import { useAppSelector } from '../../hooks/reduxTookitHooks';
 import Typography from '@mui/material/Typography';
-import { makeStyles } from '@mui/styles';
 import { FormControl, Input, InputLabel, TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Button, { ButtonProps } from '@mui/material/Button';
@@ -26,9 +24,14 @@ const CreateDiscussionPage: React.FC<CreateDiscussionPage> = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<formValues>();
-  const {isAuthSettings} = useAuth()
+  const { isAuthSettings } = useAuth();
   const onSubmit: SubmitHandler<formValues> = (data) => {
-    const dataCreate = {title  : data.title , description : data.description , authorId : isAuthSettings.user.id , categoryId : 1} 
+    const dataCreate = {
+      title: data.title,
+      description: data.description,
+      authorId: isAuthSettings.user.id,
+      categoryId: 1,
+    };
     dispatch(
       createDiscussionQuestion({
         data: dataCreate,
