@@ -52,6 +52,28 @@ export const getDiscussionQuestions = createAsyncThunk<
     return rejectWithValue(error.message);
   }
 });
+export const getDiscussionCount = createAsyncThunk<
+  any,
+  {
+    categoryId: number | null | RegExpMatchArray;
+    searchParams?: string | null | RegExpMatchArray;
+    setError: (value: boolean | ((prevVar: boolean) => boolean)) => void;
+  },
+  { rejectValue?: string }
+>('discussionQuestionsSlice/getDiscussionCount', async (data, { rejectWithValue }) => {
+  try {
+    const response = await axios.get<any>(
+      `http://194.87.238.163/api/Discussions/counts?categoryId=${data.categoryId}&search=${data.searchParams}`
+    );
+    console.log(data.categoryId, data.searchParams);
+
+    return response.data;
+  } catch (error: any) {
+    data.setError(true);
+    return rejectWithValue(error.message);
+  }
+});
+
 export const getDiscussionDetails = createAsyncThunk<
   IDiscussion,
   {
@@ -78,7 +100,7 @@ export const getDiscussionProps = createAsyncThunk<
   try {
     const response = await $host<IDiscussionGetResponse>({
       method: 'GET',
-      url: `/api/Discussions?pageIndex=${props.data[1]}&pageSize=5&search=${props.data[0].query}&orderCol=${props.data[3]}&orderDirection=${props.data[2]}`,
+      url: `/api/Discussions?categoryId=${props.data[4]}&pageIndex=${props.data[1]}&pageSize=5&search=${props.data[0].query}&orderCol=${props.data[3]}&orderDirection=${props.data[2]}`,
     });
 
     return response.data;

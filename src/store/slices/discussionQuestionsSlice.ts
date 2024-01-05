@@ -6,6 +6,7 @@ import {
   getDiscussionDetails,
   getDiscussionProps,
   getDiscussionQuestions,
+  getDiscussionCount,
 } from '../actions/discussionQuestionsAction';
 import {
   // ICategoriesGetResponse,
@@ -18,10 +19,12 @@ interface IQuestionsArrayState {
   questions: IDiscussion[];
   singleQuestion: IDiscussion;
   categories: ICategory[];
+  discussionCount: number;
 }
 const initialState: IQuestionsArrayState = {
   questions: [],
   categories: [],
+  discussionCount: 0,
   singleQuestion: discussionPrototype,
 };
 export const discussionQuestionsSlice = createSlice({
@@ -38,6 +41,9 @@ export const discussionQuestionsSlice = createSlice({
         state.questions = action.payload.entities;
       }
     );
+    builder.addCase(getDiscussionCount.fulfilled, (state, action: PayloadAction<number>) => {
+      state.discussionCount = action.payload;
+    });
     builder.addCase(
       getDiscussionProps.fulfilled,
       (state, action: PayloadAction<IDiscussionGetResponse>) => {
