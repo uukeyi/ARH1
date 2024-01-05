@@ -13,6 +13,7 @@ import {
   getDiscussionQuestions,
   getDiscussionProps,
   deleteDiscussionQuestion,
+  getDiscussionCount,
 } from '../../store/actions/discussionQuestionsAction';
 import { useNavigate } from 'react-router';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -26,6 +27,7 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
   const [curPage, setCurPage] = useState<number>(1);
   const [sortBS, setSortBS] = useState<string>('');
   const [sortCC, setSortCC] = useState<string>('');
+  const [pageNumber, setPageNumber] = useState<number>(0);
 
   const state = useAppSelector((state) => state.discussionQuestions);
   const categories = useAppSelector((state) => state.discussionQuestions.categories);
@@ -35,25 +37,31 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
   const { isAuthSettings } = useAuth();
   const { setBlockSettings, setIsOpenBlockEdit } = useAdminModalEdit();
   const [errorDelete, setErrorDelete] = useState(false);
+  const location = useLocation();
+  const currentLocation = location.pathname;
+  const currentId = currentLocation.match(/\d+/g);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<formValues>();
   const onSubmit: SubmitHandler<any> = (data) => {
-    console.log(data.query, sortBS, sortCC);
-
     if (data.query !== '' || sortBS !== '' || sortCC !== '') setCurPage(1);
-    const arr = [data, curPage, sortBS, sortCC];
+    const arr = [data, curPage, sortBS, sortCC, currentId];
     dispatch(
       getDiscussionProps({
         data: arr,
       })
     );
+    dispatch(
+      getDiscussionCount({
+        categoryId: currentId,
+        searchParams: data.query,
+        setError: setError,
+      })
+    );
   };
-  const location = useLocation();
-  const currentLocation = location.pathname;
-  const currentId = currentLocation.match(/\d+/g);
+
   const [error, setError] = useState(false);
   const dataArray = [currentId, setError];
   useEffect(() => {
@@ -77,7 +85,41 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
       navigate('/');
     }
   }, [errorDelete]);
-
+  useEffect(() => {
+    dispatch(
+      getDiscussionCount({
+        categoryId: currentId,
+        searchParams: '',
+        setError: setError,
+      })
+    );
+  }, []);
+  useEffect(() => {
+    setPageNumber(Math.ceil(state.discussionCount / 5));
+  }, [state.discussionCount]);
+  const renderButtons = () => {
+    const buttons = [];
+    for (let i = 0; i < pageNumber; i++) {
+      buttons.push(
+        <Button
+          sx={{
+            width: '20%',
+            background: 'white',
+            border: '1px solid rgb(235 51 73)',
+            color: 'black',
+          }}
+          type="submit"
+          onClick={() => {
+            setCurPage(i + 1);
+            console.log(curPage);
+          }}
+        >
+          {i + 1}
+        </Button>
+      );
+    }
+    return buttons;
+  };
   return (
     <Box sx={{ pt: '180px', pb: '200px', background: '#f3f3f9' }}>
       <div className="container">
@@ -369,7 +411,6 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
             component="form"
             sx={{ display: 'flex', gap: '10px', flexDirection: 'row' }}
           >
-            {' '}
             <Button
               sx={{
                 width: '20%',
@@ -386,6 +427,7 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
             >
               Prev
             </Button>
+            {renderButtons()}
             <Button
               sx={{
                 width: '20%',
@@ -395,8 +437,9 @@ const DiscussionFacadePage: React.FC<DiscussionFacadePageProps> = () => {
               }}
               type="submit"
               onClick={() => {
-                setCurPage(curPage + 1);
-                console.log(curPage);
+                if (curPage < pageNumber) {
+                  setCurPage(curPage + 1);
+                }
               }}
             >
               Next
